@@ -1,9 +1,15 @@
 import React, { useState } from "react";
+import {
+	getAuth,
+	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
+} from "firebase/auth";
 
 function Auth() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [newAccount, setNewAccount] = useState(false);
+	const [error, setError] = useState("");
 
 	const onAuthInputChange = (e) => {
 		const {
@@ -17,13 +23,19 @@ function Auth() {
 		}
 	};
 
-	const onAuthBtnClick = (e) => {
+	const onAuthBtnClick = async (e) => {
 		e.preventDefault();
-		if (email !== "" && password !== "") {
-			const alertMsg = newAccount
-				? "회원가입이 완료되었습니다!"
-				: "로그인되었습니다!";
-			alert(alertMsg);
+		const auth = getAuth();
+		try {
+			if (newAccount) {
+				await createUserWithEmailAndPassword(auth, email, password);
+				alert("회원가입이 완료되었습니다!");
+			} else {
+				await signInWithEmailAndPassword(auth, email, password);
+				alert("로그인되었습니다!");
+			}
+		} catch (error) {
+			setError(error.message);
 		}
 	};
 
@@ -51,6 +63,7 @@ function Auth() {
 					placeholder="비밀번호를 입력해주세요"
 				/>
 				<input type="submit" value={newAccount ? "회원가입" : "로그인"} />
+				{error && <span>{error}</span>}
 			</form>
 			<button onClick={toggleAuthForm}>
 				{newAccount ? "로그인" : "회원가입"}
