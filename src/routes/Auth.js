@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { authService } from "fbase";
 import {
-	getAuth,
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
+	signInWithPopup,
+	GoogleAuthProvider,
+	GithubAuthProvider,
 } from "firebase/auth";
 
 function Auth() {
@@ -10,6 +13,7 @@ function Auth() {
 	const [password, setPassword] = useState("");
 	const [newAccount, setNewAccount] = useState(false);
 	const [error, setError] = useState("");
+	const [socialError, setSocialError] = useState("");
 
 	const onAuthInputChange = (e) => {
 		const {
@@ -23,24 +27,39 @@ function Auth() {
 		}
 	};
 
+	const toggleAuthForm = () => {
+		setNewAccount((prev) => !prev);
+	};
+
 	const onAuthBtnClick = async (e) => {
 		e.preventDefault();
-		const auth = getAuth();
 		try {
 			if (newAccount) {
-				await createUserWithEmailAndPassword(auth, email, password);
+				await createUserWithEmailAndPassword(authService, email, password);
 				alert("회원가입이 완료되었습니다!");
 			} else {
-				await signInWithEmailAndPassword(auth, email, password);
-				alert("로그인되었습니다!");
+				await signInWithEmailAndPassword(authService, email, password);
 			}
 		} catch (error) {
 			setError(error.message);
 		}
 	};
 
-	const toggleAuthForm = () => {
-		setNewAccount((prev) => !prev);
+	const onSocialClick = async (e) => {
+		const {
+			target: { name },
+		} = e;
+		let provider;
+		if (name === "google") {
+			provider = new GoogleAuthProvider();
+		} else if (name === "github") {
+			provider = new GithubAuthProvider();
+		}
+		try {
+			await signInWithPopup(authService, provider);
+		} catch (error) {
+			setSocialError(error.message);
+		}
 	};
 
 	return (
@@ -68,6 +87,15 @@ function Auth() {
 			<button onClick={toggleAuthForm}>
 				{newAccount ? "로그인" : "회원가입"}
 			</button>
+			<div>
+				<button name="google" onClick={onSocialClick}>
+					Google로 로그인하기
+				</button>
+				<button name="github" onClick={onSocialClick}>
+					Github으로 로그인하기
+				</button>
+				{socialError && <span>{socialError}</span>}
+			</div>
 		</div>
 	);
 }

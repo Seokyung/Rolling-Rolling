@@ -9,9 +9,9 @@ function AppRouter({ isLoggedIn }) {
 	return (
 		<HashRouter>
 			<div>
-				<Navigation />
 				{isLoggedIn ? (
 					<>
+						<Navigation />
 						<Routes>
 							<Route exact path="/" element={<Home />} />
 							<Route exact path="/profile" element={<Profile />} />

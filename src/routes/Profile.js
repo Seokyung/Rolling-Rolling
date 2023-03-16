@@ -1,9 +1,19 @@
 import React from "react";
+import { signOut } from "firebase/auth";
+import { authService } from "fbase";
 
 function Profile() {
+	const onLogoutClick = async () => {
+		try {
+			await signOut(authService);
+		} catch (error) {
+			alert(error.message);
+		}
+	};
 	return (
 		<div>
 			<h2>Profile</h2>
+			<button onClick={onLogoutClick}>로그아웃</button>
 		</div>
 	);
 }
