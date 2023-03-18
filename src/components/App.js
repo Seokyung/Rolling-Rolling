@@ -3,6 +3,7 @@ import AppRouter from "routes/AppRouter";
 import { authService } from "fbase";
 
 function App() {
+	const [init, setInit] = useState(false);
 	const [isLoggedIn, setIsLoggedIn] = useState(authService.currentUser);
 
 	useEffect(() => {
@@ -12,12 +13,13 @@ function App() {
 			} else {
 				setIsLoggedIn(false);
 			}
+			setInit(true);
 		});
 	}, []);
 
 	return (
 		<div>
-			<AppRouter isLoggedIn={isLoggedIn} />
+			{init ? <AppRouter isLoggedIn={isLoggedIn} /> : "Initializing..."}
 			<footer>
 				&copy; {new Date().getFullYear()} Rolling-Rolling
 				<br />
