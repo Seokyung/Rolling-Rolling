@@ -2,16 +2,8 @@ import React, { useEffect, useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
 import { authService, dbService } from "fbase";
 import { onAuthStateChanged } from "firebase/auth";
-import {
-	doc,
-	getDoc,
-	collection,
-	query,
-	where,
-	orderBy,
-	onSnapshot,
-} from "firebase/firestore";
-import Message from "../messgaes/Message";
+import { doc, getDoc, collection, query, onSnapshot } from "firebase/firestore";
+import CreateMessage from "components/messgaes/CreateMessage";
 
 function Paper({ userObj }) {
 	// const [messages, setMessages] = useState([]);
@@ -25,7 +17,6 @@ function Paper({ userObj }) {
 		const paperSnap = await getDoc(paper);
 		if (paperSnap.exists()) {
 			setPaperName(paperSnap.data().paperName);
-			//console.log("data: ", paperSnap.data());
 		} else {
 			console.log("No Doc!");
 		}
@@ -33,11 +24,7 @@ function Paper({ userObj }) {
 
 	useEffect(() => {
 		getPaper();
-		const q = query(
-			collection(dbService, "papers", `${paperId}`, "messages")
-			//where("creatorId", "==", `${userObj.uid}`),
-			//orderBy("createdAt", "desc")
-		);
+		const q = query(collection(dbService, "papers", `${paperId}`, "messages"));
 		const unsubscribe = onSnapshot(
 			q,
 			(snapshot) => {
@@ -46,7 +33,6 @@ function Paper({ userObj }) {
 					...doc.data(),
 				}));
 				setMessages(messageArray);
-				//setPaperModal(false);
 			},
 			(error) => {
 				alert(`Paper: ${error.message}`);
@@ -75,13 +61,8 @@ function Paper({ userObj }) {
 					</div>
 				))}
 			</div>
-			{/* <div>
-				{messages.map((message) => (
-					<Message />
-				))}
-			</div>
 			<button onClick={showMsgModal}>메세지 작성하기</button>
-			{msgModal && <CreateMessage setMsgModal={setMsgModal} />} */}
+			{msgModal && <CreateMessage setMsgModal={setMsgModal} />}
 		</div>
 	);
 }
