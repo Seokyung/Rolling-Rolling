@@ -17,18 +17,18 @@ function CreateMessage({ setMsgModal }) {
 		if (message === "") {
 			return;
 		}
-		const paperId = "paperID";
-		const msgObj = {
-			text: message,
-			createdAt: Date.now(),
-		};
-		try {
-			const newMessage = doc(collection(dbService, `${paperId}`));
-			await setDoc(newMessage, msgObj);
-		} catch (error) {
-			alert(error.message);
-			console.log(error);
-		}
+		// const paperId = "paperID";
+		// const msgObj = {
+		// 	text: message,
+		// 	createdAt: Date.now(),
+		// };
+		// try {
+		// 	const newMessage = doc(collection(dbService, `${paperId}`));
+		// 	await setDoc(newMessage, msgObj);
+		// } catch (error) {
+		// 	alert(error.message);
+		// 	console.log(error);
+		// }
 		setMsgModal((prev) => !prev);
 	};
 
