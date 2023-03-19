@@ -1,5 +1,11 @@
 import React from "react";
-import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
+import {
+	HashRouter,
+	Routes,
+	Route,
+	Navigate,
+	BrowserRouter,
+} from "react-router-dom";
 import Navigation from "components/Navigation";
 import Home from "./Home";
 import Profile from "./Profile";
@@ -8,7 +14,7 @@ import PaperRouter from "./PaperRouter";
 
 function AppRouter({ isLoggedIn, userObj }) {
 	return (
-		<HashRouter>
+		<BrowserRouter>
 			<div>
 				{isLoggedIn ? (
 					<>
@@ -32,7 +38,7 @@ function AppRouter({ isLoggedIn, userObj }) {
 					</>
 				)}
 			</div>
-		</HashRouter>
+		</BrowserRouter>
 	);
 }
 
