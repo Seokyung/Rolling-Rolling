@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { authService, dbService } from "fbase";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import {
+	collection,
+	query,
+	where,
+	orderBy,
+	onSnapshot,
+} from "firebase/firestore";
 import CreatePaper from "components/papers/CreatePaper";
 import Paper from "components/papers/Paper";
 
@@ -12,6 +18,7 @@ function Home({ userObj }) {
 	useEffect(() => {
 		const q = query(
 			collection(dbService, "papers"),
+			where("creatorId", "==", `${userObj.uid}`),
 			orderBy("createdAt", "desc")
 		);
 		const unsubscribe = onSnapshot(
@@ -26,6 +33,7 @@ function Home({ userObj }) {
 			},
 			(error) => {
 				alert(`Home: ${error.message}`);
+				console.log(`Home: ${error}`);
 			}
 		);
 		onAuthStateChanged(authService, (user) => {
