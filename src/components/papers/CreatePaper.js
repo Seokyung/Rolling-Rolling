@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { dbService } from "fbase";
 import { collection, doc, setDoc } from "firebase/firestore";
 
-function CreatePaper() {
+function CreatePaper({ userObj }) {
 	const [paperName, setPaperName] = useState("");
 
 	const onPaperNameChange = (e) => {
@@ -22,6 +22,7 @@ function CreatePaper() {
 			paperId: newPaper.id,
 			paperName: paperName,
 			createdAt: Date.now(),
+			creatorId: userObj.uid,
 		};
 		try {
 			await setDoc(newPaper, paperObj);

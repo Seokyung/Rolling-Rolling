@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Navigation() {
+function Navigation({ userObj }) {
 	return (
 		<nav>
 			<ul>

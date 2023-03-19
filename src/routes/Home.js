@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { dbService } from "fbase";
+import { authService, dbService } from "fbase";
+import { onAuthStateChanged } from "firebase/auth";
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import CreatePaper from "components/papers/CreatePaper";
 import Paper from "components/papers/Paper";
 
-function Home() {
+function Home({ userObj }) {
 	const [papers, setPapers] = useState([]);
 	const [paperModal, setPaperModal] = useState(false);
 
@@ -24,9 +25,14 @@ function Home() {
 				setPaperModal(false);
 			},
 			(error) => {
-				alert(error.message);
+				alert(`Home: ${error.message}`);
 			}
 		);
+		onAuthStateChanged(authService, (user) => {
+			if (user === null) {
+				unsubscribe();
+			}
+		});
 	}, []);
 
 	const showPaperModal = () => {
@@ -37,7 +43,7 @@ function Home() {
 		<div>
 			<h2>Home</h2>
 			<button onClick={showPaperModal}>Paper 만들기</button>
-			{paperModal && <CreatePaper />}
+			{paperModal && <CreatePaper userObj={userObj} />}
 			<div>
 				{papers.map((paper) => (
 					<div key={paper.id}>
