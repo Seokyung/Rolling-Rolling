@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { authService, dbService } from "fbase";
 import { onAuthStateChanged } from "firebase/auth";
@@ -6,7 +6,6 @@ import { doc, getDoc, collection, query, onSnapshot } from "firebase/firestore";
 import CreateMessage from "components/messgaes/CreateMessage";
 
 function Paper({ userObj }) {
-	// const [messages, setMessages] = useState([]);
 	const { paperId } = useParams();
 	const [paperName, setPaperName] = useState("");
 	const [messages, setMessages] = useState([]);
@@ -18,7 +17,7 @@ function Paper({ userObj }) {
 		if (paperSnap.exists()) {
 			setPaperName(paperSnap.data().paperName);
 		} else {
-			console.log("No Doc!");
+			console.log("This document doesn't exist!");
 		}
 	};
 
