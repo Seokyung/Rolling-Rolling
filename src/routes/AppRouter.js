@@ -4,6 +4,7 @@ import Navigation from "components/Navigation";
 import Home from "./Home";
 import Profile from "./Profile";
 import Auth from "./Auth";
+import PaperRouter from "./PaperRouter";
 
 function AppRouter({ isLoggedIn, userObj }) {
 	return (
@@ -15,6 +16,10 @@ function AppRouter({ isLoggedIn, userObj }) {
 						<Routes>
 							<Route exact path="/" element={<Home userObj={userObj} />} />
 							<Route exact path="/profile" element={<Profile />} />
+							<Route
+								path="/paper/*"
+								element={<PaperRouter userObj={userObj} />}
+							/>
 							<Route path="*" element={<Navigate to={"/"} />} />
 						</Routes>
 					</>

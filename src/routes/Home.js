@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { authService, dbService } from "fbase";
 import { onAuthStateChanged } from "firebase/auth";
 import {
@@ -9,7 +10,6 @@ import {
 	onSnapshot,
 } from "firebase/firestore";
 import CreatePaper from "components/papers/CreatePaper";
-import Paper from "components/papers/Paper";
 
 function Home({ userObj }) {
 	const [papers, setPapers] = useState([]);
@@ -55,7 +55,9 @@ function Home({ userObj }) {
 			<div>
 				{papers.map((paper) => (
 					<div key={paper.id}>
-						<h4>{paper.paperName}</h4>
+						<Link to={`/paper/${paper.id}`}>
+							<h4>{paper.paperName}</h4>
+						</Link>
 					</div>
 				))}
 			</div>
