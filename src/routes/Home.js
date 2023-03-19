@@ -1,12 +1,26 @@
+import React, { useState } from "react";
+import CreatePaper from "components/papers/CreatePaper";
 import Paper from "components/papers/Paper";
-import React from "react";
 
 function Home() {
+	//const [papers, setPapers] = useState([]);
+	const [paperModal, setPaperModal] = useState(false);
+
+	const showPaperModal = () => {
+		setPaperModal((prev) => !prev);
+	};
+
 	return (
 		<div>
 			<h2>Home</h2>
-			<h3>나의 페이퍼</h3>
+			<button onClick={showPaperModal}>Paper 만들기</button>
+			{paperModal && <CreatePaper />}
 			<Paper />
+			{/* <div>
+				{papers.map((paper) => (
+					<Paper />
+				))}
+			</div> */}
 		</div>
 	);
 }
