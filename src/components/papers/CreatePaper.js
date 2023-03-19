@@ -25,7 +25,7 @@ function CreatePaper() {
 		};
 		try {
 			await setDoc(newPaper, paperObj);
-			alert(`${paperName}이 생성되었습니다!`);
+			alert(`${paperName} 페이지가 생성되었습니다!`);
 		} catch (error) {
 			alert("페이퍼 생성에 실패하였습니다 :(");
 			console.log(error);
