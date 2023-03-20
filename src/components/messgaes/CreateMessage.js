@@ -4,6 +4,7 @@ import { collection, doc, setDoc } from "firebase/firestore";
 
 function CreateMessage({ setMsgModal, paperId }) {
 	const [msgTitle, setMsgTitle] = useState("");
+	const [msgWriter, setMsgWriter] = useState("");
 	const [msgContent, setMsgContent] = useState("");
 
 	const onMessageChange = (e) => {
@@ -12,6 +13,8 @@ function CreateMessage({ setMsgModal, paperId }) {
 		} = e;
 		if (name === "title") {
 			setMsgTitle(value);
+		} else if (name === "writer") {
+			setMsgWriter(value);
 		} else if (name === "content") {
 			setMsgContent(value);
 		}
@@ -19,7 +22,7 @@ function CreateMessage({ setMsgModal, paperId }) {
 
 	const onMessageSubmit = async (e) => {
 		e.preventDefault();
-		if (msgTitle === "") {
+		if (msgTitle === "" && msgWriter === "") {
 			return;
 		}
 		const newMsg = doc(
@@ -28,6 +31,7 @@ function CreateMessage({ setMsgModal, paperId }) {
 		const msgObj = {
 			paperId: paperId,
 			msgTitle: msgTitle,
+			msgWriter: msgWriter,
 			msgContent: msgContent,
 			createdAt: Date.now(),
 		};
@@ -39,6 +43,7 @@ function CreateMessage({ setMsgModal, paperId }) {
 			console.log(error);
 		}
 		setMsgTitle("");
+		setMsgWriter("");
 		setMsgContent("");
 		setMsgModal((prev) => !prev);
 	};
@@ -54,6 +59,13 @@ function CreateMessage({ setMsgModal, paperId }) {
 					value={msgTitle}
 					onChange={onMessageChange}
 					placeholder="제목을 입력하세요 :)"
+				/>
+				<input
+					type="text"
+					name="writer"
+					value={msgWriter}
+					onChange={onMessageChange}
+					placeholder="이름을 입력하세요 :)"
 				/>
 				<input
 					type="text"

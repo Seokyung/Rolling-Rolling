@@ -65,7 +65,8 @@ function Paper({ userObj }) {
 			<div>
 				{messages.map((message) => (
 					<div key={message.id}>
-						<h4>{message.msgTitle}</h4>
+						<h3>{message.msgTitle}</h3>
+						<h4>{message.msgWriter}</h4>
 						<p>{message.msgContent}</p>
 					</div>
 				))}
