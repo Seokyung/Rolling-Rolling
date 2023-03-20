@@ -22,7 +22,7 @@ function CreateMessage({ setMsgModal, paperId }) {
 
 	const onMessageSubmit = async (e) => {
 		e.preventDefault();
-		if (msgTitle === "" && msgWriter === "") {
+		if (msgTitle === "" || msgWriter === "") {
 			return;
 		}
 		const newMsg = doc(
