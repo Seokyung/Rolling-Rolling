@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { authService, dbService } from "fbase";
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc, collection, query, onSnapshot } from "firebase/firestore";
+import {
+	doc,
+	getDoc,
+	collection,
+	query,
+	orderBy,
+	onSnapshot,
+} from "firebase/firestore";
 import CreateMessage from "components/messgaes/CreateMessage";
 
 function Paper({ userObj }) {
@@ -23,7 +30,10 @@ function Paper({ userObj }) {
 
 	useEffect(() => {
 		getPaper();
-		const q = query(collection(dbService, "papers", `${paperId}`, "messages"));
+		const q = query(
+			collection(dbService, "papers", `${paperId}`, "messages"),
+			orderBy("createdAt", "desc")
+		);
 		const unsubscribe = onSnapshot(
 			q,
 			(snapshot) => {
@@ -51,7 +61,7 @@ function Paper({ userObj }) {
 
 	return (
 		<div>
-			<h4>{paperName}</h4>
+			<h2>{paperName}</h2>
 			<div>
 				{messages.map((message) => (
 					<div key={message.id}>
@@ -61,7 +71,9 @@ function Paper({ userObj }) {
 				))}
 			</div>
 			<button onClick={showMsgModal}>메세지 작성하기</button>
-			{msgModal && <CreateMessage setMsgModal={setMsgModal} />}
+			{msgModal && (
+				<CreateMessage setMsgModal={setMsgModal} paperId={paperId} />
+			)}
 		</div>
 	);
 }

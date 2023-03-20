@@ -2,33 +2,44 @@ import React, { useState } from "react";
 import { dbService } from "fbase";
 import { collection, doc, setDoc } from "firebase/firestore";
 
-function CreateMessage({ setMsgModal }) {
-	const [message, setMessage] = useState("");
+function CreateMessage({ setMsgModal, paperId }) {
+	const [msgTitle, setMsgTitle] = useState("");
+	const [msgContent, setMsgContent] = useState("");
 
 	const onMessageChange = (e) => {
 		const {
-			target: { value },
+			target: { name, value },
 		} = e;
-		setMessage(value);
+		if (name === "title") {
+			setMsgTitle(value);
+		} else if (name === "content") {
+			setMsgContent(value);
+		}
 	};
 
 	const onMessageSubmit = async (e) => {
 		e.preventDefault();
-		if (message === "") {
+		if (msgTitle === "") {
 			return;
 		}
-		// const paperId = "paperID";
-		// const msgObj = {
-		// 	text: message,
-		// 	createdAt: Date.now(),
-		// };
-		// try {
-		// 	const newMessage = doc(collection(dbService, `${paperId}`));
-		// 	await setDoc(newMessage, msgObj);
-		// } catch (error) {
-		// 	alert(error.message);
-		// 	console.log(error);
-		// }
+		const newMsg = doc(
+			collection(dbService, "papers", `${paperId}`, "messages")
+		);
+		const msgObj = {
+			paperId: paperId,
+			msgTitle: msgTitle,
+			msgContent: msgContent,
+			createdAt: Date.now(),
+		};
+		try {
+			await setDoc(newMsg, msgObj);
+			alert(`${msgTitle} 메세지가 작성되었습니다!`);
+		} catch (error) {
+			alert("메세지 작성에 실패하였습니다 :(");
+			console.log(error);
+		}
+		setMsgTitle("");
+		setMsgContent("");
 		setMsgModal((prev) => !prev);
 	};
 
@@ -39,9 +50,17 @@ function CreateMessage({ setMsgModal }) {
 				<input
 					type="text"
 					autoFocus
-					value={message}
+					name="title"
+					value={msgTitle}
 					onChange={onMessageChange}
-					placeholder="메세지를 입력하세요 :)"
+					placeholder="제목을 입력하세요 :)"
+				/>
+				<input
+					type="text"
+					name="content"
+					value={msgContent}
+					onChange={onMessageChange}
+					placeholder="내용을 입력하세요 :)"
 				/>
 				<input type="submit" value="메세지 붙이기" />
 			</form>
