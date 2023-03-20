@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { authService } from "fbase";
 
-function Profile() {
+function Profile({ userObj }) {
 	const navigate = useNavigate();
 
 	const onLogoutClick = async () => {
@@ -17,7 +17,7 @@ function Profile() {
 
 	return (
 		<div>
-			<h2>Profile</h2>
+			<h2>{userObj.displayName}의 Profile</h2>
 			<button onClick={onLogoutClick}>로그아웃</button>
 		</div>
 	);
