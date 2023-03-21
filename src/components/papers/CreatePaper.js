@@ -83,7 +83,7 @@ function CreatePaper({ userObj }) {
 						value={paperCode}
 						onChange={onPaperCodeChange}
 						maxLength="4"
-						placeholder="페이퍼 비밀번호"
+						placeholder="4자리 비밀번호를 설정해주세요!"
 					/>
 				)}
 				<input type="submit" value="페이퍼 만들기" />
