@@ -27,7 +27,7 @@ function Paper({ userObj }) {
 		if (paperSnap.exists()) {
 			const paperSnapObj = {
 				paperName: paperSnap.data().paperName,
-				paperCreator: paperSnap.data().paperCreator,
+				paperCreator: paperSnap.data().creatorId,
 				isPrivate: paperSnap.data().isPrivate,
 				paperCode: paperSnap.data().paperCode,
 			};
