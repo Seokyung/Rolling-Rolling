@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { authService } from "fbase";
@@ -17,7 +17,8 @@ function Profile({ userObj }) {
 
 	return (
 		<div>
-			<h2>{userObj.displayName}의 Profile</h2>
+			<img src={`${userObj.photoURL}`} width="100px" />
+			<h2>{userObj.displayName}</h2>
 			<button onClick={onLogoutClick}>로그아웃</button>
 		</div>
 	);
