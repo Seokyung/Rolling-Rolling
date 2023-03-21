@@ -47,7 +47,7 @@ function Home({ userObj }) {
 
 	const deletePaper = async (paper) => {
 		const isDelete = window.confirm(
-			`${paper.paperName}페이퍼를 삭제하시겠습니까?`
+			`${paper.paperName} 페이퍼를 삭제하시겠습니까?`
 		);
 		if (isDelete) {
 			const paperRef = doc(dbService, "papers", `${paper.id}`);
@@ -70,7 +70,9 @@ function Home({ userObj }) {
 						<Link to={`/paper/${paper.id}`}>
 							<h4>{paper.paperName}</h4>
 						</Link>
-						<button onClick={() => deletePaper(paper)}>페이퍼 삭제</button>
+						{userObj.uid === paper.creatorId && (
+							<button onClick={() => deletePaper(paper)}>페이퍼 삭제</button>
+						)}
 					</div>
 				))}
 			</div>
