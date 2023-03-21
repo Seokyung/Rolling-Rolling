@@ -68,7 +68,10 @@ function Home({ userObj }) {
 				{papers.map((paper) => (
 					<div key={paper.id}>
 						<Link to={`/paper/${paper.id}`}>
-							<h4>{paper.paperName}</h4>
+							<h4>
+								{paper.isPrivate && "🔒"}
+								{paper.paperName}
+							</h4>
 						</Link>
 						{userObj.uid === paper.creatorId && (
 							<button onClick={() => deletePaper(paper)}>페이퍼 삭제</button>

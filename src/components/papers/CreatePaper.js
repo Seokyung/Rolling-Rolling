@@ -4,6 +4,8 @@ import { collection, doc, setDoc } from "firebase/firestore";
 
 function CreatePaper({ userObj }) {
 	const [paperName, setPaperName] = useState("");
+	const [isPrivate, setIsPrivate] = useState(false);
+	const [paperCode, setPaperCode] = useState("");
 
 	const onPaperNameChange = (e) => {
 		const {
@@ -12,9 +14,30 @@ function CreatePaper({ userObj }) {
 		setPaperName(value);
 	};
 
+	const onPrivateCheckChange = (e) => {
+		const {
+			target: { checked },
+		} = e;
+		setIsPrivate(checked);
+	};
+
+	const onPaperCodeChange = (e) => {
+		const {
+			target: { value, maxLength },
+		} = e;
+		if (value.length > maxLength) {
+			value = value.slice(0, maxLength);
+		}
+		setPaperCode(value);
+	};
+
 	const onCreatePaper = async (e) => {
 		e.preventDefault();
 		if (paperName === "") {
+			return;
+		}
+		if (isPrivate && paperCode === "") {
+			alert("페이퍼 비밀번호를 설정해주세요!");
 			return;
 		}
 		const newPaper = doc(collection(dbService, "papers"));
@@ -23,6 +46,8 @@ function CreatePaper({ userObj }) {
 			paperName: paperName,
 			createdAt: Date.now(),
 			creatorId: userObj.uid,
+			isPrivate: isPrivate,
+			paperCode: paperCode,
 		};
 		try {
 			await setDoc(newPaper, paperObj);
@@ -46,6 +71,21 @@ function CreatePaper({ userObj }) {
 					onChange={onPaperNameChange}
 					placeholder="페이퍼 이름을 입력하세요 :)"
 				/>
+				<input
+					type="checkbox"
+					checked={isPrivate}
+					onChange={onPrivateCheckChange}
+				/>
+				<label htmlFor="isPrivate">비공개</label>
+				{isPrivate && (
+					<input
+						type="number"
+						value={paperCode}
+						onChange={onPaperCodeChange}
+						maxLength="4"
+						placeholder="페이퍼 비밀번호"
+					/>
+				)}
 				<input type="submit" value="페이퍼 만들기" />
 			</form>
 		</div>
