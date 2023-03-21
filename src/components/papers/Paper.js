@@ -18,6 +18,7 @@ function Paper({ userObj }) {
 	const { paperId } = useParams();
 	const [paperObj, setPaperObj] = useState({});
 	const [paperCode, setPaperCode] = useState("");
+	const [isPrivate, setIsPrivate] = useState(true);
 	const [messages, setMessages] = useState([]);
 	const [msgModal, setMsgModal] = useState(false);
 
@@ -28,9 +29,9 @@ function Paper({ userObj }) {
 			const paperSnapObj = {
 				paperName: paperSnap.data().paperName,
 				paperCreator: paperSnap.data().creatorId,
-				isPrivate: paperSnap.data().isPrivate,
 				paperCode: paperSnap.data().paperCode,
 			};
+			setIsPrivate(paperSnap.data().isPrivate);
 			setPaperObj(paperSnapObj);
 		} else {
 			console.log("This document doesn't exist!");
@@ -77,10 +78,7 @@ function Paper({ userObj }) {
 	const onSubmitPaperCode = (e) => {
 		e.preventDefault();
 		if (paperObj.paperCode === paperCode) {
-			setPaperObj((prev) => ({
-				...prev,
-				isPrivate: false,
-			}));
+			setIsPrivate(false);
 			setPaperCode("");
 		} else {
 			alert("페이지 비밀번호가 다릅니다!");
@@ -110,7 +108,7 @@ function Paper({ userObj }) {
 
 	return (
 		<>
-			{paperObj.isPrivate ? (
+			{isPrivate ? (
 				<div>
 					<h2>페이지 비밀번호를 입력하세요!</h2>
 					<form onSubmit={onSubmitPaperCode}>
