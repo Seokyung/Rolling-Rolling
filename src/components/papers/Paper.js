@@ -96,7 +96,7 @@ function Paper({ userObj }) {
 			</div>
 			<button onClick={showMsgModal}>메세지 작성하기</button>
 			{msgModal && (
-				<CreateMessage setMsgModal={setMsgModal} paperId={paperId} />
+				<CreateMessage paperId={paperId} setMsgModal={setMsgModal} />
 			)}
 		</div>
 	);

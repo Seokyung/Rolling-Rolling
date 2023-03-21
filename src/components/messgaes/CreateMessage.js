@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { dbService } from "fbase";
 import { collection, doc, setDoc } from "firebase/firestore";
 
-function CreateMessage({ setMsgModal, paperId }) {
+function CreateMessage({ paperId, setMsgModal }) {
 	const [msgTitle, setMsgTitle] = useState("");
 	const [msgWriter, setMsgWriter] = useState("");
 	const [msgContent, setMsgContent] = useState("");
