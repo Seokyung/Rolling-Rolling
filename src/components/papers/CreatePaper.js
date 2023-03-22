@@ -28,7 +28,9 @@ function CreatePaper({ userObj }) {
 		if (value.length > maxLength) {
 			value = value.slice(0, maxLength);
 		}
-		setPaperCode(value);
+		if (!isNaN(value)) {
+			setPaperCode(value);
+		}
 	};
 
 	const onCreatePaper = async (e) => {
@@ -79,7 +81,7 @@ function CreatePaper({ userObj }) {
 				<label htmlFor="isPrivate">비공개</label>
 				{isPrivate && (
 					<input
-						type="number"
+						type="text"
 						value={paperCode}
 						onChange={onPaperCodeChange}
 						maxLength="4"

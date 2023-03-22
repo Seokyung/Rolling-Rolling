@@ -72,7 +72,9 @@ function Paper({ userObj }) {
 		if (value.length > maxLength) {
 			value = value.slice(0, maxLength);
 		}
-		setPaperCode(value);
+		if (!isNaN(value)) {
+			setPaperCode(value);
+		}
 	};
 
 	const onSubmitPaperCode = (e) => {
@@ -113,7 +115,7 @@ function Paper({ userObj }) {
 					<h2>페이지 비밀번호를 입력하세요!</h2>
 					<form onSubmit={onSubmitPaperCode}>
 						<input
-							type="number"
+							type="password"
 							autoFocus
 							value={paperCode}
 							onChange={onPaperCodeChange}
