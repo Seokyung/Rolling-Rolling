@@ -1,25 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { authService, dbService } from "fbase";
-import { onAuthStateChanged } from "firebase/auth";
-import {
-	doc,
-	getDoc,
-	collection,
-	query,
-	orderBy,
-	onSnapshot,
-	deleteDoc,
-} from "firebase/firestore";
+import { dbService } from "fbase";
+import { doc, getDoc } from "firebase/firestore";
 import CreateMessage from "components/messgaes/CreateMessage";
-import Message from "components/messgaes/Message";
+import MessageList from "components/messgaes/MessageList";
 
 function Paper({ userObj }) {
 	const { paperId } = useParams();
+	const [init, setInit] = useState(true);
 	const [paperObj, setPaperObj] = useState({});
 	const [paperCode, setPaperCode] = useState("");
 	const [isPrivate, setIsPrivate] = useState(true);
-	const [messages, setMessages] = useState([]);
 	const [msgModal, setMsgModal] = useState(false);
 
 	const getPaper = async () => {
@@ -31,6 +22,7 @@ function Paper({ userObj }) {
 				paperCreator: paperSnap.data().creatorId,
 				paperCode: paperSnap.data().paperCode,
 			};
+			setInit(false);
 			setIsPrivate(paperSnap.data().isPrivate);
 			setPaperObj(paperSnapObj);
 		} else {
@@ -40,29 +32,6 @@ function Paper({ userObj }) {
 
 	useEffect(() => {
 		getPaper();
-		const q = query(
-			collection(dbService, "papers", `${paperId}`, "messages"),
-			orderBy("createdAt", "desc")
-		);
-		const unsubscribe = onSnapshot(
-			q,
-			(snapshot) => {
-				const messageArray = snapshot.docs.map((doc) => ({
-					id: doc.id,
-					...doc.data(),
-				}));
-				setMessages(messageArray);
-			},
-			(error) => {
-				alert(`Paper: ${error.message}`);
-				console.log(`Paper: ${error}`);
-			}
-		);
-		onAuthStateChanged(authService, (user) => {
-			if (user === null) {
-				unsubscribe();
-			}
-		});
 	}, []);
 
 	const onPaperCodeChange = (e) => {
@@ -88,63 +57,42 @@ function Paper({ userObj }) {
 		}
 	};
 
-	const deleteMessage = async (message) => {
-		const isDelete = window.confirm(
-			`${message.msgTitle} 메세지를 삭제하시겠습니까?`
-		);
-		if (isDelete) {
-			const msgRef = doc(
-				dbService,
-				"papers",
-				`${message.paperId}`,
-				"messages",
-				`${message.id}`
-			);
-			await deleteDoc(msgRef);
-		}
-	};
-
 	const showMsgModal = () => {
 		setMsgModal((prev) => !prev);
 	};
 
 	return (
 		<>
-			{isPrivate ? (
-				<div>
-					<h2>페이지 비밀번호를 입력하세요!</h2>
-					<form onSubmit={onSubmitPaperCode}>
-						<input
-							type="password"
-							autoFocus
-							value={paperCode}
-							onChange={onPaperCodeChange}
-							maxLength="4"
-							placeholder="페이지 비밀번호"
-						/>
-						<input type="submit" value="제출" />
-					</form>
-				</div>
+			{init ? (
+				<h2>Intializing...</h2>
 			) : (
-				<div>
-					<h2>{paperObj.paperName}</h2>
-					<div>
-						{messages.map((message) => (
-							<div key={message.id}>
-								<Message msgObj={message} />
-								{paperObj.paperCreator === userObj.uid && (
-									<button onClick={() => deleteMessage(message)}>
-										메세지 삭제
-									</button>
-								)}
-							</div>
-						))}
-					</div>
-					<button onClick={showMsgModal}>메세지 작성하기</button>
-					{msgModal && (
-						<CreateMessage paperId={paperId} setMsgModal={setMsgModal} />
+				<>
+					{isPrivate ? (
+						<div>
+							<h2>페이지 비밀번호를 입력하세요!</h2>
+							<form onSubmit={onSubmitPaperCode}>
+								<input
+									type="password"
+									autoFocus
+									value={paperCode}
+									onChange={onPaperCodeChange}
+									maxLength="4"
+									placeholder="페이지 비밀번호"
+								/>
+								<input type="submit" value="제출" />
+							</form>
+						</div>
+					) : (
+						<div>
+							<h2>{paperObj.paperName}</h2>
+							<button onClick={showMsgModal}>메세지 작성하기</button>
+							{msgModal && (
+								<CreateMessage paperId={paperId} setMsgModal={setMsgModal} />
+							)}
+							<MessageList userObj={userObj} />
+						</div>
 					)}
-				</div>
+				</>
 			)}
 		</>
 	);

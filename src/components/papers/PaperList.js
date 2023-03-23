@@ -54,7 +54,6 @@ function PaperList({ userObj }) {
 
 	return (
 		<div>
-			<h2>PaperList</h2>
 			{papers.map((paper) => (
 				<div key={paper.id}>
 					<Link to={`/paper/${paper.id}`}>
