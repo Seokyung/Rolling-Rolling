@@ -111,7 +111,7 @@ function Paper({ userObj }) {
 									</button>
 									{editModal && (
 										<EditPaper
-											paperObj={paperObj}
+											paperId={paperId}
 											isOwner={userObj.uid === paperObj.paperCreator}
 											setEditModal={setEditModal}
 										/>

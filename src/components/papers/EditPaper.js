@@ -1,11 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { dbService } from "fbase";
 
-function EditPaper({ paperObj, isOwner, setEditModal }) {
-	const [newPaperName, setNewPaperName] = useState(paperObj.paperName);
-	const [newIsPrivate, setNewIsPrivate] = useState(paperObj.isPrivate);
-	const [newPaperCode, setNewPaperCode] = useState(paperObj.paperCode);
+function EditPaper({ paperId, isOwner, setEditModal }) {
+	const [newPaperName, setNewPaperName] = useState("");
+	const [newIsPrivate, setNewIsPrivate] = useState("");
+	const [newPaperCode, setNewPaperCode] = useState("");
+
+	const getPaper = async () => {
+		const paper = doc(dbService, "papers", `${paperId}`);
+		const paperSnap = await getDoc(paper);
+		if (paperSnap.exists()) {
+			setNewPaperName(paperSnap.data().paperName);
+			setNewIsPrivate(paperSnap.data().isPrivate);
+			setNewPaperCode(paperSnap.data().paperCode);
+		} else {
+			console.log("This document doesn't exist!");
+		}
+	};
+
+	useEffect(() => {
+		getPaper();
+		console.log("Edit Modal");
+	}, []);
 
 	const onPaperNameChange = (e) => {
 		const {
@@ -37,12 +54,11 @@ function EditPaper({ paperObj, isOwner, setEditModal }) {
 		e.preventDefault();
 		const isEdit = window.confirm("페이퍼 이름을 수정하시겠습니까?");
 		if (isEdit && isOwner) {
-			const paperRef = doc(dbService, "papers", `${paperObj.paperId}`);
+			const paperRef = doc(dbService, "papers", `${paperId}`);
 			await updateDoc(paperRef, {
 				paperName: newPaperName,
 			});
 			alert("이름이 수정되었습니다!");
-			setNewPaperName("");
 		}
 	};
 
@@ -54,13 +70,12 @@ function EditPaper({ paperObj, isOwner, setEditModal }) {
 		}
 		const isEdit = window.confirm("페이퍼 공개여부를 변경하시겠습니까?");
 		if (isEdit && isOwner) {
-			const paperRef = doc(dbService, "papers", `${paperObj.paperId}`);
+			const paperRef = doc(dbService, "papers", `${paperId}`);
 			await updateDoc(paperRef, {
 				isPrivate: newIsPrivate,
-				paperCode: newPaperCode,
+				paperCode: newIsPrivate ? newPaperCode : "",
 			});
 			alert("공개여부가 변경되었습니다!");
-			setNewPaperCode("");
 		}
 	};
 
