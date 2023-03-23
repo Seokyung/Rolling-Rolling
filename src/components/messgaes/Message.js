@@ -3,7 +3,10 @@ import React from "react";
 function Message({ msgObj }) {
 	return (
 		<div>
-			<h3>{msgObj.msgTitle}</h3>
+			<h3>
+				{msgObj.isPrivate && "🔒"}
+				{msgObj.msgTitle}
+			</h3>
 			<h4>{msgObj.msgWriter}</h4>
 			<p>{msgObj.msgContent}</p>
 		</div>

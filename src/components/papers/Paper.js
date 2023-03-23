@@ -89,7 +89,10 @@ function Paper({ userObj }) {
 							{msgModal && (
 								<CreateMessage paperId={paperId} setMsgModal={setMsgModal} />
 							)}
-							<MessageList userObj={userObj} />
+							<MessageList
+								userObj={userObj}
+								paperCreator={paperObj.paperCreator}
+							/>
 						</div>
 					)}
 				</>

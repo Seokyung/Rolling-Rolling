@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { dbService } from "fbase";
 import { collection, doc, setDoc } from "firebase/firestore";
 
-function CreatePaper({ userObj }) {
+function CreatePaper({ userObj, setPaperModal }) {
 	const [paperName, setPaperName] = useState("");
 	const [isPrivate, setIsPrivate] = useState(false);
 	const [paperCode, setPaperCode] = useState("");
@@ -59,6 +59,7 @@ function CreatePaper({ userObj }) {
 			console.log(error);
 		}
 		setPaperName("");
+		setPaperModal((prev) => !prev);
 	};
 
 	return (

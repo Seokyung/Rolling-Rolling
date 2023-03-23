@@ -13,7 +13,9 @@ function Home({ userObj }) {
 		<div>
 			<h2>Home</h2>
 			<button onClick={showPaperModal}>Paper 만들기</button>
-			{paperModal && <CreatePaper userObj={userObj} />}
+			{paperModal && (
+				<CreatePaper userObj={userObj} setPaperModal={setPaperModal} />
+			)}
 			<PaperList userObj={userObj} />
 		</div>
 	);

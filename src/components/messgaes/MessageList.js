@@ -7,33 +7,31 @@ import {
 	getDoc,
 	collection,
 	query,
+	where,
 	orderBy,
 	onSnapshot,
 	deleteDoc,
 } from "firebase/firestore";
 import Message from "components/messgaes/Message";
 
-function MessageList({ userObj }) {
+function MessageList({ userObj, paperCreator }) {
 	const { paperId } = useParams();
-	const [paperCreator, setPaperCreator] = useState("");
 	const [messages, setMessages] = useState([]);
 
-	const getPaperCreator = async () => {
-		const paper = doc(dbService, "papers", `${paperId}`);
-		const paperSnap = await getDoc(paper);
-		if (paperSnap.exists()) {
-			setPaperCreator(paperSnap.data().creatorId);
-		} else {
-			console.log("This document doesn't exist!");
-		}
-	};
-
 	useEffect(() => {
-		getPaperCreator();
-		const q = query(
-			collection(dbService, "papers", `${paperId}`, "messages"),
-			orderBy("createdAt", "desc")
-		);
+		let q;
+		if (paperCreator === userObj.uid) {
+			q = query(
+				collection(dbService, "papers", `${paperId}`, "messages"),
+				orderBy("createdAt", "desc")
+			);
+		} else {
+			q = query(
+				collection(dbService, "papers", `${paperId}`, "messages"),
+				where("isPrivate", "==", false),
+				orderBy("createdAt", "desc")
+			);
+		}
 		const unsubscribe = onSnapshot(
 			q,
 			(snapshot) => {
@@ -53,7 +51,7 @@ function MessageList({ userObj }) {
 				unsubscribe();
 			}
 		});
-	}, []);
+	}, [paperCreator]);
 
 	const deleteMessage = async (message) => {
 		const isDelete = window.confirm(

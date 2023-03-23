@@ -6,6 +6,7 @@ function CreateMessage({ paperId, setMsgModal }) {
 	const [msgTitle, setMsgTitle] = useState("");
 	const [msgWriter, setMsgWriter] = useState("");
 	const [msgContent, setMsgContent] = useState("");
+	const [isPrivate, setIsPrivate] = useState(false);
 
 	const onMessageChange = (e) => {
 		const {
@@ -18,6 +19,13 @@ function CreateMessage({ paperId, setMsgModal }) {
 		} else if (name === "content") {
 			setMsgContent(value);
 		}
+	};
+
+	const onPrivateCheckChange = (e) => {
+		const {
+			target: { checked },
+		} = e;
+		setIsPrivate(checked);
 	};
 
 	const onMessageSubmit = async (e) => {
@@ -34,6 +42,7 @@ function CreateMessage({ paperId, setMsgModal }) {
 			msgWriter: msgWriter,
 			msgContent: msgContent,
 			createdAt: Date.now(),
+			isPrivate: isPrivate,
 		};
 		try {
 			await setDoc(newMsg, msgObj);
@@ -74,6 +83,12 @@ function CreateMessage({ paperId, setMsgModal }) {
 					onChange={onMessageChange}
 					placeholder="내용을 입력하세요 :)"
 				/>
+				<input
+					type="checkbox"
+					checked={isPrivate}
+					onChange={onPrivateCheckChange}
+				/>
+				<label htmlFor="isPrivate">비공개</label>
 				<input type="submit" value="메세지 붙이기" />
 			</form>
 		</div>
