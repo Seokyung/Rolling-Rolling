@@ -65,6 +65,7 @@ function PaperList({ userObj }) {
 					{userObj.uid === paper.creatorId && (
 						<button onClick={() => deletePaper(paper)}>페이퍼 삭제</button>
 					)}
+					{}
 				</div>
 			))}
 		</div>
