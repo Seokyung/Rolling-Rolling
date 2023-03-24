@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { dbService } from "fbase";
-import { doc, getDoc, deleteDoc } from "firebase/firestore";
+import { authService, dbService } from "fbase";
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, onSnapshot, deleteDoc } from "firebase/firestore";
 import CreateMessage from "components/messgaes/CreateMessage";
 import MessageList from "components/messgaes/MessageList";
 import EditPaper from "./EditPaper";
@@ -16,27 +17,24 @@ function Paper({ userObj }) {
 	const [editModal, setEditModal] = useState(false);
 	const [msgModal, setMsgModal] = useState(false);
 
-	const getPaper = async () => {
-		const paper = doc(dbService, "papers", `${paperId}`);
-		const paperSnap = await getDoc(paper);
-		if (paperSnap.exists()) {
-			const paperSnapObj = {
-				paperId: paperSnap.data().paperId,
-				paperName: paperSnap.data().paperName,
-				paperCreator: paperSnap.data().creatorId,
-				isPrivate: paperSnap.data().isPrivate,
-				paperCode: paperSnap.data().paperCode,
+	useEffect(() => {
+		const unsub = onSnapshot(doc(dbService, "papers", `${paperId}`), (doc) => {
+			const paperDocObj = {
+				paperId: paperId,
+				paperName: doc.data().paperName,
+				paperCreator: doc.data().creatorId,
+				isPrivate: doc.data().isPrivate,
+				paperCode: doc.data().paperCode,
 			};
 			setInit(false);
-			setIsPrivate(paperSnap.data().isPrivate);
-			setPaperObj(paperSnapObj);
-		} else {
-			console.log("This document doesn't exist!");
-		}
-	};
-
-	useEffect(() => {
-		getPaper();
+			setIsPrivate(doc.data().isPrivate);
+			setPaperObj(paperDocObj);
+		});
+		onAuthStateChanged(authService, (user) => {
+			if (user === null) {
+				unsub();
+			}
+		});
 	}, []);
 
 	const onPaperCodeChange = (e) => {
@@ -111,7 +109,7 @@ function Paper({ userObj }) {
 									</button>
 									{editModal && (
 										<EditPaper
-											paperId={paperId}
+											paperObj={paperObj}
 											isOwner={userObj.uid === paperObj.paperCreator}
 											setEditModal={setEditModal}
 										/>

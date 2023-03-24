@@ -42,7 +42,7 @@ function CreatePaper({ userObj, setPaperModal }) {
 			alert("페이퍼 코드를 입력해주세요!");
 			return;
 		}
-		if (paperCode.length != 4) {
+		if (isPrivate && paperCode.length !== 4) {
 			alert("코드는 4자리의 숫자여야 합니다!");
 			return;
 		}

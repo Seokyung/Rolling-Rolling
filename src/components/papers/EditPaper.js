@@ -1,28 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import React, { useState } from "react";
+import { doc, updateDoc } from "firebase/firestore";
 import { dbService } from "fbase";
 
-function EditPaper({ paperId, isOwner, setEditModal }) {
-	const [newPaperName, setNewPaperName] = useState("");
-	const [newIsPrivate, setNewIsPrivate] = useState("");
-	const [newPaperCode, setNewPaperCode] = useState("");
-
-	const getPaper = async () => {
-		const paper = doc(dbService, "papers", `${paperId}`);
-		const paperSnap = await getDoc(paper);
-		if (paperSnap.exists()) {
-			setNewPaperName(paperSnap.data().paperName);
-			setNewIsPrivate(paperSnap.data().isPrivate);
-			setNewPaperCode(paperSnap.data().paperCode);
-		} else {
-			console.log("This document doesn't exist!");
-		}
-	};
-
-	useEffect(() => {
-		getPaper();
-		console.log("Edit Modal");
-	}, []);
+function EditPaper({ paperObj, isOwner, setEditModal }) {
+	const [newPaperName, setNewPaperName] = useState(paperObj.paperName);
+	const [newIsPrivate, setNewIsPrivate] = useState(paperObj.isPrivate);
+	const [newPaperCode, setNewPaperCode] = useState(paperObj.paperCode);
 
 	const onPaperNameChange = (e) => {
 		const {
@@ -54,7 +37,7 @@ function EditPaper({ paperId, isOwner, setEditModal }) {
 		e.preventDefault();
 		const isEdit = window.confirm("페이퍼 이름을 수정하시겠습니까?");
 		if (isEdit && isOwner) {
-			const paperRef = doc(dbService, "papers", `${paperId}`);
+			const paperRef = doc(dbService, "papers", `${paperObj.paperId}`);
 			await updateDoc(paperRef, {
 				paperName: newPaperName,
 			});
@@ -68,13 +51,13 @@ function EditPaper({ paperId, isOwner, setEditModal }) {
 			alert("페이퍼 코드를 입력해주세요!");
 			return;
 		}
-		if (newPaperCode.length != 4) {
+		if (newIsPrivate && newPaperCode.length !== 4) {
 			alert("코드는 4자리의 숫자여야 합니다!");
 			return;
 		}
 		const isEdit = window.confirm("페이퍼 공개여부를 변경하시겠습니까?");
 		if (isEdit && isOwner) {
-			const paperRef = doc(dbService, "papers", `${paperId}`);
+			const paperRef = doc(dbService, "papers", `${paperObj.paperId}`);
 			await updateDoc(paperRef, {
 				isPrivate: newIsPrivate,
 				paperCode: newIsPrivate ? newPaperCode : "",
