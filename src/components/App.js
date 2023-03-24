@@ -25,10 +25,28 @@ function App() {
 		});
 	}, []);
 
+	const refreshUser = () => {
+		const user = authService.currentUser;
+		setUserObj({
+			uid: user.uid,
+			displayName: user.displayName
+				? user.displayName
+				: user.email.split("@")[0],
+			photoURL: user.photoURL
+				? user.photoURL
+				: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
+			updateProfile: (args) => user.updateProfile(args),
+		});
+	};
+
 	return (
 		<div>
 			{init ? (
-				<AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} />
+				<AppRouter
+					isLoggedIn={Boolean(userObj)}
+					userObj={userObj}
+					refreshUser={refreshUser}
+				/>
 			) : (
 				"Initializing..."
 			)}
