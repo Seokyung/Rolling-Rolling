@@ -18,21 +18,24 @@ function Paper({ userObj }) {
 	const [msgModal, setMsgModal] = useState(false);
 
 	useEffect(() => {
-		const unsub = onSnapshot(doc(dbService, "papers", `${paperId}`), (doc) => {
-			const paperDocObj = {
-				paperId: paperId,
-				paperName: doc.data().paperName,
-				paperCreator: doc.data().creatorId,
-				isPrivate: doc.data().isPrivate,
-				paperCode: doc.data().paperCode,
-			};
-			setInit(false);
-			setIsPrivate(doc.data().isPrivate);
-			setPaperObj(paperDocObj);
-		});
+		const unsubscribe = onSnapshot(
+			doc(dbService, "papers", `${paperId}`),
+			(doc) => {
+				const paperDocObj = {
+					paperId: paperId,
+					paperName: doc.data().paperName,
+					paperCreator: doc.data().creatorId,
+					isPrivate: doc.data().isPrivate,
+					paperCode: doc.data().paperCode,
+				};
+				setInit(false);
+				setIsPrivate(doc.data().isPrivate);
+				setPaperObj(paperDocObj);
+			}
+		);
 		onAuthStateChanged(authService, (user) => {
 			if (user === null) {
-				unsub();
+				unsubscribe();
 			}
 		});
 	}, []);
