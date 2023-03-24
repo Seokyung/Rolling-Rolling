@@ -64,8 +64,12 @@ function EditPaper({ paperId, isOwner, setEditModal }) {
 
 	const onEditPaperPrivate = async (e) => {
 		e.preventDefault();
-		if (newIsPrivate === true && newPaperCode === "") {
+		if (newIsPrivate && newPaperCode === "") {
 			alert("페이퍼 코드를 입력해주세요!");
+			return;
+		}
+		if (newPaperCode.length != 4) {
+			alert("코드는 4자리의 숫자여야 합니다!");
 			return;
 		}
 		const isEdit = window.confirm("페이퍼 공개여부를 변경하시겠습니까?");
@@ -110,7 +114,7 @@ function EditPaper({ paperId, isOwner, setEditModal }) {
 						value={newPaperCode}
 						onChange={onPaperCodeChange}
 						maxLength="4"
-						placeholder="4자리 비밀번호를 설정해주세요!"
+						placeholder="4자리 숫자 코드를 설정해주세요!"
 					/>
 				)}
 				<input type="submit" value="공개여부 변경" />

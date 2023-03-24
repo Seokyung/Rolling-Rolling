@@ -39,7 +39,11 @@ function CreatePaper({ userObj, setPaperModal }) {
 			return;
 		}
 		if (isPrivate && paperCode === "") {
-			alert("페이퍼 비밀번호를 설정해주세요!");
+			alert("페이퍼 코드를 입력해주세요!");
+			return;
+		}
+		if (paperCode.length != 4) {
+			alert("코드는 4자리의 숫자여야 합니다!");
 			return;
 		}
 		const newPaper = doc(collection(dbService, "papers"));
@@ -86,7 +90,7 @@ function CreatePaper({ userObj, setPaperModal }) {
 						value={paperCode}
 						onChange={onPaperCodeChange}
 						maxLength="4"
-						placeholder="4자리 비밀번호를 설정해주세요!"
+						placeholder="4자리 숫자 코드를 설정해주세요!"
 					/>
 				)}
 				<input type="submit" value="페이퍼 만들기" />
