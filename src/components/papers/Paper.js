@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { authService, dbService } from "fbase";
 import { onAuthStateChanged } from "firebase/auth";
@@ -17,12 +17,14 @@ import EditPaper from "./EditPaper";
 function Paper({ userObj }) {
 	const { paperId } = useParams();
 	const navigate = useNavigate();
+	const paperUrlRef = useRef();
 	const [init, setInit] = useState(true);
 	const [paperObj, setPaperObj] = useState({});
 	const [paperCode, setPaperCode] = useState("");
 	const [isPrivate, setIsPrivate] = useState(true);
 	const [editModal, setEditModal] = useState(false);
 	const [msgModal, setMsgModal] = useState(false);
+	const [shareModal, setShareModal] = useState(false);
 
 	useEffect(() => {
 		const unsubscribe = onSnapshot(
@@ -107,6 +109,18 @@ function Paper({ userObj }) {
 		setMsgModal((prev) => !prev);
 	};
 
+	const onShareClick = () => {
+		paperUrlRef.current.focus();
+		paperUrlRef.current.select();
+		navigator.clipboard.writeText(paperUrlRef.current.value).then(() => {
+			alert("링크를 복사했습니다!");
+		});
+	};
+
+	const showShareModal = () => {
+		setShareModal((prev) => !prev);
+	};
+
 	return (
 		<>
 			{init ? (
@@ -153,6 +167,18 @@ function Paper({ userObj }) {
 							<button onClick={showMsgModal}>메세지 작성하기</button>
 							{msgModal && (
 								<CreateMessage paperId={paperId} setMsgModal={setMsgModal} />
+							)}
+							<button onClick={showShareModal}>공유하기</button>
+							{shareModal && (
+								<div>
+									<input
+										type="text"
+										readOnly
+										ref={paperUrlRef}
+										value={`http://localhost:3000/paper/${paperId}`}
+									/>
+									<button onClick={onShareClick}>링크 복사</button>
+								</div>
 							)}
 						</div>
 					)}
