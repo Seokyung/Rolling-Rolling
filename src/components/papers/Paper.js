@@ -66,10 +66,16 @@ function Paper({ userObj }) {
 	const deletePaper = async (paperName) => {
 		const isDelete = window.confirm(`${paperName} 페이퍼를 삭제하시겠습니까?`);
 		if (isDelete) {
-			const paperRef = doc(dbService, "papers", `${paperId}`);
-			await deleteDoc(paperRef);
+			try {
+				const paperRef = doc(dbService, "papers", `${paperId}`);
+				await deleteDoc(paperRef);
+				alert("페이퍼가 삭제되었습니다!");
+			} catch (error) {
+				console.log(error.message);
+			} finally {
+				navigate("/", { replace: true });
+			}
 		}
-		navigate("/", { replace: true });
 	};
 
 	const showEditModal = () => {

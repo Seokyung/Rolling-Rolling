@@ -36,10 +36,11 @@ function CreatePaper({ userObj, setPaperModal }) {
 	const onCreatePaper = async (e) => {
 		e.preventDefault();
 		if (paperName === "") {
+			alert("페이퍼 이름를 작성해주세요!");
 			return;
 		}
 		if (isPrivate && paperCode === "") {
-			alert("페이퍼 코드를 입력해주세요!");
+			alert("페이퍼 코드를 작성해주세요!");
 			return;
 		}
 		if (isPrivate && paperCode.length !== 4) {

@@ -50,11 +50,12 @@ function CreateMessage({ paperId, setMsgModal }) {
 		} catch (error) {
 			alert("메세지 작성에 실패하였습니다 :(");
 			console.log(error);
+		} finally {
+			setMsgTitle("");
+			setMsgWriter("");
+			setMsgContent("");
+			setMsgModal((prev) => !prev);
 		}
-		setMsgTitle("");
-		setMsgWriter("");
-		setMsgContent("");
-		setMsgModal((prev) => !prev);
 	};
 
 	return (

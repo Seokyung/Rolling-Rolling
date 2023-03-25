@@ -47,8 +47,13 @@ function PaperList({ userObj }) {
 			`${paper.paperName} 페이퍼를 삭제하시겠습니까?`
 		);
 		if (isDelete) {
-			const paperRef = doc(dbService, "papers", `${paper.id}`);
-			await deleteDoc(paperRef);
+			try {
+				const paperRef = doc(dbService, "papers", `${paper.id}`);
+				await deleteDoc(paperRef);
+				alert("페이퍼가 삭제되었습니다!");
+			} catch (error) {
+				console.log(error.message);
+			}
 		}
 	};
 
