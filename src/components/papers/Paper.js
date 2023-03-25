@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { authService, dbService } from "fbase";
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, onSnapshot, deleteDoc } from "firebase/firestore";
+import {
+	doc,
+	onSnapshot,
+	deleteDoc,
+	query,
+	collection,
+	getDocs,
+} from "firebase/firestore";
 import CreateMessage from "components/messgaes/CreateMessage";
 import MessageList from "components/messgaes/MessageList";
 import EditPaper from "./EditPaper";
@@ -67,6 +74,20 @@ function Paper({ userObj }) {
 		const isDelete = window.confirm(`${paperName} 페이퍼를 삭제하시겠습니까?`);
 		if (isDelete) {
 			try {
+				const msgQuery = query(
+					collection(dbService, "papers", `${paperId}`, "messages")
+				);
+				const msgSnapshot = await getDocs(msgQuery);
+				msgSnapshot.forEach(async (msg) => {
+					const msgRef = doc(
+						dbService,
+						"papers",
+						`${paperId}`,
+						"messages",
+						`${msg.id}`
+					);
+					await deleteDoc(msgRef);
+				});
 				const paperRef = doc(dbService, "papers", `${paperId}`);
 				await deleteDoc(paperRef);
 				alert("페이퍼가 삭제되었습니다!");

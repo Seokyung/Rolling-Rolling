@@ -9,6 +9,7 @@ import {
 	orderBy,
 	onSnapshot,
 	doc,
+	getDocs,
 	deleteDoc,
 } from "firebase/firestore";
 
@@ -48,6 +49,20 @@ function PaperList({ userObj }) {
 		);
 		if (isDelete) {
 			try {
+				const msgQuery = query(
+					collection(dbService, "papers", `${paper.id}`, "messages")
+				);
+				const msgSnapshot = await getDocs(msgQuery);
+				msgSnapshot.forEach(async (msg) => {
+					const msgRef = doc(
+						dbService,
+						"papers",
+						`${paper.id}`,
+						"messages",
+						`${msg.id}`
+					);
+					await deleteDoc(msgRef);
+				});
 				const paperRef = doc(dbService, "papers", `${paper.id}`);
 				await deleteDoc(paperRef);
 				alert("페이퍼가 삭제되었습니다!");
