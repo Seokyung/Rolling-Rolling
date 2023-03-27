@@ -4,6 +4,7 @@ import { collection, doc, setDoc } from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import imageCompression from "browser-image-compression";
+import MessageCanvas from "./MessageCanvas";
 
 function CreateMessage({ paperId, userObj, setMsgModal }) {
 	const imgInputRef = useRef(null);
@@ -12,6 +13,7 @@ function CreateMessage({ paperId, userObj, setMsgModal }) {
 	const [msgContent, setMsgContent] = useState("");
 	const [msgImg, setMsgImg] = useState("");
 	const [isPrivate, setIsPrivate] = useState(false);
+	const [canvasModal, setCanvasModal] = useState(false);
 
 	const onMessageChange = (e) => {
 		const {
@@ -52,6 +54,10 @@ function CreateMessage({ paperId, userObj, setMsgModal }) {
 	const clearMsgImg = () => {
 		imgInputRef.current.value = null;
 		setMsgImg("");
+	};
+
+	const showCanvasModal = () => {
+		setCanvasModal((prev) => !prev);
 	};
 
 	const onMessageSubmit = async (e) => {
@@ -131,6 +137,8 @@ function CreateMessage({ paperId, userObj, setMsgModal }) {
 					<label htmlFor="isPrivate">비공개</label>
 					<input type="submit" value="메세지 올리기" />
 				</div>
+			</form>
+			<div>
 				<label htmlFor="msgImgInput">
 					<span>이미지 첨부</span>
 				</label>
@@ -148,7 +156,11 @@ function CreateMessage({ paperId, userObj, setMsgModal }) {
 						<button onClick={clearMsgImg}>이미지 제거하기</button>
 					</div>
 				)}
-			</form>
+			</div>
+			<div>
+				<button onClick={showCanvasModal}>그림 그리기</button>
+				{canvasModal && <MessageCanvas />}
+			</div>
 		</div>
 	);
 }
