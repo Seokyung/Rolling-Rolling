@@ -3,6 +3,7 @@ import { authService } from "fbase";
 import {
 	signInWithPopup,
 	GoogleAuthProvider,
+	FacebookAuthProvider,
 	GithubAuthProvider,
 } from "firebase/auth";
 import AuthForm from "components/AuthForm";
@@ -17,6 +18,8 @@ function Auth() {
 		let provider;
 		if (name === "google") {
 			provider = new GoogleAuthProvider();
+		} else if (name === "facebook") {
+			provider = new FacebookAuthProvider();
 		} else if (name === "github") {
 			provider = new GithubAuthProvider();
 		}
@@ -33,6 +36,9 @@ function Auth() {
 			<div>
 				<button name="google" onClick={onSocialClick}>
 					Google로 로그인하기
+				</button>
+				<button name="facebook" onClick={onSocialClick}>
+					Facebook으로 로그인하기
 				</button>
 				<button name="github" onClick={onSocialClick}>
 					Github으로 로그인하기
