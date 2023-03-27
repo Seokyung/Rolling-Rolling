@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { authService, dbService } from "fbase";
+import { authService, dbService, storageService } from "fbase";
 import { onAuthStateChanged } from "firebase/auth";
 import {
 	doc,
@@ -9,7 +9,9 @@ import {
 	query,
 	collection,
 	getDocs,
+	getDoc,
 } from "firebase/firestore";
+import { ref, deleteObject } from "firebase/storage";
 import CreateMessage from "components/messgaes/CreateMessage";
 import MessageList from "components/messgaes/MessageList";
 import EditPaper from "./EditPaper";
@@ -88,6 +90,13 @@ function Paper({ userObj }) {
 						"messages",
 						`${msg.id}`
 					);
+					// const msgSnap = await getDoc(msgRef);
+					// if (msgSnap.msgImg !== "") {
+					// 	console.log(msgSnap.msgImg);
+					// 	const urlRef = ref(storageService, msgSnap.msgImg);
+					// 	console.log(urlRef);
+					// 	await deleteObject(urlRef);
+					// }
 					await deleteDoc(msgRef);
 				});
 				const paperRef = doc(dbService, "papers", `${paperId}`);
@@ -166,7 +175,11 @@ function Paper({ userObj }) {
 							/>
 							<button onClick={showMsgModal}>메세지 작성하기</button>
 							{msgModal && (
-								<CreateMessage paperId={paperId} setMsgModal={setMsgModal} />
+								<CreateMessage
+									paperId={paperId}
+									userObj={userObj}
+									setMsgModal={setMsgModal}
+								/>
 							)}
 							<button onClick={showShareModal}>공유하기</button>
 							{shareModal && (

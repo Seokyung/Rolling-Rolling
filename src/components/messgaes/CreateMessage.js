@@ -1,11 +1,20 @@
-import React, { useState } from "react";
-import { dbService } from "fbase";
+import React, { useRef, useState } from "react";
+import { dbService, storageService } from "fbase";
 import { collection, doc, setDoc } from "firebase/firestore";
+import {
+	ref,
+	uploadBytes,
+	uploadString,
+	getDownloadURL,
+} from "firebase/storage";
+import { v4 as uuidv4 } from "uuid";
 
-function CreateMessage({ paperId, setMsgModal }) {
+function CreateMessage({ paperId, userObj, setMsgModal }) {
+	const imgInputRef = useRef(null);
 	const [msgTitle, setMsgTitle] = useState("");
 	const [msgWriter, setMsgWriter] = useState("");
 	const [msgContent, setMsgContent] = useState("");
+	const [msgImg, setMsgImg] = useState("");
 	const [isPrivate, setIsPrivate] = useState(false);
 
 	const onMessageChange = (e) => {
@@ -28,10 +37,41 @@ function CreateMessage({ paperId, setMsgModal }) {
 		setIsPrivate(checked);
 	};
 
+	const onMsgImgChange = (e) => {
+		const {
+			target: { files },
+		} = e;
+		const imgFile = files[0];
+		const reader = new FileReader();
+		if (imgFile) {
+			reader.onload = (finishedEvent) => {
+				const {
+					currentTarget: { result },
+				} = finishedEvent;
+				setMsgImg(result);
+			};
+			reader.readAsDataURL(imgFile);
+		}
+	};
+
+	const clearMsgImg = () => {
+		imgInputRef.current.value = null;
+		setMsgImg("");
+	};
+
 	const onMessageSubmit = async (e) => {
 		e.preventDefault();
 		if (msgTitle === "" || msgWriter === "") {
+			alert("메세지 제목/작성자를 입력해주세요!");
 			return;
+		}
+		let msgImgUrl = "";
+		if (msgImg !== "") {
+			const msgImgRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+			// await uploadBytes(msgImgRef, msgImg);
+			const metadata = { customMetadata: { paperId: paperId } };
+			await uploadString(msgImgRef, msgImg, "data_url", metadata);
+			msgImgUrl = await getDownloadURL(msgImgRef);
 		}
 		const newMsg = doc(
 			collection(dbService, "papers", `${paperId}`, "messages")
@@ -41,6 +81,7 @@ function CreateMessage({ paperId, setMsgModal }) {
 			msgTitle: msgTitle,
 			msgWriter: msgWriter,
 			msgContent: msgContent,
+			msgImg: msgImgUrl,
 			createdAt: Date.now(),
 			isPrivate: isPrivate,
 		};
@@ -54,6 +95,7 @@ function CreateMessage({ paperId, setMsgModal }) {
 			setMsgTitle("");
 			setMsgWriter("");
 			setMsgContent("");
+			setMsgImg("");
 			setMsgModal((prev) => !prev);
 		}
 	};
@@ -62,35 +104,54 @@ function CreateMessage({ paperId, setMsgModal }) {
 		<div>
 			<h2>Create Message</h2>
 			<form onSubmit={onMessageSubmit}>
+				<div>
+					<input
+						type="text"
+						autoFocus
+						name="title"
+						value={msgTitle}
+						onChange={onMessageChange}
+						placeholder="제목을 입력하세요 :)"
+					/>
+					<input
+						type="text"
+						name="writer"
+						value={msgWriter}
+						onChange={onMessageChange}
+						placeholder="이름을 입력하세요 :)"
+					/>
+					<input
+						type="text"
+						name="content"
+						value={msgContent}
+						onChange={onMessageChange}
+						placeholder="내용을 입력하세요 :)"
+					/>
+					<input
+						type="checkbox"
+						checked={isPrivate}
+						onChange={onPrivateCheckChange}
+					/>
+					<label htmlFor="isPrivate">비공개</label>
+					<input type="submit" value="메세지 올리기" />
+				</div>
+				<label htmlFor="msgImgInput">
+					<span>이미지 첨부</span>
+				</label>
 				<input
-					type="text"
-					autoFocus
-					name="title"
-					value={msgTitle}
-					onChange={onMessageChange}
-					placeholder="제목을 입력하세요 :)"
+					type="file"
+					id="msgImgInput"
+					ref={imgInputRef}
+					onChange={onMsgImgChange}
+					accept="image/*"
+					style={{ display: "none" }}
 				/>
-				<input
-					type="text"
-					name="writer"
-					value={msgWriter}
-					onChange={onMessageChange}
-					placeholder="이름을 입력하세요 :)"
-				/>
-				<input
-					type="text"
-					name="content"
-					value={msgContent}
-					onChange={onMessageChange}
-					placeholder="내용을 입력하세요 :)"
-				/>
-				<input
-					type="checkbox"
-					checked={isPrivate}
-					onChange={onPrivateCheckChange}
-				/>
-				<label htmlFor="isPrivate">비공개</label>
-				<input type="submit" value="메세지 붙이기" />
+				{msgImg && (
+					<div>
+						<img src={msgImg} width="200px" />
+						<button onClick={clearMsgImg}>이미지 제거하기</button>
+					</div>
+				)}
 			</form>
 		</div>
 	);

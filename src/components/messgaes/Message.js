@@ -1,6 +1,7 @@
 import React from "react";
-import { dbService } from "fbase";
+import { dbService, storageService } from "fbase";
 import { doc, deleteDoc } from "firebase/firestore";
+import { ref, deleteObject } from "firebase/storage";
 
 function Message({ msgObj, isOwner }) {
 	const deleteMessage = async (msgObj) => {
@@ -16,6 +17,10 @@ function Message({ msgObj, isOwner }) {
 				`${msgObj.id}`
 			);
 			await deleteDoc(msgRef);
+			if (msgObj.msgImg !== "") {
+				const urlRef = ref(storageService, msgObj.msgImg);
+				await deleteObject(urlRef);
+			}
 			alert("메세지가 삭제되었습니다!");
 		}
 	};
@@ -28,6 +33,11 @@ function Message({ msgObj, isOwner }) {
 			</h3>
 			<h4>{msgObj.msgWriter}</h4>
 			<p>{msgObj.msgContent}</p>
+			{msgObj.msgImg && (
+				<a href={msgObj.msgImg} target="_blank" rel="noopener noreferrer">
+					<img src={msgObj.msgImg} width="150px" />
+				</a>
+			)}
 			{isOwner && (
 				<button onClick={() => deleteMessage(msgObj)}>메세지 삭제</button>
 			)}
