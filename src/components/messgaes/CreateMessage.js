@@ -1,13 +1,9 @@
 import React, { useRef, useState } from "react";
 import { dbService, storageService } from "fbase";
 import { collection, doc, setDoc } from "firebase/firestore";
-import {
-	ref,
-	uploadBytes,
-	uploadString,
-	getDownloadURL,
-} from "firebase/storage";
+import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
+import imageCompression from "browser-image-compression";
 
 function CreateMessage({ paperId, userObj, setMsgModal }) {
 	const imgInputRef = useRef(null);
@@ -37,20 +33,19 @@ function CreateMessage({ paperId, userObj, setMsgModal }) {
 		setIsPrivate(checked);
 	};
 
-	const onMsgImgChange = (e) => {
+	const onMsgImgChange = async (e) => {
 		const {
 			target: { files },
 		} = e;
 		const imgFile = files[0];
-		const reader = new FileReader();
-		if (imgFile) {
-			reader.onload = (finishedEvent) => {
-				const {
-					currentTarget: { result },
-				} = finishedEvent;
+		try {
+			const compressedImg = await imageCompression(imgFile, { maxSizeMB: 0.5 });
+			const promise = imageCompression.getDataUrlFromFile(compressedImg);
+			promise.then((result) => {
 				setMsgImg(result);
-			};
-			reader.readAsDataURL(imgFile);
+			});
+		} catch (error) {
+			console.log(error);
 		}
 	};
 
