@@ -67,10 +67,11 @@ function CreateMessage({ paperId, userObj, setMsgModal }) {
 		}
 		let msgImgUrl = "";
 		if (msgImg !== "") {
-			const msgImgRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
-			// await uploadBytes(msgImgRef, msgImg);
-			const metadata = { customMetadata: { paperId: paperId } };
-			await uploadString(msgImgRef, msgImg, "data_url", metadata);
+			const msgImgRef = ref(
+				storageService,
+				`${userObj.uid}/${paperId}/${uuidv4()}`
+			);
+			await uploadString(msgImgRef, msgImg, "data_url");
 			msgImgUrl = await getDownloadURL(msgImgRef);
 		}
 		const newMsg = doc(

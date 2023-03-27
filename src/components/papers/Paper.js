@@ -9,7 +9,6 @@ import {
 	query,
 	collection,
 	getDocs,
-	getDoc,
 } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 import CreateMessage from "components/messgaes/CreateMessage";
@@ -90,14 +89,11 @@ function Paper({ userObj }) {
 						"messages",
 						`${msg.id}`
 					);
-					// const msgSnap = await getDoc(msgRef);
-					// if (msgSnap.msgImg !== "") {
-					// 	console.log(msgSnap.msgImg);
-					// 	const urlRef = ref(storageService, msgSnap.msgImg);
-					// 	console.log(urlRef);
-					// 	await deleteObject(urlRef);
-					// }
 					await deleteDoc(msgRef);
+					if (msg.data().msgImg !== "") {
+						const urlRef = ref(storageService, msg.data().msgImg);
+						await deleteObject(urlRef);
+					}
 				});
 				const paperRef = doc(dbService, "papers", `${paperId}`);
 				await deleteDoc(paperRef);

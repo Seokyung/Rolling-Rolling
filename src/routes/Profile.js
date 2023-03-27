@@ -1,16 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { authService, dbService } from "fbase";
+import { authService, dbService, storageService } from "fbase";
 import { signOut, deleteUser } from "firebase/auth";
 import {
 	doc,
-	onSnapshot,
 	deleteDoc,
 	query,
 	collection,
 	getDocs,
 	where,
 } from "firebase/firestore";
+import { ref, deleteObject } from "firebase/storage";
 import EditProfile from "components/profile/EditProfile";
 
 function Profile({ userObj, refreshUser }) {
@@ -50,6 +50,10 @@ function Profile({ userObj, refreshUser }) {
 						`${msg.id}`
 					);
 					await deleteDoc(msgRef);
+					if (msg.data().msgImg !== "") {
+						const urlRef = ref(storageService, msg.data().msgImg);
+						await deleteObject(urlRef);
+					}
 				});
 				const paperRef = doc(dbService, "papers", `${paper.id}`);
 				await deleteDoc(paperRef);

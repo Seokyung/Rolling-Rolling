@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { authService, dbService } from "fbase";
+import { authService, dbService, storageService } from "fbase";
 import { onAuthStateChanged } from "firebase/auth";
 import {
 	collection,
@@ -12,6 +12,7 @@ import {
 	getDocs,
 	deleteDoc,
 } from "firebase/firestore";
+import { ref, deleteObject } from "firebase/storage";
 
 function PaperList({ userObj }) {
 	const [papers, setPapers] = useState([]);
@@ -62,6 +63,10 @@ function PaperList({ userObj }) {
 						`${msg.id}`
 					);
 					await deleteDoc(msgRef);
+					if (msg.data().msgImg !== "") {
+						const urlRef = ref(storageService, msg.data().msgImg);
+						await deleteObject(urlRef);
+					}
 				});
 				const paperRef = doc(dbService, "papers", `${paper.id}`);
 				await deleteDoc(paperRef);
