@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-function MessageCanvas() {
+function MessageCanvas({ setMsgDrawing, setCanvasModal }) {
 	const canvasRef = useRef(null);
 	const [ctx, setCtx] = useState(null);
 	const [isDrawing, setIsDrawing] = useState(false);
@@ -16,13 +16,23 @@ function MessageCanvas() {
 	const onDrawing = (e) => {
 		const mouseX = e.nativeEvent.offsetX;
 		const mouseY = e.nativeEvent.offsetY;
-		if (!isDrawing) {
-			ctx.beginPath();
-			ctx.moveTo(mouseX, mouseY);
-		} else {
+		if (isDrawing) {
 			ctx.lineTo(mouseX, mouseY);
 			ctx.stroke();
+		} else {
+			ctx.beginPath();
+			ctx.moveTo(mouseX, mouseY);
 		}
+	};
+
+	const resetDrawing = () => {
+		ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+	};
+
+	const saveDrawing = () => {
+		const drawingUrl = canvasRef.current.toDataURL("image/png");
+		setMsgDrawing(drawingUrl);
+		setCanvasModal((prev) => !prev);
 	};
 
 	return (
@@ -36,6 +46,8 @@ function MessageCanvas() {
 				onMouseLeave={() => setIsDrawing(false)}
 				style={{ backgroundColor: "yellow" }}
 			/>
+			<button onClick={resetDrawing}>그림 지우기</button>
+			<button onClick={saveDrawing}>그림 첨부하기</button>
 		</div>
 	);
 }

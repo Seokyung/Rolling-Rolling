@@ -11,7 +11,9 @@ function CreateMessage({ paperId, userObj, setMsgModal }) {
 	const [msgTitle, setMsgTitle] = useState("");
 	const [msgWriter, setMsgWriter] = useState("");
 	const [msgContent, setMsgContent] = useState("");
+	const [attachment, setAttachment] = useState("");
 	const [msgImg, setMsgImg] = useState("");
+	const [msgDrawing, setMsgDrawing] = useState("");
 	const [isPrivate, setIsPrivate] = useState(false);
 	const [canvasModal, setCanvasModal] = useState(false);
 
@@ -33,6 +35,13 @@ function CreateMessage({ paperId, userObj, setMsgModal }) {
 			target: { checked },
 		} = e;
 		setIsPrivate(checked);
+	};
+
+	const onAttachmentChange = (e) => {
+		const {
+			target: { value },
+		} = e;
+		setAttachment(value);
 	};
 
 	const onMsgImgChange = async (e) => {
@@ -60,6 +69,10 @@ function CreateMessage({ paperId, userObj, setMsgModal }) {
 		setCanvasModal((prev) => !prev);
 	};
 
+	const clearMsgDrawing = () => {
+		setMsgDrawing("");
+	};
+
 	const onMessageSubmit = async (e) => {
 		e.preventDefault();
 		if (msgTitle === "" || msgWriter === "") {
@@ -67,12 +80,20 @@ function CreateMessage({ paperId, userObj, setMsgModal }) {
 			return;
 		}
 		let msgImgUrl = "";
-		if (msgImg !== "") {
+		if (attachment === "attachImage" && msgImg !== "") {
 			const msgImgRef = ref(
 				storageService,
 				`${userObj.uid}/${paperId}/${uuidv4()}`
 			);
 			await uploadString(msgImgRef, msgImg, "data_url");
+			msgImgUrl = await getDownloadURL(msgImgRef);
+		}
+		if (attachment === "attachDrawing" && msgDrawing !== "") {
+			const msgImgRef = ref(
+				storageService,
+				`${userObj.uid}/${paperId}/${uuidv4()}`
+			);
+			await uploadString(msgImgRef, msgDrawing, "data_url");
 			msgImgUrl = await getDownloadURL(msgImgRef);
 		}
 		const newMsg = doc(
@@ -139,28 +160,67 @@ function CreateMessage({ paperId, userObj, setMsgModal }) {
 				</div>
 			</form>
 			<div>
-				<label htmlFor="msgImgInput">
-					<span>이미지 첨부</span>
+				<label>
+					<input
+						type="radio"
+						name="attachmentType"
+						id="attachImage"
+						value="attachImage"
+						checked={attachment === "attachImage"}
+						onChange={onAttachmentChange}
+					/>
+					이미지 첨부하기
 				</label>
-				<input
-					type="file"
-					id="msgImgInput"
-					ref={imgInputRef}
-					onChange={onMsgImgChange}
-					accept="image/*"
-					style={{ display: "none" }}
-				/>
-				{msgImg && (
-					<div>
-						<img src={msgImg} width="200px" />
-						<button onClick={clearMsgImg}>이미지 제거하기</button>
-					</div>
-				)}
+				<label>
+					<input
+						type="radio"
+						name="attachmentType"
+						id="attachDrawing"
+						value="attachDrawing"
+						checked={attachment === "attachDrawing"}
+						onChange={onAttachmentChange}
+					/>
+					그림 첨부하기
+				</label>
 			</div>
-			<div>
-				<button onClick={showCanvasModal}>그림 그리기</button>
-				{canvasModal && <MessageCanvas />}
-			</div>
+			{attachment === "attachImage" && (
+				<div>
+					<label htmlFor="msgImgInput">
+						<span>이미지 첨부</span>
+					</label>
+					<input
+						type="file"
+						id="msgImgInput"
+						ref={imgInputRef}
+						onChange={onMsgImgChange}
+						accept="image/*"
+						style={{ display: "none" }}
+					/>
+					{msgImg && (
+						<div>
+							<img src={msgImg} width="200px" />
+							<button onClick={clearMsgImg}>이미지 제거하기</button>
+						</div>
+					)}
+				</div>
+			)}
+			{attachment === "attachDrawing" && (
+				<div>
+					<button onClick={showCanvasModal}>그림 그리기</button>
+					{canvasModal && (
+						<MessageCanvas
+							setMsgDrawing={setMsgDrawing}
+							setCanvasModal={setCanvasModal}
+						/>
+					)}
+					{msgDrawing && (
+						<div>
+							<img src={msgDrawing} width="200px" />
+							<button onClick={clearMsgDrawing}>그림 제거하기</button>
+						</div>
+					)}
+				</div>
+			)}
 		</div>
 	);
 }
