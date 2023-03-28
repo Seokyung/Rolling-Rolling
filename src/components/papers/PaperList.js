@@ -62,11 +62,11 @@ function PaperList({ userObj }) {
 						"messages",
 						`${msg.id}`
 					);
-					await deleteDoc(msgRef);
 					if (msg.data().msgImg !== "") {
 						const urlRef = ref(storageService, msg.data().msgImg);
 						await deleteObject(urlRef);
 					}
+					await deleteDoc(msgRef);
 				});
 				const paperRef = doc(dbService, "papers", `${paper.id}`);
 				await deleteDoc(paperRef);
