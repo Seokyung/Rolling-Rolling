@@ -1,16 +1,16 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { dbService, storageService } from "fbase";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
-import imageCompression from "browser-image-compression";
+import MessageImage from "./MessageImage";
 import MessageCanvas from "./MessageCanvas";
 
 function CreateMessage({ paperId, userObj, setMsgModal }) {
-	const imgInputRef = useRef(null);
 	const [msgTitle, setMsgTitle] = useState("");
 	const [msgWriter, setMsgWriter] = useState("");
 	const [msgContent, setMsgContent] = useState("");
+	const [isAttachment, setIsAttachment] = useState(false);
 	const [attachment, setAttachment] = useState("");
 	const [msgImg, setMsgImg] = useState("");
 	const [msgDrawing, setMsgDrawing] = useState("");
@@ -39,30 +39,19 @@ function CreateMessage({ paperId, userObj, setMsgModal }) {
 
 	const onAttachmentChange = (e) => {
 		const {
-			target: { value },
+			target: { checked },
 		} = e;
-		setAttachment(value);
-	};
-
-	const onMsgImgChange = async (e) => {
-		const {
-			target: { files },
-		} = e;
-		const imgFile = files[0];
-		try {
-			const compressedImg = await imageCompression(imgFile, { maxSizeMB: 0.5 });
-			const promise = imageCompression.getDataUrlFromFile(compressedImg);
-			promise.then((result) => {
-				setMsgImg(result);
-			});
-		} catch (error) {
-			console.log(error);
+		setIsAttachment(checked);
+		if (!checked) {
+			setAttachment("");
 		}
 	};
 
-	const clearMsgImg = () => {
-		imgInputRef.current.value = null;
-		setMsgImg("");
+	const onAttachmentTypeChange = (e) => {
+		const {
+			target: { value },
+		} = e;
+		setAttachment(value);
 	};
 
 	const showCanvasModal = () => {
@@ -159,67 +148,59 @@ function CreateMessage({ paperId, userObj, setMsgModal }) {
 					<input type="submit" value="메세지 올리기" />
 				</div>
 			</form>
-			<div>
-				<label>
-					<input
-						type="radio"
-						name="attachmentType"
-						id="attachImage"
-						value="attachImage"
-						checked={attachment === "attachImage"}
-						onChange={onAttachmentChange}
-					/>
-					이미지 첨부하기
-				</label>
-				<label>
-					<input
-						type="radio"
-						name="attachmentType"
-						id="attachDrawing"
-						value="attachDrawing"
-						checked={attachment === "attachDrawing"}
-						onChange={onAttachmentChange}
-					/>
-					그림 첨부하기
-				</label>
-			</div>
-			{attachment === "attachImage" && (
-				<div>
-					<label htmlFor="msgImgInput">
-						<span>이미지 첨부</span>
-					</label>
-					<input
-						type="file"
-						id="msgImgInput"
-						ref={imgInputRef}
-						onChange={onMsgImgChange}
-						accept="image/*"
-						style={{ display: "none" }}
-					/>
-					{msgImg && (
+			<input
+				type="checkbox"
+				checked={isAttachment}
+				onChange={onAttachmentChange}
+			/>
+			<label htmlFor="isAttachment">첨부파일</label>
+			{isAttachment && (
+				<>
+					<div>
+						<label>
+							<input
+								type="radio"
+								name="attachmentType"
+								id="attachImage"
+								value="attachImage"
+								checked={attachment === "attachImage"}
+								onChange={onAttachmentTypeChange}
+							/>
+							이미지 첨부하기
+						</label>
+						<label>
+							<input
+								type="radio"
+								name="attachmentType"
+								id="attachDrawing"
+								value="attachDrawing"
+								checked={attachment === "attachDrawing"}
+								onChange={onAttachmentTypeChange}
+							/>
+							그림 첨부하기
+						</label>
+					</div>
+					{attachment === "attachImage" && (
+						<MessageImage msgImg={msgImg} setMsgImg={setMsgImg} />
+					)}
+					{attachment === "attachDrawing" && (
 						<div>
-							<img src={msgImg} width="200px" />
-							<button onClick={clearMsgImg}>이미지 제거하기</button>
+							<button onClick={showCanvasModal}>그림 그리기</button>
+							{canvasModal && (
+								<MessageCanvas
+									setMsgDrawing={setMsgDrawing}
+									setCanvasModal={setCanvasModal}
+								/>
+							)}
+							{msgDrawing && (
+								<div>
+									<img src={msgDrawing} width="200px" />
+									<button onClick={clearMsgDrawing}>그림 제거하기</button>
+								</div>
+							)}
 						</div>
 					)}
-				</div>
-			)}
-			{attachment === "attachDrawing" && (
-				<div>
-					<button onClick={showCanvasModal}>그림 그리기</button>
-					{canvasModal && (
-						<MessageCanvas
-							setMsgDrawing={setMsgDrawing}
-							setCanvasModal={setCanvasModal}
-						/>
-					)}
-					{msgDrawing && (
-						<div>
-							<img src={msgDrawing} width="200px" />
-							<button onClick={clearMsgDrawing}>그림 제거하기</button>
-						</div>
-					)}
-				</div>
+				</>
 			)}
 		</div>
 	);
