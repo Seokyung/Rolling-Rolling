@@ -14,7 +14,7 @@ function MessageCanvas({ setMsgDrawing, setCanvasModal }) {
 		const canvas = canvasRef.current;
 		canvas.width = window.innerWidth * 0.6;
 		canvas.height = window.innerHeight * 0.6;
-		const getCtx = canvas.getContext("2d");
+		const getCtx = canvas.getContext("2d", { willReadFrequently: true });
 		setCtx(getCtx);
 		setTool("pen");
 		setToolWidth("1");
