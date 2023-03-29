@@ -229,7 +229,7 @@ function MessageCanvas({ setMsgDrawing, setCanvasModal }) {
 						파랑
 					</label>
 				</div>
-				<button onClick={undoLastDrawing}>되돌리기</button>
+				<button onClick={undoLastDrawing}>뒤로가기</button>
 				<button onClick={resetDrawing}>리셋</button>
 			</div>
 			<button onClick={saveDrawing}>그림 첨부하기</button>
