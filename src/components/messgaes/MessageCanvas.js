@@ -4,12 +4,11 @@ function MessageCanvas({ setMsgDrawing, setCanvasModal }) {
 	const canvasRef = useRef(null);
 	const [ctx, setCtx] = useState(null);
 	const [isDrawing, setIsDrawing] = useState(false);
-	const [tool, setTool] = useState("pen");
-	const [toolWidth, setToolWidth] = useState("1");
-	const [color, setColor] = useState("black");
-	//const [drawArray, setDrawArray] = useState([]);
-	//let drawArray = [];
-	//const [idx, setIdx] = useState(-1);
+	const [tool, setTool] = useState("");
+	const [toolWidth, setToolWidth] = useState("");
+	const [color, setColor] = useState("");
+	const [drawArray, setDrawArray] = useState([]);
+	const [idx, setIdx] = useState(0);
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
@@ -17,53 +16,55 @@ function MessageCanvas({ setMsgDrawing, setCanvasModal }) {
 		canvas.height = window.innerHeight * 0.6;
 		const getCtx = canvas.getContext("2d");
 		setCtx(getCtx);
-		//setIdx(-1);
+		setTool("pen");
+		setToolWidth("1");
+		setColor("black");
+		setDrawArray([]);
+		setIdx(0);
 	}, []);
 
-	const onDrawing = (e) => {
-		const mouseX = e.nativeEvent.offsetX;
-		const mouseY = e.nativeEvent.offsetY;
-		ctx.lineCap = "round";
-		ctx.lineJoin = "round";
-		ctx.lineWidth = toolWidth;
-		if (isDrawing) {
-			ctx.lineTo(mouseX, mouseY);
-			ctx.stroke();
-		} else {
-			ctx.beginPath();
-			ctx.moveTo(mouseX, mouseY);
+	const startDrawing = (e) => {
+		const getX = e.nativeEvent.offsetX;
+		const getY = e.nativeEvent.offsetY;
+		setIsDrawing(true);
+		ctx.beginPath();
+		ctx.moveTo(getX, getY);
+		e.preventDefault();
+		if (e.type !== "mouseout") {
+			setDrawArray(
+				drawArray.concat({
+					id: idx,
+					imgData: ctx.getImageData(
+						0,
+						0,
+						canvasRef.current.width,
+						canvasRef.current.height
+					),
+				})
+			);
+			setIdx((prev) => prev + 1);
 		}
 	};
 
-	const onHandleMouseDown = (e) => {
-		setIsDrawing(false);
-		const mouseX = e.nativeEvent.offsetX;
-		const mouseY = e.nativeEvent.offsetY;
-		ctx.beginPath();
-		ctx.moveTo(mouseX, mouseY);
-		// if (e.type !== "mouseout") {
-		// 	drawArray.push(
-		// 		ctx.getImageData(
-		// 			0,
-		// 			0,
-		// 			canvasRef.current.width,
-		// 			canvasRef.current.height
-		// 		)
-		// 	);
-		// 	setIdx((prev) => prev + 1);
-		// 	console.log(idx, ": ", drawArray[idx]);
-		// }
+	const onDrawing = (e) => {
+		const getX = e.nativeEvent.offsetX;
+		const getY = e.nativeEvent.offsetY;
+		if (isDrawing) {
+			ctx.lineCap = "round";
+			ctx.lineJoin = "round";
+			ctx.lineWidth = toolWidth;
+			ctx.lineTo(getX, getY);
+			ctx.stroke();
+		}
 	};
 
-	const undoLastStroke = () => {
-		// if (idx <= 0) {
-		// 	resetDrawing();
-		// } else {
-		// 	setIdx((prev) => prev - 1);
-		// 	drawArray.pop();
-		// 	console.log(drawArray[idx]);
-		// 	ctx.putImageData(drawArray[idx], 0, 0);
-		// }
+	const stopDrawing = (e) => {
+		if (isDrawing) {
+			ctx.stroke();
+			ctx.closePath();
+			setIsDrawing(false);
+		}
+		e.preventDefault();
 	};
 
 	const onToolChange = (e) => {
@@ -91,10 +92,26 @@ function MessageCanvas({ setMsgDrawing, setCanvasModal }) {
 			target: { value },
 		} = e;
 		setColor(value);
-		ctx.strokeStyle = value;
+		if (tool === "pen") {
+			ctx.strokeStyle = value;
+		}
+	};
+
+	const undoLastDrawing = () => {
+		if (idx <= 0) {
+			resetDrawing();
+		} else {
+			setIdx((prev) => prev - 1);
+			const undoArray = drawArray.filter((data) => data.id !== idx);
+			setDrawArray(undoArray);
+			const getArray = drawArray.find((data) => data.id === idx - 1);
+			ctx.putImageData(getArray.imgData, 0, 0);
+		}
 	};
 
 	const resetDrawing = () => {
+		setDrawArray([]);
+		setIdx(0);
 		ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 	};
 
@@ -109,10 +126,13 @@ function MessageCanvas({ setMsgDrawing, setCanvasModal }) {
 			<h4>Canvas</h4>
 			<canvas
 				ref={canvasRef}
-				onMouseDown={() => setIsDrawing(true)}
-				onMouseUp={onHandleMouseDown}
-				onMouseMove={(e) => onDrawing(e)}
-				onMouseLeave={() => setIsDrawing(false)}
+				onMouseDown={startDrawing}
+				onTouchStart={startDrawing}
+				onMouseMove={onDrawing}
+				onTouchMove={onDrawing}
+				onMouseUp={stopDrawing}
+				onMouseOut={stopDrawing}
+				onTouchEnd={stopDrawing}
 				style={{ border: "1px solid black" }}
 			/>
 			<div>
@@ -209,7 +229,7 @@ function MessageCanvas({ setMsgDrawing, setCanvasModal }) {
 						파랑
 					</label>
 				</div>
-				<button onClick={undoLastStroke}>되돌리기</button>
+				<button onClick={undoLastDrawing}>되돌리기</button>
 				<button onClick={resetDrawing}>리셋</button>
 			</div>
 			<button onClick={saveDrawing}>그림 첨부하기</button>
