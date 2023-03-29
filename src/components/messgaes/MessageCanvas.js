@@ -23,6 +23,7 @@ function MessageCanvas({ setMsgDrawing, setCanvasModal }) {
 	const onDrawing = (e) => {
 		const mouseX = e.nativeEvent.offsetX;
 		const mouseY = e.nativeEvent.offsetY;
+		ctx.lineCap = "round";
 		ctx.lineJoin = "round";
 		ctx.lineWidth = toolWidth;
 		if (isDrawing) {

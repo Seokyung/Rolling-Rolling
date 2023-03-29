@@ -73,8 +73,10 @@ function Paper({ userObj }) {
 		}
 	};
 
-	const deletePaper = async (paperName) => {
-		const isDelete = window.confirm(`${paperName} 페이퍼를 삭제하시겠습니까?`);
+	const deletePaper = async () => {
+		const isDelete = window.confirm(
+			`${paperObj.paperName} 페이퍼를 삭제하시겠습니까?`
+		);
 		if (isDelete) {
 			try {
 				const msgQuery = query(
@@ -153,9 +155,7 @@ function Paper({ userObj }) {
 							{userObj.uid === paperObj.paperCreator && (
 								<>
 									<button onClick={showEditModal}>페이퍼 수정</button>
-									<button onClick={() => deletePaper(paperObj.paperName)}>
-										페이퍼 삭제
-									</button>
+									<button onClick={deletePaper}>페이퍼 삭제</button>
 									{editModal && (
 										<EditPaper
 											paperObj={paperObj}
