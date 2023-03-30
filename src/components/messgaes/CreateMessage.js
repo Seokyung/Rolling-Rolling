@@ -194,7 +194,7 @@ function CreateMessage({ paperId, userObj, setMsgModal }) {
 							)}
 							{msgDrawing && (
 								<div>
-									<img src={msgDrawing} width="200px" />
+									<img src={msgDrawing} width="200px" alt="messageDrawing" />
 									<button onClick={clearMsgDrawing}>그림 제거하기</button>
 								</div>
 							)}

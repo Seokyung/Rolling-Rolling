@@ -35,7 +35,7 @@ function Message({ msgObj, isOwner }) {
 			<p>{msgObj.msgContent}</p>
 			{msgObj.msgImg && (
 				<a href={msgObj.msgImg} target="_blank" rel="noopener noreferrer">
-					<img src={msgObj.msgImg} width="150px" />
+					<img src={msgObj.msgImg} width="150px" alt="messageImage" />
 				</a>
 			)}
 			{isOwner && (

@@ -60,9 +60,12 @@ function Profile({ userObj, refreshUser }) {
 			});
 		} catch (error) {
 			console.log(error.message);
-		} finally {
-			navigate("/", { replace: true });
 		}
+	};
+
+	const deleteProfileImgData = async () => {
+		const urlRef = ref(storageService, `${userObj.uid}/profileImg`);
+		await deleteObject(urlRef);
 	};
 
 	const deleteAccount = async () => {
@@ -72,6 +75,7 @@ function Profile({ userObj, refreshUser }) {
 		if (isDelete) {
 			try {
 				deletePaperData();
+				deleteProfileImgData();
 				alert(
 					`회원 탈퇴 되었습니다!\n\n그동안 Rolling-Rolling을 애용해주셔서 감사합니다 :)\n필요할 땐 언제든 다시 찾아주세요♡`
 				);
@@ -87,7 +91,7 @@ function Profile({ userObj, refreshUser }) {
 
 	return (
 		<div>
-			<img src={`${userObj.photoURL}`} width="100px" />
+			<img src={`${userObj.photoURL}`} width="100px" alt="profileImage" />
 			<h2>{userObj.displayName}</h2>
 			<EditProfile userObj={userObj} refreshUser={refreshUser} />
 			<button onClick={onLogoutClick}>로그아웃</button>

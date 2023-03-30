@@ -40,7 +40,7 @@ function MessageImage({ msgImg, setMsgImg }) {
 			/>
 			{msgImg && (
 				<div>
-					<img src={msgImg} width="200px" />
+					<img src={msgImg} width="200px" alt="messageImage" />
 					<button onClick={clearMsgImg}>이미지 제거하기</button>
 				</div>
 			)}
