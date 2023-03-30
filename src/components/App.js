@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AppRouter from "routes/AppRouter";
 import { authService } from "fbase";
+import "./App.css";
 
 function App() {
 	const [init, setInit] = useState(false);
@@ -50,7 +51,7 @@ function App() {
 			) : (
 				"Initializing..."
 			)}
-			<footer>
+			<footer className="appFooter">
 				&copy; {new Date().getFullYear()} Rolling-Rolling
 				<br />
 				Seokyung Jee

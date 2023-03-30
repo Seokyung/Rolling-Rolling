@@ -1,0 +1,10 @@
+.appFooter {
+	display: flex;
+	position: relative;
+	align-items: center;
+	justify-content: center;
+	height: 13rem;
+	transform: translateY(0%);
+	text-align: center;
+	background-color: dimgrey;
+}

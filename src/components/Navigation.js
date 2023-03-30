@@ -1,15 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Navigation.css";
 
 function Navigation({ userObj }) {
 	return (
 		<nav>
-			<ul>
+			<ul className="navUl">
 				<li>
-					<Link to={"/"}>Home</Link>
+					<Link to={"/"} className="navMenu">
+						<span className="navMenuName">Home</span>
+					</Link>
 				</li>
 				<li>
-					<Link to={"/profile"}>{userObj.displayName}의 Profile</Link>
+					<Link to={"/profile"} className="navMenu">
+						<span className="navMenuName">{userObj.displayName}의 Profile</span>
+					</Link>
 				</li>
 			</ul>
 		</nav>
