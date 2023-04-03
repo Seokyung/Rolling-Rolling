@@ -9,20 +9,12 @@ import { getUser } from "modules/user";
 function App() {
 	const dispatch = useDispatch();
 	const [init, setInit] = useState(false);
-	const [userObj, setUserObj] = useState(null);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	useEffect(() => {
 		authService.onAuthStateChanged((user) => {
 			if (user) {
-				setUserObj({
-					uid: user.uid,
-					displayName: user.displayName
-						? user.displayName
-						: user.email.split("@")[0],
-					photoURL: user.photoURL
-						? user.photoURL
-						: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
-				});
+				setIsLoggedIn(true);
 				dispatch(
 					getUser({
 						uid: user.uid,
@@ -35,7 +27,7 @@ function App() {
 					})
 				);
 			} else {
-				setUserObj(null);
+				setIsLoggedIn(false);
 				dispatch(
 					getUser({
 						uid: "",
@@ -50,16 +42,6 @@ function App() {
 
 	const refreshUser = () => {
 		const user = authService.currentUser;
-		setUserObj({
-			uid: user.uid,
-			displayName: user.displayName
-				? user.displayName
-				: user.email.split("@")[0],
-			photoURL: user.photoURL
-				? user.photoURL
-				: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
-			updateProfile: (args) => user.updateProfile(args),
-		});
 		dispatch(
 			getUser({
 				uid: user.uid,
@@ -76,7 +58,7 @@ function App() {
 	return (
 		<div>
 			{init ? (
-				<AppRouter isLoggedIn={Boolean(userObj)} refreshUser={refreshUser} />
+				<AppRouter isLoggedIn={isLoggedIn} refreshUser={refreshUser} />
 			) : (
 				"Initializing..."
 			)}
