@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
-import { dbService } from "fbase";
+import { dbService } from "api/fbase";
 
 function EditPaper({ paperObj, isOwner, setEditModal }) {
 	const [newPaperName, setNewPaperName] = useState(paperObj.paperName);
@@ -26,7 +26,7 @@ function EditPaper({ paperObj, isOwner, setEditModal }) {
 			target: { value, maxLength },
 		} = e;
 		if (value.length > maxLength) {
-			value = value.slice(0, maxLength);
+			setNewPaperCode(value.slice(0, maxLength));
 		}
 		if (!isNaN(value)) {
 			setNewPaperCode(value);

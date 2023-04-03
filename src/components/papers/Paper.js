@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { authService, dbService, storageService } from "fbase";
+import { authService, dbService, storageService } from "api/fbase";
 import { onAuthStateChanged } from "firebase/auth";
 import {
 	doc,
@@ -55,7 +55,7 @@ function Paper({ userObj }) {
 			target: { value, maxLength },
 		} = e;
 		if (value.length > maxLength) {
-			value = value.slice(0, maxLength);
+			setPaperCode(value.slice(0, maxLength));
 		}
 		if (!isNaN(value)) {
 			setPaperCode(value);

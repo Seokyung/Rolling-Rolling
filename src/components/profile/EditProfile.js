@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import imageCompression from "browser-image-compression";
-import { authService, storageService } from "fbase";
+import { authService, storageService } from "api/fbase";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
 

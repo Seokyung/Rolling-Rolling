@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { dbService } from "fbase";
+import { dbService } from "api/fbase";
 import { collection, doc, setDoc } from "firebase/firestore";
 
 function CreatePaper({ userObj, setPaperModal }) {
@@ -26,7 +26,7 @@ function CreatePaper({ userObj, setPaperModal }) {
 			target: { value, maxLength },
 		} = e;
 		if (value.length > maxLength) {
-			value = value.slice(0, maxLength);
+			setPaperCode(value.slice(0, maxLength));
 		}
 		if (!isNaN(value)) {
 			setPaperCode(value);

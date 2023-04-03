@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { authService, dbService, storageService } from "fbase";
+import { authService, dbService, storageService } from "api/fbase";
 import { signOut, deleteUser } from "firebase/auth";
 import {
 	doc,

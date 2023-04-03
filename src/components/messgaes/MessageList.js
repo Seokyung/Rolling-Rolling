@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { authService, dbService } from "fbase";
+import { authService, dbService } from "api/fbase";
 import { onAuthStateChanged } from "firebase/auth";
 import {
 	collection,
