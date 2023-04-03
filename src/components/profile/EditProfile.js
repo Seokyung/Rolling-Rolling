@@ -3,8 +3,10 @@ import imageCompression from "browser-image-compression";
 import { authService, storageService } from "api/fbase";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
+import { useSelector } from "react-redux";
 
-function EditProfile({ userObj, refreshUser }) {
+function EditProfile({ refreshUser }) {
+	const userObj = useSelector((state) => state.userReducer);
 	const profileImgRef = useRef(null);
 	const [userName, setUserName] = useState(userObj.displayName);
 	const [profileImg, setProfileImg] = useState(userObj.photoURL);

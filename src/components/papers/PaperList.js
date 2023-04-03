@@ -13,14 +13,16 @@ import {
 	deleteDoc,
 } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
+import { useSelector } from "react-redux";
 
-function PaperList({ userObj }) {
+function PaperList() {
+	const userId = useSelector((state) => state.userReducer.uid);
 	const [papers, setPapers] = useState([]);
 
 	useEffect(() => {
 		const q = query(
 			collection(dbService, "papers"),
-			where("creatorId", "==", `${userObj.uid}`),
+			where("creatorId", "==", `${userId}`),
 			orderBy("createdAt", "desc")
 		);
 		const unsubscribe = onSnapshot(
@@ -88,7 +90,7 @@ function PaperList({ userObj }) {
 								{paper.paperName}
 							</h4>
 						</Link>
-						{userObj.uid === paper.creatorId && (
+						{userId === paper.creatorId && (
 							<button onClick={() => deletePaper(paper)}>페이퍼 삭제</button>
 						)}
 						{}

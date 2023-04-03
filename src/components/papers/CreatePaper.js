@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { dbService } from "api/fbase";
 import { collection, doc, setDoc } from "firebase/firestore";
+import { useSelector } from "react-redux";
 
-function CreatePaper({ userObj, setPaperModal }) {
+function CreatePaper({ setPaperModal }) {
+	const userId = useSelector((state) => state.userReducer.uid);
 	const [paperName, setPaperName] = useState("");
 	const [isPrivate, setIsPrivate] = useState(false);
 	const [paperCode, setPaperCode] = useState("");
@@ -52,7 +54,7 @@ function CreatePaper({ userObj, setPaperModal }) {
 			paperId: newPaper.id,
 			paperName: paperName,
 			createdAt: Date.now(),
-			creatorId: userObj.uid,
+			creatorId: userId,
 			isPrivate: isPrivate,
 			paperCode: paperCode,
 		};

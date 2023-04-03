@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Navigation.css";
+import { useSelector } from "react-redux";
 
-function Navigation({ userObj }) {
+function Navigation() {
+	const userName = useSelector((state) => state.userReducer.displayName);
+
 	return (
 		<nav>
 			<ul className="navUl">
@@ -13,7 +16,7 @@ function Navigation({ userObj }) {
 				</li>
 				<li>
 					<Link to={"/profile"} className="navMenu">
-						<span className="navMenuName">{userObj.displayName}의 Profile</span>
+						<span className="navMenuName">{userName}의 Profile</span>
 					</Link>
 				</li>
 			</ul>

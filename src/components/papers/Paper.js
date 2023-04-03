@@ -14,8 +14,10 @@ import { ref, deleteObject } from "firebase/storage";
 import CreateMessage from "components/messgaes/CreateMessage";
 import MessageList from "components/messgaes/MessageList";
 import EditPaper from "./EditPaper";
+import { useSelector } from "react-redux";
 
-function Paper({ userObj }) {
+function Paper() {
+	const userId = useSelector((state) => state.userReducer.uid);
 	const { paperId } = useParams();
 	const navigate = useNavigate();
 	const paperUrlRef = useRef();
@@ -152,30 +154,23 @@ function Paper({ userObj }) {
 					) : (
 						<div>
 							<h2>{paperObj.paperName}</h2>
-							{userObj.uid === paperObj.paperCreator && (
+							{userId === paperObj.paperCreator && (
 								<>
 									<button onClick={showEditModal}>페이퍼 수정</button>
 									<button onClick={deletePaper}>페이퍼 삭제</button>
 									{editModal && (
 										<EditPaper
 											paperObj={paperObj}
-											isOwner={userObj.uid === paperObj.paperCreator}
+											isOwner={userId === paperObj.paperCreator}
 											setEditModal={setEditModal}
 										/>
 									)}
 								</>
 							)}
-							<MessageList
-								userObj={userObj}
-								paperCreator={paperObj.paperCreator}
-							/>
+							<MessageList paperCreator={paperObj.paperCreator} />
 							<button onClick={showMsgModal}>메세지 작성하기</button>
 							{msgModal && (
-								<CreateMessage
-									paperId={paperId}
-									userObj={userObj}
-									setMsgModal={setMsgModal}
-								/>
+								<CreateMessage paperId={paperId} setMsgModal={setMsgModal} />
 							)}
 							<button onClick={showShareModal}>공유하기</button>
 							{shareModal && (

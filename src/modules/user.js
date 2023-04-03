@@ -7,7 +7,7 @@ export const getUser = ({ uid, displayName, photoURL }) => {
 };
 
 // initial state
-const initialState = { uid: "" };
+const initialState = {};
 
 // reducer
 function userReducer(state = initialState, action) {

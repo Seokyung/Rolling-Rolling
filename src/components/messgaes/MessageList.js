@@ -10,14 +10,16 @@ import {
 	onSnapshot,
 } from "firebase/firestore";
 import Message from "components/messgaes/Message";
+import { useSelector } from "react-redux";
 
-function MessageList({ userObj, paperCreator }) {
+function MessageList({ paperCreator }) {
+	const userId = useSelector((state) => state.userReducer.uid);
 	const { paperId } = useParams();
 	const [messages, setMessages] = useState([]);
 
 	useEffect(() => {
 		let q;
-		if (paperCreator === userObj.uid) {
+		if (paperCreator === userId) {
 			q = query(
 				collection(dbService, "papers", `${paperId}`, "messages"),
 				orderBy("createdAt", "desc")
@@ -54,7 +56,7 @@ function MessageList({ userObj, paperCreator }) {
 		<div>
 			{messages.map((message) => (
 				<div key={message.id}>
-					<Message msgObj={message} isOwner={paperCreator === userObj.uid} />
+					<Message msgObj={message} isOwner={paperCreator === userId} />
 				</div>
 			))}
 		</div>

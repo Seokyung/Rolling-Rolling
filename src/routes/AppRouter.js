@@ -12,25 +12,20 @@ import Profile from "./Profile";
 import Auth from "./Auth";
 import PaperRouter from "./PaperRouter";
 
-function AppRouter({ isLoggedIn, userObj, refreshUser }) {
+function AppRouter({ isLoggedIn, refreshUser }) {
 	return (
 		<BrowserRouter>
 			<div>
 				{isLoggedIn ? (
 					<>
-						<Navigation userObj={userObj} />
+						<Navigation />
 						<Routes>
-							<Route exact path="/" element={<Home userObj={userObj} />} />
-							<Route
-								path="/paper/*"
-								element={<PaperRouter userObj={userObj} />}
-							/>
+							<Route exact path="/" element={<Home />} />
+							<Route path="/paper/*" element={<PaperRouter />} />
 							<Route
 								exact
 								path="/profile"
-								element={
-									<Profile userObj={userObj} refreshUser={refreshUser} />
-								}
+								element={<Profile refreshUser={refreshUser} />}
 							/>
 							<Route path="*" element={<Navigate to={"/"} />} />
 						</Routes>

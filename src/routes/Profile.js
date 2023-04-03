@@ -12,8 +12,10 @@ import {
 } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 import EditProfile from "components/profile/EditProfile";
+import { useSelector } from "react-redux";
 
-function Profile({ userObj, refreshUser }) {
+function Profile({ refreshUser }) {
+	const userObj = useSelector((state) => state.userReducer);
 	const navigate = useNavigate();
 
 	const onLogoutClick = async () => {
@@ -93,7 +95,7 @@ function Profile({ userObj, refreshUser }) {
 		<div>
 			<img src={`${userObj.photoURL}`} width="100px" alt="profileImage" />
 			<h2>{userObj.displayName}</h2>
-			<EditProfile userObj={userObj} refreshUser={refreshUser} />
+			<EditProfile refreshUser={refreshUser} />
 			<button onClick={onLogoutClick}>로그아웃</button>
 			<button onClick={deleteAccount}>회원 탈퇴</button>
 		</div>

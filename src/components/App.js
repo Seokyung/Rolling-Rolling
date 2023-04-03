@@ -4,7 +4,7 @@ import { authService } from "api/fbase";
 import "./App.css";
 
 import { useDispatch } from "react-redux";
-import { getUser } from "modules/app";
+import { getUser } from "modules/user";
 
 function App() {
 	const dispatch = useDispatch();
@@ -36,6 +36,13 @@ function App() {
 				);
 			} else {
 				setUserObj(null);
+				dispatch(
+					getUser({
+						uid: "",
+						displayName: "",
+						photoURL: "",
+					})
+				);
 			}
 			setInit(true);
 		});
@@ -53,16 +60,23 @@ function App() {
 				: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
 			updateProfile: (args) => user.updateProfile(args),
 		});
+		dispatch(
+			getUser({
+				uid: user.uid,
+				displayName: user.displayName
+					? user.displayName
+					: user.email.split("@")[0],
+				photoURL: user.photoURL
+					? user.photoURL
+					: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
+			})
+		);
 	};
 
 	return (
 		<div>
 			{init ? (
-				<AppRouter
-					isLoggedIn={Boolean(userObj)}
-					userObj={userObj}
-					refreshUser={refreshUser}
-				/>
+				<AppRouter isLoggedIn={Boolean(userObj)} refreshUser={refreshUser} />
 			) : (
 				"Initializing..."
 			)}

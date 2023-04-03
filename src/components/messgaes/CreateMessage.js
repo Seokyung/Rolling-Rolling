@@ -5,8 +5,10 @@ import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import MessageImage from "./MessageImage";
 import MessageCanvas from "./MessageCanvas";
+import { useSelector } from "react-redux";
 
-function CreateMessage({ paperId, userObj, setMsgModal }) {
+function CreateMessage({ paperId, setMsgModal }) {
+	const userId = useSelector((state) => state.userReducer.uid);
 	const [msgTitle, setMsgTitle] = useState("");
 	const [msgWriter, setMsgWriter] = useState("");
 	const [msgContent, setMsgContent] = useState("");
@@ -70,18 +72,12 @@ function CreateMessage({ paperId, userObj, setMsgModal }) {
 		}
 		let msgImgUrl = "";
 		if (attachment === "attachImage" && msgImg !== "") {
-			const msgImgRef = ref(
-				storageService,
-				`${userObj.uid}/${paperId}/${uuidv4()}`
-			);
+			const msgImgRef = ref(storageService, `${userId}/${paperId}/${uuidv4()}`);
 			await uploadString(msgImgRef, msgImg, "data_url");
 			msgImgUrl = await getDownloadURL(msgImgRef);
 		}
 		if (attachment === "attachDrawing" && msgDrawing !== "") {
-			const msgImgRef = ref(
-				storageService,
-				`${userObj.uid}/${paperId}/${uuidv4()}`
-			);
+			const msgImgRef = ref(storageService, `${userId}/${paperId}/${uuidv4()}`);
 			await uploadString(msgImgRef, msgDrawing, "data_url");
 			msgImgUrl = await getDownloadURL(msgImgRef);
 		}
