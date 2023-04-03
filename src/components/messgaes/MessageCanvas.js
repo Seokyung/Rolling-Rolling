@@ -53,8 +53,17 @@ function MessageCanvas({ setMsgDrawing, setCanvasModal }) {
 			ctx.lineCap = "round";
 			ctx.lineJoin = "round";
 			ctx.lineWidth = toolWidth;
-			ctx.lineTo(getX, getY);
-			ctx.stroke();
+			if (tool === "pen") {
+				ctx.lineTo(getX, getY);
+				ctx.stroke();
+			} else if (tool === "eraser") {
+				ctx.clearRect(
+					getX - toolWidth / 2,
+					getY - toolWidth / 2,
+					toolWidth,
+					toolWidth
+				);
+			}
 		}
 	};
 
@@ -72,11 +81,6 @@ function MessageCanvas({ setMsgDrawing, setCanvasModal }) {
 			target: { value },
 		} = e;
 		setTool(value);
-		if (value === "pen") {
-			ctx.strokeStyle = color;
-		} else if (value === "eraser") {
-			ctx.strokeStyle = "white";
-		}
 	};
 
 	const onToolWidthChange = (e) => {
@@ -92,9 +96,7 @@ function MessageCanvas({ setMsgDrawing, setCanvasModal }) {
 			target: { value },
 		} = e;
 		setColor(value);
-		if (tool === "pen") {
-			ctx.strokeStyle = value;
-		}
+		ctx.strokeStyle = value;
 	};
 
 	const undoLastDrawing = () => {
