@@ -6,10 +6,10 @@ import {
 	Navigate,
 	BrowserRouter,
 } from "react-router-dom";
-import Navigation from "components/Navigation";
-import Home from "./Home";
-import Profile from "./Profile";
-import Auth from "./Auth";
+import Navigation from "pages/Navigation";
+import Home from "../pages/Home";
+import Profile from "../pages/Profile";
+import Auth from "../pages/Auth";
 import PaperRouter from "./PaperRouter";
 
 function AppRouter({ isLoggedIn, refreshUser }) {

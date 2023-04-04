@@ -1,0 +1,26 @@
+.homeContainerPC {
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	padding: 1rem;
+	background-color: brown;
+}
+
+.homeContainerTablet {
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	padding: 1rem;
+	background-color: gold;
+}
+
+.homeContainerMobile {
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	padding: 1rem;
+	background-color: aqua;
+}
