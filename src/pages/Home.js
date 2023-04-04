@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import CreatePaper from "components/papers/CreatePaper";
 import PaperList from "components/papers/PaperList";
-import "./Home.css";
-
 import { Desktop, Mobile, Tablet } from "components/mediaQuery";
+import "./Home.css";
 
 function Home() {
 	const [paperModal, setPaperModal] = useState(false);

@@ -1,0 +1,26 @@
+.profileContainerPC {
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	padding: 1rem;
+	background-color: brown;
+}
+
+.profileContainerTablet {
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	padding: 1rem;
+	background-color: gold;
+}
+
+.profileContainerMobile {
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	padding: 1rem;
+	background-color: aqua;
+}

@@ -1,0 +1,26 @@
+.authContainerPC {
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	padding: 1rem;
+	background-color: brown;
+}
+
+.authContainerTablet {
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	padding: 1rem;
+	background-color: gold;
+}
+
+.authContainerMobile {
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	padding: 1rem;
+	background-color: aqua;
+}
