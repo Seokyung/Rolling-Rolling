@@ -6,9 +6,10 @@ import {
 	FacebookAuthProvider,
 	GithubAuthProvider,
 } from "firebase/auth";
-import AuthForm from "components/AuthForm";
+import AuthForm from "components/authForm/AuthForm";
 import { Desktop, Tablet, Mobile } from "components/mediaQuery";
 import "./Auth.css";
+import Logo from "components/menu/Logo";
 
 function Auth() {
 	const [socialError, setSocialError] = useState("");
@@ -35,7 +36,8 @@ function Auth() {
 	return (
 		<>
 			<Desktop>
-				<div className="authContainerPC">
+				<div className="authContainerDesktop">
+					<Logo />
 					<AuthForm />
 					<div>
 						<button name="google" onClick={onSocialClick}>
@@ -54,6 +56,7 @@ function Auth() {
 
 			<Tablet>
 				<div className="authContainerTablet">
+					<Logo />
 					<AuthForm />
 					<div>
 						<button name="google" onClick={onSocialClick}>
@@ -72,6 +75,7 @@ function Auth() {
 
 			<Mobile>
 				<div className="authContainerMobile">
+					<Logo />
 					<AuthForm />
 					<div>
 						<button name="google" onClick={onSocialClick}>

@@ -96,7 +96,7 @@ function Profile({ refreshUser }) {
 	return (
 		<>
 			<Desktop>
-				<div className="profileContainerPC">
+				<div className="profileContainerDesktop">
 					<img src={`${userObj.photoURL}`} width="100px" alt="profileImage" />
 					<h2>{userObj.displayName}</h2>
 					<EditProfile refreshUser={refreshUser} />

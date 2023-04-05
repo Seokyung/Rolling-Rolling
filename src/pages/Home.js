@@ -14,7 +14,7 @@ function Home() {
 	return (
 		<>
 			<Desktop>
-				<div className="homeContainerPC">
+				<div className="homeContainerDesktop">
 					<h2>Home</h2>
 					<button onClick={showPaperModal}>Paper 만들기</button>
 					{paperModal && <CreatePaper setPaperModal={setPaperModal} />}
