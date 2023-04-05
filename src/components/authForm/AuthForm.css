@@ -1,0 +1,11 @@
+.authFormContainerDesktop {
+	display: flex;
+	flex-direction: column;
+	padding: 1rem;
+	background-color: greenyellow;
+}
+
+.authInputFormContainerDesktop {
+	display: flex;
+	flex-direction: column;
+}

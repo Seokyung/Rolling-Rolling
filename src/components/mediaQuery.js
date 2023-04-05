@@ -6,6 +6,11 @@ const Desktop = ({ children }) => {
 	return <React.Fragment>{isDesktop ? children : null}</React.Fragment>;
 };
 
+const DesktopOrTablet = ({ children }) => {
+	const isDesktopOrTablet = useMediaQuery({ minWidth: 768 });
+	return <React.Fragment>{isDesktopOrTablet ? children : null}</React.Fragment>;
+};
+
 const Tablet = ({ children }) => {
 	const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1023 });
 	return <React.Fragment>{isTablet ? children : null}</React.Fragment>;
@@ -26,4 +31,4 @@ const Default = ({ children }) => {
 	return <React.Fragment>{isNotMobile ? children : null}</React.Fragment>;
 };
 
-export { Desktop, Tablet, TabletOrMobile, Mobile, Default };
+export { Desktop, DesktopOrTablet, Tablet, TabletOrMobile, Mobile, Default };

@@ -1,6 +1,12 @@
 .logoContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+	background-color: blue;
 }
 
 .logoImg {
-	width: 200px;
+	width: 50%;
+	height: auto;
 }

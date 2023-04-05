@@ -5,6 +5,9 @@ import {
 	signInWithEmailAndPassword,
 } from "firebase/auth";
 
+import { Form, FloatingLabel, Button } from "react-bootstrap";
+import "./AuthForm.css";
+
 function AuthForm() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -42,30 +45,36 @@ function AuthForm() {
 	};
 
 	return (
-		<div>
-			<form onSubmit={onAuthBtnClick}>
-				이메일:
-				<input
-					type="email"
-					name="email"
-					value={email}
-					onChange={onAuthInputChange}
-					placeholder="이메일을 입력해주세요"
-				/>
-				비밀번호:
-				<input
-					type="password"
-					name="password"
-					value={password}
-					onChange={onAuthInputChange}
-					placeholder="비밀번호를 입력해주세요"
-				/>
-				<input type="submit" value={newAccount ? "회원가입" : "로그인"} />
+		<div className="authFormContainerDesktop">
+			<Form className="authInputFormContainerDesktop" onSubmit={onAuthBtnClick}>
+				<FloatingLabel className="mb-3" label="이메일">
+					<Form.Control
+						type="email"
+						name="email"
+						value={email}
+						onChange={onAuthInputChange}
+						placeholder="이메일을 입력해주세요"
+					/>
+				</FloatingLabel>
+				<FloatingLabel className="mb-3" label="비밀번호">
+					<Form.Control
+						type="password"
+						name="password"
+						value={password}
+						onChange={onAuthInputChange}
+						placeholder="비밀번호를 입력해주세요"
+					/>
+				</FloatingLabel>
+				<Button variant="primary" type="submit">
+					{newAccount ? "회원가입" : "로그인"}
+				</Button>
 				{error && <span>{error}</span>}
-			</form>
-			<button onClick={toggleAuthForm}>
-				{newAccount ? "로그인" : "회원가입"}
-			</button>
+			</Form>
+			<p onClick={toggleAuthForm}>
+				{newAccount
+					? "이미 계정이 있으신가요? 로그인하기"
+					: "계정이 없으신가요? 회원가입하기"}
+			</p>
 		</div>
 	);
 }

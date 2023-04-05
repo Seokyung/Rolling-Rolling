@@ -15,7 +15,7 @@ import PaperRouter from "./PaperRouter";
 function AppRouter({ isLoggedIn, refreshUser }) {
 	return (
 		<BrowserRouter>
-			<div>
+			<>
 				{isLoggedIn ? (
 					<>
 						<Navigation />
@@ -38,7 +38,7 @@ function AppRouter({ isLoggedIn, refreshUser }) {
 						</Routes>
 					</>
 				)}
-			</div>
+			</>
 		</BrowserRouter>
 	);
 }

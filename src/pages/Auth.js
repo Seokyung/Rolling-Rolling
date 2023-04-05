@@ -7,7 +7,7 @@ import {
 	GithubAuthProvider,
 } from "firebase/auth";
 import AuthForm from "components/authForm/AuthForm";
-import { Desktop, Tablet, Mobile } from "components/mediaQuery";
+import { DesktopOrTablet, Mobile } from "components/mediaQuery";
 import "./Auth.css";
 import Logo from "components/menu/Logo";
 
@@ -35,59 +35,44 @@ function Auth() {
 
 	return (
 		<>
-			<Desktop>
+			<DesktopOrTablet>
 				<div className="authContainerDesktop">
 					<Logo />
-					<AuthForm />
-					<div>
-						<button name="google" onClick={onSocialClick}>
-							Google로 로그인하기
-						</button>
-						<button name="facebook" onClick={onSocialClick}>
-							Facebook으로 로그인하기
-						</button>
-						<button name="github" onClick={onSocialClick}>
-							Github으로 로그인하기
-						</button>
-						{socialError && <span>{socialError}</span>}
+					<div className="authLoginContainerDesktop">
+						<AuthForm />
+						<div>
+							<button name="google" onClick={onSocialClick}>
+								Google로 로그인하기
+							</button>
+							<button name="facebook" onClick={onSocialClick}>
+								Facebook으로 로그인하기
+							</button>
+							<button name="github" onClick={onSocialClick}>
+								Github으로 로그인하기
+							</button>
+							{socialError && <span>{socialError}</span>}
+						</div>
 					</div>
 				</div>
-			</Desktop>
-
-			<Tablet>
-				<div className="authContainerTablet">
-					<Logo />
-					<AuthForm />
-					<div>
-						<button name="google" onClick={onSocialClick}>
-							Google로 로그인하기
-						</button>
-						<button name="facebook" onClick={onSocialClick}>
-							Facebook으로 로그인하기
-						</button>
-						<button name="github" onClick={onSocialClick}>
-							Github으로 로그인하기
-						</button>
-						{socialError && <span>{socialError}</span>}
-					</div>
-				</div>
-			</Tablet>
+			</DesktopOrTablet>
 
 			<Mobile>
 				<div className="authContainerMobile">
 					<Logo />
-					<AuthForm />
-					<div>
-						<button name="google" onClick={onSocialClick}>
-							Google로 로그인하기
-						</button>
-						<button name="facebook" onClick={onSocialClick}>
-							Facebook으로 로그인하기
-						</button>
-						<button name="github" onClick={onSocialClick}>
-							Github으로 로그인하기
-						</button>
-						{socialError && <span>{socialError}</span>}
+					<div className="authLoginContainerMobile">
+						<AuthForm />
+						<div>
+							<button name="google" onClick={onSocialClick}>
+								Google로 로그인하기
+							</button>
+							<button name="facebook" onClick={onSocialClick}>
+								Facebook으로 로그인하기
+							</button>
+							<button name="github" onClick={onSocialClick}>
+								Github으로 로그인하기
+							</button>
+							{socialError && <span>{socialError}</span>}
+						</div>
 					</div>
 				</div>
 			</Mobile>
