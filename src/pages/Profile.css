@@ -1,8 +1,8 @@
 .profileContainerDesktop {
 	display: flex;
 	flex-direction: column;
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 	padding: 1rem;
 	background-color: brown;
 }
@@ -10,8 +10,8 @@
 .profileContainerTablet {
 	display: flex;
 	flex-direction: column;
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 	padding: 1rem;
 	background-color: gold;
 }
@@ -19,8 +19,8 @@
 .profileContainerMobile {
 	display: flex;
 	flex-direction: column;
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 	padding: 1rem;
 	background-color: aqua;
 }

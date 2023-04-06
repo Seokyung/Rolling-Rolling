@@ -19,22 +19,12 @@
 	background-color: coral;
 }
 
-.authLoginLayoutDesktop {
+.authLoginContainerDesktop {
 	display: flex;
 	align-items: center;
 	width: 60%;
 	height: 100%;
 	padding: 1rem;
-	background-color: brown;
-}
-
-.authLoginContainerDesktop {
-	display: flex;
-	flex-direction: column;
-	width: 75%;
-	height: 80%;
-	padding: 1rem;
-	background-color: dimgrey;
 }
 
 /* ---- Mobile ---- */

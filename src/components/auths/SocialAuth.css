@@ -1,15 +1,33 @@
 /* ---- DesktopOrTablet ---- */
 
-.authSocialContainerDesktop {
+.socialContainerDesktop {
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
+	justify-content: center;
+	padding: 2rem;
+	width: 80%;
 	height: 50%;
-	background-color: orange;
+	border-radius: 20px;
+	background-color: whitesmoke;
+}
+
+.socialTitle {
+	margin: 1rem 1rem 1rem 1rem;
+}
+
+.socialFormContainerDesktop {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 2rem;
+	border-radius: 20px;
+	background-color: dimgrey;
+}
+
+.socialFormText {
+	cursor: pointer;
 }
 
 .socialBtn {
-	margin: 0.8rem;
-	width: 80%;
+	margin: 0.5rem;
 }

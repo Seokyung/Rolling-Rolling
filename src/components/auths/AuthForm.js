@@ -8,7 +8,7 @@ import {
 import { Form, FloatingLabel, Button } from "react-bootstrap";
 import "./AuthForm.css";
 
-function AuthForm() {
+function AuthForm({ onLoginMethodChange }) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [newAccount, setNewAccount] = useState(false);
@@ -49,6 +49,7 @@ function AuthForm() {
 
 	return (
 		<div className="authFormContainerDesktop">
+			<h3 className="authFormTitle">{newAccount ? "회원가입" : "로그인"}</h3>
 			<Form className="authInputFormContainerDesktop" onSubmit={onAuthBtnClick}>
 				<FloatingLabel className="mb-3" label="이메일">
 					<Form.Control
@@ -75,6 +76,9 @@ function AuthForm() {
 					{newAccount
 						? "이미 계정이 있으신가요? 로그인하기"
 						: "계정이 없으신가요? 회원가입하기"}
+				</Form.Text>
+				<Form.Text className="authFormText" onClick={onLoginMethodChange}>
+					돌아가기
 				</Form.Text>
 			</Form>
 		</div>
