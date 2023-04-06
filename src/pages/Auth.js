@@ -16,7 +16,7 @@ function Auth() {
 		<>
 			<Desktop>
 				<div className="authContainerDesktop">
-					<div className="authLogoLayoutDesktop">
+					<div className="authLogoContainerDesktop">
 						<Logo />
 					</div>
 					<div className="authLoginContainerDesktop">
@@ -31,7 +31,7 @@ function Auth() {
 
 			<TabletOrMobile>
 				<div className="authContainerMobile">
-					<div className="authLogoLayoutDesktop">
+					<div className="authLogoContainerMobile">
 						<Logo />
 					</div>
 					<div className="authLoginContainerMobile">

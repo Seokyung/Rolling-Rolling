@@ -4,7 +4,7 @@ import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 } from "firebase/auth";
-
+import { Desktop, TabletOrMobile } from "components/mediaQuery";
 import { Form, FloatingLabel, Button } from "react-bootstrap";
 import "./AuthForm.css";
 
@@ -48,40 +48,85 @@ function AuthForm({ onLoginMethodChange }) {
 	};
 
 	return (
-		<div className="authFormContainerDesktop">
-			<h3 className="authFormTitle">{newAccount ? "회원가입" : "로그인"}</h3>
-			<Form className="authInputFormContainerDesktop" onSubmit={onAuthBtnClick}>
-				<FloatingLabel className="mb-3" label="이메일">
-					<Form.Control
-						type="email"
-						name="email"
-						value={email}
-						onChange={onAuthInputChange}
-						placeholder="이메일을 입력해주세요"
-					/>
-				</FloatingLabel>
-				<FloatingLabel className="mb-3" label="비밀번호">
-					<Form.Control
-						type="password"
-						name="password"
-						value={password}
-						onChange={onAuthInputChange}
-						placeholder="비밀번호를 입력해주세요"
-					/>
-				</FloatingLabel>
-				<Button variant="primary" type="submit">
-					{newAccount ? "회원가입" : "로그인"}
-				</Button>
-				<Form.Text className="authFormText" onClick={toggleAuthForm}>
-					{newAccount
-						? "이미 계정이 있으신가요? 로그인하기"
-						: "계정이 없으신가요? 회원가입하기"}
-				</Form.Text>
-				<Form.Text className="authFormText" onClick={onLoginMethodChange}>
-					돌아가기
-				</Form.Text>
-			</Form>
-		</div>
+		<>
+			<Desktop>
+				<div className="authFormContainerDesktop">
+					<h3 className="authFormTitle">
+						{newAccount ? "회원가입" : "로그인"}
+					</h3>
+					<Form className="authInputFormContainer" onSubmit={onAuthBtnClick}>
+						<FloatingLabel className="mb-3" label="이메일">
+							<Form.Control
+								type="email"
+								name="email"
+								value={email}
+								onChange={onAuthInputChange}
+								placeholder="이메일을 입력해주세요"
+							/>
+						</FloatingLabel>
+						<FloatingLabel className="mb-3" label="비밀번호">
+							<Form.Control
+								type="password"
+								name="password"
+								value={password}
+								onChange={onAuthInputChange}
+								placeholder="비밀번호를 입력해주세요"
+							/>
+						</FloatingLabel>
+						<Button variant="primary" type="submit">
+							{newAccount ? "회원가입" : "로그인"}
+						</Button>
+						<Form.Text className="authFormText" onClick={toggleAuthForm}>
+							{newAccount
+								? "이미 계정이 있으신가요? 로그인하기"
+								: "계정이 없으신가요? 회원가입하기"}
+						</Form.Text>
+						<Form.Text className="authFormText" onClick={onLoginMethodChange}>
+							돌아가기
+						</Form.Text>
+					</Form>
+				</div>
+			</Desktop>
+
+			<TabletOrMobile>
+				<div className="authFormContainerMobile">
+					<h3 className="authFormTitle">
+						{newAccount ? "회원가입" : "로그인"}
+					</h3>
+					<Form className="authInputFormContainer" onSubmit={onAuthBtnClick}>
+						<FloatingLabel className="mb-3" label="이메일">
+							<Form.Control
+								type="email"
+								name="email"
+								value={email}
+								onChange={onAuthInputChange}
+								placeholder="이메일을 입력해주세요"
+							/>
+						</FloatingLabel>
+						<FloatingLabel className="mb-3" label="비밀번호">
+							<Form.Control
+								type="password"
+								name="password"
+								value={password}
+								onChange={onAuthInputChange}
+								placeholder="비밀번호를 입력해주세요"
+							/>
+						</FloatingLabel>
+						<Button variant="primary" type="submit">
+							{newAccount ? "회원가입" : "로그인"}
+						</Button>
+						<Form.Text className="authFormText" onClick={toggleAuthForm}>
+							{newAccount
+								? "이미 계정이 있으신가요? 로그인하기"
+								: "계정이 없으신가요? 회원가입하기"}
+						</Form.Text>
+						<Form.Text className="authFormText" onClick={onLoginMethodChange}>
+							돌아가기
+						</Form.Text>
+					</Form>
+				</div>
+			</TabletOrMobile>
+		</>
 	);
 }
 

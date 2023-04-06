@@ -1,5 +1,4 @@
-/* ---- DesktopOrTablet ---- */
-
+/* ---- Desktop ---- */
 .socialContainerDesktop {
 	display: flex;
 	flex-direction: column;
@@ -11,10 +10,6 @@
 	background-color: whitesmoke;
 }
 
-.socialTitle {
-	margin: 1rem 1rem 1rem 1rem;
-}
-
 .socialFormContainerDesktop {
 	display: flex;
 	flex-direction: column;
@@ -24,10 +19,26 @@
 	background-color: dimgrey;
 }
 
+.socialTitle {
+	margin: 1rem 1rem 1rem 1rem;
+}
+
 .socialFormText {
 	cursor: pointer;
 }
 
 .socialBtn {
 	margin: 0.5rem;
+}
+
+/* ---- TabletOrMobile ---- */
+.socialContainerMobile {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 2rem;
+	width: 100%;
+	height: 100%;
+	border-radius: 20px;
+	background-color: whitesmoke;
 }

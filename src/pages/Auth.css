@@ -1,4 +1,4 @@
-/* ---- DesktopOrTablet ---- */
+/* ---- Desktop---- */
 .authContainerDesktop {
 	display: flex;
 	flex-direction: row;
@@ -9,7 +9,7 @@
 	padding: 1rem;
 }
 
-.authLogoLayoutDesktop {
+.authLogoContainerDesktop {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
@@ -27,20 +27,34 @@
 	padding: 1rem;
 }
 
-/* ---- Mobile ---- */
+/* ---- TabletOrMobile ---- */
 .authContainerMobile {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 	padding: 1rem;
 	background-color: aqua;
+}
+
+.authLogoContainerMobile {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+	width: 80%;
+	height: 30%;
+	background-color: coral;
 }
 
 .authLoginContainerMobile {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	width: 80%;
+	height: 70%;
+	padding: 1rem;
 	background-color: pink;
 }

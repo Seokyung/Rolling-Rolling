@@ -1,4 +1,4 @@
-.logoContainer {
+.logoContainerDesktop {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -7,7 +7,20 @@
 	background-color: blue;
 }
 
-.logoImg {
+.logoImgDesktop {
 	width: 50%;
+	height: auto;
+}
+
+.logoContainerMobile {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	padding: 1rem;
+	background-color: blue;
+}
+
+.logoImgMobile {
+	width: 20%;
 	height: auto;
 }

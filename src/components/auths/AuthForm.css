@@ -1,3 +1,4 @@
+/* ---- Desktop---- */
 .authFormContainerDesktop {
 	display: flex;
 	flex-direction: column;
@@ -13,11 +14,23 @@
 	margin: 1rem 1rem 1rem 0;
 }
 
-.authInputFormContainerDesktop {
+.authInputFormContainer {
 	display: flex;
 	flex-direction: column;
 }
 
 .authFormText {
 	cursor: pointer;
+}
+
+/* ---- TabletOrMobile ---- */
+.authFormContainerMobile {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 2rem;
+	width: 100%;
+	height: 100%;
+	border-radius: 20px;
+	background-color: whitesmoke;
 }
