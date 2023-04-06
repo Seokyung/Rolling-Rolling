@@ -1,0 +1,15 @@
+/* ---- DesktopOrTablet ---- */
+
+.authSocialContainerDesktop {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	height: 50%;
+	background-color: orange;
+}
+
+.socialBtn {
+	margin: 0.8rem;
+	width: 80%;
+}

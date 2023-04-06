@@ -1,9 +1,10 @@
 .authFormContainerDesktop {
 	display: flex;
 	flex-direction: column;
-	padding: 1rem;
-	border-radius: 8%;
-	background-color: rgb(234, 234, 234);
+	justify-content: center;
+	padding: 2rem;
+	height: 50%;
+	background-color: whitesmoke;
 }
 
 .authInputFormContainerDesktop {

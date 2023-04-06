@@ -1,103 +1,36 @@
-import React, { useState } from "react";
-import { authService } from "api/fbase";
-import {
-	signInWithPopup,
-	GoogleAuthProvider,
-	FacebookAuthProvider,
-	GithubAuthProvider,
-} from "firebase/auth";
+import React from "react";
 import Logo from "components/menu/Logo";
-import AuthForm from "components/authForm/AuthForm";
-import { DesktopOrTablet, Mobile } from "components/mediaQuery";
+import AuthForm from "components/auths/AuthForm";
+import SocialAuth from "components/auths/SocialAuth";
+import { Desktop, TabletOrMobile } from "components/mediaQuery";
 import "./Auth.css";
 
-import { Button } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-	faGoogle,
-	faGithub,
-	faFacebook,
-} from "@fortawesome/free-brands-svg-icons";
-
 function Auth() {
-	const onSocialClick = async (e) => {
-		const {
-			target: { name },
-		} = e;
-		let provider;
-		if (name === "google") {
-			provider = new GoogleAuthProvider();
-		} else if (name === "facebook") {
-			provider = new FacebookAuthProvider();
-		} else if (name === "github") {
-			provider = new GithubAuthProvider();
-		}
-		try {
-			await signInWithPopup(authService, provider);
-		} catch (error) {
-			console.log(error.message);
-		}
-	};
-
 	return (
 		<>
-			<DesktopOrTablet>
+			<Desktop>
 				<div className="authContainerDesktop">
-					<Logo />
-					<div className="authLoginContainerDesktop">
-						<AuthForm />
-						<div className="authSocialContainerDesktop">
-							<Button
-								shape="circle"
-								size="large"
-								className="socialBtn"
-								name="google"
-								onClick={onSocialClick}
-							>
-								<FontAwesomeIcon icon={faGoogle} />
-							</Button>
-							<Button
-								shape="circle"
-								size="large"
-								className="socialBtn"
-								name="facebook"
-								onClick={onSocialClick}
-							>
-								<FontAwesomeIcon icon={faFacebook} />
-							</Button>
-							<Button
-								shape="circle"
-								size="large"
-								className="socialBtn"
-								name="github"
-								onClick={onSocialClick}
-							>
-								<FontAwesomeIcon icon={faGithub} />
-							</Button>
+					<div className="authLogoLayoutDesktop">
+						<Logo />
+					</div>
+					<div className="authLoginLayoutDesktop">
+						<div className="authLoginContainerDesktop">
+							<AuthForm />
+							<SocialAuth />
 						</div>
 					</div>
 				</div>
-			</DesktopOrTablet>
+			</Desktop>
 
-			<Mobile>
+			<TabletOrMobile>
 				<div className="authContainerMobile">
 					<Logo />
 					<div className="authLoginContainerMobile">
 						<AuthForm />
-						<div>
-							<Button variant="light" name="google" onClick={onSocialClick}>
-								Google로 로그인하기
-							</Button>
-							<Button variant="light" name="facebook" onClick={onSocialClick}>
-								Facebook으로 로그인하기
-							</Button>
-							<Button variant="light" name="github" onClick={onSocialClick}>
-								Github으로 로그인하기
-							</Button>
-						</div>
+						<SocialAuth />
 					</div>
 				</div>
-			</Mobile>
+			</TabletOrMobile>
 		</>
 	);
 }

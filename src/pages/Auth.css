@@ -9,25 +9,32 @@
 	padding: 1rem;
 }
 
+.authLogoLayoutDesktop {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+	width: 40%;
+	height: 100%;
+	background-color: coral;
+}
+
+.authLoginLayoutDesktop {
+	display: flex;
+	align-items: center;
+	width: 60%;
+	height: 100%;
+	padding: 1rem;
+	background-color: brown;
+}
+
 .authLoginContainerDesktop {
 	display: flex;
 	flex-direction: column;
-	width: 50%;
-	margin: 1rem;
+	width: 75%;
+	height: 80%;
 	padding: 1rem;
-	border-radius: 8%;
-	background-color: rgb(84, 84, 84);
-}
-
-.authSocialContainerDesktop {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 0.5rem 0.5rem 0 0.5rem;
-}
-
-.socialBtn {
-	margin: 0.5rem 0.5rem 0 0.5rem;
+	background-color: dimgrey;
 }
 
 /* ---- Mobile ---- */
