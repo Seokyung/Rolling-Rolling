@@ -12,7 +12,6 @@ function AuthForm() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [newAccount, setNewAccount] = useState(false);
-	const [error, setError] = useState("");
 
 	const onAuthInputChange = (e) => {
 		const {
@@ -32,6 +31,10 @@ function AuthForm() {
 
 	const onAuthBtnClick = async (e) => {
 		e.preventDefault();
+		if (email === "" || password === "") {
+			alert("이메일 / 비밀번호를 입력해주세요!");
+			return;
+		}
 		try {
 			if (newAccount) {
 				await createUserWithEmailAndPassword(authService, email, password);
@@ -40,7 +43,7 @@ function AuthForm() {
 				await signInWithEmailAndPassword(authService, email, password);
 			}
 		} catch (error) {
-			setError(error.message);
+			console.log(error.message);
 		}
 	};
 
@@ -68,13 +71,12 @@ function AuthForm() {
 				<Button variant="primary" type="submit">
 					{newAccount ? "회원가입" : "로그인"}
 				</Button>
-				{error && <span>{error}</span>}
+				<Form.Text className="authFormText" onClick={toggleAuthForm}>
+					{newAccount
+						? "이미 계정이 있으신가요? 로그인하기"
+						: "계정이 없으신가요? 회원가입하기"}
+				</Form.Text>
 			</Form>
-			<p onClick={toggleAuthForm}>
-				{newAccount
-					? "이미 계정이 있으신가요? 로그인하기"
-					: "계정이 없으신가요? 회원가입하기"}
-			</p>
 		</div>
 	);
 }

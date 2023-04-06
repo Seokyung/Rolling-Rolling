@@ -6,14 +6,20 @@ import {
 	FacebookAuthProvider,
 	GithubAuthProvider,
 } from "firebase/auth";
+import Logo from "components/menu/Logo";
 import AuthForm from "components/authForm/AuthForm";
 import { DesktopOrTablet, Mobile } from "components/mediaQuery";
 import "./Auth.css";
-import Logo from "components/menu/Logo";
+
+import { Button } from "antd";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+	faGoogle,
+	faGithub,
+	faFacebook,
+} from "@fortawesome/free-brands-svg-icons";
 
 function Auth() {
-	const [socialError, setSocialError] = useState("");
-
 	const onSocialClick = async (e) => {
 		const {
 			target: { name },
@@ -29,7 +35,7 @@ function Auth() {
 		try {
 			await signInWithPopup(authService, provider);
 		} catch (error) {
-			setSocialError(error.message);
+			console.log(error.message);
 		}
 	};
 
@@ -40,17 +46,34 @@ function Auth() {
 					<Logo />
 					<div className="authLoginContainerDesktop">
 						<AuthForm />
-						<div>
-							<button name="google" onClick={onSocialClick}>
-								Google로 로그인하기
-							</button>
-							<button name="facebook" onClick={onSocialClick}>
-								Facebook으로 로그인하기
-							</button>
-							<button name="github" onClick={onSocialClick}>
-								Github으로 로그인하기
-							</button>
-							{socialError && <span>{socialError}</span>}
+						<div className="authSocialContainerDesktop">
+							<Button
+								shape="circle"
+								size="large"
+								className="socialBtn"
+								name="google"
+								onClick={onSocialClick}
+							>
+								<FontAwesomeIcon icon={faGoogle} />
+							</Button>
+							<Button
+								shape="circle"
+								size="large"
+								className="socialBtn"
+								name="facebook"
+								onClick={onSocialClick}
+							>
+								<FontAwesomeIcon icon={faFacebook} />
+							</Button>
+							<Button
+								shape="circle"
+								size="large"
+								className="socialBtn"
+								name="github"
+								onClick={onSocialClick}
+							>
+								<FontAwesomeIcon icon={faGithub} />
+							</Button>
 						</div>
 					</div>
 				</div>
@@ -62,16 +85,15 @@ function Auth() {
 					<div className="authLoginContainerMobile">
 						<AuthForm />
 						<div>
-							<button name="google" onClick={onSocialClick}>
+							<Button variant="light" name="google" onClick={onSocialClick}>
 								Google로 로그인하기
-							</button>
-							<button name="facebook" onClick={onSocialClick}>
+							</Button>
+							<Button variant="light" name="facebook" onClick={onSocialClick}>
 								Facebook으로 로그인하기
-							</button>
-							<button name="github" onClick={onSocialClick}>
+							</Button>
+							<Button variant="light" name="github" onClick={onSocialClick}>
 								Github으로 로그인하기
-							</button>
-							{socialError && <span>{socialError}</span>}
+							</Button>
 						</div>
 					</div>
 				</div>
