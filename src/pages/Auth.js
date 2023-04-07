@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Logo from "components/menu/Logo";
 import AuthForm from "components/auths/AuthForm";
 import SocialAuth from "components/auths/SocialAuth";
-import { Desktop, TabletOrMobile } from "components/mediaQuery";
+import { PC, TabletOrMobile } from "components/mediaQuery";
 import "./Auth.css";
 
 function Auth() {
@@ -14,7 +14,7 @@ function Auth() {
 
 	return (
 		<>
-			<Desktop>
+			<PC>
 				<div className="authContainerDesktop">
 					<div className="authLogoContainerDesktop">
 						<Logo />
@@ -27,7 +27,7 @@ function Auth() {
 						)}
 					</div>
 				</div>
-			</Desktop>
+			</PC>
 
 			<TabletOrMobile>
 				<div className="authContainerMobile">

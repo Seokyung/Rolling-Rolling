@@ -13,7 +13,7 @@ import {
 import { ref, deleteObject } from "firebase/storage";
 import EditProfile from "components/profile/EditProfile";
 import { useSelector } from "react-redux";
-import { Desktop, Tablet, Mobile } from "components/mediaQuery";
+import { PC, Tablet, Mobile } from "components/mediaQuery";
 import "./Profile.css";
 
 function Profile({ refreshUser }) {
@@ -95,7 +95,7 @@ function Profile({ refreshUser }) {
 
 	return (
 		<>
-			<Desktop>
+			<PC>
 				<div className="profileContainerDesktop">
 					<img src={`${userObj.photoURL}`} width="100px" alt="profileImage" />
 					<h2>{userObj.displayName}</h2>
@@ -103,7 +103,7 @@ function Profile({ refreshUser }) {
 					<button onClick={onLogoutClick}>로그아웃</button>
 					<button onClick={deleteAccount}>회원 탈퇴</button>
 				</div>
-			</Desktop>
+			</PC>
 
 			<Tablet>
 				<div className="profileContainerTablet">

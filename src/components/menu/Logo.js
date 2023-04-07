@@ -1,16 +1,16 @@
 import React from "react";
 import logoImg from "assets/logo.png";
-import { Desktop, TabletOrMobile } from "components/mediaQuery";
+import { PC, TabletOrMobile } from "components/mediaQuery";
 import "./Logo.css";
 
 function Logo() {
 	return (
 		<>
-			<Desktop>
+			<PC>
 				<div className="logoContainerDesktop">
 					<img className="logoImgDesktop" src={logoImg} alt="logo" />
 				</div>
-			</Desktop>
+			</PC>
 
 			<TabletOrMobile>
 				<div className="logoContainerMobile">

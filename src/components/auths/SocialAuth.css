@@ -25,10 +25,13 @@
 
 .socialFormText {
 	cursor: pointer;
+	margin: 0.5rem;
+	font-size: 1.5rem;
 }
 
-.socialBtn {
+.socialBtnText {
 	margin: 0.5rem;
+	font-size: 1.8rem;
 }
 
 /* ---- TabletOrMobile ---- */

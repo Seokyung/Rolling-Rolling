@@ -1,14 +1,14 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 
-const Desktop = ({ children }) => {
-	const isDesktop = useMediaQuery({ minWidth: 1024 });
-	return <React.Fragment>{isDesktop ? children : null}</React.Fragment>;
+const PC = ({ children }) => {
+	const isPC = useMediaQuery({ minWidth: 1024 });
+	return <React.Fragment>{isPC ? children : null}</React.Fragment>;
 };
 
-const DesktopOrTablet = ({ children }) => {
-	const isDesktopOrTablet = useMediaQuery({ minWidth: 768 });
-	return <React.Fragment>{isDesktopOrTablet ? children : null}</React.Fragment>;
+const PCorTablet = ({ children }) => {
+	const isPCorTablet = useMediaQuery({ minWidth: 768 });
+	return <React.Fragment>{isPCorTablet ? children : null}</React.Fragment>;
 };
 
 const Tablet = ({ children }) => {
@@ -31,4 +31,4 @@ const Default = ({ children }) => {
 	return <React.Fragment>{isNotMobile ? children : null}</React.Fragment>;
 };
 
-export { Desktop, DesktopOrTablet, Tablet, TabletOrMobile, Mobile, Default };
+export { PC, PCorTablet, Tablet, TabletOrMobile, Mobile, Default };

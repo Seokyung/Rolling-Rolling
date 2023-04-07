@@ -4,7 +4,7 @@ import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 } from "firebase/auth";
-import { Desktop, TabletOrMobile } from "components/mediaQuery";
+import { PC, TabletOrMobile } from "components/mediaQuery";
 import { Form, FloatingLabel, Button } from "react-bootstrap";
 import "./AuthForm.css";
 
@@ -49,7 +49,7 @@ function AuthForm({ onLoginMethodChange }) {
 
 	return (
 		<>
-			<Desktop>
+			<PC>
 				<div className="authFormContainerDesktop">
 					<h3 className="authFormTitle">
 						{newAccount ? "회원가입" : "로그인"}
@@ -86,7 +86,7 @@ function AuthForm({ onLoginMethodChange }) {
 						</Form.Text>
 					</Form>
 				</div>
-			</Desktop>
+			</PC>
 
 			<TabletOrMobile>
 				<div className="authFormContainerMobile">
