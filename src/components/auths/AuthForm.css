@@ -1,5 +1,5 @@
 /* ---- Desktop---- */
-.authFormContainerDesktop {
+.authFormContainer {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -8,6 +8,14 @@
 	height: 50%;
 	border-radius: 20px;
 	background-color: whitesmoke;
+}
+
+@media screen and (max-width: 1023px) {
+	.authFormContainer {
+		width: 100%;
+		height: 100%;
+		background-color: red;
+	}
 }
 
 .authFormTitle {
@@ -24,7 +32,7 @@
 }
 
 /* ---- TabletOrMobile ---- */
-.authFormContainerMobile {
+/* .authFormContainerMobile {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -33,4 +41,4 @@
 	height: 100%;
 	border-radius: 20px;
 	background-color: whitesmoke;
-}
+} */

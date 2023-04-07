@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import CreatePaper from "components/papers/CreatePaper";
 import PaperList from "components/papers/PaperList";
-import { PC, Mobile, Tablet } from "components/mediaQuery";
 import "./Home.css";
 
 function Home() {
@@ -12,34 +11,12 @@ function Home() {
 	};
 
 	return (
-		<>
-			<PC>
-				<div className="homeContainerDesktop">
-					<h2>Home</h2>
-					<button onClick={showPaperModal}>Paper 만들기</button>
-					{paperModal && <CreatePaper setPaperModal={setPaperModal} />}
-					<PaperList />
-				</div>
-			</PC>
-
-			<Tablet>
-				<div className="homeContainerTablet">
-					<h2>Home</h2>
-					<button onClick={showPaperModal}>Paper 만들기</button>
-					{paperModal && <CreatePaper setPaperModal={setPaperModal} />}
-					<PaperList />
-				</div>
-			</Tablet>
-
-			<Mobile>
-				<div className="homeContainerMobile">
-					<h2>Home</h2>
-					<button onClick={showPaperModal}>Paper 만들기</button>
-					{paperModal && <CreatePaper setPaperModal={setPaperModal} />}
-					<PaperList />
-				</div>
-			</Mobile>
-		</>
+		<div className="home-container">
+			<h2>Home</h2>
+			<button onClick={showPaperModal}>Paper 만들기</button>
+			{paperModal && <CreatePaper setPaperModal={setPaperModal} />}
+			<PaperList />
+		</div>
 	);
 }
 

@@ -13,7 +13,6 @@ import {
 import { ref, deleteObject } from "firebase/storage";
 import EditProfile from "components/profile/EditProfile";
 import { useSelector } from "react-redux";
-import { PC, Tablet, Mobile } from "components/mediaQuery";
 import "./Profile.css";
 
 function Profile({ refreshUser }) {
@@ -94,37 +93,13 @@ function Profile({ refreshUser }) {
 	};
 
 	return (
-		<>
-			<PC>
-				<div className="profileContainerDesktop">
-					<img src={`${userObj.photoURL}`} width="100px" alt="profileImage" />
-					<h2>{userObj.displayName}</h2>
-					<EditProfile refreshUser={refreshUser} />
-					<button onClick={onLogoutClick}>로그아웃</button>
-					<button onClick={deleteAccount}>회원 탈퇴</button>
-				</div>
-			</PC>
-
-			<Tablet>
-				<div className="profileContainerTablet">
-					<img src={`${userObj.photoURL}`} width="100px" alt="profileImage" />
-					<h2>{userObj.displayName}</h2>
-					<EditProfile refreshUser={refreshUser} />
-					<button onClick={onLogoutClick}>로그아웃</button>
-					<button onClick={deleteAccount}>회원 탈퇴</button>
-				</div>
-			</Tablet>
-
-			<Mobile>
-				<div className="profileContainerMobile">
-					<img src={`${userObj.photoURL}`} width="100px" alt="profileImage" />
-					<h2>{userObj.displayName}</h2>
-					<EditProfile refreshUser={refreshUser} />
-					<button onClick={onLogoutClick}>로그아웃</button>
-					<button onClick={deleteAccount}>회원 탈퇴</button>
-				</div>
-			</Mobile>
-		</>
+		<div className="profile-container">
+			<img src={`${userObj.photoURL}`} width="100px" alt="profileImage" />
+			<h2>{userObj.displayName}</h2>
+			<EditProfile refreshUser={refreshUser} />
+			<button onClick={onLogoutClick}>로그아웃</button>
+			<button onClick={deleteAccount}>회원 탈퇴</button>
+		</div>
 	);
 }
 
