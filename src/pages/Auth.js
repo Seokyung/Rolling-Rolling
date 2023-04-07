@@ -24,37 +24,6 @@ function Auth() {
 				)}
 			</div>
 		</div>
-		// <>
-		// 	<PC>
-		// 		<div className="authContainerDesktop">
-		// 			<div className="authLogoContainerDesktop">
-		// 				<Logo />
-		// 			</div>
-		// 			<div className="authLoginContainerDesktop">
-		// 				{isSocial ? (
-		// 					<SocialAuth onLoginMethodChange={onLoginMethodChange} />
-		// 				) : (
-		// 					<AuthForm onLoginMethodChange={onLoginMethodChange} />
-		// 				)}
-		// 			</div>
-		// 		</div>
-		// 	</PC>
-
-		// 	<TabletOrMobile>
-		// 		<div className="authContainerMobile">
-		// 			<div className="authLogoContainerMobile">
-		// 				<Logo />
-		// 			</div>
-		// 			<div className="authLoginContainerMobile">
-		// 				{isSocial ? (
-		// 					<SocialAuth onLoginMethodChange={onLoginMethodChange} />
-		// 				) : (
-		// 					<AuthForm onLoginMethodChange={onLoginMethodChange} />
-		// 				)}
-		// 			</div>
-		// 		</div>
-		// 	</TabletOrMobile>
-		// </>
 	);
 }
 

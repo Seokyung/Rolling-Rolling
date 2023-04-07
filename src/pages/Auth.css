@@ -5,7 +5,7 @@
 	align-items: center;
 	width: 100%;
 	height: 100%;
-	padding: 1rem;
+	padding: 2rem;
 }
 
 .auth-logo-container {
@@ -15,7 +15,6 @@
 	align-items: center;
 	width: 40%;
 	height: 100%;
-	background-color: coral;
 }
 
 .auth-login-container {
@@ -23,85 +22,38 @@
 	align-items: center;
 	width: 60%;
 	height: 100%;
-	padding: 1rem;
+	padding: 2rem;
+}
+
+@media screen and (min-width: 1024px) {
+	.auth-logo-container {
+		margin-right: 2rem;
+		max-width: 500px;
+	}
+
+	.auth-login-container {
+		margin-left: 2rem;
+		max-width: 700px;
+	}
 }
 
 @media screen and (max-width: 1023px) {
 	.auth-container {
 		flex-direction: column;
-		background-color: aqua;
+		padding: 5rem;
 	}
 
 	.auth-logo-container {
-		width: 80%;
+		justify-content: center;
+		width: 100%;
 		height: 30%;
+		background-color: aqua;
 	}
 
 	.auth-login-container {
 		flex-direction: column;
-		width: 80%;
+		width: 100%;
 		height: 70%;
-		background-color: pink;
+		background-color: brown;
 	}
 }
-
-/* ---- Desktop---- */
-/* .authContainerDesktop {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-	padding: 1rem;
-}
-
-.authLogoContainerDesktop {
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
-	align-items: center;
-	width: 40%;
-	height: 100%;
-	background-color: coral;
-}
-
-.authLoginContainerDesktop {
-	display: flex;
-	align-items: center;
-	width: 60%;
-	height: 100%;
-	padding: 1rem;
-} */
-
-/* ---- TabletOrMobile ---- */
-/* .authContainerMobile {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-	padding: 1rem;
-	background-color: aqua;
-}
-
-.authLogoContainerMobile {
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
-	align-items: center;
-	width: 80%;
-	height: 30%;
-	background-color: coral;
-}
-
-.authLoginContainerMobile {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	width: 80%;
-	height: 70%;
-	padding: 1rem;
-	background-color: pink;
-} */

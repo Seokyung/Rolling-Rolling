@@ -1,5 +1,4 @@
-/* ---- Desktop---- */
-.authFormContainer {
+.authForm-container {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -10,35 +9,32 @@
 	background-color: whitesmoke;
 }
 
+.authForm-title {
+	margin: 1rem 1rem 1rem 0;
+	font-size: 2.5rem;
+}
+
+.authForm-form-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.authForm-form-small-text {
+	cursor: pointer;
+	font-size: 1.5rem;
+}
+
 @media screen and (max-width: 1023px) {
-	.authFormContainer {
+	.authForm-container {
 		width: 100%;
 		height: 100%;
-		background-color: red;
+	}
+
+	.authForm-title {
+		font-size: 5rem;
+	}
+
+	.authForm-form-small-text {
+		font-size: 3rem;
 	}
 }
-
-.authFormTitle {
-	margin: 1rem 1rem 1rem 0;
-}
-
-.authInputFormContainer {
-	display: flex;
-	flex-direction: column;
-}
-
-.authFormText {
-	cursor: pointer;
-}
-
-/* ---- TabletOrMobile ---- */
-/* .authFormContainerMobile {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	padding: 2rem;
-	width: 100%;
-	height: 100%;
-	border-radius: 20px;
-	background-color: whitesmoke;
-} */

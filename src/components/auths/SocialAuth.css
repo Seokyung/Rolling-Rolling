@@ -1,11 +1,10 @@
-/* ---- Desktop ---- */
 .social-container {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	padding: 2rem;
 	width: 80%;
-	height: 50%;
+	height: 60%;
 	border-radius: 20px;
 	background-color: whitesmoke;
 }
@@ -14,11 +13,10 @@
 	.social-container {
 		width: 100%;
 		height: 100%;
-		background-color: red;
 	}
 }
 
-.socialFormContainer {
+.social-form-container {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -27,29 +25,18 @@
 	background-color: dimgrey;
 }
 
-.socialTitle {
+.social-title {
 	margin: 1rem 1rem 1rem 1rem;
+	font-size: 2.5rem;
 }
 
-.socialFormText {
+.social-form-small-text {
 	cursor: pointer;
 	margin: 0.5rem;
 	font-size: 1.5rem;
 }
 
-.socialBtnText {
+.social-btn-text {
 	margin: 0.5rem;
 	font-size: 1.8rem;
 }
-
-/* ---- TabletOrMobile ---- */
-/* .socialContainerMobile {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	padding: 2rem;
-	width: 100%;
-	height: 100%;
-	border-radius: 20px;
-	background-color: whitesmoke;
-} */
