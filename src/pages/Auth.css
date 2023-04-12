@@ -27,7 +27,6 @@
 
 @media screen and (min-width: 1024px) {
 	.auth-logo-container {
-		margin-right: 2rem;
 		max-width: 500px;
 	}
 
@@ -40,20 +39,18 @@
 @media screen and (max-width: 1023px) {
 	.auth-container {
 		flex-direction: column;
-		padding: 5rem;
+		justify-content: flex-start;
+		height: auto;
 	}
 
 	.auth-logo-container {
 		justify-content: center;
 		width: 100%;
-		height: 30%;
-		background-color: aqua;
 	}
 
 	.auth-login-container {
 		flex-direction: column;
 		width: 100%;
-		height: 70%;
-		background-color: brown;
+		height: auto;
 	}
 }

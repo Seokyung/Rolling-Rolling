@@ -50,7 +50,8 @@ function AuthForm({ onLoginMethodChange }) {
 		<div className="authForm-container">
 			<h3 className="authForm-title">{newAccount ? "회원가입" : "로그인"}</h3>
 			<Form className="authForm-form-container" onSubmit={onAuthBtnClick}>
-				<FloatingLabel className="mb-3" label="이메일">
+				<Form.Group className="authForm-form-group">
+					<Form.Label className="authForm-form-label">이메일</Form.Label>
 					<Form.Control
 						className="authForm-input-text"
 						type="email"
@@ -60,20 +61,20 @@ function AuthForm({ onLoginMethodChange }) {
 						onChange={onAuthInputChange}
 						placeholder="이메일을 입력해주세요"
 					/>
-				</FloatingLabel>
-				<FloatingLabel className="mb-3" label="비밀번호">
+				</Form.Group>
+				<Form.Group className="authForm-form-group">
+					<Form.Label className="authForm-form-label">비밀번호</Form.Label>
 					<Form.Control
+						className="authForm-input-text"
 						type="password"
 						name="password"
 						value={password}
 						onChange={onAuthInputChange}
 						placeholder="비밀번호를 입력해주세요"
 					/>
-				</FloatingLabel>
-				<Button variant="primary" type="submit">
-					<span className="authForm-btn-text">
-						{newAccount ? "회원가입" : "로그인"}
-					</span>
+				</Form.Group>
+				<Button className="authForm-btn" variant="primary" type="submit">
+					<span>{newAccount ? "회원가입" : "로그인"}</span>
 				</Button>
 			</Form>
 			<div className="authForm-small-container">

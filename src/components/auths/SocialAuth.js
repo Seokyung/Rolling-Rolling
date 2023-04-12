@@ -45,9 +45,7 @@ function SocialAuth({ onLoginMethodChange }) {
 					name="google"
 					onClick={onSocialClick}
 				>
-					<span className="social-btn-text">
-						<FontAwesomeIcon icon={faGoogle} /> 구글 로그인
-					</span>
+					<FontAwesomeIcon icon={faGoogle} /> 구글 로그인
 				</Button>
 				<Button
 					className="social-btn"
@@ -55,9 +53,7 @@ function SocialAuth({ onLoginMethodChange }) {
 					name="facebook"
 					onClick={onSocialClick}
 				>
-					<span className="social-btn-text">
-						<FontAwesomeIcon icon={faFacebook} /> 페이스북 로그인
-					</span>
+					<FontAwesomeIcon icon={faFacebook} /> 페이스북 로그인
 				</Button>
 				<Button
 					className="social-btn"
@@ -65,14 +61,12 @@ function SocialAuth({ onLoginMethodChange }) {
 					name="github"
 					onClick={onSocialClick}
 				>
-					<span className="social-btn-text">
-						<FontAwesomeIcon icon={faGithub} /> 깃허브 로그인
-					</span>
+					<FontAwesomeIcon icon={faGithub} /> 깃허브 로그인
 				</Button>
 			</Stack>
 			<Form.Text
 				onClick={onLoginMethodChange}
-				bsPrefix="social-form-small-text"
+				bsPrefix="social-form-small-container"
 			>
 				이메일로 로그인하기
 			</Form.Text>

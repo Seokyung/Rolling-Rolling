@@ -1,9 +1,9 @@
 .social-container {
 	display: flex;
 	flex-direction: column;
-	padding: 2rem;
+	align-items: center;
+	padding: 3rem;
 	width: 80%;
-	height: 60%;
 	border-radius: 20px;
 	background-color: whitesmoke;
 }
@@ -12,42 +12,59 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
 	padding: 2rem;
+	width: 100%;
 	border-radius: 20px;
 	background-color: dimgrey;
 }
 
 .social-title {
 	margin: 1rem;
-	font-size: 2.5rem;
-}
-
-.social-form-small-text {
-	cursor: pointer;
-	margin: 0.7rem 0.5rem 0.5rem 0.5rem;
-	font-size: 1.5rem;
-	color: #6c757d;
-	text-decoration: underline;
+	font-size: 2.8rem;
 }
 
 .social-btn {
 	margin: 0.75rem;
+	padding: 0.75rem !important;
+	font-size: 2rem !important;
 }
 
-.social-btn-text {
-	margin: 0.5rem;
-	font-size: 2rem;
+.social-form-small-container {
+	width: 100%;
+	cursor: pointer;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	font-size: 1.7rem;
+	color: #6c757d;
+	text-decoration: underline;
 }
 
 @media screen and (max-width: 1023px) {
 	.social-container {
 		width: 100%;
 		height: 100%;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
 	}
 
 	.social-form-container {
-		margin-top: 1rem;
 		padding: 3rem;
 		justify-content: flex-start;
+	}
+
+	.social-title {
+		font-size: 3.5rem;
+	}
+
+	.social-btn {
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		font-size: 2.5rem !important;
+	}
+
+	.social-form-small-container {
+		font-size: 2rem;
 	}
 }

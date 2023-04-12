@@ -1,25 +1,29 @@
 .logoContainer {
 	display: flex;
-	justify-content: center;
+	justify-content: flex-end;
 	align-items: center;
-	width: 80%;
-	padding: 1rem;
+	width: 100%;
+	padding: 2rem;
 }
 
 .logoImg {
+	width: 80%;
 	min-width: 300px;
 	height: auto;
 }
 
 @media screen and (max-width: 1023px) {
 	.logoContainer {
-		width: 80%;
-		height: 100%;
+		width: auto;
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+		padding: 0;
 	}
 
 	.logoImg {
-		max-width: 50%;
+		max-width: 500px;
+		width: 100%;
 		min-width: 200px;
-		height: auto;
+		object-fit: contain;
 	}
 }
