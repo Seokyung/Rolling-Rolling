@@ -40,7 +40,7 @@ function SocialAuth({ onLoginMethodChange }) {
 			<h3 className="social-title">간편 로그인</h3>
 			<Stack className="social-form-container">
 				<Button
-					className="mb-4"
+					className="social-btn"
 					variant="light"
 					name="google"
 					onClick={onSocialClick}
@@ -50,7 +50,7 @@ function SocialAuth({ onLoginMethodChange }) {
 					</span>
 				</Button>
 				<Button
-					className="mb-4"
+					className="social-btn"
 					variant="light"
 					name="facebook"
 					onClick={onSocialClick}
@@ -60,7 +60,7 @@ function SocialAuth({ onLoginMethodChange }) {
 					</span>
 				</Button>
 				<Button
-					className="mb-4"
+					className="social-btn"
 					variant="light"
 					name="github"
 					onClick={onSocialClick}
@@ -70,8 +70,11 @@ function SocialAuth({ onLoginMethodChange }) {
 					</span>
 				</Button>
 			</Stack>
-			<Form.Text onClick={onLoginMethodChange}>
-				<span className="social-form-small-text">이메일로 로그인</span>
+			<Form.Text
+				onClick={onLoginMethodChange}
+				bsPrefix="social-form-small-text"
+			>
+				이메일로 로그인하기
 			</Form.Text>
 		</div>
 	);

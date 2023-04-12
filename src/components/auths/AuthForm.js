@@ -50,8 +50,9 @@ function AuthForm({ onLoginMethodChange }) {
 		<div className="authForm-container">
 			<h3 className="authForm-title">{newAccount ? "회원가입" : "로그인"}</h3>
 			<Form className="authForm-form-container" onSubmit={onAuthBtnClick}>
-				<Form.Floating className="mb-3">
+				<FloatingLabel className="mb-3" label="이메일">
 					<Form.Control
+						className="authForm-input-text"
 						type="email"
 						id="email"
 						name="email"
@@ -59,8 +60,7 @@ function AuthForm({ onLoginMethodChange }) {
 						onChange={onAuthInputChange}
 						placeholder="이메일을 입력해주세요"
 					/>
-					<label htmlFor="email">이메일</label>
-				</Form.Floating>
+				</FloatingLabel>
 				<FloatingLabel className="mb-3" label="비밀번호">
 					<Form.Control
 						type="password"
@@ -71,19 +71,24 @@ function AuthForm({ onLoginMethodChange }) {
 					/>
 				</FloatingLabel>
 				<Button variant="primary" type="submit">
-					{newAccount ? "회원가입" : "로그인"}
-				</Button>
-				<Form.Text onClick={toggleAuthForm}>
-					<span className="authForm-form-small-text">
-						{newAccount
-							? "이미 계정이 있으신가요? 로그인하기"
-							: "계정이 없으신가요? 회원가입하기"}
+					<span className="authForm-btn-text">
+						{newAccount ? "회원가입" : "로그인"}
 					</span>
-				</Form.Text>
-				<Form.Text onClick={onLoginMethodChange}>
-					<span className="authForm-form-small-text">돌아가기</span>
-				</Form.Text>
+				</Button>
 			</Form>
+			<div className="authForm-small-container">
+				<span className="authForm-small-toggle-text" onClick={toggleAuthForm}>
+					{newAccount
+						? "이미 계정이 있으신가요? 로그인하기"
+						: "계정이 없으신가요? 회원가입하기"}
+				</span>
+				<span
+					className="authForm-small-method-text"
+					onClick={onLoginMethodChange}
+				>
+					돌아가기
+				</span>
+			</div>
 		</div>
 	);
 }
