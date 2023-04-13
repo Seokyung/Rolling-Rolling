@@ -6,11 +6,11 @@ import {
 	Navigate,
 	BrowserRouter,
 } from "react-router-dom";
-import Navigation from "components/menu/Navigation";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
 import Auth from "../pages/Auth";
 import PaperRouter from "./PaperRouter";
+import Navigation from "components/menu/Navigation";
 
 function AppRouter({ isLoggedIn, refreshUser }) {
 	return (

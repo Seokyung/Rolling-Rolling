@@ -1,8 +1,8 @@
 import React from "react";
 import logoImg from "assets/Rolling-Rolling_logo.png";
-import "./Logo.css";
+import "./AuthLogo.css";
 
-function Logo() {
+function AuthLogo() {
 	return (
 		<div className="logoContainer">
 			<img className="logoImg" src={logoImg} alt="logo" />
@@ -10,4 +10,4 @@ function Logo() {
 	);
 }
 
-export default Logo;
+export default AuthLogo;

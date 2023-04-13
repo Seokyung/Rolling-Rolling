@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import AppRouter from "routes/AppRouter";
 import { authService } from "api/fbase";
-import "./App.css";
 
 import { useDispatch } from "react-redux";
 import { getUser } from "modules/user";
+import Footer from "./footer/Footer";
 
 function App() {
 	const dispatch = useDispatch();
@@ -56,11 +56,7 @@ function App() {
 			) : (
 				"Initializing..."
 			)}
-			<footer className="appFooter">
-				&copy; {new Date().getFullYear()} Rolling-Rolling
-				<br />
-				Seokyung Jee
-			</footer>
+			<Footer />
 		</div>
 	);
 }

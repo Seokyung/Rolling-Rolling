@@ -1,4 +1,4 @@
-.appFooter {
+.footer-container {
 	display: flex;
 	position: relative;
 	align-items: center;
@@ -12,7 +12,7 @@
 }
 
 @media screen and (max-width: 1023px) {
-	.appFooter {
+	.footer-container {
 		font-size: 1.5rem;
 	}
 }

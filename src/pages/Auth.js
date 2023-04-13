@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Logo from "components/menu/Logo";
+import AuthLogo from "components/auths/AuthLogo";
 import AuthForm from "components/auths/AuthForm";
 import SocialAuth from "components/auths/SocialAuth";
 import "./Auth.css";
@@ -14,7 +14,7 @@ function Auth() {
 	return (
 		<div className="auth-container">
 			<div className="auth-logo-container">
-				<Logo />
+				<AuthLogo />
 			</div>
 			<div className="auth-login-container">
 				{isSocial ? (
