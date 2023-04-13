@@ -6,7 +6,7 @@ import {
 	Navigate,
 	BrowserRouter,
 } from "react-router-dom";
-import Navigation from "pages/Navigation";
+import Navigation from "components/menu/Navigation";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
 import Auth from "../pages/Auth";

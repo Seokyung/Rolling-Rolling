@@ -1,5 +1,5 @@
 import React from "react";
-import logoImg from "assets/logo.png";
+import logoImg from "assets/Rolling-Rolling_logo.png";
 import "./Logo.css";
 
 function Logo() {

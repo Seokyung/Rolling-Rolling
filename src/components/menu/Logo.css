@@ -3,7 +3,6 @@
 	justify-content: flex-end;
 	align-items: center;
 	width: 100%;
-	padding: 2rem;
 }
 
 .logoImg {
@@ -17,7 +16,6 @@
 		width: auto;
 		margin-top: 2rem;
 		margin-bottom: 2rem;
-		padding: 0;
 	}
 
 	.logoImg {
