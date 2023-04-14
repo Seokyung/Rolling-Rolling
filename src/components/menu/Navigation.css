@@ -2,9 +2,10 @@
 	display: flex;
 	position: relative;
 	justify-content: center;
+	align-items: center;
 	width: 100%;
 	max-width: 100%;
-	height: 10%;
+	height: 12%;
 	z-index: 10;
 }
 
@@ -13,7 +14,7 @@
 	transform: translateX(-50%) translateY(-50%);
 	top: 50%;
 	left: 50%;
-	height: 80%;
+	height: 88%;
 	padding: 0.5rem;
 }
 
@@ -27,22 +28,78 @@
 .navigation-menu {
 	position: absolute;
 	transform: translateY(-50%);
-	justify-content: center;
-	align-items: center;
 	right: 2rem;
 	top: 50%;
+	margin: 0;
 	padding: 0;
-	font-size: 3rem;
-	font-weight: bold;
+	outline: none;
+	appearance: none;
+	border: none;
+	white-space: nowrap;
+	background: none;
+}
+
+.navigation-menu svg {
+	width: 3rem;
+	height: 3rem;
+	color: #303030;
+}
+
+.offcanvas {
+	--bs-offcanvas-width: 40% !important;
+	--bs-offcanvas-padding-x: 3rem !important;
+	--bs-offcanvas-padding-y: 4rem !important;
+	font-size: 1.7rem;
+}
+
+.offcanvas-title {
+	font-size: 2.2rem !important;
+}
+
+.navigation-offcanvas-username {
+	font-weight: 700;
+	color: #944444;
+}
+
+.offcanvas-body {
+	padding: 0 var(--bs-offcanvas-padding-x) !important;
+}
+
+.navigation-offcanvas-body {
+	display: flex;
+	flex-direction: column;
+}
+
+.navigation-offcanvas-body-link {
+	margin-bottom: 1.5rem;
+	padding: 0.75rem;
+	color: #505050;
+	text-decoration: none;
+}
+
+.navigation-offcanvas-body-link:hover {
+	color: #b27572;
+}
+
+.navigation-offcanvas-body-link svg {
+	margin-right: 1rem;
 }
 
 @media screen and (max-width: 1023px) {
-	.navigation-logo-container {
-		height: 75%;
-		padding: 1rem;
+	.navigation-container {
+		height: 8%;
 	}
 
-	.navigation-menu {
-		font-size: 4rem;
+	.navigation-logo-container {
+		height: 85%;
+		padding: 1rem;
+	}
+	.offcanvas {
+		--bs-offcanvas-width: 60% !important;
+		font-size: 2.2rem;
+	}
+
+	.offcanvas-title {
+		font-size: 2.5rem !important;
 	}
 }
