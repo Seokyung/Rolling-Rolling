@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 import logoImg from "assets/Rolling-Rolling_logo.png";
 import { Navbar, Offcanvas, Nav } from "react-bootstrap";
-import { List } from "react-bootstrap-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faHouse, faUser } from "@fortawesome/free-solid-svg-icons";
 import "./Navigation.css";
