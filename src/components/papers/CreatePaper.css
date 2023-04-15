@@ -1,5 +1,5 @@
 .modal {
-	--bs-modal-width: 80% !important;
+	--bs-modal-width: 70% !important;
 }
 
 .createPaper-modal-header {
@@ -64,20 +64,6 @@
 	font-size: 1.7rem !important;
 }
 
-.pincode-input-text {
-	padding: 0 !important;
-	margin: 0 2px;
-	text-align: center;
-	border: 1px solid;
-	background: transparent;
-	width: 50px;
-	height: 50px;
-}
-.pincode-input-text:focus {
-	outline: none;
-	box-shadow: none;
-}
-
 .createPaper-modal-footer {
 	display: flex;
 	justify-content: flex-end;
@@ -88,4 +74,30 @@
 .createPaper-modal-footer-btn {
 	margin-left: 1rem;
 	font-size: 1.5rem !important;
+}
+
+@media screen and (max-width: 1023px) {
+	.modal {
+		--bs-modal-width: 85% !important;
+	}
+
+	.createPaper-modal-title {
+		font-size: 2.2rem !important;
+	}
+
+	.createPaper-form-title {
+		font-size: 1.8rem;
+	}
+
+	.createPaper-form-text {
+		font-size: 1.8rem !important;
+	}
+
+	.createPaper-form-code {
+		font-size: 1.8rem !important;
+	}
+
+	.createPaper-modal-footer-btn {
+		font-size: 1.6rem !important;
+	}
 }
