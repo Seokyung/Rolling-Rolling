@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { dbService } from "api/fbase";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { useSelector } from "react-redux";
 
-function CreatePaper({ setPaperModal }) {
+import { Modal, Button, Form } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import "./CreatePaper.css";
+
+function CreatePaper({ paperModal, setPaperModal }) {
 	const userId = useSelector((state) => state.userReducer.uid);
 	const [paperName, setPaperName] = useState("");
+	const [paperCode, setPaperCode] = useState(Array(4).fill(""));
 	const [isPrivate, setIsPrivate] = useState(false);
-	const [paperCode, setPaperCode] = useState("");
+	const codeInputRef = useRef([]);
+
+	const closePaperModal = () => {
+		setPaperName("");
+		setIsPrivate(false);
+		setPaperCode(Array(4).fill(""));
+		setPaperModal(false);
+	};
 
 	const onPaperNameChange = (e) => {
 		const {
@@ -23,16 +36,58 @@ function CreatePaper({ setPaperModal }) {
 		setIsPrivate(checked);
 	};
 
-	const onPaperCodeChange = (e) => {
+	const onCodeChange = (e, index) => {
 		const {
-			target: { value, maxLength },
+			target: { value },
 		} = e;
-		if (value.length > maxLength) {
-			setPaperCode(value.slice(0, maxLength));
-		}
 		if (!isNaN(value)) {
-			setPaperCode(value);
+			const newCodes = [...paperCode];
+			newCodes[index] = value;
+			setPaperCode(newCodes);
+			if (value && index < codeInputRef.current.length - 1) {
+				codeInputRef.current[index + 1].focus();
+				if (paperCode[index + 1]) {
+					codeInputRef.current[index + 1].select();
+				}
+			}
 		}
+	};
+
+	const handleKeyDown = (e, index) => {
+		if (e.key === "Backspace") {
+			if (!paperCode[index] && index > 0) {
+				codeInputRef.current[index - 1].focus();
+			}
+			const newCodes = [...paperCode];
+			newCodes[index] = "";
+			setPaperCode(newCodes);
+		}
+	};
+
+	useEffect(() => {
+		if (isPrivate && codeInputRef.current[0]) {
+			codeInputRef.current[0].focus();
+			if (paperCode[0]) {
+				codeInputRef.current[0].select();
+			}
+		}
+	}, [isPrivate]);
+
+	const renderCodeInputs = () => {
+		return paperCode.map((code, index) => {
+			return (
+				<Form.Control
+					className="createPaper-form-code"
+					key={index}
+					type="text"
+					maxLength={1}
+					value={code}
+					ref={(el) => (codeInputRef.current[index] = el)}
+					onChange={(e) => onCodeChange(e, index)}
+					onKeyDown={(e) => handleKeyDown(e, index)}
+				/>
+			);
+		});
 	};
 
 	const onCreatePaper = async (e) => {
@@ -56,7 +111,7 @@ function CreatePaper({ setPaperModal }) {
 			createdAt: Date.now(),
 			creatorId: userId,
 			isPrivate: isPrivate,
-			paperCode: paperCode,
+			paperCode: paperCode.join(""),
 		};
 		try {
 			await setDoc(newPaper, paperObj);
@@ -66,39 +121,84 @@ function CreatePaper({ setPaperModal }) {
 			console.log(error);
 		}
 		setPaperName("");
-		setPaperModal((prev) => !prev);
+		closePaperModal();
 	};
 
 	return (
-		<div>
-			<h4>Create Paper</h4>
-			<form onSubmit={onCreatePaper}>
-				페이퍼 이름:
-				<input
-					type="text"
-					autoFocus
-					value={paperName}
-					onChange={onPaperNameChange}
-					placeholder="페이퍼 이름을 입력하세요 :)"
-				/>
-				<input
-					type="checkbox"
-					checked={isPrivate}
-					onChange={onPrivateCheckChange}
-				/>
-				<label htmlFor="isPrivate">비공개</label>
-				{isPrivate && (
-					<input
-						type="text"
-						value={paperCode}
-						onChange={onPaperCodeChange}
-						maxLength="4"
-						placeholder="4자리 숫자 코드를 설정해주세요!"
-					/>
-				)}
-				<input type="submit" value="페이퍼 만들기" />
-			</form>
-		</div>
+		<Modal
+			show={paperModal}
+			onExit={closePaperModal}
+			centered
+			animation={true}
+			keyboard={false}
+			backdrop="static"
+		>
+			<Modal.Header>
+				<div className="createPaper-modal-header">
+					<Modal.Title bsPrefix="createPaper-modal-title">
+						페이퍼 만들기
+					</Modal.Title>
+					<button
+						className="createPaper-modal-close-btn"
+						onClick={closePaperModal}
+					>
+						<FontAwesomeIcon icon={faXmark} />
+					</button>
+				</div>
+			</Modal.Header>
+			<Modal.Body>
+				<Form className="createPaper-form-container">
+					<Form.Group className="createPaper-form-group">
+						<Form.Label className="createPaper-form-title">
+							페이퍼 이름
+						</Form.Label>
+						<Form.Control
+							className="createPaper-form-text"
+							type="text"
+							autoFocus
+							value={paperName}
+							onChange={onPaperNameChange}
+							placeholder="페이퍼 이름을 입력하세요 :)"
+						/>
+					</Form.Group>
+					<Form.Group className="createPaper-form-group">
+						<Form.Check type="checkbox" className="createPaper-form-title">
+							<Form.Check.Input
+								type="checkbox"
+								checked={isPrivate}
+								onChange={onPrivateCheckChange}
+							/>
+							<Form.Check.Label>비공개</Form.Check.Label>
+						</Form.Check>
+					</Form.Group>
+					{isPrivate && (
+						<Form.Group className="createPaper-form-code-group">
+							{renderCodeInputs()}
+						</Form.Group>
+					)}
+				</Form>
+			</Modal.Body>
+			<Modal.Footer>
+				<div className="createPaper-modal-footer">
+					<Button
+						className="createPaper-modal-footer-btn"
+						variant="secondary"
+						size="lg"
+						onClick={closePaperModal}
+					>
+						닫기
+					</Button>
+					<Button
+						className="createPaper-modal-footer-btn"
+						variant="primary"
+						size="lg"
+						onClick={onCreatePaper}
+					>
+						페이퍼 만들기
+					</Button>
+				</div>
+			</Modal.Footer>
+		</Modal>
 	);
 }
 
