@@ -1,0 +1,14 @@
+.paperList-container {
+	display: flex;
+	flex-direction: row;
+	/* flex-wrap: wrap; */
+}
+
+.paperList-card-container {
+	width: auto;
+	/* width: 33.33%;
+	box-sizing: border-box;
+	margin-right: 1.33%;
+	margin-bottom: 1.33%;
+	padding: 1rem; */
+}

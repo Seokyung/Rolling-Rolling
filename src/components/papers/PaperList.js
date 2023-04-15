@@ -15,6 +15,9 @@ import {
 import { ref, deleteObject } from "firebase/storage";
 import { useSelector } from "react-redux";
 
+import { Row, Col, Card, Button } from "react-bootstrap";
+import "./PaperList.css";
+
 function PaperList() {
 	const userId = useSelector((state) => state.userReducer.uid);
 	const [papers, setPapers] = useState([]);
@@ -80,22 +83,35 @@ function PaperList() {
 	};
 
 	return (
-		<div>
-			{papers &&
-				papers.map((paper) => (
-					<div key={paper.id}>
-						<Link to={`/paper/${paper.id}`}>
-							<h4>
-								{paper.isPrivate && "🔒"}
-								{paper.paperName}
-							</h4>
-						</Link>
-						{userId === paper.creatorId && (
-							<button onClick={() => deletePaper(paper)}>페이퍼 삭제</button>
-						)}
-						{}
-					</div>
-				))}
+		<div className="paperList-container">
+			<Row md={3} className="g-3">
+				{papers &&
+					papers.map((paper) => (
+						<Col key={paper.id}>
+							<Card className="paperList-card-container">
+								<Card.Body>
+									<Card.Title>
+										<Link to={`/paper/${paper.id}`}>
+											<h4>
+												{paper.isPrivate && "🔒 "}
+												{paper.paperName}
+											</h4>
+										</Link>
+									</Card.Title>
+									<Card.Text>{paper.createdAt}</Card.Text>
+									{userId === paper.creatorId && (
+										<Button
+											variant="primary"
+											onClick={() => deletePaper(paper)}
+										>
+											페이퍼 삭제
+										</Button>
+									)}
+								</Card.Body>
+							</Card>
+						</Col>
+					))}
+			</Row>
 		</div>
 	);
 }

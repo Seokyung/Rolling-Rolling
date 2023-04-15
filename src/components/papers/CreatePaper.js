@@ -104,11 +104,25 @@ function CreatePaper({ paperModal, setPaperModal }) {
 			alert("코드는 4자리의 숫자여야 합니다!");
 			return;
 		}
+
+		const currentTime = new Date();
+		const year = currentTime.getFullYear();
+		const month = String(currentTime.getMonth() + 1).padStart(2, "0");
+		const date = String(currentTime.getDate()).padStart(2, "0");
+		const formattedDate = `${year}/${month}/${date}`;
+
+		const hours = String(currentTime.getHours()).padStart(2, "0");
+		const minutes = String(currentTime.getMinutes()).padStart(2, "0");
+		const seconds = String(currentTime.getSeconds()).padStart(2, "0");
+		const formattedTime = `${hours}:${minutes}:${seconds}`;
+
+		const formattedDateTime = `${formattedDate} ${formattedTime}`;
+
 		const newPaper = doc(collection(dbService, "papers"));
 		const paperObj = {
 			paperId: newPaper.id,
 			paperName: paperName,
-			createdAt: Date.now(),
+			createdAt: formattedDateTime,
 			creatorId: userId,
 			isPrivate: isPrivate,
 			paperCode: paperCode.join(""),
