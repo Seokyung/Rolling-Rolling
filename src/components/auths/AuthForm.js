@@ -4,7 +4,10 @@ import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 } from "firebase/auth";
-import { Form, FloatingLabel, Button } from "react-bootstrap";
+
+import { Form, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import "./AuthForm.css";
 
 function AuthForm({ onLoginMethodChange }) {
@@ -48,7 +51,14 @@ function AuthForm({ onLoginMethodChange }) {
 
 	return (
 		<div className="authForm-container">
-			<h3 className="authForm-title">{newAccount ? "회원가입" : "로그인"}</h3>
+			<div className="authForm-header">
+				<button className="authForm-header-btn" onClick={onLoginMethodChange}>
+					<FontAwesomeIcon icon={faAngleLeft} />
+				</button>
+				<h3 className="authForm-header-title">
+					{newAccount ? "이메일로 회원가입" : "이메일로 로그인"}
+				</h3>
+			</div>
 			<Form className="authForm-form-container" onSubmit={onAuthBtnClick}>
 				<Form.Group className="authForm-form-group">
 					<Form.Label className="authForm-form-label">이메일</Form.Label>
@@ -82,12 +92,6 @@ function AuthForm({ onLoginMethodChange }) {
 					{newAccount
 						? "이미 계정이 있으신가요? 로그인하기"
 						: "계정이 없으신가요? 회원가입하기"}
-				</span>
-				<span
-					className="authForm-small-method-text"
-					onClick={onLoginMethodChange}
-				>
-					돌아가기
 				</span>
 			</div>
 		</div>
