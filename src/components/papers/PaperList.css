@@ -20,6 +20,13 @@
 	font-weight: 700;
 }
 
+.paperList-card-title:hover {
+	color: #944444;
+	font-size: 1.95rem;
+	font-weight: 700;
+	transition: 0.3s;
+}
+
 .paperList-card-date {
 	font-size: 1.3rem;
 	margin-bottom: 2.2rem;
@@ -30,6 +37,29 @@
 	right: 2.5rem;
 	bottom: 2rem;
 	font-size: 1.4rem !important;
+}
+
+.paperList-pagination-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 2rem;
+	margin-bottom: 0;
+}
+
+.paperList-pagination-item span {
+	background-color: #9f5757 !important;
+	border-color: #9f5757 !important;
+}
+
+.paperList-pagination-item a {
+	font-size: 1.4rem;
+	color: #303030;
+}
+
+.paperList-pagination-item a:hover {
+	font-weight: 700;
+	color: #9f5757;
 }
 
 @media screen and (max-width: 1023px) {

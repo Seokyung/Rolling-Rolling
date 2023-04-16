@@ -35,7 +35,9 @@
 }
 
 .home-paper-btn:hover {
+	font-size: 1.9rem;
 	background-color: #944444;
+	transition: 0.3s;
 }
 
 .home-paper-btn svg {
@@ -67,5 +69,9 @@
 		bottom: 5rem;
 		font-size: 2rem;
 		border-radius: 50px;
+	}
+
+	.home-paper-btn:hover {
+		font-size: 2.2rem;
 	}
 }

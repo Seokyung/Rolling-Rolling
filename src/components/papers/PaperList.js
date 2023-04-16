@@ -15,12 +15,16 @@ import {
 import { ref, deleteObject } from "firebase/storage";
 import { useSelector } from "react-redux";
 
-import { Row, Col, Card, Button } from "react-bootstrap";
+import { Row, Col, Card, Button, Pagination } from "react-bootstrap";
 import "./PaperList.css";
 
 function PaperList() {
 	const userId = useSelector((state) => state.userReducer.uid);
 	const [papers, setPapers] = useState([]);
+	const [slicedPapers, setSlicedPapers] = useState([]);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [pageArr, setPageArr] = useState([]);
+	const papersPerPage = 5;
 
 	useEffect(() => {
 		const q = query(
@@ -48,6 +52,29 @@ function PaperList() {
 			}
 		});
 	}, []);
+
+	useEffect(() => {
+		const papersToShow = papers.slice(
+			(currentPage - 1) * papersPerPage,
+			currentPage * papersPerPage
+		);
+		let newPageArr = [];
+		if (parseInt(papers.length % 5) === 0) {
+			for (let i = 1; i <= parseInt(papers.length / 5); i++) {
+				newPageArr.push(i);
+			}
+		} else {
+			for (let i = 1; i <= parseInt(papers.length / 5) + 1; i++) {
+				newPageArr.push(i);
+			}
+		}
+		setSlicedPapers(papersToShow);
+		setPageArr(newPageArr);
+	}, [papers, currentPage]);
+
+	const onPageChange = (pageNumber) => {
+		setCurrentPage(pageNumber);
+	};
 
 	const deletePaper = async (paper) => {
 		const isDelete = window.confirm(
@@ -86,7 +113,7 @@ function PaperList() {
 		<div className="paperList-container">
 			<Row md={1} className="g-4">
 				{papers &&
-					papers.map((paper) => (
+					slicedPapers.map((paper) => (
 						<Col key={paper.id}>
 							<Card className="paperList-card-container">
 								<Card.Body>
@@ -120,6 +147,18 @@ function PaperList() {
 						</Col>
 					))}
 			</Row>
+			<Pagination className="paperList-pagination-container" size="lg">
+				{pageArr.map((pageNum) => (
+					<Pagination.Item
+						className="paperList-pagination-item"
+						key={pageNum}
+						active={pageNum === currentPage}
+						onClick={() => onPageChange(pageNum)}
+					>
+						{pageNum}
+					</Pagination.Item>
+				))}
+			</Pagination>
 		</div>
 	);
 }
