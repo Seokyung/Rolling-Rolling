@@ -3,7 +3,7 @@
 	flex-direction: column;
 	width: 100%;
 	height: auto;
-	padding: 1.5rem;
+	padding: 3rem;
 }
 
 .home-paper-container {
@@ -11,22 +11,22 @@
 	flex-direction: column;
 	width: 100%;
 	height: auto;
-	/* height: 200vh; */
-	padding: 2.5rem 2rem;
+	margin-bottom: 3rem;
+	padding: 3rem 2.5rem;
 	border-radius: 50px;
-	background-color: lightskyblue;
+	background-color: #e4bab5;
 }
 
 .home-paper-btn {
 	position: sticky;
 	position: -webkit-sticky;
 	align-self: flex-end;
-	padding: 1rem 1.8rem;
+	padding: 1.2rem 1.8rem;
 	right: 3rem;
 	bottom: 3rem;
 	color: white;
 	font-size: 1.7rem;
-	background-color: #944444;
+	background-color: #9f5757;
 	border-radius: 45px;
 	outline: none;
 	appearance: none;
@@ -35,7 +35,7 @@
 }
 
 .home-paper-btn:hover {
-	background-color: #853d3d;
+	background-color: #944444;
 }
 
 .home-paper-btn svg {
@@ -53,7 +53,12 @@
 
 @media screen and (max-width: 1023px) {
 	.home-container {
-		margin-bottom: 5rem;
+		padding: 1.8rem;
+	}
+
+	.home-paper-container {
+		margin-bottom: 1.8rem;
+		padding: 2.5rem 2rem;
 	}
 
 	.home-paper-btn {
