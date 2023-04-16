@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { authService } from "api/fbase";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import logoImg from "assets/Rolling-Rolling_logo.png";
-import { Navbar, Offcanvas, Nav } from "react-bootstrap";
+import { Navbar, Offcanvas, Nav, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faHouse, faUser } from "@fortawesome/free-solid-svg-icons";
 import "./Navigation.css";
@@ -11,6 +14,7 @@ import "./Navigation.css";
 function Navigation() {
 	const userName = useSelector((state) => state.userReducer.displayName);
 	const [isMenu, setIsMenu] = useState(false);
+	const navigate = useNavigate();
 
 	const showMenu = () => {
 		setIsMenu((prev) => !prev);
@@ -18,6 +22,19 @@ function Navigation() {
 
 	const closeMenu = () => {
 		setIsMenu(false);
+	};
+
+	const onLogoutClick = async () => {
+		const isLogout = window.confirm("로그아웃 하시겠습니까?");
+		if (isLogout) {
+			try {
+				await signOut(authService);
+				alert("로그아웃 되었습니다!");
+				navigate("/", { replace: true });
+			} catch (error) {
+				alert(error.message);
+			}
+		}
 	};
 
 	return (
@@ -38,10 +55,10 @@ function Navigation() {
 					</Offcanvas.Title>
 				</Offcanvas.Header>
 				<Offcanvas.Body>
-					<Nav className="navigation-offcanvas-body">
+					<Nav className="navigation-offcanvas-nav">
 						<Link
 							to={"/"}
-							className="navigation-offcanvas-body-link"
+							className="navigation-offcanvas-nav-link"
 							onClick={closeMenu}
 						>
 							<FontAwesomeIcon icon={faHouse} />
@@ -49,12 +66,18 @@ function Navigation() {
 						</Link>
 						<Link
 							to={"/profile"}
-							className="navigation-offcanvas-body-link"
+							className="navigation-offcanvas-nav-link"
 							onClick={closeMenu}
 						>
 							<FontAwesomeIcon icon={faUser} />내 정보
 						</Link>
 					</Nav>
+					<Button
+						className="navigation-offcanvas-logout-btn"
+						onClick={onLogoutClick}
+					>
+						로그아웃
+					</Button>
 				</Offcanvas.Body>
 			</Navbar.Offcanvas>
 		</>
