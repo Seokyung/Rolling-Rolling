@@ -1,14 +1,40 @@
-.paperList-container {
-	display: flex;
-	flex-direction: row;
-	/* flex-wrap: wrap; */
+.card {
+	margin: 0.75rem !important;
+	padding: 2rem !important;
+	border-radius: 35px !important;
 }
 
 .paperList-card-container {
-	width: auto;
-	/* width: 33.33%;
-	box-sizing: border-box;
-	margin-right: 1.33%;
-	margin-bottom: 1.33%;
-	padding: 1rem; */
+	display: flex !important;
+	justify-content: center !important;
+}
+
+.paperList-card-link {
+	text-decoration: none;
+}
+
+.paperList-card-title {
+	margin-bottom: 1rem;
+	color: #303030;
+	font-size: 1.8rem;
+	font-weight: 700;
+}
+
+.paperList-card-date {
+	font-size: 1.3rem;
+	margin-bottom: 2.2rem;
+}
+
+.paperList-card-delete-btn {
+	position: absolute;
+	right: 2.5rem;
+	bottom: 2rem;
+	font-size: 1.4rem !important;
+}
+
+@media screen and (max-width: 1023px) {
+	.card {
+		margin: 0.5rem !important;
+		padding: 1.75rem 1rem !important;
+	}
 }

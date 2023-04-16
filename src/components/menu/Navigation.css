@@ -12,9 +12,9 @@
 .navigation-logo-container {
 	position: absolute;
 	transform: translateX(-50%) translateY(-50%);
-	top: 50%;
+	top: 53%;
 	left: 50%;
-	height: 88%;
+	height: 80%;
 }
 
 .navigation-logo {
@@ -86,11 +86,11 @@
 
 @media screen and (max-width: 1023px) {
 	.navigation-container {
-		height: 8%;
+		height: 10%;
 	}
 
 	.navigation-logo-container {
-		height: 85%;
+		height: 70%;
 	}
 
 	.navigation-menu svg {

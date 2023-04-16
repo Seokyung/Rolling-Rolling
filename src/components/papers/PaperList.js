@@ -84,28 +84,36 @@ function PaperList() {
 
 	return (
 		<div className="paperList-container">
-			<Row md={3} className="g-3">
+			<Row md={1} className="g-4">
 				{papers &&
 					papers.map((paper) => (
 						<Col key={paper.id}>
 							<Card className="paperList-card-container">
 								<Card.Body>
 									<Card.Title>
-										<Link to={`/paper/${paper.id}`}>
-											<h4>
-												{paper.isPrivate && "🔒 "}
+										<Link
+											to={`/paper/${paper.id}`}
+											className="paperList-card-link"
+										>
+											<h4 className="paperList-card-title">
+												{paper.isPrivate && "🔒"}
 												{paper.paperName}
 											</h4>
 										</Link>
 									</Card.Title>
-									<Card.Text>{paper.createdAt}</Card.Text>
+									<Card.Text className="paperList-card-date">
+										{paper.createdAt}
+									</Card.Text>
 									{userId === paper.creatorId && (
-										<Button
-											variant="primary"
-											onClick={() => deletePaper(paper)}
-										>
-											페이퍼 삭제
-										</Button>
+										<div className="paperList-card-btn-container">
+											<Button
+												className="paperList-card-delete-btn"
+												variant="danger"
+												onClick={() => deletePaper(paper)}
+											>
+												페이퍼 삭제
+											</Button>
+										</div>
 									)}
 								</Card.Body>
 							</Card>
