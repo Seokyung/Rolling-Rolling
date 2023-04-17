@@ -6,9 +6,13 @@ import { useDispatch } from "react-redux";
 import { getUser } from "modules/user";
 import Footer from "./footer/Footer";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faScroll } from "@fortawesome/free-solid-svg-icons";
+import "./App.css";
+
 function App() {
 	const dispatch = useDispatch();
-	const [init, setInit] = useState(false);
+	const [init, setInit] = useState(true);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	const getUserDispatch = (user) => {
@@ -40,7 +44,7 @@ function App() {
 					})
 				);
 			}
-			setInit(true);
+			setInit(false);
 		});
 	}, []);
 
@@ -52,9 +56,11 @@ function App() {
 	return (
 		<div>
 			{init ? (
-				<AppRouter isLoggedIn={isLoggedIn} refreshUser={refreshUser} />
+				<div className="app-init-container">
+					<FontAwesomeIcon className="app-init-icon" icon={faScroll} spin />
+				</div>
 			) : (
-				"Initializing..."
+				<AppRouter isLoggedIn={isLoggedIn} refreshUser={refreshUser} />
 			)}
 			<Footer />
 		</div>

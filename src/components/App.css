@@ -1,0 +1,12 @@
+.app-init-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+.app-init-icon {
+	color: #944444;
+	font-size: 5rem;
+}

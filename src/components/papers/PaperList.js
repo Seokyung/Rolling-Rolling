@@ -15,11 +15,13 @@ import {
 import { ref, deleteObject } from "firebase/storage";
 import { useSelector } from "react-redux";
 
+import { Skeleton } from "antd";
 import { Row, Col, Card, Button, Pagination } from "react-bootstrap";
 import "./PaperList.css";
 
 function PaperList() {
 	const userId = useSelector((state) => state.userReducer.uid);
+	const [init, setInit] = useState(true);
 	const [papers, setPapers] = useState([]);
 	const [slicedPapers, setSlicedPapers] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
@@ -51,6 +53,7 @@ function PaperList() {
 				unsubscribe();
 			}
 		});
+		setInit(false);
 	}, []);
 
 	useEffect(() => {
@@ -110,56 +113,62 @@ function PaperList() {
 	};
 
 	return (
-		<div className="paperList-container">
-			<Row md={1} className="g-4">
-				{papers &&
-					slicedPapers.map((paper) => (
-						<Col key={paper.id}>
-							<Card className="paperList-card-container">
-								<Card.Body>
-									<Card.Title>
-										<Link
-											to={`/paper/${paper.id}`}
-											className="paperList-card-link"
-										>
-											<h4 className="paperList-card-title">
-												{paper.isPrivate && "🔒"}
-												{paper.paperName}
-											</h4>
-										</Link>
-									</Card.Title>
-									<Card.Text className="paperList-card-date">
-										{paper.createdAt}
-									</Card.Text>
-									{userId === paper.creatorId && (
-										<div className="paperList-card-btn-container">
-											<Button
-												className="paperList-card-delete-btn"
-												variant="danger"
-												onClick={() => deletePaper(paper)}
-											>
-												페이퍼 삭제
-											</Button>
-										</div>
-									)}
-								</Card.Body>
-							</Card>
-						</Col>
-					))}
-			</Row>
-			<Pagination className="paperList-pagination-container" size="lg">
-				{pageArr.map((pageNum) => (
-					<Pagination.Item
-						className="paperList-pagination-item"
-						key={pageNum}
-						active={pageNum === currentPage}
-						onClick={() => onPageChange(pageNum)}
-					>
-						{pageNum}
-					</Pagination.Item>
-				))}
-			</Pagination>
-		</div>
+		<>
+			{init ? (
+				<Skeleton active />
+			) : (
+				<>
+					<Row md={1} className="g-4">
+						{papers &&
+							slicedPapers.map((paper) => (
+								<Col key={paper.id}>
+									<Card className="paperList-card-container">
+										<Card.Body>
+											<Card.Title>
+												<Link
+													to={`/paper/${paper.id}`}
+													className="paperList-card-link"
+												>
+													<h4 className="paperList-card-title">
+														{paper.isPrivate && "🔒"}
+														{paper.paperName}
+													</h4>
+												</Link>
+											</Card.Title>
+											<Card.Text className="paperList-card-date">
+												{paper.createdAt}
+											</Card.Text>
+											{userId === paper.creatorId && (
+												<div className="paperList-card-btn-container">
+													<Button
+														className="paperList-card-delete-btn"
+														variant="danger"
+														onClick={() => deletePaper(paper)}
+													>
+														페이퍼 삭제
+													</Button>
+												</div>
+											)}
+										</Card.Body>
+									</Card>
+								</Col>
+							))}
+					</Row>
+					<Pagination className="paperList-pagination-container" size="lg">
+						{pageArr.map((pageNum) => (
+							<Pagination.Item
+								className="paperList-pagination-item"
+								key={pageNum}
+								active={pageNum === currentPage}
+								onClick={() => onPageChange(pageNum)}
+							>
+								{pageNum}
+							</Pagination.Item>
+						))}
+					</Pagination>
+				</>
+			)}
+		</>
 	);
 }
 

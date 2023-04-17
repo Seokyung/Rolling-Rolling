@@ -16,6 +16,8 @@ import MessageList from "components/messgaes/MessageList";
 import EditPaper from "./EditPaper";
 import { useSelector } from "react-redux";
 
+import { Skeleton } from "antd";
+
 function Paper() {
 	const userId = useSelector((state) => state.userReducer.uid);
 	const { paperId } = useParams();
@@ -130,10 +132,14 @@ function Paper() {
 		setShareModal((prev) => !prev);
 	};
 
+	const gotoPrevPage = () => {
+		navigate(-1);
+	};
+
 	return (
 		<>
 			{init ? (
-				<h2>Intializing...</h2>
+				<Skeleton active />
 			) : (
 				<>
 					{isPrivate ? (
@@ -184,6 +190,7 @@ function Paper() {
 									<button onClick={onShareClick}>링크 복사</button>
 								</div>
 							)}
+							<button onClick={gotoPrevPage}>뒤로가기</button>
 						</div>
 					)}
 				</>
