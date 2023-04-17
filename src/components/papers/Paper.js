@@ -17,16 +17,19 @@ import EditPaper from "./EditPaper";
 import { useSelector } from "react-redux";
 
 import { Skeleton } from "antd";
+import { Form, Button } from "react-bootstrap";
+import "./Paper.css";
 
 function Paper() {
 	const userId = useSelector((state) => state.userReducer.uid);
 	const { paperId } = useParams();
-	const navigate = useNavigate();
-	const paperUrlRef = useRef();
 	const [init, setInit] = useState(true);
+	const navigate = useNavigate();
+	const codeInputRef = useRef([]);
+	const paperUrlRef = useRef();
 	const [paperObj, setPaperObj] = useState({});
-	const [paperCode, setPaperCode] = useState("");
-	const [isPrivate, setIsPrivate] = useState(true);
+	const [paperCode, setPaperCode] = useState(Array(4).fill(""));
+	const [isPrivate, setIsPrivate] = useState(false);
 	const [editModal, setEditModal] = useState(false);
 	const [msgModal, setMsgModal] = useState(false);
 	const [shareModal, setShareModal] = useState(false);
@@ -42,9 +45,9 @@ function Paper() {
 					isPrivate: doc.data().isPrivate,
 					paperCode: doc.data().paperCode,
 				};
-				setInit(false);
 				setIsPrivate(doc.data().isPrivate);
 				setPaperObj(paperDocObj);
+				setInit(false);
 			}
 		);
 		onAuthStateChanged(authService, (user) => {
@@ -54,26 +57,69 @@ function Paper() {
 		});
 	}, []);
 
-	const onPaperCodeChange = (e) => {
+	const onCodeChange = (e, index) => {
 		const {
-			target: { value, maxLength },
+			target: { value },
 		} = e;
-		if (value.length > maxLength) {
-			setPaperCode(value.slice(0, maxLength));
-		}
 		if (!isNaN(value)) {
-			setPaperCode(value);
+			const newCodes = [...paperCode];
+			newCodes[index] = value;
+			setPaperCode(newCodes);
+			if (value && index < codeInputRef.current.length - 1) {
+				codeInputRef.current[index + 1].focus();
+				if (paperCode[index + 1]) {
+					codeInputRef.current[index + 1].select();
+				}
+			}
 		}
 	};
 
+	const handleKeyDown = (e, index) => {
+		if (e.key === "Backspace") {
+			if (!paperCode[index] && index > 0) {
+				codeInputRef.current[index - 1].focus();
+			}
+			const newCodes = [...paperCode];
+			newCodes[index] = "";
+			setPaperCode(newCodes);
+		}
+	};
+
+	const renderCodeInputs = () => {
+		return paperCode.map((code, index) => {
+			return (
+				<Form.Control
+					className="paper-form-code"
+					key={index}
+					type="text"
+					maxLength={1}
+					value={code}
+					ref={(el) => (codeInputRef.current[index] = el)}
+					onChange={(e) => onCodeChange(e, index)}
+					onKeyDown={(e) => handleKeyDown(e, index)}
+				/>
+			);
+		});
+	};
+
+	useEffect(() => {
+		if (isPrivate && codeInputRef.current[0]) {
+			codeInputRef.current[0].focus();
+			if (paperCode[0]) {
+				codeInputRef.current[0].select();
+			}
+		}
+	}, [isPrivate]);
+
 	const onSubmitPaperCode = (e) => {
 		e.preventDefault();
-		if (paperObj.paperCode === paperCode) {
+		if (paperObj.paperCode === paperCode.join("")) {
 			setIsPrivate(false);
-			setPaperCode("");
+			setPaperCode(Array(4).fill(""));
 		} else {
 			alert("페이지 비밀번호가 다릅니다!");
-			setPaperCode("");
+			setPaperCode(Array(4).fill(""));
+			codeInputRef.current[0].focus();
 		}
 	};
 
@@ -143,20 +189,22 @@ function Paper() {
 			) : (
 				<>
 					{isPrivate ? (
-						<div>
-							<h2>페이지 비밀번호를 입력하세요!</h2>
-							<form onSubmit={onSubmitPaperCode}>
-								<input
-									type="password"
-									autoFocus
-									value={paperCode}
-									onChange={onPaperCodeChange}
-									maxLength="4"
-									placeholder="페이지 비밀번호"
-								/>
-								<input type="submit" value="제출" />
-							</form>
-						</div>
+						<Form>
+							<Form.Group className="paper-form-code-container">
+								<Form.Label className="paper-form-code-title">
+									페이지 비밀번호를 입력하세요!
+								</Form.Label>
+								<div className="paper-form-code-group">
+									{renderCodeInputs()}
+								</div>
+								<Button
+									className="paper-form-code-btn"
+									onClick={onSubmitPaperCode}
+								>
+									제출
+								</Button>
+							</Form.Group>
+						</Form>
 					) : (
 						<div>
 							<h2>{paperObj.paperName}</h2>

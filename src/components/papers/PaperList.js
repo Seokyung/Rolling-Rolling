@@ -42,6 +42,7 @@ function PaperList() {
 					...doc.data(),
 				}));
 				setPapers(paperArray);
+				setInit(false);
 			},
 			(error) => {
 				alert(`Home: ${error.message}`);
@@ -53,7 +54,6 @@ function PaperList() {
 				unsubscribe();
 			}
 		});
-		setInit(false);
 	}, []);
 
 	useEffect(() => {
