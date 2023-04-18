@@ -15,6 +15,7 @@ function CreatePaper({ paperModal, setPaperModal }) {
 	const [paperCode, setPaperCode] = useState(Array(4).fill(""));
 	const [isPrivate, setIsPrivate] = useState(false);
 	const codeInputRef = useRef([]);
+
 	const [messageApi, contextHolder] = message.useMessage();
 	const key = "updatable";
 
@@ -95,11 +96,6 @@ function CreatePaper({ paperModal, setPaperModal }) {
 
 	const onCreatePaper = async (e) => {
 		e.preventDefault();
-		messageApi.open({
-			key,
-			type: "loading",
-			content: "페이지 생성중...",
-		});
 
 		if (paperName === "") {
 			alert("페이퍼 이름를 작성해주세요!");
@@ -113,6 +109,12 @@ function CreatePaper({ paperModal, setPaperModal }) {
 			alert("코드는 4자리의 숫자여야 합니다!");
 			return;
 		}
+
+		messageApi.open({
+			key,
+			type: "loading",
+			content: "페이지 생성중...",
+		});
 
 		const currentTime = new Date();
 		const year = currentTime.getFullYear();
@@ -145,7 +147,12 @@ function CreatePaper({ paperModal, setPaperModal }) {
 				duration: 2,
 			});
 		} catch (error) {
-			alert("페이퍼 생성에 실패하였습니다 :(");
+			messageApi.open({
+				key,
+				type: "error",
+				content: "페이퍼 생성에 실패하였습니다 😢",
+				duration: 2,
+			});
 			console.log(error);
 		}
 		setPaperName("");

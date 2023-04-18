@@ -6,7 +6,7 @@
 	padding: 3rem;
 	width: 80%;
 	border-radius: 30px;
-	background-color: #f5f5f7;
+	background-color: #fffdfd;
 }
 
 .authForm-header {
@@ -47,7 +47,7 @@
 }
 
 .authForm-form-group {
-	margin-bottom: 1.2rem;
+	margin-bottom: 1.5rem;
 }
 
 .form-floating {
@@ -55,9 +55,9 @@
 }
 
 .authForm-form-label {
-	margin-left: 0.5rem;
 	font-size: 1.7rem;
-	color: #303030;
+	font-weight: 700;
+	color: #9f5757;
 }
 
 .authForm-input-text {
@@ -65,9 +65,8 @@
 	font-size: 2rem !important;
 }
 
-.authForm-input-text {
-	padding: 1rem !important;
-	font-size: 2rem !important;
+.authForm-form-feedback {
+	font-size: 1.3rem !important;
 }
 
 .authForm-input-pw {
@@ -81,12 +80,23 @@
 		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
 }
 
+.authForm-form-error {
+	text-align: center !important;
+	font-size: 1.4rem !important;
+	color: var(--bs-form-invalid-color) !important;
+}
+
 .authForm-btn {
 	margin-top: 0.5rem;
 	margin-bottom: 0.5rem;
+	background-color: #9f5757 !important;
+	border-color: #9f5757 !important;
 }
 .authForm-btn span {
 	font-size: 2.2rem;
+}
+.authForm-btn:hover {
+	background-color: #944444 !important;
 }
 
 .authForm-small-container {
