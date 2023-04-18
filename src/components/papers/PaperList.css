@@ -15,9 +15,14 @@
 
 .paperList-card-title {
 	margin-bottom: 1rem;
-	color: #944444;
+	color: #9f5757;
 	font-size: 2rem;
 	font-weight: 700;
+}
+.paperList-card-title:hover {
+	font-size: 2.2rem;
+	transition: 0.15s;
+	color: #944444;
 }
 
 .paperList-card-date {

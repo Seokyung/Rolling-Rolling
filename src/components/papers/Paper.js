@@ -91,7 +91,7 @@ function Paper() {
 				<Form.Control
 					className="paper-form-code"
 					key={index}
-					type="text"
+					type="password"
 					maxLength={1}
 					value={code}
 					ref={(el) => (codeInputRef.current[index] = el)}

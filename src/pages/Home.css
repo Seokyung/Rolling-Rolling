@@ -37,7 +37,7 @@
 .home-paper-btn:hover {
 	font-size: 1.9rem;
 	background-color: #944444;
-	transition: 0.3s;
+	transition: 0.15s;
 }
 
 .home-paper-btn svg {

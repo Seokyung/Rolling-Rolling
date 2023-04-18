@@ -75,7 +75,7 @@ function AuthForm({ onLoginMethodChange }) {
 				<Form.Group className="authForm-form-group">
 					<Form.Label className="authForm-form-label">비밀번호</Form.Label>
 					<Form.Control
-						className="authForm-input-text"
+						className="authForm-input-pw"
 						type="password"
 						name="password"
 						value={password}
