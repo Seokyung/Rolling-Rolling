@@ -4,6 +4,7 @@ import { collection, doc, setDoc } from "firebase/firestore";
 import { useSelector } from "react-redux";
 
 import { Modal, Button, Form } from "react-bootstrap";
+import { message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import "./CreatePaper.css";
@@ -14,6 +15,8 @@ function CreatePaper({ paperModal, setPaperModal }) {
 	const [paperCode, setPaperCode] = useState(Array(4).fill(""));
 	const [isPrivate, setIsPrivate] = useState(false);
 	const codeInputRef = useRef([]);
+	const [messageApi, contextHolder] = message.useMessage();
+	const key = "updatable";
 
 	const closePaperModal = () => {
 		setPaperName("");
@@ -92,6 +95,12 @@ function CreatePaper({ paperModal, setPaperModal }) {
 
 	const onCreatePaper = async (e) => {
 		e.preventDefault();
+		messageApi.open({
+			key,
+			type: "loading",
+			content: "페이지 생성중...",
+		});
+
 		if (paperName === "") {
 			alert("페이퍼 이름를 작성해주세요!");
 			return;
@@ -129,7 +138,12 @@ function CreatePaper({ paperModal, setPaperModal }) {
 		};
 		try {
 			await setDoc(newPaper, paperObj);
-			alert(`${paperName} 페이지가 생성되었습니다!`);
+			messageApi.open({
+				key,
+				type: "success",
+				content: `${paperName} 페이지가 생성되었습니다!`,
+				duration: 2,
+			});
 		} catch (error) {
 			alert("페이퍼 생성에 실패하였습니다 :(");
 			console.log(error);
@@ -139,80 +153,83 @@ function CreatePaper({ paperModal, setPaperModal }) {
 	};
 
 	return (
-		<Modal
-			show={paperModal}
-			onExit={closePaperModal}
-			centered
-			animation={true}
-			keyboard={false}
-			backdrop="static"
-		>
-			<Modal.Header>
-				<div className="createPaper-modal-header">
-					<Modal.Title bsPrefix="createPaper-modal-title">
-						페이퍼 만들기
-					</Modal.Title>
-					<button
-						className="createPaper-modal-close-btn"
-						onClick={closePaperModal}
-					>
-						<FontAwesomeIcon icon={faXmark} />
-					</button>
-				</div>
-			</Modal.Header>
-			<Modal.Body>
-				<Form className="createPaper-form-container">
-					<Form.Group className="createPaper-form-group">
-						<Form.Label className="createPaper-form-title">
-							페이퍼 이름
-						</Form.Label>
-						<Form.Control
-							className="createPaper-form-text"
-							type="text"
-							autoFocus
-							value={paperName}
-							onChange={onPaperNameChange}
-							placeholder="페이퍼 이름을 입력하세요 :)"
-						/>
-					</Form.Group>
-					<Form.Group className="createPaper-form-group">
-						<Form.Check type="checkbox" className="createPaper-form-title">
-							<Form.Check.Input
-								type="checkbox"
-								checked={isPrivate}
-								onChange={onPrivateCheckChange}
+		<>
+			{contextHolder}
+			<Modal
+				show={paperModal}
+				onExit={closePaperModal}
+				centered
+				animation={true}
+				keyboard={false}
+				backdrop="static"
+			>
+				<Modal.Header>
+					<div className="createPaper-modal-header">
+						<Modal.Title bsPrefix="createPaper-modal-title">
+							페이퍼 만들기
+						</Modal.Title>
+						<button
+							className="createPaper-modal-close-btn"
+							onClick={closePaperModal}
+						>
+							<FontAwesomeIcon icon={faXmark} />
+						</button>
+					</div>
+				</Modal.Header>
+				<Modal.Body>
+					<Form className="createPaper-form-container">
+						<Form.Group className="createPaper-form-group">
+							<Form.Label className="createPaper-form-title">
+								페이퍼 이름
+							</Form.Label>
+							<Form.Control
+								className="createPaper-form-text"
+								type="text"
+								autoFocus
+								value={paperName}
+								onChange={onPaperNameChange}
+								placeholder="페이퍼 이름을 입력하세요 :)"
 							/>
-							<Form.Check.Label>비공개</Form.Check.Label>
-						</Form.Check>
-					</Form.Group>
-					{isPrivate && (
-						<Form.Group className="createPaper-form-code-group">
-							{renderCodeInputs()}
 						</Form.Group>
-					)}
-				</Form>
-			</Modal.Body>
-			<Modal.Footer>
-				<div className="createPaper-modal-footer">
-					<Button
-						className="createPaper-modal-footer-btn"
-						variant="secondary"
-						size="lg"
-						onClick={closePaperModal}
-					>
-						닫기
-					</Button>
-					<Button
-						className="createPaper-modal-footer-btn"
-						variant="primary"
-						size="lg"
-						onClick={onCreatePaper}
-					>
-						페이퍼 만들기
-					</Button>
-				</div>
-			</Modal.Footer>
-		</Modal>
+						<Form.Group className="createPaper-form-group">
+							<Form.Check type="checkbox" className="createPaper-form-title">
+								<Form.Check.Input
+									type="checkbox"
+									checked={isPrivate}
+									onChange={onPrivateCheckChange}
+								/>
+								<Form.Check.Label>비공개</Form.Check.Label>
+							</Form.Check>
+						</Form.Group>
+						{isPrivate && (
+							<Form.Group className="createPaper-form-code-group">
+								{renderCodeInputs()}
+							</Form.Group>
+						)}
+					</Form>
+				</Modal.Body>
+				<Modal.Footer>
+					<div className="createPaper-modal-footer">
+						<Button
+							className="createPaper-modal-footer-btn"
+							variant="secondary"
+							size="lg"
+							onClick={closePaperModal}
+						>
+							닫기
+						</Button>
+						<Button
+							className="createPaper-modal-footer-btn"
+							variant="primary"
+							size="lg"
+							onClick={onCreatePaper}
+						>
+							페이퍼 만들기
+						</Button>
+					</div>
+				</Modal.Footer>
+			</Modal>
+		</>
 	);
 }
 

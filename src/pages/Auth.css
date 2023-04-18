@@ -15,6 +15,7 @@
 	align-items: center;
 	width: 40%;
 	height: 100%;
+	padding: 2rem;
 }
 
 .auth-login-container {
@@ -26,12 +27,7 @@
 }
 
 @media screen and (min-width: 1024px) {
-	.auth-logo-container {
-		max-width: 500px;
-	}
-
 	.auth-login-container {
-		margin-left: 2rem;
 		max-width: 700px;
 	}
 }
