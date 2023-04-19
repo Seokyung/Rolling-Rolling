@@ -77,7 +77,7 @@
 }
 
 .navigation-offcanvas-nav-link:hover {
-	color: #b27572;
+	color: #9f5757;
 }
 
 .navigation-offcanvas-nav-link svg {
@@ -85,7 +85,14 @@
 }
 
 .navigation-offcanvas-logout-btn {
+	position: absolute;
+	right: 3rem;
 	font-size: 1.7rem !important;
+	background-color: #9f5757 !important;
+	border-color: #9f5757 !important;
+}
+.navigation-offcanvas-logout-btn:hover {
+	background-color: #944444 !important;
 }
 
 @media screen and (max-width: 1023px) {
