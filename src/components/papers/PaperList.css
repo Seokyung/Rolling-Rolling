@@ -29,14 +29,26 @@
 .paperList-card-date {
 	color: #454545;
 	font-size: 1.3rem;
-	margin-bottom: 2.2rem;
+	margin-bottom: 2rem;
 }
 
 .paperList-card-delete-btn {
 	position: absolute;
 	right: 2.5rem;
 	bottom: 2rem;
-	font-size: 1.4rem !important;
+	color: #9d4040;
+	outline: none;
+	appearance: none;
+	border: none;
+	white-space: nowrap;
+	background: none;
+}
+.paperList-card-delete-btn svg {
+	width: 2rem;
+	height: 2rem;
+}
+.paperList-card-delete-btn:hover {
+	color: #922b2b;
 }
 
 .paperList-pagination-container {

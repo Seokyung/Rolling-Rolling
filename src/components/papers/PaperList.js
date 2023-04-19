@@ -15,8 +15,11 @@ import {
 import { ref, deleteObject } from "firebase/storage";
 import { useSelector } from "react-redux";
 
-import { Skeleton } from "antd";
-import { Row, Col, Card, Button, Pagination } from "react-bootstrap";
+import { Skeleton, message, Popconfirm } from "antd";
+import { QuestionCircleOutlined } from "@ant-design/icons";
+import { Row, Col, Card, Pagination } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import "./PaperList.css";
 
 function PaperList() {
@@ -27,6 +30,9 @@ function PaperList() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageArr, setPageArr] = useState([]);
 	const papersPerPage = 5;
+
+	const [messageApi, contextHolder] = message.useMessage();
+	const key = "updatable";
 
 	useEffect(() => {
 		const q = query(
@@ -80,35 +86,46 @@ function PaperList() {
 	};
 
 	const deletePaper = async (paper) => {
-		const isDelete = window.confirm(
-			`${paper.paperName} 페이퍼를 삭제하시겠습니까?`
-		);
-		if (isDelete) {
-			try {
-				const msgQuery = query(
-					collection(dbService, "papers", `${paper.id}`, "messages")
+		messageApi.open({
+			key,
+			type: "loading",
+			content: "페이지 삭제중...",
+		});
+		try {
+			const msgQuery = query(
+				collection(dbService, "papers", `${paper.id}`, "messages")
+			);
+			const msgSnapshot = await getDocs(msgQuery);
+			msgSnapshot.forEach(async (msg) => {
+				const msgRef = doc(
+					dbService,
+					"papers",
+					`${paper.id}`,
+					"messages",
+					`${msg.id}`
 				);
-				const msgSnapshot = await getDocs(msgQuery);
-				msgSnapshot.forEach(async (msg) => {
-					const msgRef = doc(
-						dbService,
-						"papers",
-						`${paper.id}`,
-						"messages",
-						`${msg.id}`
-					);
-					if (msg.data().msgImg !== "") {
-						const urlRef = ref(storageService, msg.data().msgImg);
-						await deleteObject(urlRef);
-					}
-					await deleteDoc(msgRef);
-				});
-				const paperRef = doc(dbService, "papers", `${paper.id}`);
-				await deleteDoc(paperRef);
-				alert("페이퍼가 삭제되었습니다!");
-			} catch (error) {
-				console.log(error.message);
-			}
+				if (msg.data().msgImg !== "") {
+					const urlRef = ref(storageService, msg.data().msgImg);
+					await deleteObject(urlRef);
+				}
+				await deleteDoc(msgRef);
+			});
+			const paperRef = doc(dbService, "papers", `${paper.id}`);
+			await deleteDoc(paperRef);
+			messageApi.open({
+				key,
+				type: "success",
+				content: "페이퍼가 삭제되었습니다!",
+				duration: 2,
+			});
+		} catch (error) {
+			messageApi.open({
+				key,
+				type: "error",
+				content: "페이퍼 삭제에 실패하였습니다 😢",
+				duration: 2,
+			});
+			console.log(error.code);
 		}
 	};
 
@@ -118,6 +135,7 @@ function PaperList() {
 				<Skeleton active />
 			) : (
 				<>
+					{contextHolder}
 					<Row md={1} className="g-4">
 						{papers &&
 							slicedPapers.map((paper) => (
@@ -139,15 +157,25 @@ function PaperList() {
 												{paper.createdAt}
 											</Card.Text>
 											{userId === paper.creatorId && (
-												<div className="paperList-card-btn-container">
-													<Button
-														className="paperList-card-delete-btn"
-														variant="danger"
-														onClick={() => deletePaper(paper)}
-													>
-														페이퍼 삭제
-													</Button>
-												</div>
+												<Popconfirm
+													title="페이퍼 삭제"
+													description="페이퍼를 삭제하시겠습니까?"
+													onConfirm={() => deletePaper(paper)}
+													placement="topLeft"
+													okText="삭제"
+													cancelText="취소"
+													icon={
+														<QuestionCircleOutlined
+															style={{
+																color: "red",
+															}}
+														/>
+													}
+												>
+													<button className="paperList-card-delete-btn">
+														<FontAwesomeIcon icon={faTrash} />
+													</button>
+												</Popconfirm>
 											)}
 										</Card.Body>
 									</Card>
