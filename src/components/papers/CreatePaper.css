@@ -12,8 +12,9 @@
 
 .createPaper-modal-title {
 	margin: 0 !important;
-	color: #212121 !important;
+	color: #9f5757 !important;
 	font-size: 2rem !important;
+	font-weight: 700 !important;
 }
 
 .createPaper-modal-close-btn {
@@ -41,7 +42,7 @@
 }
 
 .createPaper-form-title {
-	color: #212121;
+	color: #9f5757;
 	font-size: 1.7rem;
 }
 
@@ -50,18 +51,28 @@
 	font-size: 1.7rem !important;
 }
 
+.createPaper-form-group-text {
+	font-size: 1.2rem !important;
+}
+
 .createPaper-form-code-group {
 	display: flex;
 	flex-direction: row;
-	margin: 1.5rem 1rem;
+	align-items: baseline;
+	margin-bottom: 0.5rem;
 }
 
 .createPaper-form-code {
-	margin: 1rem !important;
+	margin-right: 1rem !important;
 	padding: 1rem !important;
 	width: 5rem !important;
 	text-align: center;
 	font-size: 1.7rem !important;
+}
+
+.createPaper-form-code-group-text {
+	margin: 0.125rem;
+	font-size: 1.2rem !important;
 }
 
 .createPaper-modal-footer {
@@ -71,9 +82,19 @@
 	margin: 1rem !important;
 }
 
-.createPaper-modal-footer-btn {
+.createPaper-modal-footer-close-btn {
 	margin-left: 1rem;
 	font-size: 1.5rem !important;
+}
+
+.createPaper-modal-footer-create-btn {
+	margin-left: 1rem;
+	font-size: 1.5rem !important;
+	background-color: #9f5757 !important;
+	border-color: #9f5757 !important;
+}
+.createPaper-modal-footer-create-btn:hover {
+	background-color: #944444 !important;
 }
 
 @media screen and (max-width: 1023px) {

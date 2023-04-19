@@ -14,8 +14,10 @@ function CreatePaper({ paperModal, setPaperModal }) {
 	const [paperName, setPaperName] = useState("");
 	const [paperCode, setPaperCode] = useState(Array(4).fill(""));
 	const [isPrivate, setIsPrivate] = useState(false);
+	const paperNameRef = useRef();
 	const codeInputRef = useRef([]);
 
+	const [validated, setValidated] = useState(false);
 	const [messageApi, contextHolder] = message.useMessage();
 	const key = "updatable";
 
@@ -23,6 +25,7 @@ function CreatePaper({ paperModal, setPaperModal }) {
 		setPaperName("");
 		setIsPrivate(false);
 		setPaperCode(Array(4).fill(""));
+		setValidated(false);
 		setPaperModal(false);
 	};
 
@@ -38,6 +41,9 @@ function CreatePaper({ paperModal, setPaperModal }) {
 			target: { checked },
 		} = e;
 		setIsPrivate(checked);
+		if (checked === false) {
+			setPaperCode(Array(4).fill(""));
+		}
 	};
 
 	const onCodeChange = (e, index) => {
@@ -82,6 +88,7 @@ function CreatePaper({ paperModal, setPaperModal }) {
 			return (
 				<Form.Control
 					className="createPaper-form-code"
+					required
 					key={index}
 					type="text"
 					maxLength={1}
@@ -98,15 +105,13 @@ function CreatePaper({ paperModal, setPaperModal }) {
 		e.preventDefault();
 
 		if (paperName === "") {
-			alert("페이퍼 이름를 작성해주세요!");
+			paperNameRef.current.focus();
+			setValidated(true);
 			return;
 		}
-		if (isPrivate && paperCode === "") {
-			alert("페이퍼 코드를 작성해주세요!");
-			return;
-		}
-		if (isPrivate && paperCode.length !== 4) {
-			alert("코드는 4자리의 숫자여야 합니다!");
+		if (isPrivate && paperCode.join("").length !== 4) {
+			codeInputRef.current[0].focus();
+			setValidated(true);
 			return;
 		}
 
@@ -153,9 +158,8 @@ function CreatePaper({ paperModal, setPaperModal }) {
 				content: "페이퍼 생성에 실패하였습니다 😢",
 				duration: 2,
 			});
-			console.log(error);
+			console.log(error.code);
 		}
-		setPaperName("");
 		closePaperModal();
 	};
 
@@ -184,19 +188,31 @@ function CreatePaper({ paperModal, setPaperModal }) {
 					</div>
 				</Modal.Header>
 				<Modal.Body>
-					<Form className="createPaper-form-container">
+					<Form
+						className="createPaper-form-container"
+						noValidate
+						validated={validated}
+					>
 						<Form.Group className="createPaper-form-group">
 							<Form.Label className="createPaper-form-title">
 								페이퍼 이름
 							</Form.Label>
 							<Form.Control
 								className="createPaper-form-text"
-								type="text"
+								required
 								autoFocus
+								type="text"
 								value={paperName}
+								ref={paperNameRef}
 								onChange={onPaperNameChange}
-								placeholder="페이퍼 이름을 입력하세요 :)"
+								placeholder="페이퍼 이름을 입력해주세요 :)"
 							/>
+							<Form.Control.Feedback
+								className="createPaper-form-group-text"
+								type="invalid"
+							>
+								페이퍼 이름을 입력해주세요!
+							</Form.Control.Feedback>
 						</Form.Group>
 						<Form.Group className="createPaper-form-group">
 							<Form.Check type="checkbox" className="createPaper-form-title">
@@ -207,10 +223,24 @@ function CreatePaper({ paperModal, setPaperModal }) {
 								/>
 								<Form.Check.Label>비공개</Form.Check.Label>
 							</Form.Check>
+							<Form.Text className="createPaper-form-group-text">
+								페이퍼의 공개여부를 설정해주세요
+							</Form.Text>
 						</Form.Group>
 						{isPrivate && (
-							<Form.Group className="createPaper-form-code-group">
-								{renderCodeInputs()}
+							<Form.Group className="createPaper-form-group">
+								<Form.Group className="createPaper-form-code-group">
+									{renderCodeInputs()}
+									<Form.Control.Feedback
+										className="createPaper-form-group-text"
+										type="invalid"
+									>
+										페이퍼 코드가 올바르지 않습니다!
+									</Form.Control.Feedback>
+								</Form.Group>
+								<Form.Text className="createPaper-form-code-group-text">
+									4자리의 숫자로 이루어진 코드를 입력해주세요
+								</Form.Text>
 							</Form.Group>
 						)}
 					</Form>
@@ -218,7 +248,7 @@ function CreatePaper({ paperModal, setPaperModal }) {
 				<Modal.Footer>
 					<div className="createPaper-modal-footer">
 						<Button
-							className="createPaper-modal-footer-btn"
+							className="createPaper-modal-footer-close-btn"
 							variant="secondary"
 							size="lg"
 							onClick={closePaperModal}
@@ -226,7 +256,7 @@ function CreatePaper({ paperModal, setPaperModal }) {
 							닫기
 						</Button>
 						<Button
-							className="createPaper-modal-footer-btn"
+							className="createPaper-modal-footer-create-btn"
 							variant="primary"
 							size="lg"
 							onClick={onCreatePaper}
