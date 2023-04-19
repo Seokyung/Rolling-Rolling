@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { authService } from "api/fbase";
 import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 } from "firebase/auth";
 
-import { Form, Button, InputGroup } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
@@ -16,6 +16,14 @@ function AuthForm({ onLoginMethodChange }) {
 	const [password, setPassword] = useState("");
 	const [checkPassword, setCheckPassword] = useState("");
 	const [newAccount, setNewAccount] = useState(false);
+
+	const emailRef = useRef();
+	const pwRef = useRef();
+	const checkPwRef = useRef();
+
+	const [isPwInValid, setIsPwInValid] = useState(false);
+	const [isPwValid, setIsPwValid] = useState(false);
+	const [checkPwMsg, setCheckPwMsg] = useState("");
 
 	const [validated, setValidated] = useState(false);
 	const [errorMsg, setErrorMsg] = useState("");
@@ -31,9 +39,27 @@ function AuthForm({ onLoginMethodChange }) {
 		}
 		if (name === "password") {
 			setPassword(value);
+			if (newAccount && checkPassword !== value) {
+				setIsPwInValid(true);
+				setIsPwValid(false);
+				setCheckPwMsg("비밀번호가 일치하지 않습니다");
+			} else if (newAccount && password && checkPassword === value) {
+				setIsPwInValid(false);
+				setIsPwValid(true);
+				setCheckPwMsg("비밀번호가 일치합니다");
+			}
 		}
 		if (name === "checkPassword") {
 			setCheckPassword(value);
+			if (newAccount && password !== value) {
+				setIsPwInValid(true);
+				setIsPwValid(false);
+				setCheckPwMsg("비밀번호가 일치하지 않습니다");
+			} else if (newAccount && password && password === value) {
+				setIsPwInValid(false);
+				setIsPwValid(true);
+				setCheckPwMsg("비밀번호가 일치합니다");
+			}
 		}
 	};
 
@@ -49,16 +75,20 @@ function AuthForm({ onLoginMethodChange }) {
 	const onAuthBtnClick = async (e) => {
 		e.preventDefault();
 
-		const form = e.currentTarget;
 		if (newAccount && password !== checkPassword) {
-			setValidated(true);
-			setErrorMsg("비밀번호가 일치하지 않습니다");
+			checkPwRef.current.focus();
 			setCheckPassword("");
+			setCheckPwMsg("비밀번호가 일치하지 않습니다");
+			setValidated(true);
 			return;
 		}
-		if (form.checkValidity() === false) {
-			e.preventDefault();
-			e.stopPropagation();
+		if (emailRef.current.checkValidity() === false) {
+			emailRef.current.focus();
+			setValidated(true);
+			return;
+		}
+		if (pwRef.current.checkValidity() === false) {
+			pwRef.current.focus();
 			setValidated(true);
 			return;
 		}
@@ -124,67 +154,67 @@ function AuthForm({ onLoginMethodChange }) {
 				>
 					<Form.Group className="authForm-form-group">
 						<Form.Label className="authForm-form-label">이메일</Form.Label>
-						<InputGroup hasValidation>
-							<Form.Control
-								className="authForm-input-text"
-								required
-								type="email"
-								id="email"
-								name="email"
-								value={email}
-								onChange={onAuthInputChange}
-								placeholder="이메일을 입력해주세요"
-							/>
-							<Form.Control.Feedback
-								type="invalid"
-								className="authForm-form-feedback"
-							>
-								이메일을 입력해주세요!
-							</Form.Control.Feedback>
-						</InputGroup>
+						<Form.Control
+							className="authForm-input-text"
+							autoFocus
+							required
+							type="email"
+							id="email"
+							name="email"
+							value={email}
+							ref={emailRef}
+							onChange={onAuthInputChange}
+							placeholder="이메일을 입력해주세요"
+						/>
+						<Form.Control.Feedback
+							type="invalid"
+							className="authForm-form-feedback"
+						>
+							이메일을 입력해주세요!
+						</Form.Control.Feedback>
 					</Form.Group>
 					<Form.Group className="authForm-form-group">
 						<Form.Label className="authForm-form-label">비밀번호</Form.Label>
-						<InputGroup hasValidation>
-							<Form.Control
-								className="authForm-input-pw"
-								required
-								type="password"
-								name="password"
-								value={password}
-								onChange={onAuthInputChange}
-								placeholder="비밀번호를 입력해주세요"
-							/>
-							<Form.Control.Feedback
-								type="invalid"
-								className="authForm-form-feedback"
-							>
-								비밀번호를 입력해주세요!
-							</Form.Control.Feedback>
-						</InputGroup>
+						<Form.Control
+							className="authForm-input-pw"
+							required
+							type="password"
+							name="password"
+							value={password}
+							ref={pwRef}
+							onChange={onAuthInputChange}
+							placeholder="비밀번호를 입력해주세요"
+						/>
+						<Form.Control.Feedback
+							type="invalid"
+							className="authForm-form-feedback"
+						>
+							비밀번호를 입력해주세요!
+						</Form.Control.Feedback>
 					</Form.Group>
 					{newAccount && (
 						<Form.Group className="authForm-form-group">
 							<Form.Label className="authForm-form-label">
 								비밀번호 확인
 							</Form.Label>
-							<InputGroup hasValidation>
-								<Form.Control
-									className="authForm-input-pw"
-									required
-									type="password"
-									name="checkPassword"
-									value={checkPassword}
-									onChange={onAuthInputChange}
-									placeholder="비밀번호를 한번 더 입력해주세요"
-								/>
-								<Form.Control.Feedback
-									type="invalid"
-									className="authForm-form-feedback"
-								>
-									비밀번호를 한번 더 입력해주세요!
-								</Form.Control.Feedback>
-							</InputGroup>
+							<Form.Control
+								className="authForm-input-pw"
+								required
+								isInvalid={isPwInValid}
+								isValid={isPwValid}
+								type="password"
+								name="checkPassword"
+								value={checkPassword}
+								ref={checkPwRef}
+								onChange={onAuthInputChange}
+								placeholder="비밀번호를 한번 더 입력해주세요"
+							/>
+							<Form.Control.Feedback
+								type="invalid"
+								className="authForm-form-feedback"
+							>
+								{checkPwMsg}
+							</Form.Control.Feedback>
 						</Form.Group>
 					)}
 					{errorMsg && (
