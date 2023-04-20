@@ -18,6 +18,8 @@ import { useSelector } from "react-redux";
 
 import { Skeleton } from "antd";
 import { Form, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleLeft, faGear } from "@fortawesome/free-solid-svg-icons";
 import "./Paper.css";
 
 function Paper() {
@@ -162,8 +164,8 @@ function Paper() {
 		setEditModal((prev) => !prev);
 	};
 
-	const showMsgModal = () => {
-		setMsgModal((prev) => !prev);
+	const openMsgModal = () => {
+		setMsgModal(true);
 	};
 
 	const onShareClick = () => {
@@ -206,50 +208,64 @@ function Paper() {
 							</Form.Group>
 						</Form>
 					) : (
-						<div className="paper-wrapper">
-							<div className="paper-container">
-								<div className="paper-title-container">
-									<h2 className="paper-title">{paperObj.paperName}</h2>
-								</div>
-								{userId === paperObj.paperCreator && (
-									<>
-										<button onClick={showEditModal}>페이퍼 수정</button>
-										<button onClick={deletePaper}>페이퍼 삭제</button>
-										{editModal && (
-											<EditPaper
-												paperObj={paperObj}
-												isOwner={userId === paperObj.paperCreator}
-												setEditModal={setEditModal}
-											/>
-										)}
-									</>
-								)}
-								<MessageList paperCreator={paperObj.paperCreator} />
-
-								{msgModal && (
-									<CreateMessage paperId={paperId} setMsgModal={setMsgModal} />
-								)}
-								<button onClick={showShareModal}>공유하기</button>
-								{shareModal && (
-									<div>
-										<input
-											type="text"
-											readOnly
-											ref={paperUrlRef}
-											value={`http://localhost:3000/paper/${paperId}`}
-										/>
-										<button onClick={onShareClick}>링크 복사</button>
+						<>
+							<div className="paper-wrapper">
+								<div className="paper-container">
+									<div className="paper-header-container">
+										<button className="paper-prev-btn" onClick={gotoPrevPage}>
+											<FontAwesomeIcon icon={faAngleLeft} />
+										</button>
+										<div className="paper-title-container">
+											<h2 className="paper-title">{paperObj.paperName}</h2>
+										</div>
+										<button
+											className="paper-setting-btn"
+											onClick={gotoPrevPage}
+										>
+											<FontAwesomeIcon icon={faGear} />
+										</button>
 									</div>
-								)}
-								<button onClick={gotoPrevPage}>뒤로가기</button>
+									{userId === paperObj.paperCreator && (
+										<>
+											<button onClick={showEditModal}>페이퍼 수정</button>
+											<button onClick={deletePaper}>페이퍼 삭제</button>
+											{editModal && (
+												<EditPaper
+													paperObj={paperObj}
+													isOwner={userId === paperObj.paperCreator}
+													setEditModal={setEditModal}
+												/>
+											)}
+										</>
+									)}
+									<MessageList paperCreator={paperObj.paperCreator} />
+									<button onClick={showShareModal}>공유하기</button>
+									{shareModal && (
+										<div>
+											<input
+												type="text"
+												readOnly
+												ref={paperUrlRef}
+												value={`http://localhost:3000/paper/${paperId}`}
+											/>
+											<button onClick={onShareClick}>링크 복사</button>
+										</div>
+									)}
+									<button onClick={gotoPrevPage}>뒤로가기</button>
+								</div>
+								<button
+									className="paper-create-message-btn"
+									onClick={openMsgModal}
+								>
+									메세지 작성하기
+								</button>
 							</div>
-							<button
-								className="paper-create-message-btn"
-								onClick={showMsgModal}
-							>
-								메세지 작성하기
-							</button>
-						</div>
+							<CreateMessage
+								paperId={paperId}
+								msgModal={msgModal}
+								setMsgModal={setMsgModal}
+							/>
+						</>
 					)}
 				</>
 			)}

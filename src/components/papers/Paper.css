@@ -67,9 +67,43 @@
 	box-shadow: 0.5rem 0.5rem 0.5rem #968f8e;
 }
 
-.paper-title-container {
+.paper-header-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	margin-bottom: 3rem;
-	padding: 1.5rem;
+	width: 100%;
+}
+
+.paper-prev-btn {
+	color: #6e6e6e;
+	outline: none;
+	appearance: none;
+	border: none;
+	white-space: nowrap;
+	background: none;
+}
+.paper-prev-btn svg {
+	width: 2.5rem;
+	height: 2.5rem;
+}
+
+.paper-setting-btn {
+	margin-right: 1rem;
+	color: #6e6e6e;
+	outline: none;
+	appearance: none;
+	border: none;
+	white-space: nowrap;
+	background: none;
+}
+.paper-setting-btn svg {
+	width: 2.5rem;
+	height: 2.5rem;
+}
+
+.paper-title-container {
+	padding: 1.5rem 2.5rem;
 	border-radius: 30px;
 	background-color: #fffdfd;
 	box-shadow: 0.5rem 0.5rem 0.5rem #a0827f;
@@ -99,6 +133,11 @@
 	border: none;
 	white-space: nowrap;
 }
+.paper-create-message-btn:hover {
+	font-size: 1.9rem;
+	transition: all 0.2s linear;
+	background-color: #944444;
+}
 
 @media screen and (max-width: 1023px) {
 	.paper-form-code-title {
@@ -122,18 +161,8 @@
 		padding: 2rem;
 	}
 
-	.paper-title-container {
+	.paper-header-container {
 		margin-bottom: 2rem;
-		padding: 1.5rem;
-		border-radius: 30px;
-		background-color: #fffdfd;
-	}
-
-	.paper-title {
-		margin: 0;
-		font-size: 2.5rem;
-		font-weight: 700;
-		text-align: center;
 	}
 
 	.paper-create-message-btn {

@@ -12,6 +12,8 @@ import {
 import Message from "components/messgaes/Message";
 import { useSelector } from "react-redux";
 
+import { Card } from "react-bootstrap";
+
 function MessageList({ paperCreator }) {
 	const userId = useSelector((state) => state.userReducer.uid);
 	const { paperId } = useParams();
@@ -55,9 +57,9 @@ function MessageList({ paperCreator }) {
 	return (
 		<div>
 			{messages.map((message) => (
-				<div key={message.id}>
+				<Card key={message.id}>
 					<Message msgObj={message} isOwner={paperCreator === userId} />
-				</div>
+				</Card>
 			))}
 		</div>
 	);
