@@ -3,44 +3,48 @@
 	flex-direction: column;
 	width: 100%;
 	height: auto;
-	padding: 3rem;
+	padding: 0 3rem 4rem 3rem;
 }
 
 .home-paper-container {
 	display: flex;
 	flex-direction: column;
-	width: 100%;
 	height: auto;
 	margin-bottom: 3rem;
-	padding: 3rem 2.5rem;
+	padding: 3rem;
 	border-radius: 50px;
 	background-color: #e4bab5;
+	box-shadow: 0.5rem 0.5rem 0.5rem #968f8e;
 }
 
 .home-paper-btn {
 	position: sticky;
 	position: -webkit-sticky;
 	align-self: flex-end;
-	padding: 1.2rem 1.8rem;
-	right: 3rem;
+	padding: 1.5rem 2rem;
+	right: 4rem;
 	bottom: 3rem;
-	color: white;
+	color: #fffdfd;
 	font-size: 1.7rem;
 	background-color: #9f5757;
 	border-radius: 45px;
+	box-shadow: 0.3rem 0.5rem 0.5rem rgba(150, 143, 142, 0.8);
 	outline: none;
 	appearance: none;
 	border: none;
 	white-space: nowrap;
 }
-
 .home-paper-btn:hover {
 	font-size: 1.9rem;
+	transition: all 0.2s linear;
 	background-color: #944444;
-	transition: 0.15s;
+}
+.home-paper-btn:hover .home-paper-btn-icon {
+	transition: all 0.2s linear;
+	transform: rotate(180deg);
 }
 
-.home-paper-btn svg {
+.home-paper-btn-icon {
 	margin-right: 1rem;
 }
 
@@ -55,12 +59,12 @@
 
 @media screen and (max-width: 1023px) {
 	.home-container {
-		padding: 1.8rem;
+		padding: 0 2rem 4rem 2rem;
 	}
 
 	.home-paper-container {
-		margin-bottom: 1.8rem;
-		padding: 2.5rem 2rem;
+		margin-bottom: 3.7rem;
+		padding: 2rem;
 	}
 
 	.home-paper-btn {

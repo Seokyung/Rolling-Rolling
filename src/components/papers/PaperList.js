@@ -15,7 +15,7 @@ import {
 import { ref, deleteObject } from "firebase/storage";
 import { useSelector } from "react-redux";
 
-import { Skeleton, message, Popconfirm } from "antd";
+import { Skeleton, message, Tooltip, Popconfirm } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { Row, Col, Card, Pagination } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -140,45 +140,48 @@ function PaperList() {
 						{papers &&
 							slicedPapers.map((paper) => (
 								<Col key={paper.id}>
-									<Card className="paperList-card-container">
-										<Card.Body>
-											<Card.Title>
-												<Link
-													to={`/paper/${paper.id}`}
-													className="paperList-card-link"
-												>
+									<Link
+										to={`/paper/${paper.id}`}
+										className="paperList-card-link"
+									>
+										<Card className="paperList-card-container">
+											<Card.Body>
+												<Card.Title>
 													<h4 className="paperList-card-title">
 														{paper.isPrivate && "🔒"}
 														{paper.paperName}
 													</h4>
-												</Link>
-											</Card.Title>
-											<Card.Text className="paperList-card-date">
-												{paper.createdAt}
-											</Card.Text>
-											{userId === paper.creatorId && (
-												<Popconfirm
-													title="페이퍼 삭제"
-													description="페이퍼를 삭제하시겠습니까?"
-													onConfirm={() => deletePaper(paper)}
-													placement="topLeft"
-													okText="삭제"
-													cancelText="취소"
-													icon={
-														<QuestionCircleOutlined
-															style={{
-																color: "red",
-															}}
-														/>
-													}
-												>
-													<button className="paperList-card-delete-btn">
-														<FontAwesomeIcon icon={faTrash} />
-													</button>
-												</Popconfirm>
-											)}
-										</Card.Body>
-									</Card>
+												</Card.Title>
+												<Card.Text className="paperList-card-date">
+													{paper.createdAt}
+												</Card.Text>
+												{userId === paper.creatorId && (
+													<Tooltip title="페이퍼 삭제">
+														<Popconfirm
+															placement="left"
+															title="페이퍼 삭제"
+															description="페이퍼를 삭제하시겠습니까?"
+															onConfirm={() => deletePaper(paper)}
+															okText="삭제"
+															okType="danger"
+															cancelText="취소"
+															icon={
+																<QuestionCircleOutlined
+																	style={{
+																		color: "red",
+																	}}
+																/>
+															}
+														>
+															<button className="paperList-card-delete-btn">
+																<FontAwesomeIcon icon={faTrash} />
+															</button>
+														</Popconfirm>
+													</Tooltip>
+												)}
+											</Card.Body>
+										</Card>
+									</Link>
 								</Col>
 							))}
 					</Row>

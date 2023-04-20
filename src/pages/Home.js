@@ -20,7 +20,7 @@ function Home() {
 					<PaperList />
 				</div>
 				<button className="home-paper-btn" onClick={openPaperModal}>
-					<FontAwesomeIcon icon={faPlus} />
+					<FontAwesomeIcon className="home-paper-btn-icon" icon={faPlus} />
 					페이퍼 만들기
 				</button>
 			</div>
