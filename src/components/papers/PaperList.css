@@ -12,6 +12,60 @@
 	box-shadow: 0.5rem 0.5rem 0.5rem #a0827f !important;
 }
 .paperList-card-container:hover {
+	background-color: #fbf1f0 !important;
+}
+.paperList-card-container:hover .paperList-card-title {
+	color: #9f5757;
+}
+.paperList-card-container:hover .paperList-card-date {
+	color: #6a6a6a;
+}
+
+.paperList-card-link {
+	text-decoration: none;
+}
+
+.paperList-card-title {
+	margin-bottom: 1rem;
+	color: #944444;
+	font-size: 2rem;
+	font-weight: 700;
+}
+
+.paperList-card-date {
+	color: #454545;
+	font-size: 1.3rem;
+	margin-bottom: 2rem;
+}
+
+.paperList-card-delete-btn {
+	position: absolute;
+	padding: 0.1rem;
+	right: 2.6rem;
+	bottom: 2rem;
+	color: #9d4040;
+	outline: none;
+	appearance: none;
+	border: none;
+	white-space: nowrap;
+	background: none;
+}
+.paperList-card-delete-btn svg {
+	width: 2rem;
+	height: 2rem;
+}
+.paperList-card-delete-btn svg:hover {
+	color: #823636;
+}
+
+/* .paperList-card-container {
+	display: flex !important;
+	justify-content: center !important;
+	background-color: #fffdfd !important;
+	border: none !important;
+	box-shadow: 0.5rem 0.5rem 0.5rem #a0827f !important;
+}
+.paperList-card-container:hover {
 	margin: 1.5rem -0.5rem !important;
 	transition: 0.15s !important;
 	background-color: #9f5757 !important;
@@ -58,7 +112,7 @@
 .paperList-card-delete-btn svg {
 	width: 2rem;
 	height: 2rem;
-}
+} */
 /* .paperList-card-delete-btn svg:hover {
 	transition: 0.15s;
 	width: 3rem;

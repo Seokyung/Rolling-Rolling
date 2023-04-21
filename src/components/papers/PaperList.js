@@ -140,48 +140,48 @@ function PaperList() {
 						{papers &&
 							slicedPapers.map((paper) => (
 								<Col key={paper.id}>
-									<Link
-										to={`/paper/${paper.id}`}
-										className="paperList-card-link"
-									>
-										<Card className="paperList-card-container">
-											<Card.Body>
+									<Card className="paperList-card-container">
+										<Card.Body>
+											<Link
+												to={`/paper/${paper.id}`}
+												className="paperList-card-link"
+											>
 												<Card.Title>
 													<h4 className="paperList-card-title">
 														{paper.isPrivate && "🔒"}
 														{paper.paperName}
 													</h4>
 												</Card.Title>
-												<Card.Text className="paperList-card-date">
-													{paper.createdAt}
-												</Card.Text>
-												{userId === paper.creatorId && (
+											</Link>
+											<Card.Text className="paperList-card-date">
+												{paper.createdAt}
+											</Card.Text>
+											{userId === paper.creatorId && (
+												<Popconfirm
+													placement="left"
+													title="페이퍼 삭제"
+													description="페이퍼를 삭제하시겠습니까?"
+													onConfirm={() => deletePaper(paper)}
+													okText="삭제"
+													okType="danger"
+													cancelText="취소"
+													icon={
+														<QuestionCircleOutlined
+															style={{
+																color: "red",
+															}}
+														/>
+													}
+												>
 													<Tooltip title="페이퍼 삭제">
-														<Popconfirm
-															placement="left"
-															title="페이퍼 삭제"
-															description="페이퍼를 삭제하시겠습니까?"
-															onConfirm={() => deletePaper(paper)}
-															okText="삭제"
-															okType="danger"
-															cancelText="취소"
-															icon={
-																<QuestionCircleOutlined
-																	style={{
-																		color: "red",
-																	}}
-																/>
-															}
-														>
-															<button className="paperList-card-delete-btn">
-																<FontAwesomeIcon icon={faTrash} />
-															</button>
-														</Popconfirm>
+														<button className="paperList-card-delete-btn">
+															<FontAwesomeIcon icon={faTrash} />
+														</button>
 													</Tooltip>
-												)}
-											</Card.Body>
-										</Card>
-									</Link>
+												</Popconfirm>
+											)}
+										</Card.Body>
+									</Card>
 								</Col>
 							))}
 					</Row>
