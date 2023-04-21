@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { dbService } from "api/fbase";
+import { Modal, Offcanvas } from "react-bootstrap";
 
-function EditPaper({ paperObj, isOwner, setEditModal }) {
+function EditPaper({ paperObj, isOwner, editModal, setEditModal }) {
 	const [newPaperName, setNewPaperName] = useState(paperObj.paperName);
 	const [newIsPrivate, setNewIsPrivate] = useState(paperObj.isPrivate);
 	const [newPaperCode, setNewPaperCode] = useState(paperObj.paperCode);
+
+	const closeEditModal = () => {
+		setEditModal(false);
+	};
 
 	const onPaperNameChange = (e) => {
 		const {
@@ -66,12 +71,15 @@ function EditPaper({ paperObj, isOwner, setEditModal }) {
 		}
 	};
 
-	const closeEditModal = () => {
-		setEditModal((prev) => !prev);
-	};
-
 	return (
-		<div>
+		<Modal
+			show={editModal}
+			onExit={closeEditModal}
+			centered
+			animation={true}
+			keyboard={false}
+			backdrop="static"
+		>
 			<form onSubmit={onEditPaperName}>
 				<h4>Edit Paper</h4>
 				페이퍼 이름:
@@ -103,7 +111,7 @@ function EditPaper({ paperObj, isOwner, setEditModal }) {
 				<input type="submit" value="공개여부 변경" />
 			</form>
 			<button onClick={closeEditModal}>닫기</button>
-		</div>
+		</Modal>
 	);
 }
 

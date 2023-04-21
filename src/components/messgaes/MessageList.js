@@ -12,7 +12,8 @@ import {
 import Message from "components/messgaes/Message";
 import { useSelector } from "react-redux";
 
-import { Card } from "react-bootstrap";
+import { Row, Col, Card } from "react-bootstrap";
+import "./MessageList.css";
 
 function MessageList({ paperCreator }) {
 	const userId = useSelector((state) => state.userReducer.uid);
@@ -55,12 +56,16 @@ function MessageList({ paperCreator }) {
 	}, [paperCreator]);
 
 	return (
-		<div>
-			{messages.map((message) => (
-				<Card key={message.id}>
-					<Message msgObj={message} isOwner={paperCreator === userId} />
-				</Card>
-			))}
+		<div className="messageList-container">
+			<Row md={3} className="g-2">
+				{messages.map((message) => (
+					<Col key={message.id}>
+						<Card>
+							<Message msgObj={message} isOwner={paperCreator === userId} />
+						</Card>
+					</Col>
+				))}
+			</Row>
 		</div>
 	);
 }

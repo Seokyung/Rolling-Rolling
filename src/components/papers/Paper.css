@@ -59,6 +59,7 @@
 
 .paper-container {
 	display: flex;
+	align-items: center;
 	flex-direction: column;
 	margin-bottom: 3rem;
 	padding: 3rem;
@@ -71,26 +72,28 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 3rem;
 	width: 100%;
 }
 
-.paper-prev-btn {
-	color: #6e6e6e;
+.paper-header-btn {
+	color: #9f5757;
 	outline: none;
 	appearance: none;
 	border: none;
 	white-space: nowrap;
 	background: none;
 }
-.paper-prev-btn svg {
+.paper-header-btn svg {
 	width: 2.5rem;
 	height: 2.5rem;
+}
+.paper-header-btn:hover {
+	color: #944444;
 }
 
 .paper-setting-btn {
 	margin-right: 1rem;
-	color: #6e6e6e;
+	color: #9f5757;
 	outline: none;
 	appearance: none;
 	border: none;
@@ -114,6 +117,21 @@
 	font-size: 2.5rem;
 	font-weight: 700;
 	text-align: center;
+}
+
+.paper-share-btn {
+	padding: 1.5rem 5rem;
+	font-size: 1.5rem;
+	background-color: #faeeed;
+	border-radius: 30px;
+	box-shadow: 0.5rem 0.5rem 0.5rem #a0827f;
+	outline: none;
+	appearance: none;
+	border: none;
+	white-space: nowrap;
+}
+.paper-share-btn:hover {
+	background-color: #efdedd;
 }
 
 .paper-create-message-btn {
@@ -159,10 +177,6 @@
 	.paper-container {
 		margin-bottom: 3.7rem;
 		padding: 2rem;
-	}
-
-	.paper-header-container {
-		margin-bottom: 2rem;
 	}
 
 	.paper-create-message-btn {

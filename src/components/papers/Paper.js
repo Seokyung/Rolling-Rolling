@@ -17,9 +17,9 @@ import EditPaper from "./EditPaper";
 import { useSelector } from "react-redux";
 
 import { Skeleton } from "antd";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Offcanvas } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faGear } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import "./Paper.css";
 
 function Paper() {
@@ -32,6 +32,7 @@ function Paper() {
 	const [paperObj, setPaperObj] = useState({});
 	const [paperCode, setPaperCode] = useState(Array(4).fill(""));
 	const [isPrivate, setIsPrivate] = useState(false);
+	const [paperSettings, setPaperSettings] = useState(false);
 	const [editModal, setEditModal] = useState(false);
 	const [msgModal, setMsgModal] = useState(false);
 	const [shareModal, setShareModal] = useState(false);
@@ -160,8 +161,13 @@ function Paper() {
 		}
 	};
 
-	const showEditModal = () => {
-		setEditModal((prev) => !prev);
+	const showPaperSettings = () => {
+		setPaperSettings((prev) => !prev);
+	};
+
+	const openEditModal = () => {
+		setPaperSettings(false);
+		setEditModal(true);
 	};
 
 	const openMsgModal = () => {
@@ -212,34 +218,25 @@ function Paper() {
 							<div className="paper-wrapper">
 								<div className="paper-container">
 									<div className="paper-header-container">
-										<button className="paper-prev-btn" onClick={gotoPrevPage}>
+										<button className="paper-header-btn" onClick={gotoPrevPage}>
 											<FontAwesomeIcon icon={faAngleLeft} />
 										</button>
 										<div className="paper-title-container">
 											<h2 className="paper-title">{paperObj.paperName}</h2>
 										</div>
-										<button
-											className="paper-setting-btn"
-											onClick={gotoPrevPage}
-										>
-											<FontAwesomeIcon icon={faGear} />
-										</button>
+										{userId === paperObj.paperCreator && (
+											<button
+												className="paper-header-btn"
+												onClick={showPaperSettings}
+											>
+												<FontAwesomeIcon icon={faEllipsis} />
+											</button>
+										)}
 									</div>
-									{userId === paperObj.paperCreator && (
-										<>
-											<button onClick={showEditModal}>페이퍼 수정</button>
-											<button onClick={deletePaper}>페이퍼 삭제</button>
-											{editModal && (
-												<EditPaper
-													paperObj={paperObj}
-													isOwner={userId === paperObj.paperCreator}
-													setEditModal={setEditModal}
-												/>
-											)}
-										</>
-									)}
 									<MessageList paperCreator={paperObj.paperCreator} />
-									<button onClick={showShareModal}>공유하기</button>
+									<button className="paper-share-btn" onClick={showShareModal}>
+										공유하기
+									</button>
 									{shareModal && (
 										<div>
 											<input
@@ -251,7 +248,6 @@ function Paper() {
 											<button onClick={onShareClick}>링크 복사</button>
 										</div>
 									)}
-									<button onClick={gotoPrevPage}>뒤로가기</button>
 								</div>
 								<button
 									className="paper-create-message-btn"
@@ -260,6 +256,25 @@ function Paper() {
 									메세지 작성하기
 								</button>
 							</div>
+							<Offcanvas
+								show={paperSettings}
+								onHide={showPaperSettings}
+								placement="bottom"
+							>
+								<Offcanvas.Header closeButton>페이퍼 설정</Offcanvas.Header>
+								<Offcanvas.Body>
+									<button onClick={openEditModal}>페이퍼 수정</button>
+									<button onClick={deletePaper}>페이퍼 삭제</button>
+								</Offcanvas.Body>
+							</Offcanvas>
+							{userId === paperObj.paperCreator && editModal && (
+								<EditPaper
+									paperObj={paperObj}
+									isOwner={userId === paperObj.paperCreator}
+									editModal={editModal}
+									setEditModal={setEditModal}
+								/>
+							)}
 							<CreateMessage
 								paperId={paperId}
 								msgModal={msgModal}

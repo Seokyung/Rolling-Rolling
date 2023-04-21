@@ -1,0 +1,9 @@
+.messageList-container {
+	margin: 3rem 0;
+}
+
+@media screen and (max-width: 1023px) {
+	.messageList-container {
+		margin: 2rem 0;
+	}
+}
