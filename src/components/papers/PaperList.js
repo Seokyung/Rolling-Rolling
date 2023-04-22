@@ -29,7 +29,7 @@ function PaperList() {
 	const [slicedPapers, setSlicedPapers] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageArr, setPageArr] = useState([]);
-	const papersPerPage = 5;
+	const papersPerPage = 6;
 
 	const [messageApi, contextHolder] = message.useMessage();
 	const key = "updatable";
@@ -68,12 +68,12 @@ function PaperList() {
 			currentPage * papersPerPage
 		);
 		let newPageArr = [];
-		if (parseInt(papers.length % 5) === 0) {
-			for (let i = 1; i <= parseInt(papers.length / 5); i++) {
+		if (parseInt(papers.length % papersPerPage) === 0) {
+			for (let i = 1; i <= parseInt(papers.length / papersPerPage); i++) {
 				newPageArr.push(i);
 			}
 		} else {
-			for (let i = 1; i <= parseInt(papers.length / 5) + 1; i++) {
+			for (let i = 1; i <= parseInt(papers.length / papersPerPage) + 1; i++) {
 				newPageArr.push(i);
 			}
 		}
@@ -136,7 +136,7 @@ function PaperList() {
 			) : (
 				<>
 					{contextHolder}
-					<Row md={1} className="g-4">
+					<Row sm={1} md={1} lg={2} xl={3} className="g-4">
 						{papers &&
 							slicedPapers.map((paper) => (
 								<Col key={paper.id}>
