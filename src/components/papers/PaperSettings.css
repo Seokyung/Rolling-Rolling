@@ -1,0 +1,79 @@
+.paperSettings-offcanvas-container {
+	--bs-offcanvas-height: 50% !important;
+	--bs-offcanvas-padding-x: 5rem !important;
+	--bs-offcanvas-padding-y: 4.5rem !important;
+	font-size: 1.7rem;
+	border: none !important;
+	border-radius: 50px 50px 0 0 !important;
+}
+
+.paperSettings-offcanvas-title {
+	font-size: 2.2rem !important;
+	color: #303030 !important;
+}
+.paperSettings-offcanvas-title svg {
+	margin-right: 0.5rem;
+}
+
+.paperSettings-offcanvas-body {
+	display: flex !important;
+	justify-content: center !important;
+	align-items: flex-start;
+	padding: 0 var(--bs-offcanvas-padding-x) !important;
+}
+
+.paperSettings-edit-btn {
+	margin: 1.5rem;
+	padding: 2rem 4.5rem;
+	font-size: 1.7rem;
+	color: #fffdfd;
+	background-color: #9f5757;
+	border-radius: 30px;
+	border: none;
+	outline: none;
+	appearance: none;
+	border: none;
+	white-space: nowrap;
+}
+.paperSettings-edit-btn svg {
+	margin-right: 0.5rem;
+}
+.paperSettings-edit-btn:hover {
+	background-color: #944444;
+}
+
+.paperSettings-delete-btn {
+	margin: 1.5rem;
+	padding: 2rem 4.5rem;
+	font-size: 1.7rem;
+	color: #fffdfd;
+	background-color: #9f5757;
+	border-radius: 30px;
+	border: none;
+	outline: none;
+	appearance: none;
+	border: none;
+	white-space: nowrap;
+}
+.paperSettings-delete-btn svg {
+	margin-right: 0.5rem;
+}
+.paperSettings-delete-btn:hover {
+	background-color: #944444;
+}
+
+@media screen and (max-width: 1023px) {
+	.paperSettings-offcanvas-title {
+		font-size: 2.5rem !important;
+	}
+
+	.paperSettings-edit-btn {
+		padding: 2rem 3rem;
+		border-radius: 40px;
+	}
+
+	.paperSettings-delete-btn {
+		padding: 2rem 3rem;
+		border-radius: 40px;
+	}
+}

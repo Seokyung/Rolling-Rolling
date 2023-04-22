@@ -18,12 +18,14 @@
 
 .paper-header-container {
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	justify-content: center;
 	width: 100%;
 }
 
-.paper-header-btn {
+.paper-prev-btn {
+	position: absolute;
+	left: 6rem;
+	margin-top: 0.5rem;
 	color: #9f5757;
 	outline: none;
 	appearance: none;
@@ -31,16 +33,33 @@
 	white-space: nowrap;
 	background: none;
 }
-.paper-header-btn svg {
+.paper-prev-btn svg {
 	width: 2.5rem;
 	height: 2.5rem;
 }
-.paper-header-btn:hover {
+.paper-prev-btn:hover {
 	color: #944444;
 }
 
+.paper-title-container {
+	padding: 1.5rem 3rem;
+	border-radius: 30px;
+	background-color: #fffdfd;
+	box-shadow: 0.35rem 0.5rem 0.5rem #a0827f;
+}
+
+.paper-title {
+	margin: 0;
+	color: #944444;
+	font-size: 2.5rem;
+	font-weight: 700;
+	text-align: center;
+}
+
 .paper-setting-btn {
-	margin-right: 1rem;
+	position: absolute;
+	right: 6rem;
+	margin-top: 0.5rem;
 	color: #9f5757;
 	outline: none;
 	appearance: none;
@@ -53,24 +72,10 @@
 	height: 2.5rem;
 }
 
-.paper-title-container {
-	padding: 1.5rem 2.5rem;
-	border-radius: 30px;
-	background-color: #fffdfd;
-	box-shadow: 0.35rem 0.5rem 0.5rem #a0827f;
-}
-
-.paper-title {
-	margin: 0;
-	font-size: 2.5rem;
-	font-weight: 700;
-	text-align: center;
-}
-
 .paper-share-btn {
 	align-self: center;
-	padding: 1.5rem 5rem;
-	font-size: 1.5rem;
+	padding: 1.2rem 4rem;
+	font-size: 1.4rem;
 	background-color: #faeeed;
 	border-radius: 30px;
 	box-shadow: 0.5rem 0.5rem 0.5rem #a0827f;
@@ -81,6 +86,10 @@
 }
 .paper-share-btn:hover {
 	background-color: #efdedd;
+}
+
+.paper-share-btn svg {
+	margin-right: 0.5rem;
 }
 
 .paper-create-message-btn {
@@ -105,6 +114,14 @@
 	transition: all 0.2s linear;
 	background-color: #944444;
 }
+.paper-create-message-btn:hover .paper-create-message-btn-icon {
+	transition: all 0.2s linear;
+	transform: rotate(360deg);
+}
+
+.paper-create-message-btn-icon {
+	margin-right: 0.5rem;
+}
 
 @media screen and (max-width: 1023px) {
 	.paper-wrapper {
@@ -114,6 +131,18 @@
 	.paper-container {
 		margin-bottom: 3.7rem;
 		padding: 3rem 2rem;
+	}
+
+	.paper-title-container {
+		border-radius: 40px;
+	}
+
+	.paper-prev-btn {
+		left: 5rem;
+	}
+
+	.paper-setting-btn {
+		right: 5rem;
 	}
 
 	.paper-share-btn {

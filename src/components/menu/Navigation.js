@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { authService } from "api/fbase";
 import { signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -14,7 +14,16 @@ import "./Navigation.css";
 function Navigation() {
 	const userName = useSelector((state) => state.userReducer.displayName);
 	const [isMenu, setIsMenu] = useState(false);
+	const location = useLocation();
+
 	const navigate = useNavigate();
+
+	const reloadHome = () => {
+		let currentLocation = location.pathname;
+		if (currentLocation === "/") {
+			window.location.reload();
+		}
+	};
 
 	const showMenu = () => {
 		setIsMenu((prev) => !prev);
@@ -40,7 +49,11 @@ function Navigation() {
 	return (
 		<>
 			<div className="navigation-container">
-				<Link to={"/"} className="navigation-logo-container">
+				<Link
+					to={"/"}
+					onClick={reloadHome}
+					className="navigation-logo-container"
+				>
 					<img className="navigation-logo" src={logoImg} alt="logo" />
 				</Link>
 				<button className="navigation-menu" onClick={showMenu}>

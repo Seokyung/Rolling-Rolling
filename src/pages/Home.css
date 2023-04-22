@@ -45,16 +45,7 @@
 }
 
 .home-paper-btn-icon {
-	margin-right: 1rem;
-}
-
-#components-affix-demo-target .scrollable-container {
-	height: 100px;
-	overflow-y: scroll;
-}
-#components-affix-demo-target .background {
-	padding-top: 60px;
-	height: 300px;
+	margin-right: 0.5rem;
 }
 
 @media screen and (max-width: 1023px) {

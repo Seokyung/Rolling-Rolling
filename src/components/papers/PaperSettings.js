@@ -1,20 +1,17 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { dbService, storageService } from "api/fbase";
-import { doc, deleteDoc, query, collection, getDocs } from "firebase/firestore";
-import { ref, deleteObject } from "firebase/storage";
 
-import { Offcanvas } from "react-bootstrap";
+import { Offcanvas, Modal } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGear, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import "./PaperSettings.css";
 
 function PaperSettings({
 	paperSettings,
 	setPaperSettings,
 	setEditModal,
-	paperId,
+	openDeleteModal,
 }) {
-	const navigate = useNavigate();
-
 	const showPaperSettings = () => {
 		setPaperSettings((prev) => !prev);
 	};
@@ -24,49 +21,28 @@ function PaperSettings({
 		setEditModal(true);
 	};
 
-	const deletePaper = async () => {
-		const isDelete = window.confirm("페이퍼를 삭제하시겠습니까?");
-		if (isDelete) {
-			try {
-				const msgQuery = query(
-					collection(dbService, "papers", `${paperId}`, "messages")
-				);
-				const msgSnapshot = await getDocs(msgQuery);
-				msgSnapshot.forEach(async (msg) => {
-					const msgRef = doc(
-						dbService,
-						"papers",
-						`${paperId}`,
-						"messages",
-						`${msg.id}`
-					);
-					if (msg.data().msgImg !== "") {
-						const urlRef = ref(storageService, msg.data().msgImg);
-						await deleteObject(urlRef);
-					}
-					await deleteDoc(msgRef);
-				});
-				const paperRef = doc(dbService, "papers", `${paperId}`);
-				await deleteDoc(paperRef);
-				alert("페이퍼가 삭제되었습니다!");
-			} catch (error) {
-				console.log(error.code);
-			} finally {
-				navigate("/", { replace: true });
-			}
-		}
-	};
-
 	return (
 		<Offcanvas
+			className="paperSettings-offcanvas-container"
 			show={paperSettings}
 			onHide={showPaperSettings}
 			placement="bottom"
 		>
-			<Offcanvas.Header closeButton>페이퍼 설정</Offcanvas.Header>
-			<Offcanvas.Body>
-				<button onClick={openEditModal}>페이퍼 수정</button>
-				<button onClick={deletePaper}>페이퍼 삭제</button>
+			<Offcanvas.Header closeButton>
+				<Offcanvas.Title className="paperSettings-offcanvas-title">
+					<FontAwesomeIcon icon={faGear} />
+					페이퍼 설정
+				</Offcanvas.Title>
+			</Offcanvas.Header>
+			<Offcanvas.Body className="paperSettings-offcanvas-body">
+				<button className="paperSettings-edit-btn" onClick={openEditModal}>
+					<FontAwesomeIcon icon={faPenToSquare} />
+					페이퍼 수정
+				</button>
+				<button className="paperSettings-delete-btn" onClick={openDeleteModal}>
+					<FontAwesomeIcon icon={faTrash} />
+					페이퍼 삭제
+				</button>
 			</Offcanvas.Body>
 		</Offcanvas>
 	);

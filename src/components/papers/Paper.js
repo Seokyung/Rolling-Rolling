@@ -1,8 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { authService, dbService } from "api/fbase";
+import { authService, dbService, storageService } from "api/fbase";
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, onSnapshot } from "firebase/firestore";
+import {
+	doc,
+	deleteDoc,
+	query,
+	collection,
+	getDocs,
+	onSnapshot,
+} from "firebase/firestore";
+import { ref, deleteObject } from "firebase/storage";
 import { useSelector } from "react-redux";
 
 import PrivatePaper from "./PrivatiePaper";
@@ -11,9 +19,15 @@ import MessageList from "components/messgaes/MessageList";
 import EditPaper from "./EditPaper";
 import PaperSettings from "./PaperSettings";
 
-import { Skeleton } from "antd";
+import { Modal } from "react-bootstrap";
+import { Skeleton, message } from "antd";
+import {
+	faAngleLeft,
+	faEllipsis,
+	faShareNodes,
+} from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import "./Paper.css";
 
 function Paper() {
@@ -27,8 +41,12 @@ function Paper() {
 	const [isPrivate, setIsPrivate] = useState(false);
 	const [paperSettings, setPaperSettings] = useState(false);
 	const [editModal, setEditModal] = useState(false);
+	const [deleteModal, setDeleteModal] = useState(false);
 	const [msgModal, setMsgModal] = useState(false);
 	const [shareModal, setShareModal] = useState(false);
+
+	const [messageApi, contextHolder] = message.useMessage();
+	const key = "updatable";
 
 	useEffect(() => {
 		const unsubscribe = onSnapshot(
@@ -55,6 +73,63 @@ function Paper() {
 
 	const showPaperSettings = () => {
 		setPaperSettings((prev) => !prev);
+	};
+
+	const openDeleteModal = () => {
+		setPaperSettings(false);
+		setDeleteModal(true);
+	};
+
+	const closeDeleteModal = () => {
+		setDeleteModal(false);
+	};
+
+	const deletePaper = async () => {
+		messageApi.open({
+			key,
+			type: "loading",
+			content: "페이지 삭제중...",
+		});
+
+		try {
+			const msgQuery = query(
+				collection(dbService, "papers", `${paperId}`, "messages")
+			);
+			const msgSnapshot = await getDocs(msgQuery);
+			msgSnapshot.forEach(async (msg) => {
+				const msgRef = doc(
+					dbService,
+					"papers",
+					`${paperId}`,
+					"messages",
+					`${msg.id}`
+				);
+				if (msg.data().msgImg !== "") {
+					const urlRef = ref(storageService, msg.data().msgImg);
+					await deleteObject(urlRef);
+				}
+				await deleteDoc(msgRef);
+			});
+			const paperRef = doc(dbService, "papers", `${paperId}`);
+			await deleteDoc(paperRef);
+			messageApi.open({
+				key,
+				type: "success",
+				content: "페이퍼가 삭제되었습니다!",
+				duration: 2,
+			});
+		} catch (error) {
+			messageApi.open({
+				key,
+				type: "error",
+				content: "페이퍼 삭제에 실패하였습니다 😢",
+				duration: 2,
+			});
+			console.log(error.code);
+		} finally {
+			setDeleteModal(false);
+			navigate("/", { replace: true });
+		}
 	};
 
 	const openMsgModal = () => {
@@ -91,10 +166,11 @@ function Paper() {
 						/>
 					) : (
 						<>
+							{contextHolder}
 							<div className="paper-wrapper">
 								<div className="paper-container">
 									<div className="paper-header-container">
-										<button className="paper-header-btn" onClick={gotoPrevPage}>
+										<button className="paper-prev-btn" onClick={gotoPrevPage}>
 											<FontAwesomeIcon icon={faAngleLeft} />
 										</button>
 										<div className="paper-title-container">
@@ -102,7 +178,7 @@ function Paper() {
 										</div>
 										{userId === paperObj.paperCreator && (
 											<button
-												className="paper-header-btn"
+												className="paper-setting-btn"
 												onClick={showPaperSettings}
 											>
 												<FontAwesomeIcon icon={faEllipsis} />
@@ -111,7 +187,8 @@ function Paper() {
 									</div>
 									<MessageList paperCreator={paperObj.paperCreator} />
 									<button className="paper-share-btn" onClick={showShareModal}>
-										공유하기
+										<FontAwesomeIcon icon={faShareNodes} />
+										페이퍼 링크 공유하기
 									</button>
 									{shareModal && (
 										<div>
@@ -129,6 +206,10 @@ function Paper() {
 									className="paper-create-message-btn"
 									onClick={openMsgModal}
 								>
+									<FontAwesomeIcon
+										className="paper-create-message-btn-icon"
+										icon={faEnvelope}
+									/>
 									메세지 작성하기
 								</button>
 							</div>
@@ -136,7 +217,7 @@ function Paper() {
 								paperSettings={paperSettings}
 								setPaperSettings={setPaperSettings}
 								setEditModal={setEditModal}
-								paperId={paperObj.paperId}
+								openDeleteModal={openDeleteModal}
 							/>
 							{userId === paperObj.paperCreator && editModal && (
 								<EditPaper
@@ -146,6 +227,18 @@ function Paper() {
 									setEditModal={setEditModal}
 								/>
 							)}
+							<Modal
+								show={deleteModal}
+								onExit={closeDeleteModal}
+								centered
+								animation={true}
+								keyboard={false}
+								backdrop="static"
+							>
+								Delete?
+								<button onClick={deletePaper}>delete</button>
+								<button onClick={closeDeleteModal}>close</button>
+							</Modal>
 							<CreateMessage
 								paperId={paperId}
 								msgModal={msgModal}
