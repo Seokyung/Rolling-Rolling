@@ -63,7 +63,18 @@ function CreatePaper({ paperModal, setPaperModal }) {
 		}
 	};
 
+	const handleInputEnter = (e) => {
+		if (e.key === "Enter") {
+			e.preventDefault();
+			return;
+		}
+	};
+
 	const handleKeyDown = (e, index) => {
+		if (e.key === "Enter") {
+			e.preventDefault();
+			return;
+		}
 		if (e.key === "Backspace") {
 			if (!paperCode[index] && index > 0) {
 				codeInputRef.current[index - 1].focus();
@@ -71,6 +82,7 @@ function CreatePaper({ paperModal, setPaperModal }) {
 			const newCodes = [...paperCode];
 			newCodes[index] = "";
 			setPaperCode(newCodes);
+			return;
 		}
 	};
 
@@ -205,6 +217,7 @@ function CreatePaper({ paperModal, setPaperModal }) {
 								value={paperName}
 								ref={paperNameRef}
 								onChange={onPaperNameChange}
+								onKeyDown={(e) => handleInputEnter(e)}
 								placeholder="페이퍼 이름을 입력해주세요 :)"
 							/>
 							<Form.Control.Feedback

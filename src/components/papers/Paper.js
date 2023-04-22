@@ -1,27 +1,20 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { authService, dbService, storageService } from "api/fbase";
+import { authService, dbService } from "api/fbase";
 import { onAuthStateChanged } from "firebase/auth";
-import {
-	doc,
-	onSnapshot,
-	deleteDoc,
-	query,
-	collection,
-	getDocs,
-} from "firebase/firestore";
-import { ref, deleteObject } from "firebase/storage";
+import { doc, onSnapshot } from "firebase/firestore";
+import { useSelector } from "react-redux";
+
+import PrivatePaper from "./PrivatiePaper";
 import CreateMessage from "components/messgaes/CreateMessage";
 import MessageList from "components/messgaes/MessageList";
 import EditPaper from "./EditPaper";
-import { useSelector } from "react-redux";
+import PaperSettings from "./PaperSettings";
 
 import { Skeleton } from "antd";
-import { Offcanvas } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import "./Paper.css";
-import PrivatePaper from "./PrivatiePaper";
 
 function Paper() {
 	const userId = useSelector((state) => state.userReducer.uid);
@@ -60,48 +53,8 @@ function Paper() {
 		});
 	}, []);
 
-	const deletePaper = async () => {
-		const isDelete = window.confirm(
-			`${paperObj.paperName} 페이퍼를 삭제하시겠습니까?`
-		);
-		if (isDelete) {
-			try {
-				const msgQuery = query(
-					collection(dbService, "papers", `${paperId}`, "messages")
-				);
-				const msgSnapshot = await getDocs(msgQuery);
-				msgSnapshot.forEach(async (msg) => {
-					const msgRef = doc(
-						dbService,
-						"papers",
-						`${paperId}`,
-						"messages",
-						`${msg.id}`
-					);
-					if (msg.data().msgImg !== "") {
-						const urlRef = ref(storageService, msg.data().msgImg);
-						await deleteObject(urlRef);
-					}
-					await deleteDoc(msgRef);
-				});
-				const paperRef = doc(dbService, "papers", `${paperId}`);
-				await deleteDoc(paperRef);
-				alert("페이퍼가 삭제되었습니다!");
-			} catch (error) {
-				console.log(error.message);
-			} finally {
-				navigate("/", { replace: true });
-			}
-		}
-	};
-
 	const showPaperSettings = () => {
 		setPaperSettings((prev) => !prev);
-	};
-
-	const openEditModal = () => {
-		setPaperSettings(false);
-		setEditModal(true);
 	};
 
 	const openMsgModal = () => {
@@ -179,17 +132,12 @@ function Paper() {
 									메세지 작성하기
 								</button>
 							</div>
-							<Offcanvas
-								show={paperSettings}
-								onHide={showPaperSettings}
-								placement="bottom"
-							>
-								<Offcanvas.Header closeButton>페이퍼 설정</Offcanvas.Header>
-								<Offcanvas.Body>
-									<button onClick={openEditModal}>페이퍼 수정</button>
-									<button onClick={deletePaper}>페이퍼 삭제</button>
-								</Offcanvas.Body>
-							</Offcanvas>
+							<PaperSettings
+								paperSettings={paperSettings}
+								setPaperSettings={setPaperSettings}
+								setEditModal={setEditModal}
+								paperId={paperObj.paperId}
+							/>
 							{userId === paperObj.paperCreator && editModal && (
 								<EditPaper
 									paperObj={paperObj}

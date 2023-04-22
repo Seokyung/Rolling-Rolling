@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { dbService } from "api/fbase";
-import { Modal, Offcanvas } from "react-bootstrap";
+
+import { Modal } from "react-bootstrap";
+import "./EditPaper.css";
 
 function EditPaper({ paperObj, isOwner, editModal, setEditModal }) {
 	const [newPaperName, setNewPaperName] = useState(paperObj.paperName);
