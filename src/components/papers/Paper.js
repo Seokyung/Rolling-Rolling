@@ -17,20 +17,20 @@ import EditPaper from "./EditPaper";
 import { useSelector } from "react-redux";
 
 import { Skeleton } from "antd";
-import { Form, Button, Offcanvas } from "react-bootstrap";
+import { Offcanvas } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import "./Paper.css";
+import PrivatePaper from "./PrivatiePaper";
 
 function Paper() {
 	const userId = useSelector((state) => state.userReducer.uid);
 	const { paperId } = useParams();
 	const [init, setInit] = useState(true);
 	const navigate = useNavigate();
-	const codeInputRef = useRef([]);
 	const paperUrlRef = useRef();
+
 	const [paperObj, setPaperObj] = useState({});
-	const [paperCode, setPaperCode] = useState(Array(4).fill(""));
 	const [isPrivate, setIsPrivate] = useState(false);
 	const [paperSettings, setPaperSettings] = useState(false);
 	const [editModal, setEditModal] = useState(false);
@@ -59,72 +59,6 @@ function Paper() {
 			}
 		});
 	}, []);
-
-	const onCodeChange = (e, index) => {
-		const {
-			target: { value },
-		} = e;
-		if (!isNaN(value)) {
-			const newCodes = [...paperCode];
-			newCodes[index] = value;
-			setPaperCode(newCodes);
-			if (value && index < codeInputRef.current.length - 1) {
-				codeInputRef.current[index + 1].focus();
-				if (paperCode[index + 1]) {
-					codeInputRef.current[index + 1].select();
-				}
-			}
-		}
-	};
-
-	const handleKeyDown = (e, index) => {
-		if (e.key === "Backspace") {
-			if (!paperCode[index] && index > 0) {
-				codeInputRef.current[index - 1].focus();
-			}
-			const newCodes = [...paperCode];
-			newCodes[index] = "";
-			setPaperCode(newCodes);
-		}
-	};
-
-	const renderCodeInputs = () => {
-		return paperCode.map((code, index) => {
-			return (
-				<Form.Control
-					className="paper-form-code"
-					key={index}
-					type="password"
-					maxLength={1}
-					value={code}
-					ref={(el) => (codeInputRef.current[index] = el)}
-					onChange={(e) => onCodeChange(e, index)}
-					onKeyDown={(e) => handleKeyDown(e, index)}
-				/>
-			);
-		});
-	};
-
-	useEffect(() => {
-		if (isPrivate && codeInputRef.current[0]) {
-			codeInputRef.current[0].focus();
-			if (paperCode[0]) {
-				codeInputRef.current[0].select();
-			}
-		}
-	}, [isPrivate]);
-
-	const onSubmitPaperCode = (e) => {
-		e.preventDefault();
-		if (paperObj.paperCode === paperCode.join("")) {
-			setIsPrivate(false);
-			setPaperCode(Array(4).fill(""));
-		} else {
-			alert("페이지 비밀번호가 다릅니다!");
-			setPaperCode(Array(4).fill(""));
-			codeInputRef.current[0].focus();
-		}
-	};
 
 	const deletePaper = async () => {
 		const isDelete = window.confirm(
@@ -197,22 +131,11 @@ function Paper() {
 			) : (
 				<>
 					{isPrivate ? (
-						<Form>
-							<Form.Group className="paper-form-code-container">
-								<Form.Label className="paper-form-code-title">
-									페이지 비밀번호를 입력하세요!
-								</Form.Label>
-								<div className="paper-form-code-group">
-									{renderCodeInputs()}
-								</div>
-								<Button
-									className="paper-form-code-btn"
-									onClick={onSubmitPaperCode}
-								>
-									제출
-								</Button>
-							</Form.Group>
-						</Form>
+						<PrivatePaper
+							isPrivate={isPrivate}
+							setIsPrivate={setIsPrivate}
+							paperCode={paperObj.paperCode}
+						/>
 					) : (
 						<>
 							<div className="paper-wrapper">
