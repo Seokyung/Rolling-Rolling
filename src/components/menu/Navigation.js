@@ -48,13 +48,18 @@ function Navigation() {
 				</button>
 			</div>
 
-			<Navbar.Offcanvas placement="end" show={isMenu} onHide={closeMenu}>
+			<Navbar.Offcanvas
+				className="navigation-offcanvas-container"
+				placement="end"
+				show={isMenu}
+				onHide={closeMenu}
+			>
 				<Offcanvas.Header closeButton>
-					<Offcanvas.Title>
+					<Offcanvas.Title className="navigation-offcanvas-title">
 						<span className="navigation-offcanvas-username">{userName}</span>님
 					</Offcanvas.Title>
 				</Offcanvas.Header>
-				<Offcanvas.Body>
+				<Offcanvas.Body className="navigation-offcanvas-body">
 					<Nav className="navigation-offcanvas-nav">
 						<Link
 							to={"/"}

@@ -45,23 +45,25 @@
 	color: #303030;
 }
 
-.offcanvas {
+.navigation-offcanvas-container {
 	--bs-offcanvas-width: 40% !important;
 	--bs-offcanvas-padding-x: 3rem !important;
 	--bs-offcanvas-padding-y: 4rem !important;
 	font-size: 1.7rem;
+	border: none !important;
 }
 
-.offcanvas-title {
+.navigation-offcanvas-title {
 	font-size: 2.2rem !important;
 }
 
 .navigation-offcanvas-username {
 	font-weight: 700;
+	margin-right: 0.5rem;
 	color: #944444;
 }
 
-.offcanvas-body {
+.navigation-offcanvas-body {
 	padding: 0 var(--bs-offcanvas-padding-x) !important;
 }
 
@@ -106,12 +108,12 @@
 		height: 3rem;
 	}
 
-	.offcanvas {
+	.navigation-offcanvas-container {
 		--bs-offcanvas-width: 60% !important;
 		font-size: 2.2rem;
 	}
 
-	.offcanvas-title {
+	.navigation-offcanvas-title {
 		font-size: 2.5rem !important;
 	}
 }
