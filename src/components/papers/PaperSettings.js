@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Offcanvas, Modal } from "react-bootstrap";
+import { Offcanvas } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
@@ -10,7 +10,7 @@ function PaperSettings({
 	paperSettings,
 	setPaperSettings,
 	setEditModal,
-	openDeleteModal,
+	setDeleteModal,
 }) {
 	const showPaperSettings = () => {
 		setPaperSettings((prev) => !prev);
@@ -19,6 +19,11 @@ function PaperSettings({
 	const openEditModal = () => {
 		setPaperSettings(false);
 		setEditModal(true);
+	};
+
+	const openDeleteModal = () => {
+		setPaperSettings(false);
+		setDeleteModal(true);
 	};
 
 	return (

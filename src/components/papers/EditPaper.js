@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import "./EditPaper.css";
 
-function EditPaper({ paperCode, isOwner, editModal, setEditModal }) {
+function EditPaper({ paperCode, editModal, setEditModal }) {
 	const paperId = useSelector((state) => state.paperReducer.paperId);
 	const [newPaperName, setNewPaperName] = useState(
 		useSelector((state) => state.paperReducer.paperName)
@@ -50,11 +50,12 @@ function EditPaper({ paperCode, isOwner, editModal, setEditModal }) {
 	const onEditPaperName = async (e) => {
 		e.preventDefault();
 		const isEdit = window.confirm("페이퍼 이름을 수정하시겠습니까?");
-		if (isEdit && isOwner) {
+		if (isEdit) {
 			const paperRef = doc(dbService, "papers", `${paperId}`);
 			await updateDoc(paperRef, {
 				paperName: newPaperName,
 			});
+			closeEditModal();
 			alert("이름이 수정되었습니다!");
 		}
 	};
@@ -70,12 +71,13 @@ function EditPaper({ paperCode, isOwner, editModal, setEditModal }) {
 			return;
 		}
 		const isEdit = window.confirm("페이퍼 공개여부를 변경하시겠습니까?");
-		if (isEdit && isOwner) {
+		if (isEdit) {
 			const paperRef = doc(dbService, "papers", `${paperId}`);
 			await updateDoc(paperRef, {
 				isPrivate: newIsPrivate,
 				paperCode: newIsPrivate ? newPaperCode : "",
 			});
+			closeEditModal();
 			alert("공개여부가 변경되었습니다!");
 		}
 	};

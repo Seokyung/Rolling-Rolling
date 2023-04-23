@@ -1,16 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { authService, dbService, storageService } from "api/fbase";
+import { authService, dbService } from "api/fbase";
 import { onAuthStateChanged } from "firebase/auth";
-import {
-	doc,
-	deleteDoc,
-	query,
-	collection,
-	getDocs,
-	onSnapshot,
-} from "firebase/firestore";
-import { ref, deleteObject } from "firebase/storage";
+import { doc, onSnapshot } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { getPaper } from "modules/paper";
 
@@ -20,8 +12,7 @@ import MessageList from "components/messgaes/MessageList";
 import EditPaper from "./EditPaper";
 import PaperSettings from "./PaperSettings";
 
-import { Modal } from "react-bootstrap";
-import { Skeleton, message } from "antd";
+import { Skeleton } from "antd";
 import {
 	faAngleLeft,
 	faEllipsis,
@@ -30,25 +21,25 @@ import {
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Paper.css";
+import DeletePaper from "./DeletePaper";
 
 function Paper() {
 	const dispatch = useDispatch();
 	const userId = useSelector((state) => state.userReducer.uid);
 	const { paperId } = useParams();
-	const [init, setInit] = useState(true);
+
 	const navigate = useNavigate();
 	const paperUrlRef = useRef();
 
+	const [init, setInit] = useState(true);
 	const [paperObj, setPaperObj] = useState({});
 	const [isPrivate, setIsPrivate] = useState(false);
 	const [paperSettings, setPaperSettings] = useState(false);
+
 	const [editModal, setEditModal] = useState(false);
 	const [deleteModal, setDeleteModal] = useState(false);
 	const [msgModal, setMsgModal] = useState(false);
 	const [shareModal, setShareModal] = useState(false);
-
-	const [messageApi, contextHolder] = message.useMessage();
-	const key = "updatable";
 
 	const getPaperDispatch = (paperDocObj) => {
 		dispatch(
@@ -92,63 +83,6 @@ function Paper() {
 		setPaperSettings((prev) => !prev);
 	};
 
-	const openDeleteModal = () => {
-		setPaperSettings(false);
-		setDeleteModal(true);
-	};
-
-	const closeDeleteModal = () => {
-		setDeleteModal(false);
-	};
-
-	const deletePaper = async () => {
-		messageApi.open({
-			key,
-			type: "loading",
-			content: "페이지 삭제중...",
-		});
-
-		try {
-			const msgQuery = query(
-				collection(dbService, "papers", `${paperId}`, "messages")
-			);
-			const msgSnapshot = await getDocs(msgQuery);
-			msgSnapshot.forEach(async (msg) => {
-				const msgRef = doc(
-					dbService,
-					"papers",
-					`${paperId}`,
-					"messages",
-					`${msg.id}`
-				);
-				if (msg.data().msgImg !== "") {
-					const urlRef = ref(storageService, msg.data().msgImg);
-					await deleteObject(urlRef);
-				}
-				await deleteDoc(msgRef);
-			});
-			const paperRef = doc(dbService, "papers", `${paperId}`);
-			await deleteDoc(paperRef);
-			messageApi.open({
-				key,
-				type: "success",
-				content: "페이퍼가 삭제되었습니다!",
-				duration: 2,
-			});
-		} catch (error) {
-			messageApi.open({
-				key,
-				type: "error",
-				content: "페이퍼 삭제에 실패하였습니다 😢",
-				duration: 2,
-			});
-			console.log(error.code);
-		} finally {
-			setDeleteModal(false);
-			navigate("/", { replace: true });
-		}
-	};
-
 	const openMsgModal = () => {
 		setMsgModal(true);
 	};
@@ -183,7 +117,6 @@ function Paper() {
 						/>
 					) : (
 						<>
-							{contextHolder}
 							<div className="paper-wrapper">
 								<div className="paper-container">
 									<div className="paper-header-container">
@@ -235,28 +168,17 @@ function Paper() {
 								paperSettings={paperSettings}
 								setPaperSettings={setPaperSettings}
 								setEditModal={setEditModal}
-								openDeleteModal={openDeleteModal}
+								setDeleteModal={setDeleteModal}
 							/>
-							{userId === paperObj.creatorId && editModal && (
-								<EditPaper
-									paperCode={paperObj.paperCode}
-									isOwner={userId === paperObj.creatorId}
-									editModal={editModal}
-									setEditModal={setEditModal}
-								/>
-							)}
-							<Modal
-								show={deleteModal}
-								onExit={closeDeleteModal}
-								centered
-								animation={true}
-								keyboard={false}
-								backdrop="static"
-							>
-								Delete?
-								<button onClick={deletePaper}>delete</button>
-								<button onClick={closeDeleteModal}>close</button>
-							</Modal>
+							<EditPaper
+								paperCode={paperObj.paperCode}
+								editModal={editModal}
+								setEditModal={setEditModal}
+							/>
+							<DeletePaper
+								deleteModal={deleteModal}
+								setDeleteModal={setDeleteModal}
+							/>
 							<CreateMessage
 								paperId={paperId}
 								msgModal={msgModal}
