@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { authService, dbService } from "api/fbase";
 import { onAuthStateChanged } from "firebase/auth";
@@ -9,19 +9,16 @@ import { getPaper } from "modules/paper";
 import PrivatePaper from "./PrivatiePaper";
 import CreateMessage from "components/messgaes/CreateMessage";
 import MessageList from "components/messgaes/MessageList";
-import EditPaper from "./EditPaper";
 import PaperSettings from "./PaperSettings";
+import EditPaper from "./EditPaper";
+import DeletePaper from "./DeletePaper";
+import SharePaper from "./SharePaper";
 
 import { Skeleton } from "antd";
-import {
-	faAngleLeft,
-	faEllipsis,
-	faShareNodes,
-} from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Paper.css";
-import DeletePaper from "./DeletePaper";
 
 function Paper() {
 	const dispatch = useDispatch();
@@ -29,7 +26,6 @@ function Paper() {
 	const { paperId } = useParams();
 
 	const navigate = useNavigate();
-	const paperUrlRef = useRef();
 
 	const [init, setInit] = useState(true);
 	const [paperObj, setPaperObj] = useState({});
@@ -39,7 +35,6 @@ function Paper() {
 	const [editModal, setEditModal] = useState(false);
 	const [deleteModal, setDeleteModal] = useState(false);
 	const [msgModal, setMsgModal] = useState(false);
-	const [shareModal, setShareModal] = useState(false);
 
 	const getPaperDispatch = (paperDocObj) => {
 		dispatch(
@@ -87,18 +82,6 @@ function Paper() {
 		setMsgModal(true);
 	};
 
-	const onShareClick = () => {
-		paperUrlRef.current.focus();
-		paperUrlRef.current.select();
-		navigator.clipboard.writeText(paperUrlRef.current.value).then(() => {
-			alert("링크를 복사했습니다!");
-		});
-	};
-
-	const showShareModal = () => {
-		setShareModal((prev) => !prev);
-	};
-
 	const gotoPrevPage = () => {
 		navigate(-1);
 	};
@@ -137,21 +120,7 @@ function Paper() {
 										)}
 									</div>
 									<MessageList />
-									<button className="paper-share-btn" onClick={showShareModal}>
-										<FontAwesomeIcon icon={faShareNodes} />
-										페이퍼 링크 공유하기
-									</button>
-									{shareModal && (
-										<div>
-											<input
-												type="text"
-												readOnly
-												ref={paperUrlRef}
-												value={`http://localhost:3000/paper/${paperId}`}
-											/>
-											<button onClick={onShareClick}>링크 복사</button>
-										</div>
-									)}
+									<SharePaper />
 								</div>
 								<button
 									className="paper-create-message-btn"

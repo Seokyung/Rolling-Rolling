@@ -72,26 +72,6 @@
 	height: 2.5rem;
 }
 
-.paper-share-btn {
-	align-self: center;
-	padding: 1.2rem 4rem;
-	font-size: 1.4rem;
-	background-color: #faeeed;
-	border-radius: 30px;
-	box-shadow: 0.5rem 0.5rem 0.5rem #a0827f;
-	outline: none;
-	appearance: none;
-	border: none;
-	white-space: nowrap;
-}
-.paper-share-btn:hover {
-	background-color: #efdedd;
-}
-
-.paper-share-btn svg {
-	margin-right: 0.5rem;
-}
-
 .paper-create-message-btn {
 	position: sticky;
 	position: -webkit-sticky;
@@ -143,10 +123,6 @@
 
 	.paper-setting-btn {
 		right: 5rem;
-	}
-
-	.paper-share-btn {
-		border-radius: 40px;
 	}
 
 	.paper-create-message-btn {

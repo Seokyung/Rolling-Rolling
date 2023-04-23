@@ -1,0 +1,38 @@
+.sharePaper-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-self: center;
+}
+
+.sharePaper-btn {
+	padding: 1.2rem 4rem;
+	font-size: 1.4rem;
+	background-color: #faeeed;
+	border-radius: 30px;
+	box-shadow: 0.5rem 0.5rem 0.5rem #a0827f;
+	outline: none;
+	appearance: none;
+	border: none;
+	white-space: nowrap;
+}
+.sharePaper-btn:hover {
+	background-color: #efdedd;
+}
+/* .sharePaper-btn:active svg {
+	transition: all 0.2s linear;
+	transform: rotate(360deg);
+} */
+.sharePaper-btn svg {
+	margin-right: 0.5rem;
+}
+
+.sharePaper-link {
+	display: flex;
+}
+
+@media screen and (max-width: 1023px) {
+	.sharePaper-btn {
+		border-radius: 40px;
+	}
+}
