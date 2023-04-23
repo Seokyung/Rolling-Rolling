@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { dbService } from "api/fbase";
+import { useSelector } from "react-redux";
 
 import { Modal } from "react-bootstrap";
 import "./EditPaper.css";
 
-function EditPaper({ paperObj, isOwner, editModal, setEditModal }) {
-	const [newPaperName, setNewPaperName] = useState(paperObj.paperName);
-	const [newIsPrivate, setNewIsPrivate] = useState(paperObj.isPrivate);
-	const [newPaperCode, setNewPaperCode] = useState(paperObj.paperCode);
+function EditPaper({ paperCode, isOwner, editModal, setEditModal }) {
+	const paperId = useSelector((state) => state.paperReducer.paperId);
+	const [newPaperName, setNewPaperName] = useState(
+		useSelector((state) => state.paperReducer.paperName)
+	);
+	const [newIsPrivate, setNewIsPrivate] = useState(
+		useSelector((state) => state.paperReducer.isPrivate)
+	);
+	const [newPaperCode, setNewPaperCode] = useState(paperCode);
+	// const [newPaperCode, setNewPaperCode] = useState(useSelector((state) => state.paperReducer.paperCode));
 
 	const closeEditModal = () => {
 		setEditModal(false);
@@ -44,7 +51,7 @@ function EditPaper({ paperObj, isOwner, editModal, setEditModal }) {
 		e.preventDefault();
 		const isEdit = window.confirm("페이퍼 이름을 수정하시겠습니까?");
 		if (isEdit && isOwner) {
-			const paperRef = doc(dbService, "papers", `${paperObj.paperId}`);
+			const paperRef = doc(dbService, "papers", `${paperId}`);
 			await updateDoc(paperRef, {
 				paperName: newPaperName,
 			});
@@ -64,7 +71,7 @@ function EditPaper({ paperObj, isOwner, editModal, setEditModal }) {
 		}
 		const isEdit = window.confirm("페이퍼 공개여부를 변경하시겠습니까?");
 		if (isEdit && isOwner) {
-			const paperRef = doc(dbService, "papers", `${paperObj.paperId}`);
+			const paperRef = doc(dbService, "papers", `${paperId}`);
 			await updateDoc(paperRef, {
 				isPrivate: newIsPrivate,
 				paperCode: newIsPrivate ? newPaperCode : "",

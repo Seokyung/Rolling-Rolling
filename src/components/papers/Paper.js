@@ -11,7 +11,8 @@ import {
 	onSnapshot,
 } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getPaper } from "modules/paper";
 
 import PrivatePaper from "./PrivatiePaper";
 import CreateMessage from "components/messgaes/CreateMessage";
@@ -31,6 +32,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Paper.css";
 
 function Paper() {
+	const dispatch = useDispatch();
 	const userId = useSelector((state) => state.userReducer.uid);
 	const { paperId } = useParams();
 	const [init, setInit] = useState(true);
@@ -48,6 +50,19 @@ function Paper() {
 	const [messageApi, contextHolder] = message.useMessage();
 	const key = "updatable";
 
+	const getPaperDispatch = (paperDocObj) => {
+		dispatch(
+			getPaper({
+				paperId: paperDocObj.paperId,
+				paperName: paperDocObj.paperName,
+				createdAt: paperDocObj.createdAt,
+				creatorId: paperDocObj.creatorId,
+				isPrivate: paperDocObj.isPrivate,
+				// paperCode: paperDocObj.paperCode,
+			})
+		);
+	};
+
 	useEffect(() => {
 		const unsubscribe = onSnapshot(
 			doc(dbService, "papers", `${paperId}`),
@@ -55,10 +70,12 @@ function Paper() {
 				const paperDocObj = {
 					paperId: paperId,
 					paperName: doc.data().paperName,
-					paperCreator: doc.data().creatorId,
+					createdAt: doc.data().createdAt,
+					creatorId: doc.data().creatorId,
 					isPrivate: doc.data().isPrivate,
 					paperCode: doc.data().paperCode,
 				};
+				getPaperDispatch(paperDocObj);
 				setIsPrivate(doc.data().isPrivate);
 				setPaperObj(paperDocObj);
 				setInit(false);
@@ -175,8 +192,9 @@ function Paper() {
 										</button>
 										<div className="paper-title-container">
 											<h2 className="paper-title">{paperObj.paperName}</h2>
+											<h2>{paperObj.createdAt}</h2>
 										</div>
-										{userId === paperObj.paperCreator && (
+										{userId === paperObj.creatorId && (
 											<button
 												className="paper-setting-btn"
 												onClick={showPaperSettings}
@@ -185,7 +203,7 @@ function Paper() {
 											</button>
 										)}
 									</div>
-									<MessageList paperCreator={paperObj.paperCreator} />
+									<MessageList />
 									<button className="paper-share-btn" onClick={showShareModal}>
 										<FontAwesomeIcon icon={faShareNodes} />
 										페이퍼 링크 공유하기
@@ -219,10 +237,10 @@ function Paper() {
 								setEditModal={setEditModal}
 								openDeleteModal={openDeleteModal}
 							/>
-							{userId === paperObj.paperCreator && editModal && (
+							{userId === paperObj.creatorId && editModal && (
 								<EditPaper
-									paperObj={paperObj}
-									isOwner={userId === paperObj.paperCreator}
+									paperCode={paperObj.paperCode}
+									isOwner={userId === paperObj.creatorId}
 									editModal={editModal}
 									setEditModal={setEditModal}
 								/>

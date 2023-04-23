@@ -23,8 +23,9 @@
 }
 
 .paperSettings-edit-btn {
-	margin: 1.5rem;
-	padding: 2rem 4.5rem;
+	width: 100%;
+	margin: 1rem 3rem;
+	padding: 2rem;
 	font-size: 1.7rem;
 	color: #fffdfd;
 	background-color: #9f5757;
@@ -43,8 +44,9 @@
 }
 
 .paperSettings-delete-btn {
-	margin: 1.5rem;
-	padding: 2rem 4.5rem;
+	width: 100%;
+	margin: 1rem 3rem;
+	padding: 2rem;
 	font-size: 1.7rem;
 	color: #fffdfd;
 	background-color: #9f5757;
@@ -68,12 +70,12 @@
 	}
 
 	.paperSettings-edit-btn {
-		padding: 2rem 3rem;
+		margin: 1rem 2.5rem;
 		border-radius: 40px;
 	}
 
 	.paperSettings-delete-btn {
-		padding: 2rem 3rem;
+		margin: 1rem 2.5rem;
 		border-radius: 40px;
 	}
 }

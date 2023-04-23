@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { authService, dbService } from "api/fbase";
 import { onAuthStateChanged } from "firebase/auth";
 import {
@@ -15,14 +14,15 @@ import { useSelector } from "react-redux";
 import { Row, Col, Card } from "react-bootstrap";
 import "./MessageList.css";
 
-function MessageList({ paperCreator }) {
+function MessageList() {
 	const userId = useSelector((state) => state.userReducer.uid);
-	const { paperId } = useParams();
+	const creatorId = useSelector((state) => state.paperReducer.creatorId);
+	const paperId = useSelector((state) => state.paperReducer.paperId);
 	const [messages, setMessages] = useState([]);
 
 	useEffect(() => {
 		let q;
-		if (paperCreator === userId) {
+		if (creatorId === userId) {
 			q = query(
 				collection(dbService, "papers", `${paperId}`, "messages"),
 				orderBy("createdAt", "desc")
@@ -53,7 +53,7 @@ function MessageList({ paperCreator }) {
 				unsubscribe();
 			}
 		});
-	}, [paperCreator]);
+	}, []);
 
 	return (
 		<div className="messageList-container">
@@ -61,7 +61,7 @@ function MessageList({ paperCreator }) {
 				{messages.map((message) => (
 					<Col key={message.id}>
 						<Card>
-							<Message msgObj={message} isOwner={paperCreator === userId} />
+							<Message msgObj={message} isOwner={creatorId === userId} />
 						</Card>
 					</Col>
 				))}
