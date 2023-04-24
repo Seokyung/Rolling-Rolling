@@ -13,8 +13,8 @@ function Footer() {
 					rel="noopener noreferrer"
 				>
 					<FontAwesomeIcon icon={faGithub} />
+					Seokyung Jee
 				</a>
-				Seokyung Jee
 			</span>
 		</footer>
 	);

@@ -187,7 +187,7 @@ function CreatePaper({ paperModal, setPaperModal }) {
 				backdrop="static"
 			>
 				<Modal.Header className="createPaper-modal-header">
-					<Modal.Title bsPrefix="createPaper-modal-title">
+					<Modal.Title className="createPaper-modal-title">
 						페이퍼 만들기
 					</Modal.Title>
 					<button
