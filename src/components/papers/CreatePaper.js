@@ -186,25 +186,19 @@ function CreatePaper({ paperModal, setPaperModal }) {
 				keyboard={false}
 				backdrop="static"
 			>
-				<Modal.Header>
-					<div className="createPaper-modal-header">
-						<Modal.Title bsPrefix="createPaper-modal-title">
-							페이퍼 만들기
-						</Modal.Title>
-						<button
-							className="createPaper-modal-close-btn"
-							onClick={closePaperModal}
-						>
-							<FontAwesomeIcon icon={faXmark} />
-						</button>
-					</div>
+				<Modal.Header className="createPaper-modal-header">
+					<Modal.Title bsPrefix="createPaper-modal-title">
+						페이퍼 만들기
+					</Modal.Title>
+					<button
+						className="createPaper-modal-close-btn"
+						onClick={closePaperModal}
+					>
+						<FontAwesomeIcon icon={faXmark} />
+					</button>
 				</Modal.Header>
 				<Modal.Body>
-					<Form
-						className="createPaper-form-container"
-						noValidate
-						validated={validated}
-					>
+					<Form noValidate validated={validated}>
 						<Form.Group className="createPaper-form-group">
 							<Form.Label className="createPaper-form-title">
 								페이퍼 이름
@@ -258,25 +252,18 @@ function CreatePaper({ paperModal, setPaperModal }) {
 						)}
 					</Form>
 				</Modal.Body>
-				<Modal.Footer>
-					<div className="createPaper-modal-footer">
-						<Button
-							className="createPaper-modal-footer-close-btn"
-							variant="secondary"
-							size="lg"
-							onClick={closePaperModal}
-						>
-							닫기
-						</Button>
-						<Button
-							className="createPaper-modal-footer-create-btn"
-							variant="primary"
-							size="lg"
-							onClick={onCreatePaper}
-						>
-							페이퍼 만들기
-						</Button>
-					</div>
+				<Modal.Footer className="createPaper-modal-footer">
+					<Button
+						id="close-btn"
+						variant="secondary"
+						size="lg"
+						onClick={closePaperModal}
+					>
+						닫기
+					</Button>
+					<Button id="create-btn" size="lg" onClick={onCreatePaper}>
+						페이퍼 만들기
+					</Button>
 				</Modal.Footer>
 			</Modal>
 		</>

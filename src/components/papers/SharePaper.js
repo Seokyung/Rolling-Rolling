@@ -34,15 +34,6 @@ function SharePaper() {
 			<button className="sharePaper-btn" onClick={showShareLink}>
 				<FontAwesomeIcon icon={faShareNodes} />내 페이퍼 공유하기
 			</button>
-			{/* <input
-				type="checkbox"
-				id="sharePaper-checkbox"
-				checked={shareModal}
-				onChange={showShareModal}
-			/>
-			<label className="sharePaper-btn" htmlFor="sharePaper-checkbox">
-				<FontAwesomeIcon icon={faShareNodes} />내 페이퍼 공유하기
-			</label> */}
 			<Collapse in={isShare}>
 				<div className="sharePaper-link">
 					<InputGroup>

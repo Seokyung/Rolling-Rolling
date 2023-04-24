@@ -108,7 +108,7 @@ function Paper() {
 										</button>
 										<div className="paper-title-container">
 											<h2 className="paper-title">{paperObj.paperName}</h2>
-											<h2>{paperObj.createdAt}</h2>
+											{/* <h2>{paperObj.createdAt}</h2> */}
 										</div>
 										{userId === paperObj.creatorId && (
 											<button

@@ -33,18 +33,18 @@ function PaperSettings({
 			onHide={showPaperSettings}
 			placement="bottom"
 		>
-			<Offcanvas.Header closeButton>
+			<Offcanvas.Header className="paperSettings-offcanvas-header" closeButton>
 				<Offcanvas.Title className="paperSettings-offcanvas-title">
 					<FontAwesomeIcon icon={faGear} />
 					페이퍼 설정
 				</Offcanvas.Title>
 			</Offcanvas.Header>
 			<Offcanvas.Body className="paperSettings-offcanvas-body">
-				<button className="paperSettings-edit-btn" onClick={openEditModal}>
+				<button id="edit-btn" onClick={openEditModal}>
 					<FontAwesomeIcon icon={faPenToSquare} />
 					페이퍼 수정
 				</button>
-				<button className="paperSettings-delete-btn" onClick={openDeleteModal}>
+				<button id="delete-btn" onClick={openDeleteModal}>
 					<FontAwesomeIcon icon={faTrash} />
 					페이퍼 삭제
 				</button>

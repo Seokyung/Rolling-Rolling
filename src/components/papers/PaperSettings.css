@@ -1,10 +1,12 @@
 .paperSettings-offcanvas-container {
 	--bs-offcanvas-height: 50% !important;
-	--bs-offcanvas-padding-x: 5rem !important;
-	--bs-offcanvas-padding-y: 4.5rem !important;
 	font-size: 1.7rem;
 	border: none !important;
 	border-radius: 50px 50px 0 0 !important;
+}
+
+.paperSettings-offcanvas-header {
+	padding: 5rem 5rem 4rem 5rem !important;
 }
 
 .paperSettings-offcanvas-title {
@@ -19,14 +21,14 @@
 	display: flex !important;
 	justify-content: center !important;
 	align-items: flex-start;
-	padding: 0 var(--bs-offcanvas-padding-x) !important;
+	padding: 1rem 5rem !important;
 }
 
-.paperSettings-edit-btn {
+.paperSettings-offcanvas-body button {
 	width: 100%;
-	margin: 1rem 3rem;
+	margin: 0 3rem;
 	padding: 2rem;
-	font-size: 1.7rem;
+	font-size: 1.8rem;
 	color: #fffdfd;
 	background-color: #9f5757;
 	border-radius: 30px;
@@ -36,46 +38,40 @@
 	border: none;
 	white-space: nowrap;
 }
-.paperSettings-edit-btn svg {
-	margin-right: 0.5rem;
+.paperSettings-offcanvas-body button svg {
+	margin-right: 0.7rem;
 }
-.paperSettings-edit-btn:hover {
+.paperSettings-offcanvas-body button:hover {
 	background-color: #944444;
 }
 
-.paperSettings-delete-btn {
-	width: 100%;
-	margin: 1rem 3rem;
-	padding: 2rem;
-	font-size: 1.7rem;
-	color: #fffdfd;
+/* .paperSettings-offcanvas-body button#edit-btn {
 	background-color: #9f5757;
-	border-radius: 30px;
-	border: none;
-	outline: none;
-	appearance: none;
-	border: none;
-	white-space: nowrap;
 }
-.paperSettings-delete-btn svg {
+.paperSettings-offcanvas-body button#edit-btn svg {
 	margin-right: 0.5rem;
 }
-.paperSettings-delete-btn:hover {
+.paperSettings-offcanvas-body button#edit-btn:hover {
 	background-color: #944444;
 }
+
+.paperSettings-offcanvas-body button#delete-btn {
+	background-color: #9d4040;
+}
+.paperSettings-offcanvas-body button#delete-btn svg {
+	margin-right: 0.5rem;
+}
+.paperSettings-offcanvas-body button#delete-btn:hover {
+	background-color: #944444;
+} */
 
 @media screen and (max-width: 1023px) {
 	.paperSettings-offcanvas-title {
 		font-size: 2.5rem !important;
 	}
 
-	.paperSettings-edit-btn {
-		margin: 1rem 2.5rem;
-		border-radius: 40px;
-	}
-
-	.paperSettings-delete-btn {
-		margin: 1rem 2.5rem;
+	.paperSettings-offcanvas-body button {
+		margin: 0 2rem;
 		border-radius: 40px;
 	}
 }
