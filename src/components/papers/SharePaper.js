@@ -1,18 +1,24 @@
 import React, { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 
-import { Form } from "react-bootstrap";
+import { Form, Collapse, InputGroup } from "react-bootstrap";
 import { faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./SharePaper.css";
 
 function SharePaper() {
 	const paperId = useSelector((state) => state.paperReducer.paperId);
-	const [shareModal, setShareModal] = useState(false);
+	const [isShare, setIsShare] = useState(false);
 	const paperUrlRef = useRef();
 
-	const showShareModal = () => {
-		setShareModal((prev) => !prev);
+	const showShareLink = () => {
+		setIsShare((prev) => !prev);
+		const svg = document.querySelector(".sharePaper-btn svg");
+		if (!isShare) {
+			svg.classList.add("rotate-animation");
+		} else {
+			svg.classList.remove("rotate-animation");
+		}
 	};
 
 	const onShareClick = () => {
@@ -25,20 +31,31 @@ function SharePaper() {
 
 	return (
 		<div className="sharePaper-container">
-			<button className="sharePaper-btn" onClick={showShareModal}>
+			<button className="sharePaper-btn" onClick={showShareLink}>
 				<FontAwesomeIcon icon={faShareNodes} />내 페이퍼 공유하기
 			</button>
-			{shareModal && (
+			{/* <input
+				type="checkbox"
+				id="sharePaper-checkbox"
+				checked={shareModal}
+				onChange={showShareModal}
+			/>
+			<label className="sharePaper-btn" htmlFor="sharePaper-checkbox">
+				<FontAwesomeIcon icon={faShareNodes} />내 페이퍼 공유하기
+			</label> */}
+			<Collapse in={isShare}>
 				<div className="sharePaper-link">
-					<Form.Control
-						type="text"
-						readOnly
-						ref={paperUrlRef}
-						value={`http://localhost:3000/paper/${paperId}`}
-					/>
-					<button onClick={onShareClick}>링크 복사</button>
+					<InputGroup>
+						<Form.Control
+							type="text"
+							readOnly
+							ref={paperUrlRef}
+							value={`http://localhost:3000/paper/${paperId}`}
+						/>
+						<button onClick={onShareClick}>링크 복사</button>
+					</InputGroup>
 				</div>
-			)}
+			</Collapse>
 		</div>
 	);
 }

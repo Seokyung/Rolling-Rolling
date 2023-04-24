@@ -5,6 +5,14 @@
 	align-self: center;
 }
 
+/* .sharePaper-container #sharePaper-checkbox {
+	display: none;
+}
+.sharePaper-container input:checked + label svg {
+	transition: all 0.2s linear;
+	transform: rotate(360deg);
+} */
+
 .sharePaper-btn {
 	padding: 1.2rem 4rem;
 	font-size: 1.4rem;
@@ -16,19 +24,39 @@
 	border: none;
 	white-space: nowrap;
 }
+.sharePaper-btn svg {
+	margin-right: 0.5rem;
+	transition: all 0.2s linear;
+}
 .sharePaper-btn:hover {
 	background-color: #efdedd;
 }
-/* .sharePaper-btn:active svg {
-	transition: all 0.2s linear;
+.rotate-animation {
 	transform: rotate(360deg);
-} */
-.sharePaper-btn svg {
-	margin-right: 0.5rem;
 }
 
 .sharePaper-link {
-	display: flex;
+	margin-top: 1.5rem;
+}
+.sharePaper-link input {
+	padding: 1.2rem !important;
+	border: none !important;
+	border-radius: 20px 0 0 20px !important;
+	font-size: 1.4rem !important;
+}
+.sharePaper-link button {
+	padding: 1.2rem;
+	color: #fffdfd;
+	background-color: #a36260;
+	border-radius: 20px;
+	font-size: 1.4rem;
+	outline: none;
+	appearance: none;
+	border: none;
+	white-space: nowrap;
+}
+.sharePaper-link button:hover {
+	background-color: #ac7270;
 }
 
 @media screen and (max-width: 1023px) {
