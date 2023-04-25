@@ -3,7 +3,7 @@
 	flex-direction: column;
 	width: 100%;
 	height: auto;
-	padding: 0 3rem 4rem 3rem;
+	padding: 1rem 3rem 4rem 3rem;
 }
 
 .paper-container {
@@ -19,13 +19,13 @@
 .paper-header-container {
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	width: 100%;
 }
 
 .paper-prev-btn {
 	position: absolute;
 	left: 6rem;
-	margin-top: 0.5rem;
 	color: #9f5757;
 	outline: none;
 	appearance: none;
@@ -53,13 +53,11 @@
 	color: #944444;
 	font-size: 2.5rem;
 	font-weight: 700;
-	text-align: center;
 }
 
 .paper-setting-btn {
 	position: absolute;
 	right: 6rem;
-	margin-top: 0.5rem;
 	color: #9f5757;
 	outline: none;
 	appearance: none;
@@ -105,7 +103,7 @@
 
 @media screen and (max-width: 1023px) {
 	.paper-wrapper {
-		padding: 0 2rem 4rem 2rem;
+		padding: 1rem 2rem 4rem 2rem;
 	}
 
 	.paper-container {

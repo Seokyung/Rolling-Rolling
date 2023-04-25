@@ -42,7 +42,6 @@ function Paper() {
 				createdAt: paperDocObj.createdAt,
 				creatorId: paperDocObj.creatorId,
 				isPrivate: paperDocObj.isPrivate,
-				// paperCode: paperDocObj.paperCode,
 			})
 		);
 	};

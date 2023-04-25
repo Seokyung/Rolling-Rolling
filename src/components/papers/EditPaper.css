@@ -1,0 +1,20 @@
+.editPaper-form-container {
+	margin: 3rem 0;
+	padding: 3rem;
+	background-color: #fffdfd;
+	border-radius: 30px;
+}
+
+.editPaper-title {
+	margin: 0;
+	font-size: 2.5rem;
+	font-weight: 700;
+}
+
+@media screen and (max-width: 1023px) {
+	.editPaper-form-container {
+		margin: 2rem 0;
+		padding: 2rem;
+		border-radius: 40px;
+	}
+}

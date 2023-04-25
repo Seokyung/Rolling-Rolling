@@ -130,7 +130,7 @@ function CreatePaper({ paperModal, setPaperModal }) {
 		messageApi.open({
 			key,
 			type: "loading",
-			content: "페이지 생성중...",
+			content: "페이퍼 생성중...",
 		});
 
 		const currentTime = new Date();
