@@ -10,7 +10,6 @@ import PrivatePaper from "./PrivatiePaper";
 import CreateMessage from "components/messgaes/CreateMessage";
 import MessageList from "components/messgaes/MessageList";
 import PaperSettings from "./PaperSettings";
-import EditPaper from "./EditPaper";
 import DeletePaper from "./DeletePaper";
 import SharePaper from "./SharePaper";
 
@@ -32,7 +31,6 @@ function Paper() {
 	const [isPrivate, setIsPrivate] = useState(false);
 	const [paperSettings, setPaperSettings] = useState(false);
 
-	const [editModal, setEditModal] = useState(false);
 	const [deleteModal, setDeleteModal] = useState(false);
 	const [msgModal, setMsgModal] = useState(false);
 
@@ -136,13 +134,7 @@ function Paper() {
 							<PaperSettings
 								paperSettings={paperSettings}
 								setPaperSettings={setPaperSettings}
-								setEditModal={setEditModal}
 								setDeleteModal={setDeleteModal}
-							/>
-							<EditPaper
-								paperCode={paperObj.paperCode}
-								editModal={editModal}
-								setEditModal={setEditModal}
 							/>
 							<DeletePaper
 								deleteModal={deleteModal}

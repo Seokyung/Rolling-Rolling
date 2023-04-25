@@ -1,4 +1,6 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { Offcanvas } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,19 +8,16 @@ import { faGear, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import "./PaperSettings.css";
 
-function PaperSettings({
-	paperSettings,
-	setPaperSettings,
-	setEditModal,
-	setDeleteModal,
-}) {
+function PaperSettings({ paperSettings, setPaperSettings, setDeleteModal }) {
+	const paperId = useSelector((state) => state.paperReducer.paperId);
+	const navigate = useNavigate();
+
 	const showPaperSettings = () => {
 		setPaperSettings((prev) => !prev);
 	};
 
-	const openEditModal = () => {
-		setPaperSettings(false);
-		setEditModal(true);
+	const gotoEditPaper = () => {
+		navigate(`/paper/edit/${paperId}`);
 	};
 
 	const openDeleteModal = () => {
@@ -40,7 +39,7 @@ function PaperSettings({
 				</Offcanvas.Title>
 			</Offcanvas.Header>
 			<Offcanvas.Body className="paperSettings-offcanvas-body">
-				<button id="edit-btn" onClick={openEditModal}>
+				<button id="edit-btn" onClick={gotoEditPaper}>
 					<FontAwesomeIcon icon={faPenToSquare} />
 					페이퍼 수정
 				</button>

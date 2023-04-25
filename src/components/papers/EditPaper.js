@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import { doc, updateDoc } from "firebase/firestore";
-import { dbService } from "api/fbase";
+import { authService, dbService } from "api/fbase";
+import { doc, onSnapshot, updateDoc } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { Modal, Form, InputGroup, Button } from "react-bootstrap";
@@ -8,15 +10,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import "./EditPaper.css";
 
-function EditPaper({ paperCode, editModal, setEditModal }) {
+function EditPaper() {
 	const paperId = useSelector((state) => state.paperReducer.paperId);
-	const paperName = useSelector((state) => state.paperReducer.paperName);
-	const isPrivate = useSelector((state) => state.paperReducer.isPrivate);
+	const navigate = useNavigate();
 
 	const [newPaperName, setNewPaperName] = useState("");
 	const [newIsPrivate, setNewIsPrivate] = useState(false);
-	const [newPaperCode, setNewPaperCode] = useState([]);
-	// const [newPaperCode, setNewPaperCode] = useState(useSelector((state) => state.paperReducer.paperCode));
+	const [newPaperCode, setNewPaperCode] = useState(Array(4).fill(""));
 
 	const paperNameRef = useRef();
 	const codeInputRef = useRef([]);
@@ -24,17 +24,26 @@ function EditPaper({ paperCode, editModal, setEditModal }) {
 	const [validated, setValidated] = useState(false);
 
 	useEffect(() => {
-		let paperCodeArr = ["", "", "", ""];
-		for (let i = 0; i < 4; i++) {
-			paperCodeArr[i] = paperCode[i];
-		}
-		setNewPaperName(paperName);
-		setNewIsPrivate(isPrivate);
-		setNewPaperCode(paperCodeArr);
-	}, [editModal]);
+		const unsubscribe = onSnapshot(
+			doc(dbService, "papers", `${paperId}`),
+			(doc) => {
+				setNewPaperName(doc.data().paperName);
+				setNewIsPrivate(doc.data().isPrivate);
+				if (doc.data().isPrivate) {
+					const docPaperCode = doc.data().paperCode;
+					setNewPaperCode(docPaperCode.split(""));
+				}
+			}
+		);
+		onAuthStateChanged(authService, (user) => {
+			if (user === null) {
+				unsubscribe();
+			}
+		});
+	}, []);
 
-	const closeEditModal = () => {
-		setEditModal(false);
+	const closeEditPaper = () => {
+		navigate(`/paper/${paperId}`, { replace: true });
 	};
 
 	const onPaperNameChange = (e) => {
@@ -131,7 +140,6 @@ function EditPaper({ paperCode, editModal, setEditModal }) {
 			await updateDoc(paperRef, {
 				paperName: newPaperName,
 			});
-			closeEditModal();
 			alert("이름이 수정되었습니다!");
 		}
 	};
@@ -158,32 +166,19 @@ function EditPaper({ paperCode, editModal, setEditModal }) {
 				isPrivate: newIsPrivate,
 				paperCode: newIsPrivate ? newPaperCode.join("") : "",
 			});
-			closeEditModal();
 			alert("공개여부가 변경되었습니다!");
 		}
 	};
 
 	return (
-		<Modal
-			show={editModal}
-			onExit={closeEditModal}
-			centered
-			animation={true}
-			keyboard={false}
-			backdrop="static"
-		>
-			<Modal.Header className="createPaper-modal-header">
-				<Modal.Title className="createPaper-modal-title">
-					페이퍼 수정하기
-				</Modal.Title>
-				<button
-					className="deletePaper-modal-close-btn"
-					onClick={closeEditModal}
-				>
+		<div>
+			<div className="createPaper-modal-header">
+				<div className="createPaper-modal-title">페이퍼 수정하기</div>
+				<button className="deletePaper-modal-close-btn">
 					<FontAwesomeIcon icon={faXmark} />
 				</button>
-			</Modal.Header>
-			<Modal.Body>
+			</div>
+			<div>
 				<Form noValidate validated={validated}>
 					<Form.Group className="createPaper-form-group">
 						<Form.Label className="createPaper-form-title">
@@ -240,13 +235,16 @@ function EditPaper({ paperCode, editModal, setEditModal }) {
 						</Form.Group>
 					)}
 				</Form>
-			</Modal.Body>
-			<Modal.Footer className="createPaper-modal-footer">
-				<Button variant="secondary" size="lg" onClick={closeEditModal}>
+			</div>
+			<div className="createPaper-modal-footer">
+				<Button variant="secondary" size="lg" onClick={closeEditPaper}>
 					닫기
 				</Button>
-			</Modal.Footer>
-		</Modal>
+				{/* <Button id="create-btn" size="lg">
+					수정하기
+				</Button> */}
+			</div>
+		</div>
 	);
 }
 
