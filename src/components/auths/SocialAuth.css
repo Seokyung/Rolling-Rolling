@@ -4,7 +4,7 @@
 	align-items: center;
 	padding: 3rem;
 	width: 80%;
-	border-radius: 20px;
+	border-radius: 30px;
 	background-color: #fffdfd;
 }
 
@@ -16,7 +16,7 @@
 	margin-bottom: 1rem;
 	padding: 2rem;
 	width: 100%;
-	border-radius: 20px;
+	border-radius: 30px;
 	background-color: #bc8482;
 }
 
@@ -49,11 +49,13 @@
 		height: 100%;
 		margin-top: 1rem;
 		margin-bottom: 1rem;
+		border-radius: 40px;
 	}
 
 	.social-form-container {
 		padding: 3rem;
 		justify-content: flex-start;
+		border-radius: 40px;
 	}
 
 	.social-title {

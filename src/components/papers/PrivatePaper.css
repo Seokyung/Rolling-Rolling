@@ -3,9 +3,9 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin: 2rem;
-	padding: 2rem;
-	border-radius: 35px;
+	margin: 3rem;
+	padding: 3rem;
+	border-radius: 30px;
 	background-color: #e4bab5;
 }
 
@@ -50,6 +50,12 @@
 }
 
 @media screen and (max-width: 1023px) {
+	.paper-form-code-container {
+		margin: 2rem;
+		padding: 2rem;
+		border-radius: 40px;
+	}
+
 	.paper-form-code-title {
 		font-size: 1.8rem;
 	}
