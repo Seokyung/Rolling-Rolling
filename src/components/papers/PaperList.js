@@ -15,7 +15,7 @@ import {
 import { ref, deleteObject } from "firebase/storage";
 import { useSelector } from "react-redux";
 
-import { Skeleton, message, Tooltip, Popconfirm } from "antd";
+import { Skeleton, Empty, message, Tooltip, Popconfirm } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { Row, Col, Card, Pagination } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -24,9 +24,13 @@ import "./PaperList.css";
 
 function PaperList() {
 	const userId = useSelector((state) => state.userReducer.uid);
+
 	const [init, setInit] = useState(true);
+	const [isPapers, setIsPapers] = useState(false);
+
 	const [papers, setPapers] = useState([]);
 	const [slicedPapers, setSlicedPapers] = useState([]);
+
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageArr, setPageArr] = useState([]);
 	const papersPerPage = 6;
@@ -47,6 +51,11 @@ function PaperList() {
 					id: doc.id,
 					...doc.data(),
 				}));
+				if (paperArray.length !== 0) {
+					setIsPapers(true);
+				} else {
+					setIsPapers(false);
+				}
 				setPapers(paperArray);
 				setInit(false);
 			},
@@ -136,67 +145,80 @@ function PaperList() {
 			) : (
 				<>
 					{contextHolder}
-					<Row sm={1} md={1} lg={2} xl={3} className="g-4">
-						{papers &&
-							slicedPapers.map((paper) => (
-								<Col key={paper.id}>
-									<Card className="paperList-card-container">
-										<Card.Body>
-											<Link
-												to={`/paper/${paper.id}`}
-												className="paperList-card-link"
-											>
-												<Card.Title>
-													<h4 className="paperList-card-title">
-														{paper.isPrivate && "🔒"}
-														{paper.paperName}
-													</h4>
-												</Card.Title>
-											</Link>
-											<Card.Text className="paperList-card-date">
-												{paper.createdAt}
-											</Card.Text>
-											{userId === paper.creatorId && (
-												<Popconfirm
-													placement="left"
-													title="페이퍼 삭제"
-													description="페이퍼를 삭제하시겠습니까?"
-													onConfirm={() => deletePaper(paper)}
-													okText="삭제"
-													okType="danger"
-													cancelText="취소"
-													icon={
-														<QuestionCircleOutlined
-															style={{
-																color: "red",
-															}}
-														/>
-													}
+					{isPapers ? (
+						<>
+							<Row sm={1} md={1} lg={2} xl={3} className="g-4">
+								{slicedPapers.map((paper) => (
+									<Col key={paper.id}>
+										<Card className="paperList-card-container">
+											<Card.Body>
+												<Link
+													to={`/paper/${paper.id}`}
+													className="paperList-card-link"
 												>
-													<Tooltip title="페이퍼 삭제">
-														<button className="paperList-card-delete-btn">
-															<FontAwesomeIcon icon={faTrash} />
-														</button>
-													</Tooltip>
-												</Popconfirm>
-											)}
-										</Card.Body>
-									</Card>
-								</Col>
-							))}
-					</Row>
-					<Pagination className="paperList-pagination-container" size="lg">
-						{pageArr.map((pageNum) => (
-							<Pagination.Item
-								className="paperList-pagination-item"
-								key={pageNum}
-								active={pageNum === currentPage}
-								onClick={() => onPageChange(pageNum)}
-							>
-								{pageNum}
-							</Pagination.Item>
-						))}
-					</Pagination>
+													<Card.Title>
+														<h4 className="paperList-card-title">
+															{paper.isPrivate && "🔒"}
+															{paper.paperName}
+														</h4>
+													</Card.Title>
+												</Link>
+												<Card.Text className="paperList-card-date">
+													{paper.createdAt}
+												</Card.Text>
+												{userId === paper.creatorId && (
+													<Popconfirm
+														placement="left"
+														title="페이퍼 삭제"
+														description="페이퍼를 삭제하시겠습니까?"
+														onConfirm={() => deletePaper(paper)}
+														okText="삭제"
+														okType="danger"
+														cancelText="취소"
+														icon={
+															<QuestionCircleOutlined
+																style={{
+																	color: "red",
+																}}
+															/>
+														}
+													>
+														<Tooltip title="페이퍼 삭제">
+															<button className="paperList-card-delete-btn">
+																<FontAwesomeIcon icon={faTrash} />
+															</button>
+														</Tooltip>
+													</Popconfirm>
+												)}
+											</Card.Body>
+										</Card>
+									</Col>
+								))}
+							</Row>
+							<Pagination className="paperList-pagination-container" size="lg">
+								{pageArr.map((pageNum) => (
+									<Pagination.Item
+										className="paperList-pagination-item"
+										key={pageNum}
+										active={pageNum === currentPage}
+										onClick={() => onPageChange(pageNum)}
+									>
+										{pageNum}
+									</Pagination.Item>
+								))}
+							</Pagination>
+						</>
+					) : (
+						<Empty
+							description={
+								<span className="empty-text">
+									아직 페이퍼가 없네요!
+									<br />
+									페이퍼를 생성해보세요 😉
+								</span>
+							}
+						/>
+					)}
 				</>
 			)}
 		</>
