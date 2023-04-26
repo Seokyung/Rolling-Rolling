@@ -153,7 +153,11 @@ function PaperList() {
 										<Card className="paperList-card-container">
 											<Card.Body>
 												<Link
-													to={`/paper/${paper.id}`}
+													to={
+														paper.isPrivate
+															? `/paper/private/${paper.id}`
+															: `/paper/${paper.id}`
+													}
 													className="paperList-card-link"
 												>
 													<Card.Title>
