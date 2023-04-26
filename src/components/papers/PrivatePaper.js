@@ -131,8 +131,11 @@ function PrivatePaper() {
 			{contextHolder}
 			<div className="paper-wrapper">
 				<div className="paper-container">
-					<div className="paper-header-container">
-						<button className="paper-prev-btn" onClick={closePrivatePaper}>
+					<div className="privatePaper-header-container">
+						<button
+							className="privatePaper-prev-btn"
+							onClick={closePrivatePaper}
+						>
 							<FontAwesomeIcon icon={faAngleLeft} />
 						</button>
 						<div className="paper-title-container">

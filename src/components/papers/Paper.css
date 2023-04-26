@@ -18,14 +18,12 @@
 
 .paper-header-container {
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
 	width: 100%;
 }
 
 .paper-prev-btn {
-	position: absolute;
-	left: 6rem;
 	color: #9f5757;
 	outline: none;
 	appearance: none;
@@ -55,8 +53,6 @@
 }
 
 .paper-setting-btn {
-	position: absolute;
-	right: 6rem;
 	color: #9f5757;
 	outline: none;
 	appearance: none;
@@ -113,14 +109,6 @@
 
 	.paper-title-container {
 		border-radius: 40px;
-	}
-
-	.paper-prev-btn {
-		left: 5rem;
-	}
-
-	.paper-setting-btn {
-		right: 5rem;
 	}
 
 	.paper-create-message-btn {

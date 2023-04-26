@@ -1,3 +1,28 @@
+.editPaper-header-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+.editPaper-prev-btn {
+	position: absolute;
+	left: 6rem;
+	color: #9f5757;
+	outline: none;
+	appearance: none;
+	border: none;
+	white-space: nowrap;
+	background: none;
+}
+.editPaper-prev-btn svg {
+	width: 2.5rem;
+	height: 2.5rem;
+}
+.editPaper-prev-btn:hover {
+	color: #944444;
+}
+
 .editPaper-form-container {
 	margin: 3rem 0;
 	padding: 3rem;
@@ -12,6 +37,10 @@
 }
 
 @media screen and (max-width: 1023px) {
+	.editPaper-prev-btn {
+		left: 5rem;
+	}
+
 	.editPaper-form-container {
 		margin: 2rem 0;
 		padding: 2rem;

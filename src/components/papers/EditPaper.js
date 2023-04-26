@@ -182,8 +182,8 @@ function EditPaper() {
 	return (
 		<div className="paper-wrapper">
 			<div className="paper-container">
-				<div className="paper-header-container">
-					<button className="paper-prev-btn" onClick={closeEditPaper}>
+				<div className="editPaper-header-container">
+					<button className="editPaper-prev-btn" onClick={closeEditPaper}>
 						<FontAwesomeIcon icon={faAngleLeft} />
 					</button>
 					<div className="paper-title-container">
