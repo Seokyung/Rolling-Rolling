@@ -32,12 +32,22 @@
 }
 
 .createPaper-form-group {
+	display: flex !important;
+	flex-direction: column !important;
 	margin: 0 1rem 1rem 1rem;
 }
 
 .createPaper-form-title {
 	color: #9f5757;
 	font-size: 1.8rem;
+}
+
+.form-length-text {
+	display: flex !important;
+	justify-content: right !important;
+	margin-top: 0.5rem !important;
+	margin-right: 0.5rem;
+	font-size: 1.3rem !important;
 }
 
 .createPaper-form-text {

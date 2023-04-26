@@ -17,6 +17,9 @@ function CreatePaper({ paperModal, setPaperModal }) {
 	const paperNameRef = useRef();
 	const codeInputRef = useRef([]);
 
+	const [currentNameLength, setCurrentNameLength] = useState(0);
+	const maxNameLength = 50;
+
 	const [validated, setValidated] = useState(false);
 	const [messageApi, contextHolder] = message.useMessage();
 	const key = "updatable";
@@ -25,6 +28,7 @@ function CreatePaper({ paperModal, setPaperModal }) {
 		setPaperName("");
 		setIsPrivate(false);
 		setPaperCode(Array(4).fill(""));
+		setCurrentNameLength(0);
 		setValidated(false);
 		setPaperModal(false);
 	};
@@ -33,7 +37,10 @@ function CreatePaper({ paperModal, setPaperModal }) {
 		const {
 			target: { value },
 		} = e;
-		setPaperName(value);
+		if (value.length <= maxNameLength) {
+			setPaperName(value);
+			setCurrentNameLength(value.length);
+		}
 	};
 
 	const onPrivateCheckChange = (e) => {
@@ -210,10 +217,14 @@ function CreatePaper({ paperModal, setPaperModal }) {
 								type="text"
 								value={paperName}
 								ref={paperNameRef}
+								maxLength={maxNameLength}
 								onChange={onPaperNameChange}
 								onKeyDown={(e) => handleInputEnter(e)}
 								placeholder="페이퍼 이름을 입력해주세요 :)"
 							/>
+							<Form.Text className="form-length-text">
+								{currentNameLength} / {maxNameLength}
+							</Form.Text>
 							<Form.Control.Feedback
 								className="createPaper-form-group-text"
 								type="invalid"

@@ -23,10 +23,11 @@ function DeletePaper({ deleteModal, setDeleteModal }) {
 	};
 
 	const deletePaper = async () => {
-		messageApi.open({
+		await messageApi.open({
 			key,
 			type: "loading",
 			content: "페이지 삭제중...",
+			duration: 0.5,
 		});
 
 		try {
