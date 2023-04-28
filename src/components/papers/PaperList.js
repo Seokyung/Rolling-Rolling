@@ -10,13 +10,13 @@ import {
 	onSnapshot,
 } from "firebase/firestore";
 import { useSelector } from "react-redux";
+import DeletePaper from "./DeletePaper";
 
-import { Skeleton, Empty, message, Tooltip } from "antd";
+import { Skeleton, Empty } from "antd";
 import { Row, Col, Card, Pagination } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import "./PaperList.css";
-import DeletePaper from "./DeletePaper";
 
 function PaperList() {
 	const userId = useSelector((state) => state.userReducer.uid);
@@ -128,11 +128,9 @@ function PaperList() {
 												</Card.Text>
 												{userId === paper.creatorId && (
 													<div className="paperList-card-delete-btn">
-														<Tooltip title="페이퍼 삭제">
-															<button onClick={() => openDeleteModal(paper.id)}>
-																<FontAwesomeIcon icon={faTrash} />
-															</button>
-														</Tooltip>
+														<button onClick={() => openDeleteModal(paper.id)}>
+															<FontAwesomeIcon icon={faTrash} />
+														</button>
 													</div>
 												)}
 											</Card.Body>

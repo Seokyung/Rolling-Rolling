@@ -22,6 +22,9 @@ function EditPaper() {
 	const paperNameRef = useRef();
 	const codeInputRef = useRef([]);
 
+	const [currentNameLength, setCurrentNameLength] = useState(0);
+	const maxNameLength = 50;
+
 	const [validated, setValidated] = useState(false);
 	const [isNameValidate, setIsNameValidate] = useState(true);
 	const [isPrivateValidate, setIsPrivateValidate] = useState(true);
@@ -39,6 +42,7 @@ function EditPaper() {
 				setPaperObj(paperDocObj);
 				setNewPaperName(doc.data().paperName);
 				setNewIsPrivate(doc.data().isPrivate);
+				setCurrentNameLength(doc.data().paperName.length);
 				if (doc.data().isPrivate) {
 					const docPaperCode = doc.data().paperCode;
 					setNewPaperCode(docPaperCode.split(""));
@@ -60,7 +64,10 @@ function EditPaper() {
 		const {
 			target: { value },
 		} = e;
-		setNewPaperName(value);
+		if (value.length <= maxNameLength) {
+			setNewPaperName(value);
+			setCurrentNameLength(value.length);
+		}
 		if (value === paperObj.paperName) {
 			setIsNameValidate(true);
 		} else {
@@ -187,7 +194,7 @@ function EditPaper() {
 					validated={validated}
 					className="editPaper-form-container"
 				>
-					<Form.Group>
+					<Form.Group className="editPaper-form-group">
 						<Form.Label className="editPaper-form-title">
 							페이퍼 이름
 						</Form.Label>
@@ -197,6 +204,7 @@ function EditPaper() {
 								required
 								value={newPaperName}
 								ref={paperNameRef}
+								maxLength={maxNameLength}
 								onChange={onPaperNameChange}
 								onKeyDown={(e) => handleInputEnter(e)}
 								className="createPaper-form-text"
@@ -209,6 +217,9 @@ function EditPaper() {
 								페이퍼 이름을 입력해주세요!
 							</Form.Control.Feedback>
 						</InputGroup>
+						<Form.Text className="form-length-text">
+							{currentNameLength} / {maxNameLength}
+						</Form.Text>
 					</Form.Group>
 					<Divider />
 					<Form.Group>

@@ -39,6 +39,11 @@
 	font-weight: 700;
 }
 
+.editPaper-form-group {
+	display: flex !important;
+	flex-direction: column !important;
+}
+
 .editPaper-form-title {
 	color: #9f5757;
 	font-size: 1.7rem;
