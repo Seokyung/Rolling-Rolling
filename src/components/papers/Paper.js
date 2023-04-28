@@ -124,6 +124,7 @@ function Paper() {
 					<DeletePaper
 						deleteModal={deleteModal}
 						setDeleteModal={setDeleteModal}
+						paperId={paperId}
 					/>
 					<CreateMessage
 						paperId={paperId}

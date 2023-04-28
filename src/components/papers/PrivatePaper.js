@@ -110,7 +110,7 @@ function PrivatePaper() {
 			key,
 			type: "loading",
 			content: "로딩중...",
-			duration: 1,
+			duration: 0.7,
 		});
 		if (paperObj.paperCode === codes.join("")) {
 			navigate(`/paper/${paperId}`, { replace: true });

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { authService, dbService, storageService } from "api/fbase";
+import { authService, dbService } from "api/fbase";
 import { onAuthStateChanged } from "firebase/auth";
 import {
 	collection,
@@ -8,19 +8,15 @@ import {
 	where,
 	orderBy,
 	onSnapshot,
-	doc,
-	getDocs,
-	deleteDoc,
 } from "firebase/firestore";
-import { ref, deleteObject } from "firebase/storage";
 import { useSelector } from "react-redux";
 
-import { Skeleton, Empty, message, Tooltip, Popconfirm } from "antd";
-import { QuestionCircleOutlined } from "@ant-design/icons";
+import { Skeleton, Empty, message, Tooltip } from "antd";
 import { Row, Col, Card, Pagination } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import "./PaperList.css";
+import DeletePaper from "./DeletePaper";
 
 function PaperList() {
 	const userId = useSelector((state) => state.userReducer.uid);
@@ -35,8 +31,8 @@ function PaperList() {
 	const [pageArr, setPageArr] = useState([]);
 	const papersPerPage = 6;
 
-	const [messageApi, contextHolder] = message.useMessage();
-	const key = "updatable";
+	const [deleteModal, setDeleteModal] = useState(false);
+	const [paperListId, setPaperListId] = useState("");
 
 	useEffect(() => {
 		const q = query(
@@ -94,48 +90,9 @@ function PaperList() {
 		setCurrentPage(pageNumber);
 	};
 
-	const deletePaper = async (paper) => {
-		messageApi.open({
-			key,
-			type: "loading",
-			content: "페이지 삭제중...",
-		});
-		try {
-			const msgQuery = query(
-				collection(dbService, "papers", `${paper.id}`, "messages")
-			);
-			const msgSnapshot = await getDocs(msgQuery);
-			msgSnapshot.forEach(async (msg) => {
-				const msgRef = doc(
-					dbService,
-					"papers",
-					`${paper.id}`,
-					"messages",
-					`${msg.id}`
-				);
-				if (msg.data().msgImg !== "") {
-					const urlRef = ref(storageService, msg.data().msgImg);
-					await deleteObject(urlRef);
-				}
-				await deleteDoc(msgRef);
-			});
-			const paperRef = doc(dbService, "papers", `${paper.id}`);
-			await deleteDoc(paperRef);
-			messageApi.open({
-				key,
-				type: "success",
-				content: "페이퍼가 삭제되었습니다!",
-				duration: 2,
-			});
-		} catch (error) {
-			messageApi.open({
-				key,
-				type: "error",
-				content: "페이퍼 삭제에 실패하였습니다 😢",
-				duration: 2,
-			});
-			console.log(error.code);
-		}
+	const openDeleteModal = (paperId) => {
+		setDeleteModal(true);
+		setPaperListId(paperId);
 	};
 
 	return (
@@ -144,7 +101,6 @@ function PaperList() {
 				<Skeleton active />
 			) : (
 				<>
-					{contextHolder}
 					{isPapers ? (
 						<>
 							<Row sm={1} md={1} lg={2} xl={3} className="g-4">
@@ -171,28 +127,13 @@ function PaperList() {
 													{paper.createdAt}
 												</Card.Text>
 												{userId === paper.creatorId && (
-													<Popconfirm
-														placement="left"
-														title="페이퍼 삭제"
-														description="페이퍼를 삭제하시겠습니까?"
-														onConfirm={() => deletePaper(paper)}
-														okText="삭제"
-														okType="danger"
-														cancelText="취소"
-														icon={
-															<QuestionCircleOutlined
-																style={{
-																	color: "red",
-																}}
-															/>
-														}
-													>
+													<div className="paperList-card-delete-btn">
 														<Tooltip title="페이퍼 삭제">
-															<button className="paperList-card-delete-btn">
+															<button onClick={() => openDeleteModal(paper.id)}>
 																<FontAwesomeIcon icon={faTrash} />
 															</button>
 														</Tooltip>
-													</Popconfirm>
+													</div>
 												)}
 											</Card.Body>
 										</Card>
@@ -211,6 +152,11 @@ function PaperList() {
 									</Pagination.Item>
 								))}
 							</Pagination>
+							<DeletePaper
+								deleteModal={deleteModal}
+								setDeleteModal={setDeleteModal}
+								paperId={paperListId}
+							/>
 						</>
 					) : (
 						<Empty

@@ -20,6 +20,7 @@
 .home-paper-btn {
 	position: sticky;
 	position: -webkit-sticky;
+	z-index: 4;
 	align-self: flex-end;
 	padding: 1.5rem 2rem;
 	right: 4rem;

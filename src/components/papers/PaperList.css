@@ -6,7 +6,7 @@
 
 .paperList-card-container {
 	display: flex !important;
-	justify-content: center !important;
+	flex-direction: column !important;
 	background-color: #fffdfd !important;
 	border: none !important;
 	box-shadow: 0.5rem 0.5rem 0.5rem #a0827f !important;
@@ -35,26 +35,23 @@
 .paperList-card-date {
 	color: #454545;
 	font-size: 1.3rem;
-	margin-bottom: 2rem;
 }
 
 .paperList-card-delete-btn {
-	position: absolute;
-	padding: 0.1rem;
-	right: 2.6rem;
-	bottom: 2rem;
+	display: flex;
+	justify-content: right;
+}
+.paperList-card-delete-btn button {
 	color: #9d4040;
+	font-size: 2rem;
 	outline: none;
 	appearance: none;
 	border: none;
 	white-space: nowrap;
 	background: none;
 }
-.paperList-card-delete-btn svg {
-	width: 2rem;
-	height: 2rem;
-}
-.paperList-card-delete-btn svg:hover {
+.paperList-card-delete-btn svg:hover,
+.paperList-card-delete-btn svg:active {
 	color: #823636;
 }
 

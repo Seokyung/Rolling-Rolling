@@ -6,11 +6,13 @@ import {
 	Navigate,
 	BrowserRouter,
 } from "react-router-dom";
+import Navigation from "routes/Navigation";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
 import Auth from "../pages/Auth";
-import PaperRouter from "./PaperRouter";
-import Navigation from "components/menu/Navigation";
+import Paper from "components/papers/Paper";
+import PrivatePaper from "components/papers/PrivatePaper";
+import EditPaper from "components/papers/EditPaper";
 
 function AppRouter({ isLoggedIn, refreshUser }) {
 	return (
@@ -21,11 +23,21 @@ function AppRouter({ isLoggedIn, refreshUser }) {
 						<Navigation />
 						<Routes>
 							<Route exact path="/" element={<Home />} />
-							<Route path="/paper/*" element={<PaperRouter />} />
 							<Route
 								exact
 								path="/profile"
 								element={<Profile refreshUser={refreshUser} />}
+							/>
+							<Route exact path="/paper/:paperId" element={<Paper />} />
+							<Route
+								exact
+								path="/paper/private/:paperId"
+								element={<PrivatePaper />}
+							/>
+							<Route
+								exact
+								path="/paper/edit/:paperId"
+								element={<EditPaper />}
 							/>
 							<Route path="*" element={<Navigate to={"/"} />} />
 						</Routes>

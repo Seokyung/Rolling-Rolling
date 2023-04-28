@@ -32,6 +32,7 @@
 	color: #fffdfd;
 	background-color: #9f5757;
 	border-radius: 40px;
+	box-shadow: 0.3rem 0.5rem 0.5rem rgba(150, 143, 142);
 	border: none;
 	outline: none;
 	appearance: none;
@@ -41,7 +42,8 @@
 .paperSettings-offcanvas-body button svg {
 	margin-right: 0.7rem;
 }
-.paperSettings-offcanvas-body button:hover {
+.paperSettings-offcanvas-body button:hover,
+.paperSettings-offcanvas-body button:active {
 	background-color: #944444;
 }
 

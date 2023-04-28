@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { dbService, storageService } from "api/fbase";
 import { doc, deleteDoc, query, collection, getDocs } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
-import { useSelector } from "react-redux";
 
 import { Modal, Button } from "react-bootstrap";
 import { message } from "antd";
@@ -11,8 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import "./DeletePaper.css";
 
-function DeletePaper({ deleteModal, setDeleteModal }) {
-	const paperId = useSelector((state) => state.paperReducer.paperId);
+function DeletePaper({ deleteModal, setDeleteModal, paperId }) {
 	const navigate = useNavigate();
 
 	const [messageApi, contextHolder] = message.useMessage();
