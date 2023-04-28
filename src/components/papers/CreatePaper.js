@@ -167,7 +167,7 @@ function CreatePaper({ paperModal, setPaperModal }) {
 			messageApi.open({
 				key,
 				type: "success",
-				content: `${paperName} 페이지가 생성되었습니다!`,
+				content: `${paperName} 페이퍼가 생성되었습니다!`,
 				duration: 2,
 			});
 		} catch (error) {

@@ -1,9 +1,9 @@
 .paper-wrapper {
 	display: flex;
 	flex-direction: column;
-	width: 100%;
+	width: 80%;
 	height: auto;
-	padding: 1rem 3rem 4rem 3rem;
+	margin: 0 auto;
 }
 
 .paper-container {
@@ -18,12 +18,14 @@
 
 .paper-header-container {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
 	width: 100%;
 }
 
 .paper-prev-btn {
+	position: absolute;
+	left: 13%;
 	color: #9f5757;
 	outline: none;
 	appearance: none;
@@ -53,6 +55,8 @@
 }
 
 .paper-setting-btn {
+	position: absolute;
+	right: 13%;
 	color: #9f5757;
 	outline: none;
 	appearance: none;
@@ -70,13 +74,15 @@
 	position: -webkit-sticky;
 	align-self: flex-end;
 	padding: 1.5rem 2rem;
-	right: 4rem;
+	right: 0;
 	bottom: 3rem;
+	margin-right: -3rem;
+	margin-bottom: 3rem;
 	color: #fffdfd;
 	font-size: 1.7rem;
 	background-color: #9f5757;
 	border-radius: 40px;
-	box-shadow: 0.3rem 0.5rem 0.5rem rgba(150, 143, 142, 0.8);
+	/* box-shadow: 0.3rem 0.5rem 0.5rem rgba(150, 143, 142, 0.8); */
 	outline: none;
 	appearance: none;
 	border: none;
@@ -98,7 +104,7 @@
 
 @media screen and (max-width: 1023px) {
 	.paper-wrapper {
-		padding: 1rem 2rem 4rem 2rem;
+		width: 90%;
 	}
 
 	.paper-container {
@@ -113,6 +119,8 @@
 
 	.paper-create-message-btn {
 		align-self: center;
+		margin-right: 0;
+		margin-bottom: 5rem;
 		padding: 1.8rem 6rem;
 		bottom: 5rem;
 		font-size: 2rem;

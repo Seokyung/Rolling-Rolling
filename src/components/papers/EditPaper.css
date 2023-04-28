@@ -1,13 +1,13 @@
 .editPaper-header-container {
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
 	width: 100%;
 }
 
 .editPaper-prev-btn {
 	position: absolute;
-	left: 6rem;
+	left: 13%;
 	color: #9f5757;
 	outline: none;
 	appearance: none;

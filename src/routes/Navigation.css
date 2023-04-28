@@ -28,7 +28,7 @@
 .navigation-menu {
 	position: absolute;
 	transform: translateY(-50%);
-	right: 2rem;
+	right: 11%;
 	top: 50%;
 	margin: 0;
 	padding: 0;
@@ -102,6 +102,10 @@
 @media screen and (max-width: 1023px) {
 	.navigation-container {
 		height: 10%;
+	}
+
+	.navigation-menu {
+		right: 2rem;
 	}
 
 	.navigation-menu svg {

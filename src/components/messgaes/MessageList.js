@@ -11,7 +11,7 @@ import {
 import Message from "components/messgaes/Message";
 import { useSelector } from "react-redux";
 
-import { Row, Col, Card } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import "./MessageList.css";
 
 function MessageList() {
@@ -57,12 +57,10 @@ function MessageList() {
 
 	return (
 		<div className="messageList-container">
-			<Row md={3} className="g-2">
+			<Row sm={2} md={2} lg={3} xl={3} className="g-4">
 				{messages.map((message) => (
 					<Col key={message.id}>
-						<Card>
-							<Message msgObj={message} isOwner={creatorId === userId} />
-						</Card>
+						<Message msgObj={message} isOwner={creatorId === userId} />
 					</Col>
 				))}
 			</Row>

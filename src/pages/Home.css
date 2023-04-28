@@ -1,9 +1,9 @@
 .home-container {
 	display: flex;
 	flex-direction: column;
-	width: 100%;
+	width: 80%;
 	height: auto;
-	padding: 0 3rem 4rem 3rem;
+	margin: 0 auto;
 }
 
 .home-paper-container {
@@ -23,13 +23,15 @@
 	z-index: 4;
 	align-self: flex-end;
 	padding: 1.5rem 2rem;
-	right: 4rem;
+	right: 0;
 	bottom: 3rem;
+	margin-right: -3rem;
+	margin-bottom: 3rem;
 	color: #fffdfd;
 	font-size: 1.7rem;
 	background-color: #9f5757;
 	border-radius: 40px;
-	box-shadow: 0.3rem 0.5rem 0.5rem rgba(150, 143, 142, 0.8);
+	/* box-shadow: 0.3rem 0.5rem 0.5rem rgba(150, 143, 142, 0.8); */
 	outline: none;
 	appearance: none;
 	border: none;
@@ -51,7 +53,7 @@
 
 @media screen and (max-width: 1023px) {
 	.home-container {
-		padding: 0 2rem 4rem 2rem;
+		width: 90%;
 	}
 
 	.home-paper-container {
@@ -62,6 +64,8 @@
 
 	.home-paper-btn {
 		align-self: center;
+		margin-right: 0;
+		margin-bottom: 0;
 		padding: 1.8rem 6rem;
 		bottom: 5rem;
 		font-size: 2rem;

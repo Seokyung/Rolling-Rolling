@@ -3,6 +3,9 @@ import { dbService, storageService } from "api/fbase";
 import { doc, deleteDoc } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 
+import { Card, Button } from "react-bootstrap";
+import "./Message.css";
+
 function Message({ msgObj, isOwner }) {
 	const deleteMessage = async (msgObj) => {
 		const isDelete = window.confirm(
@@ -26,22 +29,30 @@ function Message({ msgObj, isOwner }) {
 	};
 
 	return (
-		<div>
-			<h3>
-				{msgObj.isPrivate && "🔒"}
-				{msgObj.msgTitle}
-			</h3>
-			<h4>{msgObj.msgWriter}</h4>
-			<p>{msgObj.msgContent}</p>
-			{msgObj.msgImg && (
-				<a href={msgObj.msgImg} target="_blank" rel="noopener noreferrer">
-					<img src={msgObj.msgImg} width="150px" alt="messageImage" />
-				</a>
-			)}
-			{isOwner && (
-				<button onClick={() => deleteMessage(msgObj)}>메세지 삭제</button>
-			)}
-		</div>
+		<Card className="message-card-container">
+			<Card.Body>
+				<Card.Title>
+					{msgObj.isPrivate && "🔒"}
+					{msgObj.msgTitle}
+				</Card.Title>
+				<Card.Subtitle>{msgObj.msgWriter}</Card.Subtitle>
+				<Card.Text>{msgObj.msgContent}</Card.Text>
+				{msgObj.msgImg && (
+					<Card.Link
+						href={msgObj.msgImg}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<Card.Img src={msgObj.msgImg} width="150px" alt="messageImage" />
+					</Card.Link>
+				)}
+				{isOwner && (
+					<div className="message-delete-btn">
+						<Button onClick={() => deleteMessage(msgObj)}>메세지 삭제</Button>
+					</div>
+				)}
+			</Card.Body>
+		</Card>
 	);
 }
 
