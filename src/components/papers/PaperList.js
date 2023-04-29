@@ -10,6 +10,7 @@ import {
 	onSnapshot,
 } from "firebase/firestore";
 import { useSelector } from "react-redux";
+import useDebounce from "modules/useDebounce";
 import DeletePaper from "./DeletePaper";
 
 import { Skeleton, Empty } from "antd";
@@ -29,7 +30,20 @@ function PaperList() {
 
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageArr, setPageArr] = useState([]);
-	const papersPerPage = 6;
+	// const papersPerPage = 6;
+
+	const [papersPerPage, setPapersPerPage] = useState(12);
+	const debouncedPapersPerPage = useDebounce(papersPerPage, 500);
+
+	// const [papersPerPage, setPapersPerPage] = useState(
+	// 	parseInt(
+	// 		getComputedStyle(document.documentElement).getPropertyValue(
+	// 			"--papers-per-page"
+	// 		)
+	// 	)
+	// );
+	// const debouncingTime = 300;
+	// const debouncingTimer = useRef(null);
 
 	const [deleteModal, setDeleteModal] = useState(false);
 	const [paperListId, setPaperListId] = useState("");
@@ -65,7 +79,22 @@ function PaperList() {
 				unsubscribe();
 			}
 		});
+
+		window.addEventListener("resize", handleResize);
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
 	}, []);
+
+	const handleResize = () => {
+		if (window.screen.width > 1199) {
+			setPapersPerPage(12);
+		} else if (window.screen.width > 991) {
+			setPapersPerPage(10);
+		} else {
+			setPapersPerPage(5);
+		}
+	};
 
 	useEffect(() => {
 		const papersToShow = papers.slice(
@@ -84,7 +113,7 @@ function PaperList() {
 		}
 		setSlicedPapers(papersToShow);
 		setPageArr(newPageArr);
-	}, [papers, currentPage]);
+	}, [papers, currentPage, debouncedPapersPerPage]);
 
 	const onPageChange = (pageNumber) => {
 		setCurrentPage(pageNumber);
