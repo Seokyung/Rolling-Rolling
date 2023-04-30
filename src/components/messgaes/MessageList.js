@@ -44,8 +44,7 @@ function MessageList() {
 				setMessages(messageArray);
 			},
 			(error) => {
-				alert(`Paper: ${error.message}`);
-				console.log(`Paper: ${error}`);
+				console.log(error.code);
 			}
 		);
 		onAuthStateChanged(authService, (user) => {

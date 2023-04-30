@@ -31,7 +31,13 @@ function PaperList() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageArr, setPageArr] = useState([]);
 
-	const [papersPerPage, setPapersPerPage] = useState(12);
+	const [papersPerPage, setPapersPerPage] = useState(
+		parseInt(
+			getComputedStyle(document.documentElement).getPropertyValue(
+				"--papers-per-page"
+			)
+		)
+	);
 	const debouncedPapersPerPage = useDebounce(papersPerPage, 500);
 
 	const [deleteModal, setDeleteModal] = useState(false);
@@ -59,8 +65,7 @@ function PaperList() {
 				setInit(false);
 			},
 			(error) => {
-				alert(`Home: ${error.message}`);
-				console.log(`Home: ${error}`);
+				console.log(error.code);
 			}
 		);
 		onAuthStateChanged(authService, (user) => {
@@ -136,7 +141,9 @@ function PaperList() {
 												>
 													<Card.Title>
 														<h4 className="paperList-card-title">
-															{paper.isPrivate && "🔒"}
+															{paper.isPrivate && (
+																<span className="private-icon">🔒</span>
+															)}
 															{paper.paperName}
 														</h4>
 													</Card.Title>

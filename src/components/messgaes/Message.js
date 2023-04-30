@@ -31,19 +31,27 @@ function Message({ msgObj, isOwner }) {
 	return (
 		<Card className="message-card-container">
 			<Card.Body>
-				<Card.Title>
-					{msgObj.isPrivate && "🔒"}
+				<Card.Title className="message-card-title">
+					{msgObj.isPrivate && <span className="private-icon">🔒</span>}
 					{msgObj.msgTitle}
 				</Card.Title>
-				<Card.Subtitle>{msgObj.msgWriter}</Card.Subtitle>
-				<Card.Text>{msgObj.msgContent}</Card.Text>
+				<Card.Subtitle className="message-card-writer">
+					작성자: {msgObj.msgWriter}
+				</Card.Subtitle>
+				<Card.Text className="message-card-content">
+					{msgObj.msgContent}
+				</Card.Text>
 				{msgObj.msgImg && (
 					<Card.Link
 						href={msgObj.msgImg}
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						<Card.Img src={msgObj.msgImg} width="150px" alt="messageImage" />
+						<Card.Img
+							src={msgObj.msgImg}
+							className="message-card-img"
+							alt="messageImage"
+						/>
 					</Card.Link>
 				)}
 				{isOwner && (
