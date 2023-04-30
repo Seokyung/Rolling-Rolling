@@ -30,20 +30,9 @@ function PaperList() {
 
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageArr, setPageArr] = useState([]);
-	// const papersPerPage = 6;
 
 	const [papersPerPage, setPapersPerPage] = useState(12);
 	const debouncedPapersPerPage = useDebounce(papersPerPage, 500);
-
-	// const [papersPerPage, setPapersPerPage] = useState(
-	// 	parseInt(
-	// 		getComputedStyle(document.documentElement).getPropertyValue(
-	// 			"--papers-per-page"
-	// 		)
-	// 	)
-	// );
-	// const debouncingTime = 300;
-	// const debouncingTimer = useRef(null);
 
 	const [deleteModal, setDeleteModal] = useState(false);
 	const [paperListId, setPaperListId] = useState("");
@@ -92,7 +81,7 @@ function PaperList() {
 		} else if (window.screen.width > 991) {
 			setPapersPerPage(10);
 		} else {
-			setPapersPerPage(5);
+			setPapersPerPage(6);
 		}
 	};
 
@@ -132,7 +121,7 @@ function PaperList() {
 				<>
 					{isPapers ? (
 						<>
-							<Row sm={1} md={1} lg={2} xl={3} className="g-4">
+							<Row xs={1} sm={1} md={1} lg={2} xl={3} className="g-4">
 								{slicedPapers.map((paper) => (
 									<Col key={paper.id}>
 										<Card className="paperList-card-container">
