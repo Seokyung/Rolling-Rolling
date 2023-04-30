@@ -24,7 +24,7 @@ function DeletePaper({ deleteModal, setDeleteModal, paperId }) {
 		await messageApi.open({
 			key,
 			type: "loading",
-			content: "페이지 삭제중...",
+			content: "페이퍼 삭제중...",
 			duration: 0.5,
 		});
 

@@ -15,8 +15,8 @@
 	background-color: #9f5757 !important;
 	border-color: #9f5757 !important;
 }
-.message-delete-btn svg:hover,
-.message-delete-btn svg:active {
+.message-delete-btn button:hover,
+.message-delete-btn button:active {
 	background-color: #944444 !important;
 }
 

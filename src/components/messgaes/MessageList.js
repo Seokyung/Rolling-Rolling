@@ -57,7 +57,7 @@ function MessageList() {
 
 	return (
 		<div className="messageList-container">
-			<Row sm={2} md={2} lg={3} xl={3} className="g-4">
+			<Row xs={2} sm={2} md={2} lg={3} xl={3} className="g-4">
 				{messages.map((message) => (
 					<Col key={message.id}>
 						<Message msgObj={message} isOwner={creatorId === userId} />
