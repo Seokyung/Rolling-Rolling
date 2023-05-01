@@ -126,7 +126,7 @@ function PaperList() {
 				<>
 					{isPapers ? (
 						<>
-							<Row xs={1} sm={1} md={1} lg={2} xl={3} className="g-4">
+							<Row md={1} lg={2} xl={3} className="g-4">
 								{slicedPapers.map((paper) => (
 									<Col key={paper.id}>
 										<Card className="paperList-card-container">

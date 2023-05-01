@@ -18,11 +18,11 @@
 
 .message-card-writer {
 	font-size: 1.2rem !important;
-	margin-bottom: 1rem !important;
 }
 
 .message-card-content {
 	font-size: 1.4rem !important;
+	color: #303030 !important;
 }
 
 .message-card-img {

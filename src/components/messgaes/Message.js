@@ -35,8 +35,9 @@ function Message({ msgObj, isOwner }) {
 					{msgObj.isPrivate && <span className="private-icon">🔒</span>}
 					{msgObj.msgTitle}
 				</Card.Title>
-				<Card.Subtitle className="message-card-writer">
-					작성자: {msgObj.msgWriter}
+				<Card.Subtitle className="mb-3 text-muted message-card-writer">
+					<span className="private-icon">👤</span>
+					{msgObj.msgWriter}
 				</Card.Subtitle>
 				<Card.Text className="message-card-content">
 					{msgObj.msgContent}

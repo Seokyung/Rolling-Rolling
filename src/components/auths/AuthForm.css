@@ -4,7 +4,7 @@
 	justify-content: center;
 	align-items: center;
 	padding: 3rem;
-	width: 80%;
+	width: 100%;
 	border-radius: 30px;
 	background-color: #fffdfd;
 }
@@ -115,7 +115,7 @@
 	text-decoration: underline;
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 992px) {
 	.authForm-container {
 		width: 100%;
 		height: 100%;

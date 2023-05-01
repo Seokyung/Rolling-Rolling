@@ -54,7 +54,7 @@ function App() {
 	};
 
 	return (
-		<div>
+		<div className="app-container">
 			{init ? (
 				<div className="app-init-container">
 					<FontAwesomeIcon className="app-init-icon" icon={faScroll} spin />

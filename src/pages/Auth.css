@@ -3,52 +3,39 @@
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	width: 100%;
+	width: 80%;
 	height: 100%;
-	padding: 2rem;
-}
-
-.auth-logo-container {
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
-	align-items: center;
-	width: 40%;
-	height: 100%;
-	padding: 2rem;
+	margin: 0 auto;
 }
 
 .auth-login-container {
 	display: flex;
+	justify-content: center;
 	align-items: center;
-	width: 60%;
-	height: 100%;
-	padding: 2rem;
+	width: 55%;
+	height: auto;
+	margin-left: 5rem;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 992px) and (max-width: 1200px) {
 	.auth-login-container {
-		max-width: 700px;
+		margin-left: 3rem;
 	}
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 992px) {
 	.auth-container {
 		flex-direction: column;
-		justify-content: flex-start;
+		width: 90%;
 		height: auto;
-		margin-top: 5rem;
-		margin-bottom: 5rem;
-	}
-
-	.auth-logo-container {
-		justify-content: center;
-		width: 100%;
+		margin: 10rem auto;
 	}
 
 	.auth-login-container {
 		flex-direction: column;
-		width: 100%;
+		width: 80%;
 		height: auto;
+		margin-top: 5rem;
+		margin-left: 0;
 	}
 }

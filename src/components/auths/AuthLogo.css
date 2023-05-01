@@ -1,28 +1,45 @@
-.logoContainer {
+.auth-logo-container {
 	display: flex;
-	justify-content: flex-end;
+	flex-direction: row;
 	align-items: center;
-	width: 100%;
-	max-width: 500px;
-}
-
-.logoImg {
-	width: 80%;
-	min-width: 300px;
+	width: 45%;
 	height: auto;
 }
 
-@media screen and (max-width: 1023px) {
-	.logoContainer {
+.logo-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+.logo-container img {
+	display: flex;
+	min-width: 380px;
+	max-width: 500px;
+	height: auto;
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+	.logo-container img {
+		min-width: 340px;
+		max-width: 380px;
+	}
+}
+
+@media screen and (max-width: 992px) {
+	.auth-logo-container {
+		width: 80%;
+		justify-content: center;
+	}
+
+	.logo-container {
 		width: auto;
 		margin-top: 2rem;
 		margin-bottom: 2rem;
 	}
-
-	.logoImg {
-		max-width: 500px;
-		width: 100%;
+	.logo-container img {
 		min-width: 200px;
+		max-width: 380px;
 		object-fit: contain;
 	}
 }

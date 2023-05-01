@@ -13,9 +13,7 @@ function Auth() {
 
 	return (
 		<div className="auth-container">
-			<div className="auth-logo-container">
-				<AuthLogo />
-			</div>
+			<AuthLogo />
 			<div className="auth-login-container">
 				{isSocial ? (
 					<SocialAuth onLoginMethodChange={onLoginMethodChange} />

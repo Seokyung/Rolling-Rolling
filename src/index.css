@@ -20,14 +20,14 @@ body,
 		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-@media screen and (max-width: 1023px) {
+/* @media screen and (max-width: 1023px) {
 	html,
 	body,
 	#root,
 	#root > div {
 		font-size: 100%;
 	}
-}
+} */
 
 * {
 	box-sizing: border-box;
