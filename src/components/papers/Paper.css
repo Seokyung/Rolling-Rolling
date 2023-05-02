@@ -102,7 +102,7 @@
 	margin-right: 0.5rem;
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 1024px) {
 	.paper-wrapper {
 		width: 90%;
 	}

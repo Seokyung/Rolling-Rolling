@@ -137,14 +137,12 @@ function AuthForm({ onLoginMethodChange }) {
 	return (
 		<>
 			{contextHolder}
-			<div className="authForm-container">
+			<div className="login-container">
 				<div className="authForm-header">
 					<button className="authForm-header-btn" onClick={onLoginMethodChange}>
 						<FontAwesomeIcon icon={faAngleLeft} />
 					</button>
-					<h3 className="authForm-header-title">
-						{newAccount ? "회원가입" : "로그인"}
-					</h3>
+					<h3 className="login-title">{newAccount ? "회원가입" : "로그인"}</h3>
 				</div>
 				<Form
 					className="authForm-form-container"
@@ -225,7 +223,7 @@ function AuthForm({ onLoginMethodChange }) {
 					</Button>
 				</Form>
 				<div className="authForm-small-container">
-					<span className="authForm-small-toggle-text" onClick={toggleAuthForm}>
+					<span className="login-form-text-container" onClick={toggleAuthForm}>
 						{newAccount
 							? "이미 계정이 있으신가요? 로그인하기"
 							: "계정이 없으신가요? 회원가입하기"}
