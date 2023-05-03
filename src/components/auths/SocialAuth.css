@@ -3,17 +3,23 @@
 	flex-direction: column;
 	justify-content: center !important;
 	align-self: center !important;
-	/* width: 90%; */
+	width: 100% !important;
 }
 
 .social-btn {
+	display: flex !important;
+	justify-content: center !important;
+	align-items: center !important;
 	align-self: center !important;
 	width: 100%;
 	padding: 2rem !important;
 	color: #fffdfd !important;
-	font-size: 2.5rem !important;
+	font-size: 2.2rem !important;
 	border: none !important;
 	box-shadow: 0.3rem 0.5rem 0.5rem #cccaca !important;
+}
+.social-btn svg {
+	font-size: 2.5rem;
 }
 .google {
 	background-color: #4285f4 !important;
@@ -46,10 +52,10 @@
 	margin-right: 1rem;
 }
 
-.login-form-text-container {
+.login-form-text {
 	width: 100%;
 	cursor: pointer;
-	font-size: 2rem;
+	font-size: 1.8rem;
 	color: #6e6e6e;
 	text-align: center;
 	text-decoration: underline;
@@ -57,22 +63,12 @@
 
 @media screen and (max-width: 1024px) {
 	.social-form-container {
-		width: 100%;
 		padding: 3rem 3rem 2rem 3rem;
-	}
-
-	.social-btn {
-		/* margin: 1.25rem 0;
-		padding: 1.75rem !important; */
 	}
 }
 
 @media screen and (min-width: 1025px) {
 	.social-form-container {
-		width: 100%;
-		/* padding: 3rem; */
+		padding: 2rem;
 	}
-}
-
-@media screen and (min-width: 1400px) {
 }

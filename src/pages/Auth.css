@@ -12,7 +12,6 @@
 
 .auth-login-container {
 	display: flex;
-	justify-content: center;
 	align-items: center;
 	height: auto;
 }
@@ -41,6 +40,7 @@
 
 	.auth-login-container {
 		flex-direction: column;
+		justify-content: center;
 		width: 100%;
 		max-width: 700px;
 		margin-top: 5rem;
@@ -49,6 +49,7 @@
 	.login-container {
 		padding: 5rem;
 		border-radius: 40px;
+		min-width: 400px;
 	}
 }
 
@@ -56,32 +57,30 @@
 	.auth-container {
 		flex-direction: row;
 		justify-content: center;
-		width: 80%;
+		width: 90%;
 		height: 100%;
 	}
 
 	.auth-logo-container {
 		width: 50%;
+		margin-right: 2rem;
 	}
 
 	.auth-login-container {
 		width: 50%;
 		flex-direction: row;
+		justify-content: flex-start;
+		margin-left: 2rem;
 	}
 
 	.login-container {
+		padding: 4rem;
 		border-radius: 30px;
-		max-width: 580px;
 	}
 }
 
-/* @media screen and (min-width: 1400px) {
-	.auth-logo-container {
-		width: 50%;
+@media screen and (min-width: 1400px) {
+	.login-container {
+		max-width: 600px;
 	}
-
-	.auth-login-container {
-		width: 50%;
-		justify-content: left;
-	}
-} */
+}

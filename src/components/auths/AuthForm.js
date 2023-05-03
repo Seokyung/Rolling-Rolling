@@ -226,7 +226,7 @@ function AuthForm({ onLoginMethodChange }) {
 						{newAccount ? "회원가입" : "로그인"}
 					</Button>
 				</Form>
-				<span className="login-form-text-container" onClick={toggleAuthForm}>
+				<span className="login-form-text" onClick={toggleAuthForm}>
 					{newAccount
 						? "이미 계정이 있으신가요? 로그인하기"
 						: "계정이 없으신가요? 회원가입하기"}

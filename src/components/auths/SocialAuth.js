@@ -64,12 +64,9 @@ function SocialAuth({ onLoginMethodChange }) {
 					깃허브 로그인
 				</Button>
 			</Stack>
-			<Form.Text
-				onClick={onLoginMethodChange}
-				bsPrefix="login-form-text-container"
-			>
+			<span className="login-form-text" onClick={onLoginMethodChange}>
 				이메일로 로그인하기
-			</Form.Text>
+			</span>
 		</div>
 	);
 }
