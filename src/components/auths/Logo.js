@@ -2,9 +2,9 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 
 import logoImg from "assets/Rolling-Rolling_logo.png";
-import "./AuthLogo.css";
+import "./Logo.css";
 
-function AuthLogo() {
+function Logo() {
 	const location = useLocation();
 
 	const reloadHome = () => {
@@ -15,12 +15,10 @@ function AuthLogo() {
 	};
 
 	return (
-		<div className="auth-logo-container">
-			<div className="logo-container">
-				<img src={logoImg} onClick={reloadHome} alt="logo" />
-			</div>
+		<div className="logo-container">
+			<img src={logoImg} onClick={reloadHome} alt="logo" />
 		</div>
 	);
 }
 
-export default AuthLogo;
+export default Logo;

@@ -3,13 +3,13 @@
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	margin-bottom: 1rem;
 	width: 100%;
 }
 
-.authForm-header-btn {
+.authForm-prev-btn {
 	position: absolute;
 	left: 0;
+	font-size: 3rem;
 	color: #6e6e6e;
 	outline: none;
 	appearance: none;
@@ -17,10 +17,9 @@
 	white-space: nowrap;
 	background: none;
 }
-
-.authForm-header-btn svg {
-	width: 3rem;
-	height: 3rem;
+.authForm-prev-btn:hover,
+.authForm-prev-btn:active {
+	color: #585858;
 }
 
 .authForm-form-container {
@@ -70,15 +69,14 @@
 }
 
 .authForm-btn {
-	margin-top: 0.5rem;
-	margin-bottom: 0.5rem;
+	margin-top: 1rem !important;
+	padding: 2rem !important;
+	font-size: 2.5rem !important;
 	background-color: #9f5757 !important;
 	border-color: #9f5757 !important;
 }
-.authForm-btn span {
-	font-size: 2.2rem;
-}
-.authForm-btn:hover {
+.authForm-btn:hover,
+.authForm-btn:active {
 	background-color: #944444 !important;
 }
 
@@ -99,8 +97,12 @@
 }
 
 @media screen and (max-width: 1024px) {
+	.authForm-form-container {
+		padding: 3rem 3rem 2rem 3rem;
+	}
+
 	.authForm-form-group {
-		margin-bottom: 1.5rem;
+		margin-bottom: 2rem;
 	}
 
 	.form-floating {
@@ -113,13 +115,6 @@
 
 	.authForm-input-text {
 		font-size: 2.3rem !important;
-	}
-
-	.authForm-btn {
-		margin-bottom: 1rem;
-	}
-	.authForm-btn span {
-		font-size: 2.5rem;
 	}
 
 	.authForm-small-toggle-text {

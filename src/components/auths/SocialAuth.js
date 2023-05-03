@@ -38,10 +38,9 @@ function SocialAuth({ onLoginMethodChange }) {
 	return (
 		<div className="login-container">
 			<h3 className="login-title">간편 로그인</h3>
-			<Stack className="social-form-container">
+			<Stack className="social-form-container" gap={5}>
 				<Button
-					className="social-btn"
-					variant="light"
+					className="social-btn google"
 					name="google"
 					onClick={onSocialClick}
 				>
@@ -49,8 +48,7 @@ function SocialAuth({ onLoginMethodChange }) {
 					구글 로그인
 				</Button>
 				<Button
-					className="social-btn"
-					variant="light"
+					className="social-btn facebook"
 					name="facebook"
 					onClick={onSocialClick}
 				>
@@ -58,8 +56,7 @@ function SocialAuth({ onLoginMethodChange }) {
 					페이스북 로그인
 				</Button>
 				<Button
-					className="social-btn"
-					variant="light"
+					className="social-btn github"
 					name="github"
 					onClick={onSocialClick}
 				>

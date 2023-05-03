@@ -115,7 +115,7 @@ function AuthForm({ onLoginMethodChange }) {
 				key,
 				type: "success",
 				content: `${
-					newAccount ? "회원가입이 완료되었습니다!" : "로그인 되었습니다!"
+					newAccount ? "회원가입이 완료되었습니다!" : "로그인되었습니다!"
 				}`,
 				duration: 2,
 			});
@@ -126,10 +126,14 @@ function AuthForm({ onLoginMethodChange }) {
 				content: `${newAccount ? "회원가입" : "로그인"}에 실패하였습니다 😢`,
 				duration: 2,
 			});
+			if (newAccount) {
+				setErrorMsg("유효하지 않은 이메일 또는 비밀번호입니다");
+			} else {
+				setErrorMsg("이메일 또는 비밀번호가 올바르지 않습니다");
+			}
 			setPassword("");
 			setCheckPassword("");
 			setValidated(true);
-			setErrorMsg(`이메일 또는 비밀번호가 올바르지 않습니다 (${error.code})`);
 			console.log(error.code);
 		}
 	};
@@ -139,7 +143,7 @@ function AuthForm({ onLoginMethodChange }) {
 			{contextHolder}
 			<div className="login-container">
 				<div className="authForm-header">
-					<button className="authForm-header-btn" onClick={onLoginMethodChange}>
+					<button className="authForm-prev-btn" onClick={onLoginMethodChange}>
 						<FontAwesomeIcon icon={faAngleLeft} />
 					</button>
 					<h3 className="login-title">{newAccount ? "회원가입" : "로그인"}</h3>
@@ -219,16 +223,14 @@ function AuthForm({ onLoginMethodChange }) {
 						<Form.Text className="authForm-form-error">{errorMsg}</Form.Text>
 					)}
 					<Button className="authForm-btn" variant="primary" type="submit">
-						<span>{newAccount ? "회원가입" : "로그인"}</span>
+						{newAccount ? "회원가입" : "로그인"}
 					</Button>
 				</Form>
-				<div className="authForm-small-container">
-					<span className="login-form-text-container" onClick={toggleAuthForm}>
-						{newAccount
-							? "이미 계정이 있으신가요? 로그인하기"
-							: "계정이 없으신가요? 회원가입하기"}
-					</span>
-				</div>
+				<span className="login-form-text-container" onClick={toggleAuthForm}>
+					{newAccount
+						? "이미 계정이 있으신가요? 로그인하기"
+						: "계정이 없으신가요? 회원가입하기"}
+				</span>
 			</div>
 		</>
 	);

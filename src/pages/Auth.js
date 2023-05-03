@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AuthLogo from "components/auths/AuthLogo";
+import Logo from "components/auths/Logo";
 import AuthForm from "components/auths/AuthForm";
 import SocialAuth from "components/auths/SocialAuth";
 import "./Auth.css";
@@ -13,7 +13,9 @@ function Auth() {
 
 	return (
 		<div className="auth-container">
-			<AuthLogo />
+			<div className="auth-logo-container">
+				<Logo />
+			</div>
 			<div className="auth-login-container">
 				{isSocial ? (
 					<SocialAuth onLoginMethodChange={onLoginMethodChange} />
