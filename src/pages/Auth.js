@@ -17,11 +17,13 @@ function Auth() {
 				<Logo />
 			</div>
 			<div className="auth-login-container">
-				{isSocial ? (
-					<SocialAuth onLoginMethodChange={onLoginMethodChange} />
-				) : (
-					<AuthForm onLoginMethodChange={onLoginMethodChange} />
-				)}
+				<div className="login-container">
+					{isSocial ? (
+						<SocialAuth onLoginMethodChange={onLoginMethodChange} />
+					) : (
+						<AuthForm onLoginMethodChange={onLoginMethodChange} />
+					)}
+				</div>
 			</div>
 		</div>
 	);

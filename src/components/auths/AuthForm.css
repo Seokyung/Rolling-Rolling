@@ -77,6 +77,20 @@
 	background-color: #944444 !important;
 }
 
+.authForm-text {
+	width: 100%;
+	font-size: 1.8rem;
+	color: #6e6e6e;
+	text-align: center;
+}
+
+.authForm-toggle-text {
+	margin-left: 1rem;
+	cursor: pointer;
+	color: #9f5757;
+	text-decoration: underline;
+}
+
 @media screen and (max-width: 1024px) {
 	.authForm-form-container {
 		padding: 3rem 3rem 2rem 3rem;

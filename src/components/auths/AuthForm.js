@@ -141,97 +141,107 @@ function AuthForm({ onLoginMethodChange }) {
 	return (
 		<>
 			{contextHolder}
-			<div className="login-container">
-				<div className="authForm-header">
-					<button className="authForm-prev-btn" onClick={onLoginMethodChange}>
-						<FontAwesomeIcon icon={faAngleLeft} />
-					</button>
-					<h3 className="login-title">{newAccount ? "회원가입" : "로그인"}</h3>
-				</div>
-				<Form
-					className="authForm-form-container"
-					noValidate
-					validated={validated}
-					onSubmit={onAuthBtnClick}
-				>
+			<div className="authForm-header">
+				<button className="authForm-prev-btn" onClick={onLoginMethodChange}>
+					<FontAwesomeIcon icon={faAngleLeft} />
+				</button>
+				<h3 className="login-title">{newAccount ? "회원가입" : "로그인"}</h3>
+			</div>
+			<Form
+				className="authForm-form-container"
+				noValidate
+				validated={validated}
+				onSubmit={onAuthBtnClick}
+			>
+				<Form.Group className="authForm-form-group">
+					<Form.Label className="authForm-form-label">이메일</Form.Label>
+					<Form.Control
+						className="authForm-input-text"
+						autoFocus
+						required
+						type="email"
+						id="email"
+						name="email"
+						value={email}
+						ref={emailRef}
+						onChange={onAuthInputChange}
+						placeholder="이메일을 입력해주세요"
+					/>
+					<Form.Control.Feedback
+						type="invalid"
+						className="authForm-form-feedback"
+					>
+						이메일을 입력해주세요!
+					</Form.Control.Feedback>
+				</Form.Group>
+				<Form.Group className="authForm-form-group">
+					<Form.Label className="authForm-form-label">비밀번호</Form.Label>
+					<Form.Control
+						className="authForm-input-pw"
+						required
+						type="password"
+						name="password"
+						value={password}
+						ref={pwRef}
+						onChange={onAuthInputChange}
+						placeholder="비밀번호를 입력해주세요"
+					/>
+					<Form.Control.Feedback
+						type="invalid"
+						className="authForm-form-feedback"
+					>
+						비밀번호를 입력해주세요!
+					</Form.Control.Feedback>
+				</Form.Group>
+				{newAccount && (
 					<Form.Group className="authForm-form-group">
-						<Form.Label className="authForm-form-label">이메일</Form.Label>
-						<Form.Control
-							className="authForm-input-text"
-							autoFocus
-							required
-							type="email"
-							id="email"
-							name="email"
-							value={email}
-							ref={emailRef}
-							onChange={onAuthInputChange}
-							placeholder="이메일을 입력해주세요"
-						/>
-						<Form.Control.Feedback
-							type="invalid"
-							className="authForm-form-feedback"
-						>
-							이메일을 입력해주세요!
-						</Form.Control.Feedback>
-					</Form.Group>
-					<Form.Group className="authForm-form-group">
-						<Form.Label className="authForm-form-label">비밀번호</Form.Label>
+						<Form.Label className="authForm-form-label">
+							비밀번호 확인
+						</Form.Label>
 						<Form.Control
 							className="authForm-input-pw"
 							required
+							isInvalid={isPwInValid}
+							isValid={isPwValid}
 							type="password"
-							name="password"
-							value={password}
-							ref={pwRef}
+							name="checkPassword"
+							value={checkPassword}
+							ref={checkPwRef}
 							onChange={onAuthInputChange}
-							placeholder="비밀번호를 입력해주세요"
+							placeholder="비밀번호를 한번 더 입력해주세요"
 						/>
 						<Form.Control.Feedback
 							type="invalid"
 							className="authForm-form-feedback"
 						>
-							비밀번호를 입력해주세요!
+							{checkPwMsg}
 						</Form.Control.Feedback>
 					</Form.Group>
-					{newAccount && (
-						<Form.Group className="authForm-form-group">
-							<Form.Label className="authForm-form-label">
-								비밀번호 확인
-							</Form.Label>
-							<Form.Control
-								className="authForm-input-pw"
-								required
-								isInvalid={isPwInValid}
-								isValid={isPwValid}
-								type="password"
-								name="checkPassword"
-								value={checkPassword}
-								ref={checkPwRef}
-								onChange={onAuthInputChange}
-								placeholder="비밀번호를 한번 더 입력해주세요"
-							/>
-							<Form.Control.Feedback
-								type="invalid"
-								className="authForm-form-feedback"
-							>
-								{checkPwMsg}
-							</Form.Control.Feedback>
-						</Form.Group>
-					)}
-					{errorMsg && (
-						<Form.Text className="authForm-form-error">{errorMsg}</Form.Text>
-					)}
-					<Button className="authForm-btn" variant="primary" type="submit">
-						{newAccount ? "회원가입" : "로그인"}
-					</Button>
-				</Form>
-				<span className="login-form-text" onClick={toggleAuthForm}>
-					{newAccount
-						? "이미 계정이 있으신가요? 로그인하기"
-						: "계정이 없으신가요? 회원가입하기"}
-				</span>
-			</div>
+				)}
+				{errorMsg && (
+					<Form.Text className="authForm-form-error">{errorMsg}</Form.Text>
+				)}
+				<Button className="authForm-btn" variant="primary" type="submit">
+					{newAccount ? "회원가입" : "로그인"}
+				</Button>
+			</Form>
+			<span className="authForm-text">
+				{newAccount ? (
+					<>
+						이미 계정이 있으신가요?
+						<span className="authForm-toggle-text" onClick={toggleAuthForm}>
+							로그인하기
+						</span>
+					</>
+				) : (
+					<>
+						계정이 없으신가요?
+						<span className="authForm-toggle-text" onClick={toggleAuthForm}>
+							회원가입하기
+						</span>
+					</>
+				)}
+			</span>
 		</>
 	);
 }

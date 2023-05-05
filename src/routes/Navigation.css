@@ -99,13 +99,13 @@
 	background-color: #944444 !important;
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 1024px) {
 	.navigation-container {
 		height: 10%;
 	}
 
 	.navigation-menu {
-		right: 6%;
+		right: 16%;
 	}
 
 	.navigation-menu svg {
@@ -120,5 +120,17 @@
 
 	.navigation-offcanvas-title {
 		font-size: 2.5rem !important;
+	}
+}
+
+@media screen and (min-width: 1025px) {
+	.navigation-menu {
+		right: 11%;
+	}
+}
+
+@media screen and (min-width: 1400px) {
+	.navigation-menu {
+		right: 16%;
 	}
 }

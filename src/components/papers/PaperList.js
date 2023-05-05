@@ -31,6 +31,8 @@ function PaperList() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageArr, setPageArr] = useState([]);
 
+	const [rowNum, setRowNum] = useState([]);
+	const [colNum, setColNum] = useState(0);
 	const [papersPerPage, setPapersPerPage] = useState(
 		parseInt(
 			getComputedStyle(document.documentElement).getPropertyValue(
@@ -74,6 +76,17 @@ function PaperList() {
 			}
 		});
 
+		if (window.screen.width > 1200) {
+			setColNum(3);
+			setPapersPerPage(12);
+		} else if (window.screen.width > 768) {
+			setColNum(2);
+			setPapersPerPage(10);
+		} else {
+			setColNum(1);
+			setPapersPerPage(5);
+		}
+
 		window.addEventListener("resize", handleResize);
 		return () => {
 			window.removeEventListener("resize", handleResize);
@@ -81,12 +94,15 @@ function PaperList() {
 	}, []);
 
 	const handleResize = () => {
-		if (window.screen.width > 1199) {
+		if (window.screen.width > 1200) {
+			setColNum(3);
 			setPapersPerPage(12);
-		} else if (window.screen.width > 991) {
+		} else if (window.screen.width > 768) {
+			setColNum(2);
 			setPapersPerPage(10);
 		} else {
-			setPapersPerPage(6);
+			setColNum(1);
+			setPapersPerPage(5);
 		}
 	};
 
@@ -95,6 +111,7 @@ function PaperList() {
 			(currentPage - 1) * papersPerPage,
 			currentPage * papersPerPage
 		);
+
 		let newPageArr = [];
 		if (parseInt(papers.length % papersPerPage) === 0) {
 			for (let i = 1; i <= parseInt(papers.length / papersPerPage); i++) {
@@ -107,7 +124,65 @@ function PaperList() {
 		}
 		setSlicedPapers(papersToShow);
 		setPageArr(newPageArr);
+
+		let newRowNum = [];
+		if (parseInt(papersToShow.length % colNum) === 0) {
+			for (let i = 0; i < parseInt(papersToShow.length / colNum); i++) {
+				newRowNum.push(i);
+			}
+		} else {
+			for (let i = 0; i < parseInt(papersToShow.length / colNum) + 1; i++) {
+				newRowNum.push(i);
+			}
+		}
+		setRowNum(newRowNum);
 	}, [papers, currentPage, debouncedPapersPerPage]);
+
+	const renderPaperRows = () => {
+		return rowNum.map((rowIdx) => {
+			return (
+				<Row key={rowIdx} className="paperList-row-container">
+					{slicedPapers
+						.slice(rowIdx * colNum, (rowIdx + 1) * colNum)
+						.map((paper) => (
+							<Col key={paper.id} className="paperList-col-container">
+								<Card className="paperList-card-container">
+									<Card.Body>
+										<Link
+											to={
+												paper.isPrivate
+													? `/paper/private/${paper.id}`
+													: `/paper/${paper.id}`
+											}
+											className="paperList-card-link"
+										>
+											<Card.Title>
+												<h4 className="paperList-card-title">
+													{paper.isPrivate && (
+														<span className="private-icon">🔒</span>
+													)}
+													{paper.paperName}
+												</h4>
+											</Card.Title>
+										</Link>
+										<Card.Text className="paperList-card-date">
+											{paper.createdAt}
+										</Card.Text>
+										{userId === paper.creatorId && (
+											<div className="paperList-card-delete-btn">
+												<button onClick={() => openDeleteModal(paper.id)}>
+													<FontAwesomeIcon icon={faTrash} />
+												</button>
+											</div>
+										)}
+									</Card.Body>
+								</Card>
+							</Col>
+						))}
+				</Row>
+			);
+		});
+	};
 
 	const onPageChange = (pageNumber) => {
 		setCurrentPage(pageNumber);
@@ -126,43 +201,7 @@ function PaperList() {
 				<>
 					{isPapers ? (
 						<>
-							<Row md={1} lg={2} xl={3} className="g-4">
-								{slicedPapers.map((paper) => (
-									<Col key={paper.id}>
-										<Card className="paperList-card-container">
-											<Card.Body>
-												<Link
-													to={
-														paper.isPrivate
-															? `/paper/private/${paper.id}`
-															: `/paper/${paper.id}`
-													}
-													className="paperList-card-link"
-												>
-													<Card.Title>
-														<h4 className="paperList-card-title">
-															{paper.isPrivate && (
-																<span className="private-icon">🔒</span>
-															)}
-															{paper.paperName}
-														</h4>
-													</Card.Title>
-												</Link>
-												<Card.Text className="paperList-card-date">
-													{paper.createdAt}
-												</Card.Text>
-												{userId === paper.creatorId && (
-													<div className="paperList-card-delete-btn">
-														<button onClick={() => openDeleteModal(paper.id)}>
-															<FontAwesomeIcon icon={faTrash} />
-														</button>
-													</div>
-												)}
-											</Card.Body>
-										</Card>
-									</Col>
-								))}
-							</Row>
+							{renderPaperRows()}
 							<Pagination className="paperList-pagination-container" size="lg">
 								{pageArr.map((pageNum) => (
 									<Pagination.Item
