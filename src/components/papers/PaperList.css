@@ -3,10 +3,6 @@
 	margin: 1.5rem;
 }
 
-.paperList-col-container {
-	width: 33.3% !important;
-}
-
 .paperList-card-container {
 	display: flex !important;
 	flex-direction: column !important;
@@ -162,10 +158,9 @@
 	:root {
 		--papers-per-page: 5;
 	}
-	.card {
-		margin: 0.5rem !important;
-		padding: 1.75rem 1rem !important;
-		border-radius: 40px !important;
+
+	.paperList-col-container {
+		width: 100% !important;
 	}
 
 	.paperList-pagination-container {
@@ -177,10 +172,18 @@
 	:root {
 		--papers-per-page: 10;
 	}
+
+	.paperList-col-container {
+		width: 50% !important;
+	}
 }
 
 @media screen and (min-width: 1200px) {
 	:root {
 		--papers-per-page: 12;
+	}
+
+	.paperList-col-container {
+		width: 33.3% !important;
 	}
 }

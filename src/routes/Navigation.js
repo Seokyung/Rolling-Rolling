@@ -48,17 +48,19 @@ function Navigation() {
 
 	return (
 		<>
-			<div className="navigation-container">
-				<Link
-					to={"/"}
-					onClick={reloadHome}
-					className="navigation-logo-container"
-				>
-					<img className="navigation-logo" src={logoImg} alt="logo" />
-				</Link>
-				<button className="navigation-menu" onClick={showMenu}>
-					<FontAwesomeIcon icon={faBars} />
-				</button>
+			<div className="navigation-wrapper">
+				<div className="navigation-container">
+					<Link
+						to={"/"}
+						onClick={reloadHome}
+						className="navigation-logo-container"
+					>
+						<img className="navigation-logo" src={logoImg} alt="logo" />
+					</Link>
+					<button className="navigation-menu" onClick={showMenu}>
+						<FontAwesomeIcon icon={faBars} />
+					</button>
+				</div>
 			</div>
 
 			<Navbar.Offcanvas
@@ -67,9 +69,9 @@ function Navigation() {
 				show={isMenu}
 				onHide={closeMenu}
 			>
-				<Offcanvas.Header closeButton>
+				<Offcanvas.Header closeButton className="navigation-offcanvas-header">
 					<Offcanvas.Title className="navigation-offcanvas-title">
-						<span className="navigation-offcanvas-username">{userName}</span>님
+						<span>{userName}</span>님
 					</Offcanvas.Title>
 				</Offcanvas.Header>
 				<Offcanvas.Body className="navigation-offcanvas-body">
@@ -90,12 +92,9 @@ function Navigation() {
 							<FontAwesomeIcon icon={faUser} />내 정보
 						</Link>
 					</Nav>
-					<Button
-						className="navigation-offcanvas-logout-btn"
-						onClick={onLogoutClick}
-					>
-						로그아웃
-					</Button>
+					<div className="navigation-offcanvas-logout-btn">
+						<Button onClick={onLogoutClick}>로그아웃</Button>
+					</div>
 				</Offcanvas.Body>
 			</Navbar.Offcanvas>
 		</>
