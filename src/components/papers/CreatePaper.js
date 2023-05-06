@@ -212,7 +212,7 @@ function CreatePaper({ paperModal, setPaperModal }) {
 								페이퍼 이름
 							</Form.Label>
 							<Form.Control
-								className="createPaper-form-text"
+								className="createPaper-form-input"
 								required
 								autoFocus
 								type="text"
@@ -223,15 +223,15 @@ function CreatePaper({ paperModal, setPaperModal }) {
 								onKeyDown={(e) => handleInputEnter(e)}
 								placeholder="페이퍼 이름을 입력해주세요 :)"
 							/>
-							<Form.Text className="form-length-text">
-								{currentNameLength} / {maxNameLength}
-							</Form.Text>
 							<Form.Control.Feedback
-								className="createPaper-form-group-text"
+								className="createPaper-form-feedback"
 								type="invalid"
 							>
 								페이퍼 이름을 입력해주세요!
 							</Form.Control.Feedback>
+							<Form.Text className="form-length-text">
+								{currentNameLength} / {maxNameLength}
+							</Form.Text>
 						</Form.Group>
 						<Form.Group className="createPaper-form-group">
 							<Form.Check type="checkbox" className="createPaper-form-title">
@@ -240,9 +240,9 @@ function CreatePaper({ paperModal, setPaperModal }) {
 									checked={isPrivate}
 									onChange={onPrivateCheckChange}
 								/>
-								<Form.Check.Label>비공개</Form.Check.Label>
+								<Form.Label id="private-label">비공개</Form.Label>
 							</Form.Check>
-							<Form.Text className="createPaper-form-group-text">
+							<Form.Text className="createPaper-form-text">
 								페이퍼의 공개여부를 설정해주세요
 							</Form.Text>
 						</Form.Group>
@@ -251,13 +251,13 @@ function CreatePaper({ paperModal, setPaperModal }) {
 								<Form.Group className="createPaper-form-code-group">
 									{renderCodeInputs()}
 									<Form.Control.Feedback
-										className="createPaper-form-group-text"
+										className="createPaper-form-feedback"
 										type="invalid"
 									>
 										페이퍼 코드가 올바르지 않습니다!
 									</Form.Control.Feedback>
 								</Form.Group>
-								<Form.Text className="createPaper-form-code-group-text">
+								<Form.Text className="createPaper-form-text">
 									4자리의 숫자로 이루어진 코드를 입력해주세요
 								</Form.Text>
 							</Form.Group>

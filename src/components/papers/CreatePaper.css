@@ -1,9 +1,11 @@
-.modal {
-	--bs-modal-width: 70% !important;
+.modal-dialog {
+	width: 60% !important;
+	max-width: 900px !important;
+	min-width: 450px !important;
 }
 .modal-content {
-	padding: 1rem;
-	border-radius: 30px !important;
+	padding: 2rem;
+	border-radius: 40px !important;
 }
 
 .createPaper-modal-header {
@@ -16,12 +18,12 @@
 .createPaper-modal-title {
 	margin: 0 !important;
 	color: #303030 !important;
-	font-size: 2rem !important;
+	font-size: 2.2rem !important;
 	font-weight: 700 !important;
 }
 
 .createPaper-modal-close-btn {
-	font-size: 2rem;
+	font-size: 2.2rem;
 	color: #7b838a;
 	padding: 0;
 	outline: none;
@@ -34,12 +36,23 @@
 .createPaper-form-group {
 	display: flex !important;
 	flex-direction: column !important;
-	margin: 0 1rem 1rem 1rem;
+	margin: 0 1rem 1.5rem 1rem;
 }
 
 .createPaper-form-title {
 	color: #9f5757;
 	font-size: 1.8rem;
+}
+.createPaper-form-title #private-label {
+	margin-left: 0.75rem;
+}
+
+.createPaper-form-input {
+	padding: 1rem !important;
+	font-size: 2rem !important;
+}
+.createPaper-form-input::placeholder {
+	font-size: 1.6rem !important;
 }
 
 .form-length-text {
@@ -51,12 +64,11 @@
 }
 
 .createPaper-form-text {
-	padding: 1rem !important;
-	font-size: 1.8rem !important;
+	font-size: 1.4rem !important;
 }
 
-.createPaper-form-group-text {
-	font-size: 1.4rem !important;
+.createPaper-form-feedback {
+	font-size: 1.6rem !important;
 }
 
 .createPaper-form-code-group {
@@ -71,23 +83,18 @@
 	padding: 1rem !important;
 	width: 5rem !important;
 	text-align: center;
-	font-size: 1.8rem !important;
-}
-
-.createPaper-form-code-group-text {
-	margin: 0.125rem;
-	font-size: 1.4rem !important;
+	font-size: 2rem !important;
 }
 
 .createPaper-modal-footer {
 	display: flex !important;
 	justify-content: flex-end !important;
 	margin: 0 !important;
-	padding: 1rem !important;
+	padding: 2rem 1rem 1rem 1rem !important;
 }
 
 .createPaper-modal-footer button {
-	font-size: 1.7rem !important;
+	font-size: 1.8rem !important;
 }
 
 .createPaper-modal-footer button#close-btn {
@@ -100,17 +107,4 @@
 }
 .createPaper-modal-footer button#create-btn:hover {
 	background-color: #944444 !important;
-}
-
-@media screen and (max-width: 1023px) {
-	.modal {
-		--bs-modal-width: 80% !important;
-	}
-	.modal-content {
-		border-radius: 40px !important;
-	}
-
-	.createPaper-modal-title {
-		font-size: 2.2rem !important;
-	}
 }

@@ -43,7 +43,8 @@
 }
 .paperList-card-delete-btn button {
 	color: #9d4040;
-	font-size: 2rem;
+	font-size: 1.8rem;
+	padding: 0;
 	outline: none;
 	appearance: none;
 	border: none;
