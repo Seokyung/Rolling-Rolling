@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { authService } from "api/fbase";
-import { signOut } from "firebase/auth";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import LogOutModal from "components/user/LogOutModal";
 
 import logoImg from "assets/Rolling-Rolling_logo.png";
 import { Navbar, Offcanvas, Nav, Button } from "react-bootstrap";
@@ -14,9 +13,9 @@ import "./Navigation.css";
 function Navigation() {
 	const userName = useSelector((state) => state.userReducer.displayName);
 	const [isMenu, setIsMenu] = useState(false);
-	const location = useLocation();
+	const [logOutModal, setLogOutModal] = useState(false);
 
-	const navigate = useNavigate();
+	const location = useLocation();
 
 	const reloadHome = () => {
 		let currentLocation = location.pathname;
@@ -33,17 +32,8 @@ function Navigation() {
 		setIsMenu(false);
 	};
 
-	const onLogoutClick = async () => {
-		const isLogout = window.confirm("로그아웃 하시겠습니까?");
-		if (isLogout) {
-			try {
-				await signOut(authService);
-				alert("로그아웃 되었습니다!");
-				navigate("/", { replace: true });
-			} catch (error) {
-				alert(error.message);
-			}
-		}
+	const openLogOutModal = () => {
+		setLogOutModal(true);
 	};
 
 	return (
@@ -93,10 +83,12 @@ function Navigation() {
 						</Link>
 					</Nav>
 					<div className="navigation-offcanvas-logout-btn">
-						<Button onClick={onLogoutClick}>로그아웃</Button>
+						<Button onClick={openLogOutModal}>로그아웃</Button>
 					</div>
 				</Offcanvas.Body>
 			</Navbar.Offcanvas>
+
+			<LogOutModal logOutModal={logOutModal} setLogOutModal={setLogOutModal} />
 		</>
 	);
 }

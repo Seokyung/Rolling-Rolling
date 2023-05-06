@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authService, dbService, storageService } from "api/fbase";
-import { signOut, deleteUser } from "firebase/auth";
+import { deleteUser } from "firebase/auth";
 import {
 	doc,
 	deleteDoc,
@@ -11,25 +11,20 @@ import {
 	where,
 } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
-import EditProfile from "components/profile/EditProfile";
 import { useSelector } from "react-redux";
+import EditProfile from "components/profile/EditProfile";
+import LogOutModal from "components/user/LogOutModal";
+
 import "./Profile.css";
 
 function Profile({ refreshUser }) {
 	const userObj = useSelector((state) => state.userReducer);
+	const [logOutModal, setLogOutModal] = useState(false);
+
 	const navigate = useNavigate();
 
-	const onLogoutClick = async () => {
-		const isLogout = window.confirm("로그아웃 하시겠습니까?");
-		if (isLogout) {
-			try {
-				await signOut(authService);
-				alert("로그아웃 되었습니다!");
-				navigate("/", { replace: true });
-			} catch (error) {
-				alert(error.message);
-			}
-		}
+	const openLogOutModal = () => {
+		setLogOutModal(true);
 	};
 
 	const deletePaperData = async () => {
@@ -93,13 +88,17 @@ function Profile({ refreshUser }) {
 	};
 
 	return (
-		<div className="profile-container">
-			<img src={`${userObj.photoURL}`} width="100px" alt="profileImage" />
-			<h2>{userObj.displayName}</h2>
-			<EditProfile refreshUser={refreshUser} />
-			<button onClick={onLogoutClick}>로그아웃</button>
-			<button onClick={deleteAccount}>회원 탈퇴</button>
-		</div>
+		<>
+			<div className="profile-container">
+				<img src={`${userObj.photoURL}`} width="100px" alt="profileImage" />
+				<h2>{userObj.displayName}</h2>
+				<EditProfile refreshUser={refreshUser} />
+				<button onClick={openLogOutModal}>로그아웃</button>
+				<button onClick={deleteAccount}>회원 탈퇴</button>
+			</div>
+
+			<LogOutModal logOutModal={logOutModal} setLogOutModal={setLogOutModal} />
+		</>
 	);
 }
 

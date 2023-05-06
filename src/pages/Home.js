@@ -3,7 +3,7 @@ import CreatePaper from "components/papers/CreatePaper";
 import PaperList from "components/papers/PaperList";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faFileCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import "./Home.css";
 
 function Home() {
@@ -20,7 +20,10 @@ function Home() {
 					<PaperList />
 				</div>
 				<button className="home-paper-btn" onClick={openPaperModal}>
-					<FontAwesomeIcon className="home-paper-btn-icon" icon={faPlus} />
+					<FontAwesomeIcon
+						className="home-paper-btn-icon"
+						icon={faFileCirclePlus}
+					/>
 					페이퍼 만들기
 				</button>
 			</div>
