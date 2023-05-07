@@ -19,7 +19,7 @@
 	box-shadow: 0.5rem 0.5rem 0.5rem #968f8e;
 }
 
-.home-paper-btn {
+.paper-creating-btn {
 	position: sticky;
 	position: -webkit-sticky;
 	z-index: 4;
@@ -41,16 +41,16 @@
 	border: none;
 	white-space: nowrap;
 }
-.home-paper-btn:hover {
+.paper-creating-btn:hover {
 	font-size: 2rem;
 	transition: all 0.2s linear;
 	background-color: #944444;
 }
 
-.home-paper-btn-icon {
+.paper-creating-btn-icon {
 	margin-right: 1rem;
 }
-.home-paper-btn:hover .home-paper-btn-icon {
+.paper-creating-btn:hover .paper-creating-btn-icon {
 	transition: all 0.2s linear;
 	transform: rotate(360deg);
 }

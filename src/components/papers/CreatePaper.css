@@ -18,12 +18,12 @@
 .createPaper-modal-title {
 	margin: 0 !important;
 	color: #303030 !important;
-	font-size: 2.2rem !important;
+	font-size: 2rem !important;
 	font-weight: 700 !important;
 }
 
 .createPaper-modal-close-btn {
-	font-size: 2.2rem;
+	font-size: 2rem;
 	color: #7b838a;
 	padding: 0;
 	outline: none;
@@ -108,3 +108,9 @@
 .createPaper-modal-footer button#create-btn:hover {
 	background-color: #944444 !important;
 }
+
+/* @media screen and (max-width: 1200px) {
+	.modal-dialog-centered {
+		min-height: 80% !important;
+	}
+} */

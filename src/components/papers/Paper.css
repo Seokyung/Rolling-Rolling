@@ -1,7 +1,7 @@
 .paper-wrapper {
 	display: flex;
 	flex-direction: column;
-	width: 80%;
+	width: 70%;
 	height: auto;
 	margin: 0 auto;
 	padding-top: 13rem;
@@ -10,125 +10,80 @@
 .paper-container {
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 3rem;
-	padding: 4rem 3rem;
-	border-radius: 30px;
+	width: 100%;
+	height: auto;
+	margin-bottom: 3.5rem;
+	padding: 3rem;
+	border-radius: 40px;
 	background-color: #e4bab5;
 	box-shadow: 0.5rem 0.5rem 0.5rem #968f8e;
 }
 
 .paper-header-container {
 	display: flex;
-	justify-content: center;
 	align-items: center;
 	width: 100%;
 }
 
 .paper-prev-btn {
-	position: absolute;
-	left: 13%;
-	color: #9f5757;
+	width: 5%;
+	color: #595959;
+	font-size: 2rem;
 	outline: none;
 	appearance: none;
 	border: none;
 	white-space: nowrap;
 	background: none;
 }
-.paper-prev-btn svg {
-	width: 2.5rem;
-	height: 2.5rem;
-}
-.paper-prev-btn:hover {
-	color: #944444;
+.paper-prev-btn:hover,
+.paper-prev-btn:active {
+	color: #454545;
 }
 
 .paper-title-container {
-	padding: 1.5rem 3rem;
-	border-radius: 30px;
-	background-color: #fffdfd;
+	width: 90%;
+	margin: 0 1.5rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
 }
 
 .paper-title {
 	margin: 0;
+	padding: 1.8rem 4rem;
+	border-radius: 40px;
+	background-color: #fffdfd;
 	color: #944444;
-	font-size: 2.5rem;
+	font-size: 2.4rem;
 	font-weight: 700;
+	text-align: center;
+	word-break: break-all;
 }
 
 .paper-setting-btn {
-	position: absolute;
-	right: 13%;
-	color: #9f5757;
+	width: 5%;
+	color: #595959;
+	font-size: 2rem;
 	outline: none;
 	appearance: none;
 	border: none;
 	white-space: nowrap;
 	background: none;
 }
-.paper-setting-btn svg {
-	width: 2.5rem;
-	height: 2.5rem;
-}
-
-.paper-create-message-btn {
-	position: sticky;
-	position: -webkit-sticky;
-	align-self: flex-end;
-	padding: 1.5rem 2rem;
-	right: 0;
-	bottom: 3rem;
-	margin-right: -3rem;
-	margin-bottom: 3rem;
-	color: #fffdfd;
-	font-size: 1.7rem;
-	background-color: #9f5757;
-	border-radius: 40px;
-	/* box-shadow: 0.3rem 0.5rem 0.5rem rgba(150, 143, 142, 0.8); */
-	outline: none;
-	appearance: none;
-	border: none;
-	white-space: nowrap;
-}
-.paper-create-message-btn:hover {
-	font-size: 1.9rem;
-	transition: all 0.2s linear;
-	background-color: #944444;
-}
-.paper-create-message-btn:hover .paper-create-message-btn-icon {
-	transition: all 0.2s linear;
-	transform: rotate(360deg);
-}
-
-.paper-create-message-btn-icon {
-	margin-right: 0.5rem;
+.paper-setting-btn:hover,
+.paper-setting-btn:active {
+	color: #454545;
 }
 
 @media screen and (max-width: 1024px) {
 	.paper-wrapper {
-		width: 90%;
+		min-width: 350px;
 	}
+}
 
-	.paper-container {
-		margin-bottom: 3.7rem;
-		padding: 3rem 2rem;
-		border-radius: 40px;
-	}
-
-	.paper-title-container {
-		border-radius: 40px;
-	}
-
-	.paper-create-message-btn {
-		align-self: center;
-		margin-right: 0;
-		margin-bottom: 5rem;
-		padding: 1.8rem 6rem;
-		bottom: 5rem;
-		font-size: 2rem;
-		border-radius: 50px;
-	}
-
-	.paper-create-message-btn:hover {
-		font-size: 2.2rem;
+@media screen and (min-width: 1400px) {
+	.paper-wrapper {
+		max-width: 1100px;
 	}
 }

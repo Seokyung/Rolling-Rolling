@@ -41,6 +41,9 @@
 
 .navigation-menu svg {
 	font-size: 2.2rem;
+	color: #595959;
+}
+.navigation-menu svg:hover {
 	color: #303030;
 }
 

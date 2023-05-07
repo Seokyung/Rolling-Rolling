@@ -13,7 +13,10 @@ import DeletePaper from "./DeletePaper";
 import SharePaper from "./SharePaper";
 
 import { Skeleton } from "antd";
-import { faAngleLeft, faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import {
+	faAngleLeft,
+	faEllipsisVertical,
+} from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Paper.css";
@@ -101,16 +104,16 @@ function Paper() {
 										className="paper-setting-btn"
 										onClick={showPaperSettings}
 									>
-										<FontAwesomeIcon icon={faEllipsis} />
+										<FontAwesomeIcon icon={faEllipsisVertical} />
 									</button>
 								)}
 							</div>
 							<MessageList />
 							<SharePaper />
 						</div>
-						<button className="paper-create-message-btn" onClick={openMsgModal}>
+						<button className="paper-creating-btn" onClick={openMsgModal}>
 							<FontAwesomeIcon
-								className="paper-create-message-btn-icon"
+								className="paper-creating-btn-icon"
 								icon={faEnvelope}
 							/>
 							메세지 작성하기

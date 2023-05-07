@@ -19,9 +19,9 @@ function Home() {
 				<div className="home-paper-container">
 					<PaperList />
 				</div>
-				<button className="home-paper-btn" onClick={openPaperModal}>
+				<button className="paper-creating-btn" onClick={openPaperModal}>
 					<FontAwesomeIcon
-						className="home-paper-btn-icon"
+						className="paper-creating-btn-icon"
 						icon={faFileCirclePlus}
 					/>
 					페이퍼 만들기

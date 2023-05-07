@@ -27,25 +27,12 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 1rem !important;
 	padding: 1rem !important;
 }
 
 .deletePaper-modal-body button {
-	font-size: 1.7rem !important;
+	font-size: 1.8rem !important;
 }
-
 .deletePaper-modal-body button#delete-btn {
 	margin-right: 2rem !important;
-	background-color: #9f5757 !important;
-	border-color: #9f5757 !important;
-}
-.deletePaper-modal-body button#delete-btn:hover {
-	background-color: #944444 !important;
-}
-
-@media screen and (max-width: 1023px) {
-	.deletePaper-modal-title {
-		font-size: 2.2rem !important;
-	}
 }

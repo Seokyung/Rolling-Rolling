@@ -267,7 +267,7 @@ function CreatePaper({ paperModal, setPaperModal }) {
 				<Modal.Footer className="createPaper-modal-footer">
 					<Button
 						id="close-btn"
-						variant="secondary"
+						variant="outline-secondary"
 						size="lg"
 						onClick={closePaperModal}
 					>
