@@ -6,6 +6,7 @@ import LogOutModal from "components/user/LogOutModal";
 
 import logoImg from "assets/Rolling-Rolling_logo.png";
 import { Navbar, Offcanvas, Nav, Button } from "react-bootstrap";
+import { Divider } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faHouse, faUser } from "@fortawesome/free-solid-svg-icons";
 import "./Navigation.css";
@@ -64,6 +65,7 @@ function Navigation() {
 						<span>{userName}</span>님
 					</Offcanvas.Title>
 				</Offcanvas.Header>
+				<Divider className="offcanvas-divider" />
 				<Offcanvas.Body className="navigation-offcanvas-body">
 					<Nav className="navigation-offcanvas-nav">
 						<Link

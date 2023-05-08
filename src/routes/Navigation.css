@@ -49,7 +49,6 @@
 
 .navigation-offcanvas-container {
 	display: flex !important;
-	width: 40% !important;
 	padding: 5rem 4rem !important;
 	font-size: 1.7rem;
 	border: none !important;
@@ -71,6 +70,10 @@
 	font-weight: 700;
 	margin-right: 0.75rem;
 	color: #944444;
+}
+
+.offcanvas-divider {
+	margin: 1rem 0 !important;
 }
 
 .navigation-offcanvas-body {
@@ -121,10 +124,6 @@
 @media screen and (max-width: 1024px) {
 	.navigation-container {
 		min-width: 400px;
-	}
-
-	.navigation-offcanvas-container {
-		width: 60% !important;
 	}
 }
 

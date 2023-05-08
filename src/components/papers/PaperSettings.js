@@ -2,7 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { Offcanvas } from "react-bootstrap";
+import { Offcanvas, Button } from "react-bootstrap";
+import { Divider } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
@@ -38,15 +39,20 @@ function PaperSettings({ paperSettings, setPaperSettings, setDeleteModal }) {
 					페이퍼 설정
 				</Offcanvas.Title>
 			</Offcanvas.Header>
+			<Divider className="offcanvas-divider" />
 			<Offcanvas.Body className="paperSettings-offcanvas-body">
-				<button id="edit-btn" onClick={gotoEditPaper}>
+				<Button id="edit-btn" onClick={gotoEditPaper}>
 					<FontAwesomeIcon icon={faPenToSquare} />
 					페이퍼 수정
-				</button>
-				<button id="delete-btn" onClick={openDeleteModal}>
+				</Button>
+				<Button
+					id="delete-btn"
+					variant="outline-danger"
+					onClick={openDeleteModal}
+				>
 					<FontAwesomeIcon icon={faTrash} />
 					페이퍼 삭제
-				</button>
+				</Button>
 			</Offcanvas.Body>
 		</Offcanvas>
 	);
