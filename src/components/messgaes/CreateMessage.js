@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { dbService, storageService } from "api/fbase";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
@@ -7,12 +8,17 @@ import MessageImage from "./MessageImage";
 import MessageCanvas from "./MessageCanvas";
 import { useSelector } from "react-redux";
 
-import { Modal } from "react-bootstrap";
+import { Modal, Form, Button } from "react-bootstrap";
+import { Divider } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import "./CreateMessage.css";
 
-function CreateMessage({ paperId, msgModal, setMsgModal }) {
+function CreateMessage() {
 	const userId = useSelector((state) => state.userReducer.uid);
+	const { paperId } = useParams();
+	const navigate = useNavigate();
+
 	const [msgTitle, setMsgTitle] = useState("");
 	const [msgWriter, setMsgWriter] = useState("");
 	const [msgContent, setMsgContent] = useState("");
@@ -21,10 +27,13 @@ function CreateMessage({ paperId, msgModal, setMsgModal }) {
 	const [msgImg, setMsgImg] = useState("");
 	const [msgDrawing, setMsgDrawing] = useState("");
 	const [isPrivate, setIsPrivate] = useState(false);
+
 	const [canvasModal, setCanvasModal] = useState(false);
 
-	const closeMsgModal = () => {
-		setMsgModal(false);
+	const [validated, setValidated] = useState(false);
+
+	const closeCreateMessage = () => {
+		navigate(`/paper/${paperId}`, { replace: true });
 	};
 
 	const onMessageChange = (e) => {
@@ -74,10 +83,13 @@ function CreateMessage({ paperId, msgModal, setMsgModal }) {
 
 	const onMessageSubmit = async (e) => {
 		e.preventDefault();
+
 		if (msgTitle === "" || msgWriter === "") {
-			alert("메세지 제목/작성자를 입력해주세요!");
+			setValidated(true);
+			// alert("메세지 제목/작성자를 입력해주세요!");
 			return;
 		}
+
 		let msgImgUrl = "";
 		if (attachment === "attachImage" && msgImg !== "") {
 			const msgImgRef = ref(storageService, `${userId}/${paperId}/${uuidv4()}`);
@@ -112,117 +124,157 @@ function CreateMessage({ paperId, msgModal, setMsgModal }) {
 			setMsgWriter("");
 			setMsgContent("");
 			setMsgImg("");
-			setMsgModal((prev) => !prev);
+			closeCreateMessage();
 		}
 	};
 
 	return (
-		<Modal
-			show={msgModal}
-			onExit={closeMsgModal}
-			centered
-			animation={true}
-			keyboard={false}
-			backdrop="static"
-		>
-			<Modal.Header>
-				<Modal.Title>메세지 작성하기</Modal.Title>
-				<button className="createPaper-modal-close-btn" onClick={closeMsgModal}>
-					<FontAwesomeIcon icon={faXmark} />
-				</button>
-			</Modal.Header>
-			<Modal.Body>
-				<form>
-					<div>
-						<input
-							type="text"
-							autoFocus
-							name="title"
-							value={msgTitle}
-							onChange={onMessageChange}
-							placeholder="제목을 입력하세요 :)"
-						/>
-						<input
-							type="text"
-							name="writer"
-							value={msgWriter}
-							onChange={onMessageChange}
-							placeholder="이름을 입력하세요 :)"
-						/>
-						<input
-							type="text"
-							name="content"
-							value={msgContent}
-							onChange={onMessageChange}
-							placeholder="내용을 입력하세요 :)"
-						/>
-						<input
-							type="checkbox"
-							checked={isPrivate}
-							onChange={onPrivateCheckChange}
-						/>
-						<label htmlFor="isPrivate">비공개</label>
+		<div className="paper-wrapper">
+			<div className="paper-container">
+				<div className="paper-header-container">
+					<button className="paper-prev-btn" onClick={closeCreateMessage}>
+						<FontAwesomeIcon icon={faAngleLeft} />
+					</button>
+					<div className="paper-title-container">
+						<h2 className="editPaper-title">메세지 작성하기</h2>
 					</div>
-				</form>
-				<input
-					type="checkbox"
-					checked={isAttachment}
-					onChange={onAttachmentChange}
-				/>
-				<label htmlFor="isAttachment">첨부파일</label>
-				{isAttachment && (
-					<>
-						<div>
-							<label>
-								<input
-									type="radio"
-									name="attachmentType"
-									id="attachImage"
-									value="attachImage"
-									checked={attachment === "attachImage"}
-									onChange={onAttachmentTypeChange}
+				</div>
+				<div className="editPaper-form-container">
+					<Form noValidate validated={validated}>
+						<Form.Group className="create-form-group">
+							<Form.Label className="create-form-title">메세지 제목</Form.Label>
+							<Form.Control
+								className="create-form-input"
+								type="text"
+								name="title"
+								required
+								autoFocus
+								value={msgTitle}
+								onChange={onMessageChange}
+								placeholder="제목을 입력하세요 :)"
+							/>
+							<Form.Control.Feedback
+								className="create-form-feedback"
+								type="invalid"
+							>
+								메세지 제목을 입력해주세요!
+							</Form.Control.Feedback>
+						</Form.Group>
+						<Form.Group className="create-form-group">
+							<Form.Label className="create-form-title">작성자</Form.Label>
+							<Form.Control
+								className="create-form-input"
+								type="text"
+								name="writer"
+								required
+								value={msgWriter}
+								onChange={onMessageChange}
+								placeholder="이름을 입력하세요 :)"
+							/>
+							<Form.Control.Feedback
+								className="create-form-feedback"
+								type="invalid"
+							>
+								작성자를 입력해주세요!
+							</Form.Control.Feedback>
+						</Form.Group>
+					</Form>
+					<Form>
+						<Form.Group className="create-form-group">
+							<Form.Label className="create-form-title">메세지 내용</Form.Label>
+							<Form.Control
+								className="create-form-input"
+								type="text"
+								name="content"
+								value={msgContent}
+								onChange={onMessageChange}
+								placeholder="내용을 입력하세요 :)"
+							/>
+						</Form.Group>
+						<Form.Group className="create-form-group">
+							<Form.Check type="checkbox" className="create-form-title">
+								<Form.Check.Input
+									type="checkbox"
+									checked={isPrivate}
+									onChange={onPrivateCheckChange}
 								/>
-								이미지 첨부하기
-							</label>
-							<label>
-								<input
-									type="radio"
-									name="attachmentType"
-									id="attachDrawing"
-									value="attachDrawing"
-									checked={attachment === "attachDrawing"}
-									onChange={onAttachmentTypeChange}
+								<Form.Label id="private-label">비공개</Form.Label>
+							</Form.Check>
+						</Form.Group>
+					</Form>
+					<Divider className="paper-divider" />
+					<Form>
+						<Form.Group className="create-form-group">
+							<Form.Check type="checkbox" className="create-form-title">
+								<Form.Check.Input
+									type="checkbox"
+									checked={isAttachment}
+									onChange={onAttachmentChange}
 								/>
-								그림 첨부하기
-							</label>
-						</div>
-						{attachment === "attachImage" && (
-							<MessageImage msgImg={msgImg} setMsgImg={setMsgImg} />
-						)}
-						{attachment === "attachDrawing" && (
-							<div>
-								<button onClick={showCanvasModal}>그림 그리기</button>
-								{canvasModal && (
-									<MessageCanvas
-										setMsgDrawing={setMsgDrawing}
-										setCanvasModal={setCanvasModal}
-									/>
+								<Form.Label id="private-label">첨부파일</Form.Label>
+							</Form.Check>
+						</Form.Group>
+						{isAttachment && (
+							<>
+								<div>
+									<label>
+										<input
+											type="radio"
+											name="attachmentType"
+											id="attachImage"
+											value="attachImage"
+											checked={attachment === "attachImage"}
+											onChange={onAttachmentTypeChange}
+										/>
+										이미지 첨부하기
+									</label>
+									<label>
+										<input
+											type="radio"
+											name="attachmentType"
+											id="attachDrawing"
+											value="attachDrawing"
+											checked={attachment === "attachDrawing"}
+											onChange={onAttachmentTypeChange}
+										/>
+										그림 첨부하기
+									</label>
+								</div>
+								{attachment === "attachImage" && (
+									<MessageImage msgImg={msgImg} setMsgImg={setMsgImg} />
 								)}
-								{msgDrawing && (
+								{attachment === "attachDrawing" && (
 									<div>
-										<img src={msgDrawing} width="200px" alt="messageDrawing" />
-										<button onClick={clearMsgDrawing}>그림 제거하기</button>
+										<button onClick={showCanvasModal}>그림 그리기</button>
+										{canvasModal && (
+											<MessageCanvas
+												setMsgDrawing={setMsgDrawing}
+												setCanvasModal={setCanvasModal}
+											/>
+										)}
+										{msgDrawing && (
+											<div>
+												<img
+													src={msgDrawing}
+													width="200px"
+													alt="messageDrawing"
+												/>
+												<button onClick={clearMsgDrawing}>그림 제거하기</button>
+											</div>
+										)}
 									</div>
 								)}
-							</div>
+							</>
 						)}
-					</>
-				)}
-			</Modal.Body>
-			<Modal.Footer>
-				<button onClick={onMessageSubmit}>메세지 올리기</button>
-			</Modal.Footer>
-		</Modal>
+					</Form>
+				</div>
+				<div className="editPaper-edit-btn">
+					<Button size="lg" onClick={onMessageSubmit}>
+						작성 완료
+					</Button>
+				</div>
+			</div>
+		</div>
 	);
 }
 

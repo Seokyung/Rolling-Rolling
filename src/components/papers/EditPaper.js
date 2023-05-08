@@ -194,8 +194,8 @@ function EditPaper() {
 			{contextHolder}
 			<div className="paper-wrapper">
 				<div className="paper-container">
-					<div className="editPaper-header-container">
-						<button className="editPaper-prev-btn" onClick={closeEditPaper}>
+					<div className="paper-header-container">
+						<button onClick={closeEditPaper}>
 							<FontAwesomeIcon icon={faAngleLeft} />
 						</button>
 						<div className="paper-title-container">

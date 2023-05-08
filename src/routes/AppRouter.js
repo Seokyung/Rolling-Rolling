@@ -13,6 +13,7 @@ import Auth from "../pages/Auth";
 import Paper from "components/papers/Paper";
 import PrivatePaper from "components/papers/PrivatePaper";
 import EditPaper from "components/papers/EditPaper";
+import CreateMessage from "components/messgaes/CreateMessage";
 
 function AppRouter({ isLoggedIn, refreshUser }) {
 	return (
@@ -38,6 +39,11 @@ function AppRouter({ isLoggedIn, refreshUser }) {
 								exact
 								path="/paper/edit/:paperId"
 								element={<EditPaper />}
+							/>
+							<Route
+								exact
+								path="/paper/:paperId/create-message"
+								element={<CreateMessage />}
 							/>
 							<Route path="*" element={<Navigate to={"/"} />} />
 						</Routes>

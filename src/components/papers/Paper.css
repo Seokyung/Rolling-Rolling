@@ -12,7 +12,7 @@
 	flex-direction: column;
 	width: 100%;
 	height: auto;
-	margin-bottom: 3.5rem;
+	margin-bottom: 5rem;
 	padding: 3rem;
 	border-radius: 40px;
 	background-color: #e4bab5;
@@ -22,11 +22,15 @@
 .paper-header-container {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	width: 100%;
 }
-
-.paper-prev-btn {
+.paper-header-container button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 5%;
+	z-index: 1;
 	color: #595959;
 	font-size: 2rem;
 	outline: none;
@@ -35,14 +39,14 @@
 	white-space: nowrap;
 	background: none;
 }
-.paper-prev-btn:hover,
-.paper-prev-btn:active {
+.paper-header-container button:hover,
+.paper-header-container button:active {
 	color: #454545;
 }
 
 .paper-title-container {
-	width: 90%;
-	margin: 0 1.5rem;
+	width: 100%;
+	margin: 0 1rem;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -51,7 +55,7 @@
 
 .paper-title {
 	margin: 0;
-	padding: 1.8rem 4rem;
+	padding: 1.8rem 3.5rem;
 	border-radius: 40px;
 	background-color: #fffdfd;
 	color: #944444;
@@ -59,21 +63,6 @@
 	font-weight: 700;
 	text-align: center;
 	word-break: break-all;
-}
-
-.paper-setting-btn {
-	width: 5%;
-	color: #595959;
-	font-size: 2rem;
-	outline: none;
-	appearance: none;
-	border: none;
-	white-space: nowrap;
-	background: none;
-}
-.paper-setting-btn:hover,
-.paper-setting-btn:active {
-	color: #454545;
 }
 
 @media screen and (max-width: 1024px) {

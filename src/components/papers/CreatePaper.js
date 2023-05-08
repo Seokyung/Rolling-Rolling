@@ -21,6 +21,7 @@ function CreatePaper({ paperModal, setPaperModal }) {
 	const maxNameLength = 50;
 
 	const [validated, setValidated] = useState(false);
+
 	const [messageApi, contextHolder] = message.useMessage();
 	const key = "updatable";
 
@@ -194,25 +195,20 @@ function CreatePaper({ paperModal, setPaperModal }) {
 				keyboard={false}
 				backdrop="static"
 			>
-				<Modal.Header className="createPaper-modal-header">
-					<Modal.Title className="createPaper-modal-title">
+				<Modal.Header className="create-modal-header">
+					<Modal.Title className="create-modal-title">
 						페이퍼 만들기
 					</Modal.Title>
-					<button
-						className="createPaper-modal-close-btn"
-						onClick={closePaperModal}
-					>
+					<button className="create-modal-close-btn" onClick={closePaperModal}>
 						<FontAwesomeIcon icon={faXmark} />
 					</button>
 				</Modal.Header>
 				<Modal.Body>
 					<Form noValidate validated={validated}>
-						<Form.Group className="createPaper-form-group">
-							<Form.Label className="createPaper-form-title">
-								페이퍼 이름
-							</Form.Label>
+						<Form.Group className="create-form-group">
+							<Form.Label className="create-form-title">페이퍼 이름</Form.Label>
 							<Form.Control
-								className="createPaper-form-input"
+								className="create-form-input"
 								required
 								autoFocus
 								type="text"
@@ -224,17 +220,17 @@ function CreatePaper({ paperModal, setPaperModal }) {
 								placeholder="페이퍼 이름을 입력해주세요 :)"
 							/>
 							<Form.Control.Feedback
-								className="createPaper-form-feedback"
+								className="create-form-feedback"
 								type="invalid"
 							>
 								페이퍼 이름을 입력해주세요!
 							</Form.Control.Feedback>
-							<Form.Text className="form-length-text">
+							<Form.Text className="create-form-length-text">
 								{currentNameLength} / {maxNameLength}
 							</Form.Text>
 						</Form.Group>
-						<Form.Group className="createPaper-form-group">
-							<Form.Check type="checkbox" className="createPaper-form-title">
+						<Form.Group className="create-form-group">
+							<Form.Check type="checkbox" className="create-form-title">
 								<Form.Check.Input
 									type="checkbox"
 									checked={isPrivate}
@@ -242,29 +238,29 @@ function CreatePaper({ paperModal, setPaperModal }) {
 								/>
 								<Form.Label id="private-label">비공개</Form.Label>
 							</Form.Check>
-							<Form.Text className="createPaper-form-text">
+							<Form.Text className="create-form-text">
 								페이퍼의 공개여부를 설정해주세요
 							</Form.Text>
 						</Form.Group>
 						{isPrivate && (
-							<Form.Group className="createPaper-form-group">
-								<Form.Group className="createPaper-form-code-group">
+							<Form.Group className="create-form-group">
+								<Form.Group className="create-form-code-group">
 									{renderCodeInputs()}
 									<Form.Control.Feedback
-										className="createPaper-form-feedback"
+										className="create-form-feedback"
 										type="invalid"
 									>
 										페이퍼 코드가 올바르지 않습니다!
 									</Form.Control.Feedback>
 								</Form.Group>
-								<Form.Text className="createPaper-form-text">
+								<Form.Text className="create-form-text">
 									4자리의 숫자로 이루어진 코드를 입력해주세요
 								</Form.Text>
 							</Form.Group>
 						)}
 					</Form>
 				</Modal.Body>
-				<Modal.Footer className="createPaper-modal-footer">
+				<Modal.Footer className="create-modal-footer">
 					<Button
 						id="close-btn"
 						variant="outline-secondary"

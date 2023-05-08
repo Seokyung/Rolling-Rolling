@@ -1,26 +1,7 @@
-.editPaper-header-container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-}
-
-.editPaper-prev-btn {
-	position: absolute;
-	left: 13%;
-	color: #9f5757;
-	outline: none;
-	appearance: none;
-	border: none;
-	white-space: nowrap;
-	background: none;
-}
-.editPaper-prev-btn svg {
-	width: 2.5rem;
-	height: 2.5rem;
-}
-.editPaper-prev-btn:hover {
-	color: #944444;
+.editPaper-title {
+	margin: 0 0 0 -5%;
+	font-size: 2.2rem;
+	font-weight: 700;
 }
 
 .editPaper-form-container {
@@ -30,13 +11,7 @@
 	margin-bottom: 0.5rem;
 	padding: 4rem 3rem 4rem 3rem;
 	background-color: #fffdfd;
-	border-radius: 30px;
-}
-
-.editPaper-title {
-	margin: 0;
-	font-size: 1.8rem;
-	font-weight: 700;
+	border-radius: 40px;
 }
 
 .editPaper-form-group {
@@ -79,14 +54,5 @@
 	background-color: #944444 !important;
 }
 
-@media screen and (max-width: 1023px) {
-	.editPaper-prev-btn {
-		left: 5rem;
-	}
-
-	.editPaper-form-container {
-		margin-top: 2rem;
-		padding: 3rem;
-		border-radius: 40px;
-	}
+@media screen and (max-width: 1024px) {
 }

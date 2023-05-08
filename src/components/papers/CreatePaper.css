@@ -8,21 +8,21 @@
 	border-radius: 40px !important;
 }
 
-.createPaper-modal-header {
+.create-modal-header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin: 1rem;
 }
 
-.createPaper-modal-title {
+.create-modal-title {
 	margin: 0 !important;
 	color: #303030 !important;
 	font-size: 2rem !important;
 	font-weight: 700 !important;
 }
 
-.createPaper-modal-close-btn {
+.create-modal-close-btn {
 	font-size: 2rem;
 	color: #7b838a;
 	padding: 0;
@@ -33,29 +33,29 @@
 	background: none;
 }
 
-.createPaper-form-group {
+.create-form-group {
 	display: flex !important;
 	flex-direction: column !important;
 	margin: 0 1rem 1.5rem 1rem;
 }
 
-.createPaper-form-title {
+.create-form-title {
 	color: #9f5757;
 	font-size: 1.8rem;
 }
-.createPaper-form-title #private-label {
+.create-form-title #private-label {
 	margin-left: 0.75rem;
 }
 
-.createPaper-form-input {
+.create-form-input {
 	padding: 1rem !important;
 	font-size: 2rem !important;
 }
-.createPaper-form-input::placeholder {
+.create-form-input::placeholder {
 	font-size: 1.6rem !important;
 }
 
-.form-length-text {
+.create-form-length-text {
 	display: flex !important;
 	justify-content: right !important;
 	margin-top: 0.5rem !important;
@@ -63,22 +63,22 @@
 	font-size: 1.4rem !important;
 }
 
-.createPaper-form-text {
+.create-form-text {
 	font-size: 1.4rem !important;
 }
 
-.createPaper-form-feedback {
+.create-form-feedback {
 	font-size: 1.6rem !important;
 }
 
-.createPaper-form-code-group {
+.create-form-code-group {
 	display: flex;
 	flex-direction: row;
 	align-items: baseline;
 	margin-bottom: 0.5rem;
 }
 
-.createPaper-form-code {
+.create-form-code {
 	margin-right: 1rem !important;
 	padding: 1rem !important;
 	width: 5rem !important;
@@ -86,26 +86,26 @@
 	font-size: 2rem !important;
 }
 
-.createPaper-modal-footer {
+.create-modal-footer {
 	display: flex !important;
 	justify-content: flex-end !important;
 	margin: 0 !important;
 	padding: 2rem 1rem 1rem 1rem !important;
 }
 
-.createPaper-modal-footer button {
+.create-modal-footer button {
 	font-size: 1.8rem !important;
 }
 
-.createPaper-modal-footer button#close-btn {
+.create-modal-footer button#close-btn {
 	margin-right: 1rem !important;
 }
 
-.createPaper-modal-footer button#create-btn {
+.create-modal-footer button#create-btn {
 	background-color: #9f5757 !important;
 	border-color: #9f5757 !important;
 }
-.createPaper-modal-footer button#create-btn:hover {
+.create-modal-footer button#create-btn:hover {
 	background-color: #944444 !important;
 }
 

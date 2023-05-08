@@ -6,7 +6,6 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { getPaper } from "modules/paper";
 
-import CreateMessage from "components/messgaes/CreateMessage";
 import MessageList from "components/messgaes/MessageList";
 import PaperSettings from "./PaperSettings";
 import DeletePaper from "./DeletePaper";
@@ -33,7 +32,6 @@ function Paper() {
 	const [paperSettings, setPaperSettings] = useState(false);
 
 	const [deleteModal, setDeleteModal] = useState(false);
-	const [msgModal, setMsgModal] = useState(false);
 
 	const getPaperDispatch = (paperDocObj) => {
 		dispatch(
@@ -75,12 +73,12 @@ function Paper() {
 		setPaperSettings((prev) => !prev);
 	};
 
-	const openMsgModal = () => {
-		setMsgModal(true);
+	const gotoEditPaper = () => {
+		navigate(`/paper/${paperId}/create-message`);
 	};
 
 	const gotoPrevPage = () => {
-		navigate(-1);
+		navigate("/");
 	};
 
 	return (
@@ -92,7 +90,7 @@ function Paper() {
 					<div className="paper-wrapper">
 						<div className="paper-container">
 							<div className="paper-header-container">
-								<button className="paper-prev-btn" onClick={gotoPrevPage}>
+								<button onClick={gotoPrevPage}>
 									<FontAwesomeIcon icon={faAngleLeft} />
 								</button>
 								<div className="paper-title-container">
@@ -100,10 +98,7 @@ function Paper() {
 									{/* <h2>{paperObj.createdAt}</h2> */}
 								</div>
 								{userId === paperObj.creatorId && (
-									<button
-										className="paper-setting-btn"
-										onClick={showPaperSettings}
-									>
+									<button onClick={showPaperSettings}>
 										<FontAwesomeIcon icon={faEllipsisVertical} />
 									</button>
 								)}
@@ -111,7 +106,7 @@ function Paper() {
 							<MessageList />
 							<SharePaper />
 						</div>
-						<button className="paper-creating-btn" onClick={openMsgModal}>
+						<button className="paper-creating-btn" onClick={gotoEditPaper}>
 							<FontAwesomeIcon
 								className="paper-creating-btn-icon"
 								icon={faEnvelope}
@@ -128,11 +123,6 @@ function Paper() {
 						deleteModal={deleteModal}
 						setDeleteModal={setDeleteModal}
 						paperId={paperId}
-					/>
-					<CreateMessage
-						paperId={paperId}
-						msgModal={msgModal}
-						setMsgModal={setMsgModal}
 					/>
 				</>
 			)}
