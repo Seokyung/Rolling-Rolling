@@ -35,7 +35,10 @@ function Message({ msgObj, isOwner }) {
 					{msgObj.isPrivate && <span className="private-icon">🔒</span>}
 					{msgObj.msgTitle}
 				</Card.Title>
-				<Card.Subtitle className="mb-3 text-muted message-card-writer">
+				<Card.Subtitle className="mb-3 text-muted message-card-subs">
+					{msgObj.createdAt}
+				</Card.Subtitle>
+				<Card.Subtitle className="mb-3 text-muted message-card-subs">
 					<span className="private-icon">👤</span>
 					{msgObj.msgWriter}
 				</Card.Subtitle>

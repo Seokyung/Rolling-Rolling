@@ -16,24 +16,31 @@ import "./MessageList.css";
 
 function MessageList() {
 	const userId = useSelector((state) => state.userReducer.uid);
-	const creatorId = useSelector((state) => state.paperReducer.creatorId);
+	const paperCreatorId = useSelector((state) => state.paperReducer.creatorId);
 	const paperId = useSelector((state) => state.paperReducer.paperId);
+
 	const [messages, setMessages] = useState([]);
 
 	useEffect(() => {
-		let q;
-		if (creatorId === userId) {
-			q = query(
-				collection(dbService, "papers", `${paperId}`, "messages"),
-				orderBy("createdAt", "desc")
-			);
-		} else {
-			q = query(
-				collection(dbService, "papers", `${paperId}`, "messages"),
-				where("isPrivate", "==", false),
-				orderBy("createdAt", "desc")
-			);
-		}
+		// let q;
+		// if (paperCreatorId === userId) {
+		// 	q = query(
+		// 		collection(dbService, "papers", `${paperId}`, "messages"),
+		// 		orderBy("createdAt", "desc")
+		// 	);
+		// } else {
+		// 	q = query(
+		// 		collection(dbService, "papers", `${paperId}`, "messages"),
+		// 		where("isPrivate", "==", false),
+		// 		orderBy("createdAt", "desc")
+		// 	);
+		// }
+
+		const q = query(
+			collection(dbService, "papers", `${paperId}`, "messages"),
+			orderBy("createdAt", "desc")
+		);
+
 		const unsubscribe = onSnapshot(
 			q,
 			(snapshot) => {
@@ -57,11 +64,29 @@ function MessageList() {
 	return (
 		<div className="messageList-container">
 			<Row xs={2} sm={2} md={2} lg={3} xl={3} className="g-4">
-				{messages.map((message) => (
-					<Col key={message.id}>
-						<Message msgObj={message} isOwner={creatorId === userId} />
-					</Col>
-				))}
+				{messages.map((message) =>
+					message.isPrivate ? (
+						(paperCreatorId === userId || userId === message.creatorId) && (
+							<Col key={message.id}>
+								<Message
+									msgObj={message}
+									isOwner={
+										paperCreatorId === userId || userId === message.creatorId
+									}
+								/>
+							</Col>
+						)
+					) : (
+						<Col key={message.id}>
+							<Message
+								msgObj={message}
+								isOwner={
+									paperCreatorId === userId || userId === message.creatorId
+								}
+							/>
+						</Col>
+					)
+				)}
 			</Row>
 		</div>
 	);

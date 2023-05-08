@@ -8,7 +8,7 @@ import MessageImage from "./MessageImage";
 import MessageCanvas from "./MessageCanvas";
 import { useSelector } from "react-redux";
 
-import { Modal, Form, Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { Divider } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
@@ -101,18 +101,34 @@ function CreateMessage() {
 			await uploadString(msgImgRef, msgDrawing, "data_url");
 			msgImgUrl = await getDownloadURL(msgImgRef);
 		}
+
+		const currentTime = new Date();
+		const year = currentTime.getFullYear();
+		const month = String(currentTime.getMonth() + 1).padStart(2, "0");
+		const date = String(currentTime.getDate()).padStart(2, "0");
+		const formattedDate = `${year}/${month}/${date}`;
+
+		const hours = String(currentTime.getHours()).padStart(2, "0");
+		const minutes = String(currentTime.getMinutes()).padStart(2, "0");
+		const seconds = String(currentTime.getSeconds()).padStart(2, "0");
+		const formattedTime = `${hours}:${minutes}:${seconds}`;
+
+		const formattedDateTime = `${formattedDate} ${formattedTime}`;
+
 		const newMsg = doc(
 			collection(dbService, "papers", `${paperId}`, "messages")
 		);
 		const msgObj = {
 			paperId: paperId,
+			creatorId: userId,
 			msgTitle: msgTitle,
 			msgWriter: msgWriter,
 			msgContent: msgContent,
 			msgImg: msgImgUrl,
-			createdAt: Date.now(),
+			createdAt: formattedDateTime,
 			isPrivate: isPrivate,
 		};
+
 		try {
 			await setDoc(newMsg, msgObj);
 			alert(`${msgTitle} 메세지가 작성되었습니다!`);
