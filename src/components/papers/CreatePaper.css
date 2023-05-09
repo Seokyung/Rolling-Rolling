@@ -43,9 +43,6 @@
 	color: #9f5757;
 	font-size: 1.8rem;
 }
-.create-form-title #private-label {
-	margin-left: 0.75rem;
-}
 
 .create-form-input {
 	padding: 1rem !important;
@@ -75,7 +72,7 @@
 	display: flex;
 	flex-direction: row;
 	align-items: baseline;
-	margin-bottom: 0.5rem;
+	margin: 0.5rem 0;
 }
 
 .create-form-code {

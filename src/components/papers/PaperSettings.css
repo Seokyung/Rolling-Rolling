@@ -37,6 +37,7 @@
 	margin: 0 3rem;
 	padding: 2rem;
 	font-size: 1.8rem;
+	border-radius: 10px;
 }
 .paperSettings-offcanvas-body button svg {
 	margin-right: 1rem;

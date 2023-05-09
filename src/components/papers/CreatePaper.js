@@ -107,7 +107,7 @@ function CreatePaper({ paperModal, setPaperModal }) {
 		return paperCode.map((code, index) => {
 			return (
 				<Form.Control
-					className="createPaper-form-code"
+					className="create-form-code"
 					required
 					key={index}
 					type="text"
@@ -236,7 +236,7 @@ function CreatePaper({ paperModal, setPaperModal }) {
 									checked={isPrivate}
 									onChange={onPrivateCheckChange}
 								/>
-								<Form.Label id="private-label">비공개</Form.Label>
+								<Form.Check.Label>비공개</Form.Check.Label>
 							</Form.Check>
 							<Form.Text className="create-form-text">
 								페이퍼의 공개여부를 설정해주세요

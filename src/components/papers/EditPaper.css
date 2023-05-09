@@ -9,35 +9,9 @@
 	flex-direction: column;
 	margin-top: 3rem;
 	margin-bottom: 0.5rem;
-	padding: 4rem 3rem 4rem 3rem;
+	padding: 3.5rem;
 	background-color: #fffdfd;
 	border-radius: 40px;
-}
-
-.editPaper-form-group {
-	display: flex !important;
-	flex-direction: column !important;
-}
-
-.editPaper-form-title {
-	color: #9f5757;
-	font-size: 1.7rem;
-}
-
-.editPaper-form-code-group {
-	margin: 2rem 2rem 0 2rem;
-}
-.editPaper-form-code-input {
-	display: flex;
-	flex-direction: row;
-	align-items: baseline;
-}
-
-.editPaper-form-code-group-text {
-	display: flex;
-	flex-direction: column;
-	margin: 0.125rem;
-	font-size: 1.4rem !important;
 }
 
 .editPaper-edit-btn {
@@ -46,13 +20,10 @@
 }
 
 .editPaper-edit-btn button {
-	font-size: 1.7rem !important;
+	font-size: 1.8rem !important;
 	background-color: #9f5757 !important;
 	border-color: #9f5757 !important;
 }
 .editPaper-edit-btn button:hover {
 	background-color: #944444 !important;
-}
-
-@media screen and (max-width: 1024px) {
 }

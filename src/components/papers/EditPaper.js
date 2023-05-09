@@ -139,7 +139,7 @@ function EditPaper() {
 		return newPaperCode.map((code, index) => {
 			return (
 				<Form.Control
-					className="createPaper-form-code"
+					className="create-form-code"
 					required
 					key={index}
 					type="text"
@@ -207,12 +207,11 @@ function EditPaper() {
 						validated={validated}
 						className="editPaper-form-container"
 					>
-						<Form.Group className="editPaper-form-group">
-							<Form.Label className="editPaper-form-title">
-								페이퍼 이름
-							</Form.Label>
+						<Form.Group className="create-form-group">
+							<Form.Label className="create-form-title">페이퍼 이름</Form.Label>
 							<InputGroup hasValidation>
 								<Form.Control
+									className="create-form-input"
 									type="text"
 									required
 									value={newPaperName}
@@ -220,23 +219,22 @@ function EditPaper() {
 									maxLength={maxNameLength}
 									onChange={onPaperNameChange}
 									onKeyDown={(e) => handleInputEnter(e)}
-									className="createPaper-form-text"
 									placeholder="페이퍼 이름을 입력하세요 :)"
 								/>
 								<Form.Control.Feedback
-									className="createPaper-form-group-text"
+									className="create-form-feedback"
 									type="invalid"
 								>
 									페이퍼 이름을 입력해주세요!
 								</Form.Control.Feedback>
 							</InputGroup>
-							<Form.Text className="form-length-text">
+							<Form.Text className="create-form-length-text">
 								{currentNameLength} / {maxNameLength}
 							</Form.Text>
 						</Form.Group>
 						<Divider />
-						<Form.Group>
-							<Form.Check type="checkbox" className="editPaper-form-title">
+						<Form.Group className="create-form-group">
+							<Form.Check type="checkbox" className="create-form-title">
 								<Form.Check.Input
 									type="checkbox"
 									checked={newIsPrivate}
@@ -244,26 +242,26 @@ function EditPaper() {
 								/>
 								<Form.Check.Label>비공개</Form.Check.Label>
 							</Form.Check>
-							<Form.Text className="createPaper-form-group-text">
+							<Form.Text className="create-form-text">
 								페이퍼의 공개여부를 설정해주세요
 							</Form.Text>
-							{newIsPrivate && (
-								<Form.Group className="editPaper-form-code-group">
-									<Form.Group className="editPaper-form-code-input">
-										{renderCodeInputs()}
-										<Form.Control.Feedback
-											className="createPaper-form-group-text"
-											type="invalid"
-										>
-											페이퍼 코드가 올바르지 않습니다!
-										</Form.Control.Feedback>
-									</Form.Group>
-									<Form.Text className="createPaper-form-code-group-text">
-										4자리의 숫자로 이루어진 코드를 입력해주세요
-									</Form.Text>
-								</Form.Group>
-							)}
 						</Form.Group>
+						{newIsPrivate && (
+							<Form.Group className="create-form-group">
+								<Form.Group className="create-form-code-group">
+									{renderCodeInputs()}
+									<Form.Control.Feedback
+										className="create-form-feedback"
+										type="invalid"
+									>
+										페이퍼 코드가 올바르지 않습니다!
+									</Form.Control.Feedback>
+								</Form.Group>
+								<Form.Text className="create-form-text">
+									4자리의 숫자로 이루어진 코드를 입력해주세요
+								</Form.Text>
+							</Form.Group>
+						)}
 						<Divider />
 						<div className="editPaper-edit-btn">
 							<Button

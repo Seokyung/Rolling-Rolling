@@ -43,7 +43,7 @@ function PaperSettings({ paperSettings, setPaperSettings, setDeleteModal }) {
 			<Offcanvas.Body className="paperSettings-offcanvas-body">
 				<Button id="edit-btn" onClick={gotoEditPaper}>
 					<FontAwesomeIcon icon={faPenToSquare} />
-					페이퍼 수정
+					페이퍼 수정하기
 				</Button>
 				<Button
 					id="delete-btn"
@@ -51,7 +51,7 @@ function PaperSettings({ paperSettings, setPaperSettings, setDeleteModal }) {
 					onClick={openDeleteModal}
 				>
 					<FontAwesomeIcon icon={faTrash} />
-					페이퍼 삭제
+					페이퍼 삭제하기
 				</Button>
 			</Offcanvas.Body>
 		</Offcanvas>

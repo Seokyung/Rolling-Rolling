@@ -20,7 +20,9 @@ function CreateMessage() {
 	const navigate = useNavigate();
 
 	const [msgTitle, setMsgTitle] = useState("");
-	const [msgWriter, setMsgWriter] = useState("");
+	const [msgWriter, setMsgWriter] = useState(
+		useSelector((state) => state.userReducer.displayName)
+	);
 	const [msgContent, setMsgContent] = useState("");
 	const [isAttachment, setIsAttachment] = useState(false);
 	const [attachment, setAttachment] = useState("");
