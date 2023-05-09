@@ -23,34 +23,34 @@
 	position: sticky;
 	position: -webkit-sticky;
 	z-index: 4;
-	display: flex;
+	display: flex !important;
 	align-items: center;
 	justify-content: center;
 	align-self: center;
 	right: 0;
 	bottom: 5rem;
 	margin-bottom: 5rem;
-	padding: 1.5rem 4rem;
-	color: #fffdfd;
-	font-size: 1.8rem;
-	background-color: #9f5757;
-	border-radius: 50px;
+	padding: 1.5rem 4rem !important;
+	color: #fffdfd !important;
+	font-size: 1.8rem !important;
+	background-color: #9f5757 !important;
+	border-color: #944444 !important;
+	border-radius: 50px !important;
 	box-shadow: 0.3rem 0.5rem 0.5rem rgba(150, 143, 142, 0.8);
-	outline: none;
-	appearance: none;
-	border: none;
-	white-space: nowrap;
 }
-.paper-creating-btn:hover {
-	font-size: 2rem;
+.paper-creating-btn:hover,
+.paper-creating-btn:active {
+	font-size: 2.2rem !important;
 	transition: all 0.2s linear;
-	background-color: #944444;
+	background-color: #853d3d !important;
+	border-color: #763636 !important;
 }
 
 .paper-creating-btn-icon {
 	margin-right: 1rem;
 }
-.paper-creating-btn:hover .paper-creating-btn-icon {
+.paper-creating-btn:hover .paper-creating-btn-icon,
+.paper-creating-btn:active .paper-creating-btn-icon {
 	transition: all 0.2s linear;
 	transform: rotate(360deg);
 }

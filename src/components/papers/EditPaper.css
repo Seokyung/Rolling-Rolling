@@ -1,3 +1,50 @@
+.editPaper-container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: auto;
+	margin-bottom: 5rem;
+	padding: 4rem 5rem;
+	border-radius: 40px;
+	background-color: #e4bab5;
+	box-shadow: 0.5rem 0.5rem 0.5rem #968f8e;
+}
+
+.editPaper-header-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	margin-bottom: 3rem;
+}
+.editPaper-header-container button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 5%;
+	z-index: 1;
+	color: #595959;
+	font-size: 2rem;
+	outline: none;
+	appearance: none;
+	border: none;
+	white-space: nowrap;
+	background: none;
+}
+.editPaper-header-container button:hover,
+.editPaper-header-container button:active {
+	color: #454545;
+}
+
+.paper-title-container {
+	width: 100%;
+	margin: 0 1rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
 .editPaper-title {
 	margin: 0 0 0 -5%;
 	font-size: 2.2rem;
@@ -7,8 +54,7 @@
 .editPaper-form-container {
 	display: flex;
 	flex-direction: column;
-	margin-top: 3rem;
-	margin-bottom: 0.5rem;
+	margin: 0.5rem 0;
 	padding: 3.5rem;
 	background-color: #fffdfd;
 	border-radius: 40px;
@@ -22,8 +68,10 @@
 .editPaper-edit-btn button {
 	font-size: 1.8rem !important;
 	background-color: #9f5757 !important;
-	border-color: #9f5757 !important;
+	border-color: #944444 !important;
 }
-.editPaper-edit-btn button:hover {
-	background-color: #944444 !important;
+.editPaper-edit-btn button:hover,
+.editPaper-edit-btn button:active {
+	background-color: #853d3d !important;
+	border-color: #763636 !important;
 }

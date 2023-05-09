@@ -4,6 +4,8 @@ import { doc, deleteDoc } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 
 import { Card, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import "./Message.css";
 
 function Message({ msgObj, isOwner }) {
@@ -60,7 +62,10 @@ function Message({ msgObj, isOwner }) {
 				)}
 				{isOwner && (
 					<div className="message-delete-btn">
-						<Button onClick={() => deleteMessage(msgObj)}>메세지 삭제</Button>
+						{/* <Button onClick={() => deleteMessage(msgObj)}>메세지 삭제</Button> */}
+						<Button onClick={() => deleteMessage(msgObj)}>
+							<FontAwesomeIcon icon={faTrash} />
+						</Button>
 					</div>
 				)}
 			</Card.Body>

@@ -10,18 +10,18 @@
 }
 
 .message-card-title {
-	font-size: 1.8rem !important;
+	font-size: 2rem !important;
 	font-weight: 700 !important;
 	color: #944444 !important;
 	margin-bottom: 1rem !important;
 }
 
 .message-card-subs {
-	font-size: 1.2rem !important;
+	font-size: 1.4rem !important;
 }
 
 .message-card-content {
-	font-size: 1.4rem !important;
+	font-size: 1.6rem !important;
 	color: #303030 !important;
 }
 
@@ -37,11 +37,12 @@
 .message-delete-btn button {
 	font-size: 1.4rem !important;
 	background-color: #9f5757 !important;
-	border-color: #9f5757 !important;
+	border-color: #944444 !important;
 }
 .message-delete-btn button:hover,
 .message-delete-btn button:active {
-	background-color: #944444 !important;
+	background-color: #853d3d !important;
+	border-color: #763636 !important;
 }
 
 @media screen and (max-width: 1023px) {

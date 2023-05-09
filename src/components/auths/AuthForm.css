@@ -67,14 +67,15 @@
 
 .authForm-btn {
 	margin-top: 1rem !important;
-	padding: 2rem !important;
+	padding: 1.8rem !important;
 	font-size: 2.2rem !important;
 	background-color: #9f5757 !important;
-	border-color: #9f5757 !important;
+	border-color: #944444 !important;
 }
 .authForm-btn:hover,
 .authForm-btn:active {
-	background-color: #944444 !important;
+	background-color: #853d3d !important;
+	border-color: #763636 !important;
 }
 
 .authForm-text {
@@ -116,9 +117,5 @@
 
 	.authForm-form-group {
 		margin-bottom: 1.5rem;
-	}
-
-	.authForm-btn {
-		padding: 1.8rem !important;
 	}
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CreatePaper from "components/papers/CreatePaper";
 import PaperList from "components/papers/PaperList";
 
+import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import "./Home.css";
@@ -19,13 +20,13 @@ function Home() {
 				<div className="home-paper-container">
 					<PaperList />
 				</div>
-				<button className="paper-creating-btn" onClick={openPaperModal}>
+				<Button className="paper-creating-btn" onClick={openPaperModal}>
 					<FontAwesomeIcon
 						className="paper-creating-btn-icon"
 						icon={faFileCirclePlus}
 					/>
 					페이퍼 만들기
-				</button>
+				</Button>
 			</div>
 			<CreatePaper paperModal={paperModal} setPaperModal={setPaperModal} />
 		</>

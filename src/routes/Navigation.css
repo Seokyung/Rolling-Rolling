@@ -113,12 +113,13 @@
 	font-size: 1.8rem !important;
 	padding: 1rem 2rem !important;
 	background-color: #9f5757 !important;
-	border-color: #9f5757 !important;
+	border-color: #944444 !important;
 	box-shadow: 0.3rem 0.5rem 0.5rem #cccaca !important;
 }
 .navigation-offcanvas-logout-btn button:hover,
 .navigation-offcanvas-logout-btn button:active {
-	background-color: #944444 !important;
+	background-color: #853d3d !important;
+	border-color: #763636 !important;
 }
 
 @media screen and (max-width: 1024px) {

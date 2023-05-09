@@ -261,6 +261,9 @@ function CreatePaper({ paperModal, setPaperModal }) {
 					</Form>
 				</Modal.Body>
 				<Modal.Footer className="create-modal-footer">
+					<Button id="create-btn" size="lg" onClick={onCreatePaper}>
+						페이퍼 만들기
+					</Button>
 					<Button
 						id="close-btn"
 						variant="outline-secondary"
@@ -268,9 +271,6 @@ function CreatePaper({ paperModal, setPaperModal }) {
 						onClick={closePaperModal}
 					>
 						닫기
-					</Button>
-					<Button id="create-btn" size="lg" onClick={onCreatePaper}>
-						페이퍼 만들기
 					</Button>
 				</Modal.Footer>
 			</Modal>

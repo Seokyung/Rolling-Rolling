@@ -11,6 +11,7 @@ import PaperSettings from "./PaperSettings";
 import DeletePaper from "./DeletePaper";
 import SharePaper from "./SharePaper";
 
+import { Button } from "react-bootstrap";
 import { Skeleton } from "antd";
 import {
 	faAngleLeft,
@@ -106,13 +107,13 @@ function Paper() {
 							<MessageList />
 							<SharePaper />
 						</div>
-						<button className="paper-creating-btn" onClick={gotoEditPaper}>
+						<Button className="paper-creating-btn" onClick={gotoEditPaper}>
 							<FontAwesomeIcon
 								className="paper-creating-btn-icon"
 								icon={faEnvelope}
 							/>
 							메세지 작성하기
-						</button>
+						</Button>
 					</div>
 					<PaperSettings
 						paperSettings={paperSettings}

@@ -85,7 +85,7 @@
 
 .create-modal-footer {
 	display: flex !important;
-	justify-content: flex-end !important;
+	justify-content: center !important;
 	margin: 0 !important;
 	padding: 2rem 1rem 1rem 1rem !important;
 }
@@ -94,16 +94,18 @@
 	font-size: 1.8rem !important;
 }
 
-.create-modal-footer button#close-btn {
-	margin-right: 1rem !important;
-}
-
 .create-modal-footer button#create-btn {
 	background-color: #9f5757 !important;
-	border-color: #9f5757 !important;
+	border-color: #944444 !important;
+	margin-right: 1rem;
 }
 .create-modal-footer button#create-btn:hover {
-	background-color: #944444 !important;
+	background-color: #853d3d !important;
+	border-color: #763636 !important;
+}
+
+.create-modal-footer button#close-btn {
+	margin-left: 1rem;
 }
 
 /* @media screen and (max-width: 1200px) {
