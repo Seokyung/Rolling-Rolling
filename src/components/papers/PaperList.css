@@ -2,7 +2,7 @@
 	display: flex !important;
 	flex-direction: column !important;
 	margin: 0.5rem 0.5rem 2.5rem 0.5rem !important;
-	padding: 2.5rem !important;
+	padding: 2rem !important;
 	background-color: #fffdfd !important;
 	border-radius: 30px !important;
 	border: none !important;
@@ -32,28 +32,19 @@
 	margin-right: 0.5rem;
 }
 
+.paperList-card-info {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 .paperList-card-date {
 	color: #454545;
 	font-size: 1.4rem;
 }
 
 .paperList-card-delete-btn {
-	display: flex;
-	justify-content: right;
-}
-.paperList-card-delete-btn button {
-	color: #9d4040;
-	font-size: 1.8rem;
-	padding: 0;
-	outline: none;
-	appearance: none;
-	border: none;
-	white-space: nowrap;
-	background: none;
-}
-.paperList-card-delete-btn svg:hover,
-.paperList-card-delete-btn svg:active {
-	color: #823636;
+	font-size: 1.6rem !important;
 }
 
 .empty-container {

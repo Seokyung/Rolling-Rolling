@@ -14,7 +14,7 @@ import useDebounce from "modules/useDebounce";
 import DeletePaper from "./DeletePaper";
 
 import { Skeleton, Empty } from "antd";
-import { Row, Col, Card, Pagination } from "react-bootstrap";
+import { Row, Col, Card, Button, Pagination } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import "./PaperList.css";
@@ -146,16 +146,16 @@ function PaperList() {
 						.slice(rowIdx * colNum, (rowIdx + 1) * colNum)
 						.map((paper) => (
 							<Col key={paper.id} className="paperList-col-container">
-								<Card className="paperList-card-container">
-									<Card.Body>
-										<Link
-											to={
-												paper.isPrivate
-													? `/paper/private/${paper.id}`
-													: `/paper/${paper.id}`
-											}
-											className="paperList-card-link"
-										>
+								<Link
+									to={
+										paper.isPrivate
+											? `/paper/private/${paper.id}`
+											: `/paper/${paper.id}`
+									}
+									className="paperList-card-link"
+								>
+									<Card className="paperList-card-container">
+										<Card.Body>
 											<Card.Title>
 												<h4 className="paperList-card-title">
 													{paper.isPrivate && (
@@ -164,19 +164,42 @@ function PaperList() {
 													{paper.paperName}
 												</h4>
 											</Card.Title>
-										</Link>
-										<Card.Text className="paperList-card-date">
-											{paper.createdAt}
-										</Card.Text>
-										{userId === paper.creatorId && (
-											<div className="paperList-card-delete-btn">
-												<button onClick={() => openDeleteModal(paper.id)}>
-													<FontAwesomeIcon icon={faTrash} />
-												</button>
+											<div className="paperList-card-info">
+												<Card.Text className="paperList-card-date">
+													{paper.createdAt}
+												</Card.Text>
+												{userId === paper.creatorId && (
+													<Button
+														className="paperList-card-delete-btn"
+														variant="danger"
+														onClick={(e) => {
+															e.preventDefault();
+															e.stopPropagation();
+															openDeleteModal(paper.id);
+														}}
+													>
+														<FontAwesomeIcon icon={faTrash} />
+													</Button>
+												)}
 											</div>
-										)}
-									</Card.Body>
-								</Card>
+
+											{/* {userId === paper.creatorId && (
+												<div className="paperList-card-delete-btn">
+													<Button
+														variant="danger"
+														onClick={(e) => {
+															e.preventDefault();
+															e.stopPropagation();
+															openDeleteModal(paper.id);
+														}}
+													>
+														<FontAwesomeIcon icon={faTrash} />
+													</Button>
+												</div>
+											)} */}
+										</Card.Body>
+									</Card>
+								</Link>
 							</Col>
 						))}
 				</Row>
