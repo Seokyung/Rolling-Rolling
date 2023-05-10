@@ -7,7 +7,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Form, InputGroup, Button } from "react-bootstrap";
 import { Divider, message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import "./EditPaper.css";
 
 function EditPaper() {
@@ -199,7 +199,13 @@ function EditPaper() {
 							<FontAwesomeIcon icon={faAngleLeft} />
 						</button>
 						<div className="paper-title-container">
-							<h2 className="editPaper-title">페이퍼 수정하기</h2>
+							<h2 className="editPaper-title">
+								<FontAwesomeIcon
+									className="icon-margin-right"
+									icon={faPenToSquare}
+								/>
+								페이퍼 수정
+							</h2>
 						</div>
 					</div>
 					<Form

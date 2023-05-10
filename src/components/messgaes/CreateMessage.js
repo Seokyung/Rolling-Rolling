@@ -8,10 +8,15 @@ import MessageImage from "./MessageImage";
 import MessageCanvas from "./MessageCanvas";
 import { useSelector } from "react-redux";
 
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, ButtonGroup, ToggleButton } from "react-bootstrap";
 import { Divider } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+	faAngleLeft,
+	faEnvelope,
+	faImage,
+	faBrush,
+} from "@fortawesome/free-solid-svg-icons";
 import "./CreateMessage.css";
 
 function CreateMessage() {
@@ -24,7 +29,6 @@ function CreateMessage() {
 		useSelector((state) => state.userReducer.displayName)
 	);
 	const [msgContent, setMsgContent] = useState("");
-	const [isAttachment, setIsAttachment] = useState(false);
 	const [attachment, setAttachment] = useState("");
 	const [msgImg, setMsgImg] = useState("");
 	const [msgDrawing, setMsgDrawing] = useState("");
@@ -58,16 +62,6 @@ function CreateMessage() {
 		setIsPrivate(checked);
 	};
 
-	const onAttachmentChange = (e) => {
-		const {
-			target: { checked },
-		} = e;
-		setIsAttachment(checked);
-		if (!checked) {
-			setAttachment("");
-		}
-	};
-
 	const onAttachmentTypeChange = (e) => {
 		const {
 			target: { value },
@@ -75,12 +69,13 @@ function CreateMessage() {
 		setAttachment(value);
 	};
 
-	const showCanvasModal = () => {
-		setCanvasModal((prev) => !prev);
+	const openCanvasModal = () => {
+		setCanvasModal(true);
 	};
 
 	const clearMsgDrawing = () => {
 		setMsgDrawing("");
+		setAttachment("");
 	};
 
 	const onMessageSubmit = async (e) => {
@@ -141,158 +136,190 @@ function CreateMessage() {
 			setMsgTitle("");
 			setMsgWriter("");
 			setMsgContent("");
+			setAttachment("");
 			setMsgImg("");
+			setMsgDrawing("");
 			closeCreateMessage();
 		}
 	};
 
 	return (
-		<div className="paper-wrapper">
-			<div className="paper-container">
-				<div className="paper-header-container">
-					<button className="paper-prev-btn" onClick={closeCreateMessage}>
-						<FontAwesomeIcon icon={faAngleLeft} />
-					</button>
-					<div className="paper-title-container">
-						<h2 className="editPaper-title">메세지 작성하기</h2>
+		<>
+			<div className="paper-wrapper">
+				<div className="editPaper-container">
+					<div className="editPaper-header-container">
+						<button onClick={closeCreateMessage}>
+							<FontAwesomeIcon icon={faAngleLeft} />
+						</button>
+						<div className="paper-title-container">
+							<h2 className="createMessage-title">
+								<FontAwesomeIcon
+									className="icon-margin-right"
+									icon={faEnvelope}
+								/>
+								메세지 작성하기
+							</h2>
+						</div>
 					</div>
-				</div>
-				<div className="editPaper-form-container">
-					<Form noValidate validated={validated}>
-						<Form.Group className="create-form-group">
-							<Form.Label className="create-form-title">메세지 제목</Form.Label>
-							<Form.Control
-								className="create-form-input"
-								type="text"
-								name="title"
-								required
-								autoFocus
-								value={msgTitle}
-								onChange={onMessageChange}
-								placeholder="제목을 입력하세요 :)"
-							/>
-							<Form.Control.Feedback
-								className="create-form-feedback"
-								type="invalid"
-							>
-								메세지 제목을 입력해주세요!
-							</Form.Control.Feedback>
-						</Form.Group>
-						<Form.Group className="create-form-group">
-							<Form.Label className="create-form-title">작성자</Form.Label>
-							<Form.Control
-								className="create-form-input"
-								type="text"
-								name="writer"
-								required
-								value={msgWriter}
-								onChange={onMessageChange}
-								placeholder="이름을 입력하세요 :)"
-							/>
-							<Form.Control.Feedback
-								className="create-form-feedback"
-								type="invalid"
-							>
-								작성자를 입력해주세요!
-							</Form.Control.Feedback>
-						</Form.Group>
-					</Form>
-					<Form>
-						<Form.Group className="create-form-group">
-							<Form.Label className="create-form-title">메세지 내용</Form.Label>
-							<Form.Control
-								className="create-form-input"
-								type="text"
-								name="content"
-								value={msgContent}
-								onChange={onMessageChange}
-								placeholder="내용을 입력하세요 :)"
-							/>
-						</Form.Group>
-						<Form.Group className="create-form-group">
-							<Form.Check type="checkbox" className="create-form-title">
-								<Form.Check.Input
-									type="checkbox"
-									checked={isPrivate}
-									onChange={onPrivateCheckChange}
+					<div className="editPaper-form-container">
+						<Form noValidate validated={validated}>
+							<Form.Group className="create-form-group">
+								<Form.Label className="create-form-title">
+									메세지 제목
+								</Form.Label>
+								<Form.Control
+									className="create-form-input"
+									type="text"
+									name="title"
+									required
+									autoFocus
+									value={msgTitle}
+									onChange={onMessageChange}
+									placeholder="제목을 입력하세요 :)"
 								/>
-								<Form.Label id="private-label">비공개</Form.Label>
-							</Form.Check>
-						</Form.Group>
-					</Form>
-					<Divider className="paper-divider" />
-					<Form>
-						<Form.Group className="create-form-group">
-							<Form.Check type="checkbox" className="create-form-title">
-								<Form.Check.Input
-									type="checkbox"
-									checked={isAttachment}
-									onChange={onAttachmentChange}
+								<Form.Control.Feedback
+									className="create-form-feedback"
+									type="invalid"
+								>
+									메세지 제목을 입력해주세요!
+								</Form.Control.Feedback>
+							</Form.Group>
+							<Form.Group className="create-form-group">
+								<Form.Label className="create-form-title">작성자</Form.Label>
+								<Form.Control
+									className="create-form-input"
+									type="text"
+									name="writer"
+									required
+									value={msgWriter}
+									onChange={onMessageChange}
+									placeholder="이름을 입력하세요 :)"
 								/>
-								<Form.Label id="private-label">첨부파일</Form.Label>
-							</Form.Check>
-						</Form.Group>
-						{isAttachment && (
-							<>
-								<div>
-									<label>
-										<input
-											type="radio"
-											name="attachmentType"
-											id="attachImage"
-											value="attachImage"
-											checked={attachment === "attachImage"}
-											onChange={onAttachmentTypeChange}
-										/>
-										이미지 첨부하기
-									</label>
-									<label>
-										<input
-											type="radio"
-											name="attachmentType"
-											id="attachDrawing"
-											value="attachDrawing"
-											checked={attachment === "attachDrawing"}
-											onChange={onAttachmentTypeChange}
-										/>
-										그림 첨부하기
-									</label>
-								</div>
-								{attachment === "attachImage" && (
-									<MessageImage msgImg={msgImg} setMsgImg={setMsgImg} />
-								)}
-								{attachment === "attachDrawing" && (
-									<div>
-										<button onClick={showCanvasModal}>그림 그리기</button>
-										{canvasModal && (
-											<MessageCanvas
-												setMsgDrawing={setMsgDrawing}
-												setCanvasModal={setCanvasModal}
+								<Form.Control.Feedback
+									className="create-form-feedback"
+									type="invalid"
+								>
+									작성자를 입력해주세요!
+								</Form.Control.Feedback>
+							</Form.Group>
+						</Form>
+						<Form>
+							<Form.Group className="create-form-group">
+								<Form.Label className="create-form-title">
+									메세지 내용
+								</Form.Label>
+								<Form.Control
+									className="create-form-input"
+									as="textarea"
+									rows={5}
+									name="content"
+									value={msgContent}
+									onChange={onMessageChange}
+									placeholder="내용을 입력하세요 :)"
+								/>
+							</Form.Group>
+							<Divider className="paper-divider" />
+							<Form.Group className="create-form-group">
+								<Form.Check type="checkbox" className="create-form-title">
+									<Form.Check.Input
+										type="checkbox"
+										checked={isPrivate}
+										onChange={onPrivateCheckChange}
+									/>
+									<Form.Check.Label>비공개</Form.Check.Label>
+								</Form.Check>
+								<Form.Text className="create-form-text">
+									메세지의 공개여부를 설정해주세요
+								</Form.Text>
+								<Form.Text className="create-form-text-small">
+									(비공개 메세지는 페이퍼 주인과 메세지 작성자만 볼 수 있어요🤫
+									)
+								</Form.Text>
+							</Form.Group>
+							<Divider className="paper-divider" />
+							<Form.Group className="createMessage-button-group">
+								<ButtonGroup>
+									<ToggleButton
+										className="createMessage-toggle-btn"
+										type="radio"
+										variant="outline-secondary"
+										checked={attachment === "attachImage"}
+										id="attachImage"
+										value="attachImage"
+										onChange={onAttachmentTypeChange}
+									>
+										<FontAwesomeIcon icon={faImage} />
+										사진 첨부
+									</ToggleButton>
+									<ToggleButton
+										className="createMessage-toggle-btn"
+										type="radio"
+										variant="outline-secondary"
+										checked={attachment === "attachDrawing"}
+										id="attachDrawing"
+										value="attachDrawing"
+										onChange={onAttachmentTypeChange}
+									>
+										<FontAwesomeIcon icon={faBrush} />
+										그림 첨부
+									</ToggleButton>
+								</ButtonGroup>
+								{
+									<div className="createMessage-attach-group">
+										{attachment === "attachImage" && (
+											<MessageImage
+												msgImg={msgImg}
+												setMsgImg={setMsgImg}
+												setAttachment={setAttachment}
 											/>
 										)}
-										{msgDrawing && (
-											<div>
-												<img
-													src={msgDrawing}
-													width="200px"
-													alt="messageDrawing"
-												/>
-												<button onClick={clearMsgDrawing}>그림 제거하기</button>
-											</div>
+										{attachment === "attachDrawing" && (
+											<>
+												<button
+													onClick={(e) => {
+														e.preventDefault();
+														openCanvasModal();
+													}}
+												>
+													그림 그리기
+												</button>
+												{msgDrawing && (
+													<div>
+														<img
+															src={msgDrawing}
+															width="200px"
+															alt="messageDrawing"
+														/>
+														<button onClick={clearMsgDrawing}>
+															그림 제거하기
+														</button>
+													</div>
+												)}
+											</>
 										)}
 									</div>
-								)}
-							</>
-						)}
-					</Form>
-				</div>
-				<div className="editPaper-edit-btn">
-					<Button size="lg" onClick={onMessageSubmit}>
-						작성 완료
-					</Button>
+								}
+							</Form.Group>
+
+							<Divider className="paper-divider" />
+							<div className="editPaper-edit-btn">
+								<Button size="lg" onClick={onMessageSubmit}>
+									작성 완료
+								</Button>
+							</div>
+						</Form>
+					</div>
 				</div>
 			</div>
-		</div>
+			{canvasModal && (
+				<MessageCanvas
+					canvasModal={canvasModal}
+					setCanvasModal={setCanvasModal}
+					setMsgDrawing={setMsgDrawing}
+					setAttachment={setAttachment}
+				/>
+			)}
+		</>
 	);
 }
 

@@ -1,8 +1,9 @@
 import React, { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 
-import { Form, Collapse, InputGroup } from "react-bootstrap";
-import { faShareNodes } from "@fortawesome/free-solid-svg-icons";
+import { Form, Collapse, InputGroup, Button } from "react-bootstrap";
+import { Tooltip, message } from "antd";
+import { faShareNodes, faCopy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./SharePaper.css";
 
@@ -10,6 +11,8 @@ function SharePaper() {
 	const paperId = useSelector((state) => state.paperReducer.paperId);
 	const [isShare, setIsShare] = useState(false);
 	const paperUrlRef = useRef();
+
+	const [messageApi, contextHolder] = message.useMessage();
 
 	const showShareLink = () => {
 		setIsShare((prev) => !prev);
@@ -25,29 +28,39 @@ function SharePaper() {
 		paperUrlRef.current.focus();
 		paperUrlRef.current.select();
 		navigator.clipboard.writeText(paperUrlRef.current.value).then(() => {
-			alert("링크를 복사했습니다!");
+			messageApi.open({
+				type: "info",
+				content: "링크를 복사했습니다!",
+			});
 		});
 	};
 
 	return (
-		<div className="sharePaper-container">
-			<button className="sharePaper-btn" onClick={showShareLink}>
-				<FontAwesomeIcon icon={faShareNodes} />내 페이퍼 공유하기
-			</button>
-			<Collapse in={isShare}>
-				<div className="sharePaper-link">
-					<InputGroup>
-						<Form.Control
-							type="text"
-							readOnly
-							ref={paperUrlRef}
-							value={`http://localhost:3000/paper/${paperId}`}
-						/>
-						<button onClick={onShareClick}>링크 복사</button>
-					</InputGroup>
-				</div>
-			</Collapse>
-		</div>
+		<>
+			{contextHolder}
+			<div className="sharePaper-container">
+				<button className="sharePaper-btn" onClick={showShareLink}>
+					<FontAwesomeIcon icon={faShareNodes} />내 페이퍼 공유하기
+				</button>
+				<Collapse in={isShare}>
+					<div className="sharePaper-link">
+						<InputGroup>
+							<Form.Control
+								type="text"
+								readOnly
+								ref={paperUrlRef}
+								value={`http://localhost:3000/paper/${paperId}`}
+							/>
+							<Tooltip title="링크 복사">
+								<Button variant="secondary" onClick={onShareClick}>
+									<FontAwesomeIcon icon={faCopy} />
+								</Button>
+							</Tooltip>
+						</InputGroup>
+					</div>
+				</Collapse>
+			</div>
+		</>
 	);
 }
 

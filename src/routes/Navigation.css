@@ -3,7 +3,7 @@
 	position: fixed;
 	justify-content: center;
 	align-items: center;
-	width: 75%;
+	width: 85%;
 	height: 10rem;
 	margin: 0 auto;
 	padding-top: 2rem;
@@ -122,14 +122,15 @@
 	border-color: #763636 !important;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1200px) {
 	.navigation-container {
-		min-width: 400px;
+		width: 75%;
+		min-width: 350px;
 	}
 }
 
 @media screen and (min-width: 1400px) {
 	.navigation-container {
-		max-width: 1200px;
+		max-width: 1300px;
 	}
 }

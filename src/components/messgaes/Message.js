@@ -63,7 +63,10 @@ function Message({ msgObj, isOwner }) {
 				{isOwner && (
 					<div className="message-delete-btn">
 						{/* <Button onClick={() => deleteMessage(msgObj)}>메세지 삭제</Button> */}
-						<Button onClick={() => deleteMessage(msgObj)}>
+						<Button
+							variant="outline-danger"
+							onClick={() => deleteMessage(msgObj)}
+						>
 							<FontAwesomeIcon icon={faTrash} />
 						</Button>
 					</div>

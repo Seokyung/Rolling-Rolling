@@ -4,7 +4,7 @@
 	width: 100%;
 	height: auto;
 	margin-bottom: 5rem;
-	padding: 4rem 5rem;
+	padding: 3rem 5rem;
 	border-radius: 40px;
 	background-color: #e4bab5;
 	box-shadow: 0.5rem 0.5rem 0.5rem #968f8e;
@@ -49,12 +49,17 @@
 	margin: 0 0 0 -5%;
 	font-size: 2.2rem;
 	font-weight: 700;
+	padding: 1.8rem 3.5rem;
+	border-radius: 40px;
+	color: #595959;
+	background-color: #fffdfd;
 }
 
 .editPaper-form-container {
 	display: flex;
 	flex-direction: column;
-	margin: 0.5rem 0;
+	margin-top: 0.5rem;
+	margin-bottom: 1rem;
 	padding: 3.5rem;
 	background-color: #fffdfd;
 	border-radius: 40px;

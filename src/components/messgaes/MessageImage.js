@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import imageCompression from "browser-image-compression";
 
-function MessageImage({ msgImg, setMsgImg }) {
+function MessageImage({ msgImg, setMsgImg, setAttachment }) {
 	const imgInputRef = useRef(null);
 
 	const onMsgImgChange = async (e) => {
@@ -23,6 +23,7 @@ function MessageImage({ msgImg, setMsgImg }) {
 	const clearMsgImg = () => {
 		imgInputRef.current.value = null;
 		setMsgImg("");
+		setAttachment("");
 	};
 
 	return (

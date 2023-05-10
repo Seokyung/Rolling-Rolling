@@ -61,10 +61,16 @@
 }
 
 .create-form-text {
+	margin-left: 0.75rem;
 	font-size: 1.4rem !important;
+}
+.create-form-text-small {
+	margin-left: 0.75rem;
+	font-size: 1.2rem !important;
 }
 
 .create-form-feedback {
+	margin-left: 0.75rem;
 	font-size: 1.6rem !important;
 }
 

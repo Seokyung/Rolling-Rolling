@@ -33,23 +33,12 @@
 	margin-top: 2rem;
 }
 .sharePaper-link input {
-	padding: 1.5rem 1.5rem 1.5rem 2rem !important;
+	padding: 1.2rem 1.5rem !important;
 	border: none !important;
-	border-radius: 30px 0 0 30px !important;
 	font-size: 1.4rem !important;
 }
 .sharePaper-link button {
-	padding: 1.2rem;
+	padding: 1.2rem 1.5rem;
 	color: #fffdfd;
-	background-color: #a36260;
-	border-radius: 30px;
-	font-size: 1.4rem;
-	outline: none;
-	appearance: none;
-	border: none;
-	white-space: nowrap;
-}
-.sharePaper-link button:hover,
-.sharePaper-link button:active {
-	background-color: #ac7270;
+	font-size: 1.6rem;
 }

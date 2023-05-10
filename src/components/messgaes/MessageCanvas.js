@@ -1,6 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 
-function MessageCanvas({ setMsgDrawing, setCanvasModal }) {
+import { Modal, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+
+function MessageCanvas({
+	canvasModal,
+	setCanvasModal,
+	setMsgDrawing,
+	setAttachment,
+}) {
 	const canvasRef = useRef(null);
 	const [ctx, setCtx] = useState(null);
 	const [isDrawing, setIsDrawing] = useState(false);
@@ -12,8 +21,8 @@ function MessageCanvas({ setMsgDrawing, setCanvasModal }) {
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
-		canvas.width = window.innerWidth * 0.6;
-		canvas.height = window.innerHeight * 0.6;
+		canvas.width = window.innerWidth * 0.5;
+		canvas.height = window.innerHeight * 0.5;
 		const getCtx = canvas.getContext("2d", { willReadFrequently: true });
 		setCtx(getCtx);
 		setTool("pen");
@@ -22,6 +31,11 @@ function MessageCanvas({ setMsgDrawing, setCanvasModal }) {
 		setDrawArray([]);
 		setIdx(0);
 	}, []);
+
+	const closeCanvasModal = () => {
+		setCanvasModal(false);
+		setAttachment("");
+	};
 
 	const startDrawing = (e) => {
 		const getX = e.nativeEvent.offsetX;
@@ -120,122 +134,148 @@ function MessageCanvas({ setMsgDrawing, setCanvasModal }) {
 	const saveDrawing = () => {
 		const drawingUrl = canvasRef.current.toDataURL("image/png");
 		setMsgDrawing(drawingUrl);
-		setCanvasModal((prev) => !prev);
+		setCanvasModal(false);
 	};
 
 	return (
-		<div>
-			<h4>Canvas</h4>
-			<canvas
-				ref={canvasRef}
-				onMouseDown={startDrawing}
-				onTouchStart={startDrawing}
-				onMouseMove={onDrawing}
-				onTouchMove={onDrawing}
-				onMouseUp={stopDrawing}
-				onMouseOut={stopDrawing}
-				onTouchEnd={stopDrawing}
-				style={{ border: "1px solid black" }}
-			/>
-			<div>
+		<Modal
+			show={canvasModal}
+			onExit={closeCanvasModal}
+			centered
+			animation={true}
+			keyboard={false}
+			backdrop="static"
+		>
+			<Modal.Header className="create-modal-header">
+				<Modal.Title className="create-modal-title">그림 그리기</Modal.Title>
+				<button className="create-modal-close-btn" onClick={closeCanvasModal}>
+					<FontAwesomeIcon icon={faXmark} />
+				</button>
+			</Modal.Header>
+			<Modal.Body>
+				<canvas
+					ref={canvasRef}
+					onMouseDown={startDrawing}
+					onTouchStart={startDrawing}
+					onMouseMove={onDrawing}
+					onTouchMove={onDrawing}
+					onMouseUp={stopDrawing}
+					onMouseOut={stopDrawing}
+					onTouchEnd={stopDrawing}
+					style={{ border: "1px solid black" }}
+				/>
 				<div>
+					<div>
+						<label>
+							<input
+								type="radio"
+								name="toolType"
+								id="pen"
+								value="pen"
+								checked={tool === "pen"}
+								onChange={onToolChange}
+							/>
+							펜
+						</label>
+						<label>
+							<input
+								type="radio"
+								name="toolType"
+								id="eraser"
+								value="eraser"
+								checked={tool === "eraser"}
+								onChange={onToolChange}
+							/>
+							지우개
+						</label>
+					</div>
 					<label>
+						펜 두께
 						<input
-							type="radio"
-							name="toolType"
-							id="pen"
-							value="pen"
-							checked={tool === "pen"}
-							onChange={onToolChange}
+							type="range"
+							id="toolWidth"
+							min="1"
+							max="25"
+							step="2"
+							value={toolWidth}
+							onChange={onToolWidthChange}
 						/>
-						펜
 					</label>
-					<label>
-						<input
-							type="radio"
-							name="toolType"
-							id="eraser"
-							value="eraser"
-							checked={tool === "eraser"}
-							onChange={onToolChange}
-						/>
-						지우개
-					</label>
+					<div>
+						<label>
+							<input
+								type="radio"
+								name="penColor"
+								id="black"
+								value="black"
+								checked={color === "black"}
+								onChange={onColorChange}
+							/>
+							검정
+						</label>
+						<label>
+							<input
+								type="radio"
+								name="penColor"
+								id="red"
+								value="red"
+								checked={color === "red"}
+								onChange={onColorChange}
+							/>
+							빨강
+						</label>
+						<label>
+							<input
+								type="radio"
+								name="penColor"
+								id="yellow"
+								value="yellow"
+								checked={color === "yellow"}
+								onChange={onColorChange}
+							/>
+							노랑
+						</label>
+						<label>
+							<input
+								type="radio"
+								name="penColor"
+								id="green"
+								value="green"
+								checked={color === "green"}
+								onChange={onColorChange}
+							/>
+							초록
+						</label>
+						<label>
+							<input
+								type="radio"
+								name="penColor"
+								id="blue"
+								value="blue"
+								checked={color === "blue"}
+								onChange={onColorChange}
+							/>
+							파랑
+						</label>
+					</div>
+					<button onClick={undoLastDrawing}>뒤로가기</button>
+					<button onClick={resetDrawing}>리셋</button>
 				</div>
-				<label>
-					펜 두께
-					<input
-						type="range"
-						id="toolWidth"
-						min="1"
-						max="25"
-						step="2"
-						value={toolWidth}
-						onChange={onToolWidthChange}
-					/>
-				</label>
-				<div>
-					<label>
-						<input
-							type="radio"
-							name="penColor"
-							id="black"
-							value="black"
-							checked={color === "black"}
-							onChange={onColorChange}
-						/>
-						검정
-					</label>
-					<label>
-						<input
-							type="radio"
-							name="penColor"
-							id="red"
-							value="red"
-							checked={color === "red"}
-							onChange={onColorChange}
-						/>
-						빨강
-					</label>
-					<label>
-						<input
-							type="radio"
-							name="penColor"
-							id="yellow"
-							value="yellow"
-							checked={color === "yellow"}
-							onChange={onColorChange}
-						/>
-						노랑
-					</label>
-					<label>
-						<input
-							type="radio"
-							name="penColor"
-							id="green"
-							value="green"
-							checked={color === "green"}
-							onChange={onColorChange}
-						/>
-						초록
-					</label>
-					<label>
-						<input
-							type="radio"
-							name="penColor"
-							id="blue"
-							value="blue"
-							checked={color === "blue"}
-							onChange={onColorChange}
-						/>
-						파랑
-					</label>
-				</div>
-				<button onClick={undoLastDrawing}>뒤로가기</button>
-				<button onClick={resetDrawing}>리셋</button>
-			</div>
-			<button onClick={saveDrawing}>그림 첨부하기</button>
-		</div>
+			</Modal.Body>
+			<Modal.Footer className="create-modal-footer">
+				<Button id="create-btn" size="lg" onClick={saveDrawing}>
+					그림 첨부하기
+				</Button>
+				<Button
+					id="close-btn"
+					variant="outline-secondary"
+					size="lg"
+					onClick={closeCanvasModal}
+				>
+					닫기
+				</Button>
+			</Modal.Footer>
+		</Modal>
 	);
 }
 

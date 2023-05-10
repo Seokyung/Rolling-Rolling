@@ -171,7 +171,7 @@ function PaperList() {
 												{userId === paper.creatorId && (
 													<Button
 														className="paperList-card-delete-btn"
-														variant="danger"
+														variant="outline-danger"
 														onClick={(e) => {
 															e.preventDefault();
 															e.stopPropagation();
@@ -182,21 +182,6 @@ function PaperList() {
 													</Button>
 												)}
 											</div>
-
-											{/* {userId === paper.creatorId && (
-												<div className="paperList-card-delete-btn">
-													<Button
-														variant="danger"
-														onClick={(e) => {
-															e.preventDefault();
-															e.stopPropagation();
-															openDeleteModal(paper.id);
-														}}
-													>
-														<FontAwesomeIcon icon={faTrash} />
-													</Button>
-												</div>
-											)} */}
 										</Card.Body>
 									</Card>
 								</Link>
