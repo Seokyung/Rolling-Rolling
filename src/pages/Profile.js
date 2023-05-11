@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import EditProfile from "components/profile/EditProfile";
 import LogOutModal from "components/user/LogOutModal";
 
+import { Button } from "react-bootstrap";
 import "./Profile.css";
 
 function Profile({ refreshUser }) {
@@ -89,12 +90,16 @@ function Profile({ refreshUser }) {
 
 	return (
 		<>
-			<div className="profile-container">
-				<img src={`${userObj.photoURL}`} width="100px" alt="profileImage" />
-				<h2>{userObj.displayName}</h2>
-				<EditProfile refreshUser={refreshUser} />
-				<button onClick={openLogOutModal}>로그아웃</button>
-				<button onClick={deleteAccount}>회원 탈퇴</button>
+			<div className="home-container">
+				<div className="home-paper-container">
+					<img src={`${userObj.photoURL}`} width="100px" alt="profileImage" />
+					<h2>{userObj.displayName}</h2>
+					<EditProfile refreshUser={refreshUser} />
+					<div className="editPaper-edit-btn">
+						<Button onClick={openLogOutModal}>로그아웃</Button>
+						<Button onClick={deleteAccount}>회원 탈퇴</Button>
+					</div>
+				</div>
 			</div>
 
 			<LogOutModal logOutModal={logOutModal} setLogOutModal={setLogOutModal} />

@@ -238,32 +238,6 @@ function CreateMessage() {
 							</Form.Group>
 							<Divider className="paper-divider" />
 							<Form.Group className="createMessage-button-group">
-								<ButtonGroup>
-									<ToggleButton
-										className="createMessage-toggle-btn"
-										type="radio"
-										variant="outline-secondary"
-										checked={attachment === "attachImage"}
-										id="attachImage"
-										value="attachImage"
-										onChange={onAttachmentTypeChange}
-									>
-										<FontAwesomeIcon icon={faImage} />
-										사진 첨부
-									</ToggleButton>
-									<ToggleButton
-										className="createMessage-toggle-btn"
-										type="radio"
-										variant="outline-secondary"
-										checked={attachment === "attachDrawing"}
-										id="attachDrawing"
-										value="attachDrawing"
-										onChange={onAttachmentTypeChange}
-									>
-										<FontAwesomeIcon icon={faBrush} />
-										그림 첨부
-									</ToggleButton>
-								</ButtonGroup>
 								{
 									<div className="createMessage-attach-group">
 										{attachment === "attachImage" && (
@@ -299,6 +273,32 @@ function CreateMessage() {
 										)}
 									</div>
 								}
+								<ButtonGroup>
+									<ToggleButton
+										className="createMessage-toggle-btn"
+										type="radio"
+										variant="outline-secondary"
+										checked={attachment === "attachImage"}
+										id="attachImage"
+										value="attachImage"
+										onChange={onAttachmentTypeChange}
+									>
+										<FontAwesomeIcon icon={faImage} />
+										사진 첨부
+									</ToggleButton>
+									<ToggleButton
+										className="createMessage-toggle-btn"
+										type="radio"
+										variant="outline-secondary"
+										checked={attachment === "attachDrawing"}
+										id="attachDrawing"
+										value="attachDrawing"
+										onChange={onAttachmentTypeChange}
+									>
+										<FontAwesomeIcon icon={faBrush} />
+										그림 첨부
+									</ToggleButton>
+								</ButtonGroup>
 							</Form.Group>
 
 							<Divider className="paper-divider" />

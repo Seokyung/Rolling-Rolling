@@ -84,6 +84,7 @@ function Navigation() {
 							<FontAwesomeIcon icon={faUser} />내 정보
 						</Link>
 					</Nav>
+					<Divider className="offcanvas-divider" />
 					<div className="navigation-offcanvas-logout-btn">
 						<Button onClick={openLogOutModal}>로그아웃</Button>
 					</div>

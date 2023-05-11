@@ -6,9 +6,3 @@
 	margin: 0 auto;
 	background-color: brown;
 }
-
-@media screen and (max-width: 1023px) {
-	.profile-container {
-		width: 90%;
-	}
-}

@@ -5,6 +5,9 @@ import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
 import { useSelector } from "react-redux";
 
+import { Form, Button } from "react-bootstrap";
+import { Divider } from "antd";
+
 function EditProfile({ refreshUser }) {
 	const userObj = useSelector((state) => state.userReducer);
 	const profileImgRef = useRef(null);
@@ -77,31 +80,34 @@ function EditProfile({ refreshUser }) {
 
 	return (
 		<div>
-			<h2>Edit Profile</h2>
-			<form onSubmit={onUpdateUserName}>
-				<input
-					type="text"
-					value={userName}
-					onChange={onUserNameChange}
-					placeholder={userObj.displayName}
-				/>
-				<input type="submit" value="이름 변경" />
-			</form>
-			<form onSubmit={onUpdateProfileImg}>
-				<label>
-					<span>이미지 첨부</span>
-					<input
+			<Form className="editPaper-form-container">
+				<Form.Group className="create-form-group">
+					<Form.Label className="create-form-title">이름 변경하기</Form.Label>
+					<Form.Control
+						type="text"
+						className="create-form-input"
+						value={userName}
+						onChange={onUserNameChange}
+						placeholder={userObj.displayName}
+					/>
+					<Button onClick={onUpdateUserName}>이름 변경</Button>
+				</Form.Group>
+				<Divider className="offcanvas-divider" />
+				<Form.Group className="create-form-group">
+					<Form.Label className="create-form-title">
+						프로필 사진 변경하기
+					</Form.Label>
+					<img src={profileImg} width="100px" alt="editProfileImage" />
+					<Form.Control
 						type="file"
 						id="profileImgInput"
 						ref={profileImgRef}
 						onChange={onProfileImgChange}
 						accept="image/*"
-						style={{ display: "none" }}
 					/>
-				</label>
-				<img src={profileImg} width="100px" alt="editProfileImage" />
-				<input type="submit" value="프로필 사진 변경" />
-			</form>
+					<Button onClick={onUpdateProfileImg}>프로필 사진 변경</Button>
+				</Form.Group>
+			</Form>
 		</div>
 	);
 }
