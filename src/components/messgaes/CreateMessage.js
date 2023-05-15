@@ -8,7 +8,13 @@ import MessageImage from "./MessageImage";
 import MessageCanvas from "./MessageCanvas";
 import { useSelector } from "react-redux";
 
-import { Form, Button, ButtonGroup, ToggleButton } from "react-bootstrap";
+import {
+	Form,
+	Button,
+	ButtonGroup,
+	ToggleButton,
+	Collapse,
+} from "react-bootstrap";
 import { Divider } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -34,6 +40,10 @@ function CreateMessage() {
 	const [msgDrawing, setMsgDrawing] = useState("");
 	const [isPrivate, setIsPrivate] = useState(false);
 
+	const [currentTitleLength, setCurrentTitleLength] = useState(0);
+	const maxTitleLength = 50;
+
+	const [attachOpen, setAttachOpen] = useState(false);
 	const [canvasModal, setCanvasModal] = useState(false);
 
 	const [validated, setValidated] = useState(false);
@@ -48,6 +58,7 @@ function CreateMessage() {
 		} = e;
 		if (name === "title") {
 			setMsgTitle(value);
+			setCurrentTitleLength(value.length);
 		} else if (name === "writer") {
 			setMsgWriter(value);
 		} else if (name === "content") {
@@ -67,6 +78,7 @@ function CreateMessage() {
 			target: { value },
 		} = e;
 		setAttachment(value);
+		setAttachOpen(true);
 	};
 
 	const openCanvasModal = () => {
@@ -76,6 +88,13 @@ function CreateMessage() {
 	const clearMsgDrawing = () => {
 		setMsgDrawing("");
 		setAttachment("");
+	};
+
+	const closeAttach = () => {
+		setAttachOpen(false);
+		// setAttachment("");
+		setMsgImg("");
+		setMsgDrawing("");
 	};
 
 	const onMessageSubmit = async (e) => {
@@ -174,6 +193,7 @@ function CreateMessage() {
 									required
 									autoFocus
 									value={msgTitle}
+									maxLength={maxTitleLength}
 									onChange={onMessageChange}
 									placeholder="제목을 입력하세요 :)"
 								/>
@@ -183,6 +203,9 @@ function CreateMessage() {
 								>
 									메세지 제목을 입력해주세요!
 								</Form.Control.Feedback>
+								<Form.Text className="create-form-length-text">
+									{currentTitleLength} / {maxTitleLength}
+								</Form.Text>
 							</Form.Group>
 							<Form.Group className="create-form-group">
 								<Form.Label className="create-form-title">작성자</Form.Label>
@@ -226,7 +249,7 @@ function CreateMessage() {
 										checked={isPrivate}
 										onChange={onPrivateCheckChange}
 									/>
-									<Form.Check.Label>비공개</Form.Check.Label>
+									<Form.Check.Label>🔒 비공개 메세지</Form.Check.Label>
 								</Form.Check>
 								<Form.Text className="create-form-text">
 									메세지의 공개여부를 설정해주세요
@@ -239,46 +262,48 @@ function CreateMessage() {
 							<Divider className="paper-divider" />
 							<Form.Group className="createMessage-button-group">
 								{
-									<div className="createMessage-attach-group">
-										{attachment === "attachImage" && (
-											<MessageImage
-												msgImg={msgImg}
-												setMsgImg={setMsgImg}
-												setAttachment={setAttachment}
-											/>
-										)}
-										{attachment === "attachDrawing" && (
-											<>
-												<button
-													onClick={(e) => {
-														e.preventDefault();
-														openCanvasModal();
-													}}
-												>
-													그림 그리기
-												</button>
-												{msgDrawing && (
-													<div>
-														<img
-															src={msgDrawing}
-															width="200px"
-															alt="messageDrawing"
-														/>
-														<button onClick={clearMsgDrawing}>
-															그림 제거하기
-														</button>
-													</div>
-												)}
-											</>
-										)}
-									</div>
+									<Collapse in={attachOpen}>
+										<div className="createMessage-attach-group">
+											{attachment === "attachImage" && (
+												<MessageImage
+													msgImg={msgImg}
+													setMsgImg={setMsgImg}
+													closeAttach={closeAttach}
+												/>
+											)}
+											{attachment === "attachDrawing" && (
+												<>
+													<button
+														onClick={(e) => {
+															e.preventDefault();
+															openCanvasModal();
+														}}
+													>
+														그림 그리기
+													</button>
+													{msgDrawing && (
+														<div>
+															<img
+																src={msgDrawing}
+																width="200px"
+																alt="messageDrawing"
+															/>
+															<button onClick={clearMsgDrawing}>
+																그림 제거하기
+															</button>
+														</div>
+													)}
+												</>
+											)}
+										</div>
+									</Collapse>
 								}
 								<ButtonGroup>
 									<ToggleButton
 										className="createMessage-toggle-btn"
 										type="radio"
 										variant="outline-secondary"
-										checked={attachment === "attachImage"}
+										checked={attachment === "attachImage" && attachOpen}
 										id="attachImage"
 										value="attachImage"
 										onChange={onAttachmentTypeChange}
@@ -290,7 +315,7 @@ function CreateMessage() {
 										className="createMessage-toggle-btn"
 										type="radio"
 										variant="outline-secondary"
-										checked={attachment === "attachDrawing"}
+										checked={attachment === "attachDrawing" && attachOpen}
 										id="attachDrawing"
 										value="attachDrawing"
 										onChange={onAttachmentTypeChange}

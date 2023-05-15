@@ -4,10 +4,8 @@ import { dbService, storageService } from "api/fbase";
 import { doc, deleteDoc, query, collection, getDocs } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, CloseButton } from "react-bootstrap";
 import { message } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import "./DeletePaper.css";
 
 function DeletePaper({ deleteModal, setDeleteModal, paperId }) {
@@ -83,12 +81,7 @@ function DeletePaper({ deleteModal, setDeleteModal, paperId }) {
 					<Modal.Title className="deletePaper-modal-title">
 						페이퍼를 삭제하시겠습니까?
 					</Modal.Title>
-					<button
-						className="deletePaper-modal-close-btn"
-						onClick={closeDeleteModal}
-					>
-						<FontAwesomeIcon icon={faXmark} />
-					</button>
+					<CloseButton className="modal-close-btn" onClick={closeDeleteModal} />
 				</Modal.Header>
 				<Modal.Body className="deletePaper-modal-body">
 					<Button

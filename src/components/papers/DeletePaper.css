@@ -12,17 +12,6 @@
 	font-weight: 700 !important;
 }
 
-.deletePaper-modal-close-btn {
-	font-size: 2rem;
-	color: #7b838a;
-	padding: 0;
-	outline: none;
-	appearance: none;
-	border: none;
-	white-space: nowrap;
-	background: none;
-}
-
 .deletePaper-modal-body {
 	display: flex;
 	justify-content: center;

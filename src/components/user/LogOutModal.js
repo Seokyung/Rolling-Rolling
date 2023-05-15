@@ -3,10 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { authService } from "api/fbase";
 import { signOut } from "firebase/auth";
 
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, CloseButton } from "react-bootstrap";
 import { message } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 function LogOutModal({ logOutModal, setLogOutModal }) {
 	const navigate = useNavigate();
@@ -60,12 +58,7 @@ function LogOutModal({ logOutModal, setLogOutModal }) {
 					<Modal.Title className="deletePaper-modal-title">
 						로그아웃 하시겠습니까?
 					</Modal.Title>
-					<button
-						className="deletePaper-modal-close-btn"
-						onClick={closeLogOutModal}
-					>
-						<FontAwesomeIcon icon={faXmark} />
-					</button>
+					<CloseButton className="modal-close-btn" onClick={closeLogOutModal} />
 				</Modal.Header>
 				<Modal.Body className="deletePaper-modal-body">
 					<Button id="delete-btn" size="lg" onClick={onLogoutClick}>

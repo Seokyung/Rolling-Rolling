@@ -1,11 +1,14 @@
 import React, { useRef } from "react";
 import imageCompression from "browser-image-compression";
 
-import { Form, Button, ButtonGroup, ToggleButton } from "react-bootstrap";
-import { Upload } from "antd";
+import { Form, ButtonGroup, ToggleButton } from "react-bootstrap";
+import { Button, Image } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import "./MessageImage.css";
 
-function MessageImage({ msgImg, setMsgImg, setAttachment }) {
+function MessageImage({ msgImg, setMsgImg, closeAttach }) {
 	const imgInputRef = useRef(null);
 
 	const onMsgImgChange = async (e) => {
@@ -27,33 +30,46 @@ function MessageImage({ msgImg, setMsgImg, setAttachment }) {
 	const clearMsgImg = () => {
 		imgInputRef.current.value = null;
 		setMsgImg("");
-		setAttachment("");
+	};
+
+	const closeMsgImg = () => {
+		imgInputRef.current.value = null;
+		closeAttach();
 	};
 
 	return (
 		<>
-			<div>
-				{msgImg && (
-					<div>
-						<img src={msgImg} width="200px" alt="messageImage" />
-						<button
-							onClick={(e) => {
-								e.preventDefault();
-								clearMsgImg();
-							}}
+			<div className="messageImage-container">
+				{msgImg ? (
+					<div className="msgImg-upload-wrapper">
+						<div>
+							<Image src={msgImg} className="msgImg-img" alt="messageImage" />
+						</div>
+						<Button
+							shape="circle"
+							className="upload-close-btn img-close"
+							onClick={clearMsgImg}
 						>
-							이미지 제거하기
-						</button>
+							<FontAwesomeIcon icon={faXmark} />
+						</Button>
+					</div>
+				) : (
+					<div className="msgImg-upload-wrapper">
+						<label htmlFor="msgImgInput">
+							<div className="msgImg-upload-container">
+								<PlusOutlined />
+								첨부할 이미지를 선택해주세요
+							</div>
+						</label>
+						<Button
+							shape="circle"
+							className="upload-close-btn file-close"
+							onClick={closeMsgImg}
+						>
+							<FontAwesomeIcon icon={faXmark} />
+						</Button>
 					</div>
 				)}
-				<label htmlFor="msgImgInput">
-					<div>
-						<div className="msgImg-upload-container">
-							<PlusOutlined />
-							사진 업로드
-						</div>
-					</div>
-				</label>
 				<input
 					type="file"
 					id="msgImgInput"
@@ -62,31 +78,7 @@ function MessageImage({ msgImg, setMsgImg, setAttachment }) {
 					accept="image/*"
 					style={{ display: "none" }}
 				/>
-				<button onClick={clearMsgImg}>X</button>
 			</div>
-			{/* <Form.Group className="createMessage-button-group">
-				<Form.Label>이미지 첨부</Form.Label>
-				<Form.Control
-					type="file"
-					id="msgImgInput"
-					ref={imgInputRef}
-					onChange={onMsgImgChange}
-					accept="image/*"
-				/>
-			</Form.Group> */}
-			{/* <Upload
-				action="/upload.do"
-				listType="picture-card"
-				id="msgImgInput"
-				ref={imgInputRef}
-				onChange={onMsgImgChange}
-				accept="image/*"
-			>
-				<div>
-					<PlusOutlined />
-					<div className="msgImg-upload-container">사진 업로드</div>
-				</div>
-			</Upload> */}
 		</>
 	);
 }

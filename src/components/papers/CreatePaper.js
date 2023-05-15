@@ -3,10 +3,8 @@ import { dbService } from "api/fbase";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { useSelector } from "react-redux";
 
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, CloseButton } from "react-bootstrap";
 import { message } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import "./CreatePaper.css";
 
 function CreatePaper({ paperModal, setPaperModal }) {
@@ -199,9 +197,7 @@ function CreatePaper({ paperModal, setPaperModal }) {
 					<Modal.Title className="create-modal-title">
 						페이퍼 만들기
 					</Modal.Title>
-					<button className="create-modal-close-btn" onClick={closePaperModal}>
-						<FontAwesomeIcon icon={faXmark} />
-					</button>
+					<CloseButton className="modal-close-btn" onClick={closePaperModal} />
 				</Modal.Header>
 				<Modal.Body>
 					<Form noValidate validated={validated}>
@@ -236,10 +232,13 @@ function CreatePaper({ paperModal, setPaperModal }) {
 									checked={isPrivate}
 									onChange={onPrivateCheckChange}
 								/>
-								<Form.Check.Label>비공개</Form.Check.Label>
+								<Form.Check.Label>🔒 비공개 페이퍼</Form.Check.Label>
 							</Form.Check>
 							<Form.Text className="create-form-text">
 								페이퍼의 공개여부를 설정해주세요
+							</Form.Text>
+							<Form.Text className="create-form-text-small">
+								(비공개 페이퍼는 코드를 입력해야만 볼 수 있어요🤫 )
 							</Form.Text>
 						</Form.Group>
 						{isPrivate && (

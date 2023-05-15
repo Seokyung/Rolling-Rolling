@@ -246,10 +246,13 @@ function EditPaper() {
 									checked={newIsPrivate}
 									onChange={onPrivateCheckChange}
 								/>
-								<Form.Check.Label>비공개</Form.Check.Label>
+								<Form.Check.Label>🔒 비공개 페이퍼</Form.Check.Label>
 							</Form.Check>
 							<Form.Text className="create-form-text">
 								페이퍼의 공개여부를 설정해주세요
+							</Form.Text>
+							<Form.Text className="create-form-text-small">
+								(비공개 페이퍼는 코드를 입력해야만 볼 수 있어요🤫 )
 							</Form.Text>
 						</Form.Group>
 						{newIsPrivate && (

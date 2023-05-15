@@ -22,15 +22,8 @@
 	font-weight: 700 !important;
 }
 
-.create-modal-close-btn {
-	font-size: 2rem;
-	color: #7b838a;
-	padding: 0;
-	outline: none;
-	appearance: none;
-	border: none;
-	white-space: nowrap;
-	background: none;
+.modal-close-btn {
+	font-size: 1.8rem;
 }
 
 .create-form-group {
