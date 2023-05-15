@@ -1,11 +1,10 @@
 import React, { useRef } from "react";
 import imageCompression from "browser-image-compression";
 
-import { Form, ButtonGroup, ToggleButton } from "react-bootstrap";
 import { Button, Image } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faInbox } from "@fortawesome/free-solid-svg-icons";
 import "./MessageImage.css";
 
 function MessageImage({ msgImg, setMsgImg, closeAttach }) {
@@ -39,25 +38,25 @@ function MessageImage({ msgImg, setMsgImg, closeAttach }) {
 
 	return (
 		<>
-			<div className="messageImage-container">
+			<div className="msgImg-wrapper">
 				{msgImg ? (
-					<div className="msgImg-upload-wrapper">
-						<div>
+					<div className="msgImg-container">
+						<div className="msgImg-img-container">
 							<Image src={msgImg} className="msgImg-img" alt="messageImage" />
+							<Button
+								shape="circle"
+								className="upload-close-btn img-close"
+								onClick={clearMsgImg}
+							>
+								<FontAwesomeIcon icon={faXmark} />
+							</Button>
 						</div>
-						<Button
-							shape="circle"
-							className="upload-close-btn img-close"
-							onClick={clearMsgImg}
-						>
-							<FontAwesomeIcon icon={faXmark} />
-						</Button>
 					</div>
 				) : (
-					<div className="msgImg-upload-wrapper">
+					<div className="msgImg-container">
 						<label htmlFor="msgImgInput">
 							<div className="msgImg-upload-container">
-								<PlusOutlined />
+								<FontAwesomeIcon icon={faInbox} />
 								첨부할 이미지를 선택해주세요
 							</div>
 						</label>
