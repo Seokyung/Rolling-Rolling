@@ -1,8 +1,7 @@
 import React, { useRef } from "react";
 import imageCompression from "browser-image-compression";
 
-import { Button, Image } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { Button as CircleBtn, Image } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faInbox } from "@fortawesome/free-solid-svg-icons";
 import "./MessageImage.css";
@@ -43,13 +42,13 @@ function MessageImage({ msgImg, setMsgImg, closeAttach }) {
 					<div className="msgImg-container">
 						<div className="msgImg-img-container">
 							<Image src={msgImg} className="msgImg-img" alt="messageImage" />
-							<Button
+							<CircleBtn
 								shape="circle"
 								className="upload-close-btn img-close"
 								onClick={clearMsgImg}
 							>
 								<FontAwesomeIcon icon={faXmark} />
-							</Button>
+							</CircleBtn>
 						</div>
 					</div>
 				) : (
@@ -60,13 +59,13 @@ function MessageImage({ msgImg, setMsgImg, closeAttach }) {
 								첨부할 이미지를 선택해주세요
 							</div>
 						</label>
-						<Button
+						<CircleBtn
 							shape="circle"
 							className="upload-close-btn file-close"
 							onClick={closeMsgImg}
 						>
 							<FontAwesomeIcon icon={faXmark} />
-						</Button>
+						</CircleBtn>
 					</div>
 				)}
 				<input

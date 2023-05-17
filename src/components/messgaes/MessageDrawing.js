@@ -8,7 +8,14 @@ import {
 	ToggleButton,
 	CloseButton,
 } from "react-bootstrap";
-import { Divider } from "antd";
+import { Row, Col, Slider, InputNumber } from "antd";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+	faPen,
+	faEraser,
+	faArrowLeft,
+	faRotateLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import "./MessageDrawing.css";
 
 function MessageDrawing({
@@ -28,9 +35,15 @@ function MessageDrawing({
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
-		canvas.width = window.innerWidth * 0.5;
-		canvas.height = window.innerHeight * 0.5;
 		const getCtx = canvas.getContext("2d", { willReadFrequently: true });
+
+		if (
+			canvas.clientWidth !== canvas.width ||
+			canvas.clientHeight !== canvas.height
+		) {
+			canvas.width = canvas.clientWidth;
+			canvas.height = canvas.clientHeight;
+		}
 
 		setCtx(getCtx);
 		// setTool("pen");
@@ -45,13 +58,18 @@ function MessageDrawing({
 		setAttachment("");
 	};
 
-	const getPos = (e) => {
+	const getPosMouse = (e) => {
 		return {
-			getX: parseInt(e.nativeEvent.offsetX * 0.9),
-			getY: parseInt(e.nativeEvent.offsetY * 0.9),
+			x: parseInt(e.nativeEvent.offsetX),
+			y: parseInt(e.nativeEvent.offsetY),
 		};
-		// const getX = e.nativeEvent.offsetX;
-		// const getY = e.nativeEvent.offsetY;
+	};
+
+	const getPosTouch = (e) => {
+		return {
+			x: parseInt(e.touches[0].clientX),
+			y: parseInt(e.touches[0].clientY),
+		};
 
 		// Touch Event
 		// const getX = e.touches[0].clientX - e.target.offsetLeft;
@@ -61,14 +79,35 @@ function MessageDrawing({
 		// 	document.documentElement.scrollTop;
 	};
 
-	const startDrawing = (e) => {
-		// e.preventDefault();
+	const startDrawing = (e, type) => {
+		// if (e.cancelable) {
+		// 	e.preventDefault();
+		// }
+		// window.addEventListener(
+		// 	"touchstart",
+		// 	function () {
+		// 		e.nativeEvent.preventDefault();
+		// 	},
+		// 	{ passive: false }
+		// ); // for scroll lock in Mobile
 
-		const { getX, getY } = getPos(e);
+		let getX, getY;
+
+		if (type === "mouse") {
+			const { x, y } = getPosMouse(e);
+			getX = x;
+			getY = y;
+		}
+		if (type === "touch") {
+			const { x, y } = getPosTouch(e);
+			getX = x;
+			getY = y;
+		}
 
 		setIsDrawing(true);
 		ctx.beginPath();
 		ctx.moveTo(getX, getY);
+
 		if (e.type !== "mouseout") {
 			setDrawArray(
 				drawArray.concat({
@@ -85,15 +124,33 @@ function MessageDrawing({
 		}
 	};
 
-	const onDrawing = (e) => {
-		// e.preventDefault();
+	const onDrawing = (e, type) => {
+		// window.addEventListener(
+		// 	"touchmove",
+		// 	function () {
+		// 		e.nativeEvent.preventDefault();
+		// 	},
+		// 	{ passive: false }
+		// ); // for scroll lock in Mobile
 
-		const { getX, getY } = getPos(e);
+		let getX, getY;
+
+		if (type === "mouse") {
+			const { x, y } = getPosMouse(e);
+			getX = x;
+			getY = y;
+		}
+		if (type === "touch") {
+			const { x, y } = getPosTouch(e);
+			getX = x;
+			getY = y;
+		}
 
 		if (isDrawing) {
 			ctx.lineCap = "round";
 			ctx.lineJoin = "round";
 			ctx.lineWidth = toolWidth;
+
 			if (tool === "pen") {
 				ctx.lineTo(getX, getY);
 				ctx.stroke();
@@ -125,11 +182,13 @@ function MessageDrawing({
 	};
 
 	const onToolWidthChange = (e) => {
-		const {
-			target: { value },
-		} = e;
-		setToolWidth(value);
-		ctx.lineWidth = value;
+		// const {
+		// 	target: { value },
+		// } = e;
+		// setToolWidth(value);
+		// ctx.lineWidth = value;
+		setToolWidth(e);
+		ctx.lineWidth = e;
 	};
 
 	const onColorChange = (e) => {
@@ -181,20 +240,20 @@ function MessageDrawing({
 				<canvas
 					className="msgDrawing-canvas"
 					ref={canvasRef}
-					onMouseDown={startDrawing}
-					onTouchStart={startDrawing}
-					onMouseMove={onDrawing}
-					onTouchMove={onDrawing}
+					onMouseDown={(e) => startDrawing(e, "mouse")}
+					onTouchStart={(e) => startDrawing(e, "touch")}
+					onMouseMove={(e) => onDrawing(e, "mouse")}
+					onTouchMove={(e) => onDrawing(e, "touch")}
 					onMouseUp={stopDrawing}
 					onMouseOut={stopDrawing}
 					onTouchEnd={stopDrawing}
 				/>
-				<Divider className="paper-divider" />
 				<div className="msgDrawing-tool-container">
 					<Form>
-						<Form.Group>
+						<Form.Group className="msgDrawing-tool-group">
 							<ButtonGroup>
 								<ToggleButton
+									className="msgDrawing-tool-toggle-btn"
 									type="radio"
 									name="toolType"
 									id="pen"
@@ -202,9 +261,10 @@ function MessageDrawing({
 									checked={tool === "pen"}
 									onChange={onToolChange}
 								>
-									펜
+									<FontAwesomeIcon icon={faPen} /> 펜
 								</ToggleButton>
 								<ToggleButton
+									className="msgDrawing-tool-toggle-btn"
 									type="radio"
 									name="toolType"
 									id="eraser"
@@ -212,22 +272,34 @@ function MessageDrawing({
 									checked={tool === "eraser"}
 									onChange={onToolChange}
 								>
-									지우개
+									<FontAwesomeIcon icon={faEraser} /> 지우개
 								</ToggleButton>
 							</ButtonGroup>
 						</Form.Group>
-						<Form.Group>
+						<Form.Group className="msgDrawing-tool-group">
 							<Form.Label>펜 두께</Form.Label>
-							<Form.Range
-								id="toolWidth"
-								min="1"
-								max="25"
-								step="2"
-								value={toolWidth}
-								onChange={onToolWidthChange}
-							/>
+							<Row>
+								<Col span={16}>
+									<Slider
+										id="toolWidth"
+										min={1}
+										max={100}
+										value={toolWidth}
+										onChange={onToolWidthChange}
+									/>
+								</Col>
+								<Col span={4}>
+									<InputNumber
+										style={{ margin: "0 1rem" }}
+										min={1}
+										max={100}
+										value={toolWidth}
+										onChange={onToolWidthChange}
+									/>
+								</Col>
+							</Row>
 						</Form.Group>
-						<Form.Group>
+						<Form.Group className="msgDrawing-tool-group">
 							<Form.Check type="radio" inline>
 								<Form.Check.Input
 									type="radio"
@@ -237,7 +309,7 @@ function MessageDrawing({
 									checked={color === "black"}
 									onChange={onColorChange}
 								/>
-								<Form.Check.Label>검정</Form.Check.Label>
+								<Form.Check.Label id="pen-black">검정</Form.Check.Label>
 							</Form.Check>
 							<Form.Check type="radio" inline>
 								<Form.Check.Input
@@ -248,7 +320,7 @@ function MessageDrawing({
 									checked={color === "red"}
 									onChange={onColorChange}
 								/>
-								<Form.Check.Label>빨강</Form.Check.Label>
+								<Form.Check.Label id="pen-red">빨강</Form.Check.Label>
 							</Form.Check>
 							<Form.Check type="radio" inline>
 								<Form.Check.Input
@@ -259,7 +331,7 @@ function MessageDrawing({
 									checked={color === "yellow"}
 									onChange={onColorChange}
 								/>
-								<Form.Check.Label>노랑</Form.Check.Label>
+								<Form.Check.Label id="pen-yellow">노랑</Form.Check.Label>
 							</Form.Check>
 							<Form.Check type="radio" inline>
 								<Form.Check.Input
@@ -270,7 +342,7 @@ function MessageDrawing({
 									checked={color === "green"}
 									onChange={onColorChange}
 								/>
-								<Form.Check.Label>초록</Form.Check.Label>
+								<Form.Check.Label id="pen-green">초록</Form.Check.Label>
 							</Form.Check>
 							<Form.Check type="radio" inline>
 								<Form.Check.Input
@@ -281,12 +353,18 @@ function MessageDrawing({
 									checked={color === "blue"}
 									onChange={onColorChange}
 								/>
-								<Form.Check.Label>파랑</Form.Check.Label>
+								<Form.Check.Label id="pen-blue">파랑</Form.Check.Label>
 							</Form.Check>
 						</Form.Group>
+						<Form.Group className="msgDrawing-tool-group">
+							<Button onClick={undoLastDrawing}>
+								<FontAwesomeIcon icon={faArrowLeft} /> 뒤로가기
+							</Button>
+							<Button onClick={resetDrawing}>
+								<FontAwesomeIcon icon={faRotateLeft} /> 리셋
+							</Button>
+						</Form.Group>
 					</Form>
-					<Button onClick={undoLastDrawing}>뒤로가기</Button>
-					<Button onClick={resetDrawing}>리셋</Button>
 				</div>
 			</Modal.Body>
 			<Modal.Footer className="create-modal-footer">

@@ -15,13 +15,14 @@ import {
 	ToggleButton,
 	Collapse,
 } from "react-bootstrap";
-import { Divider } from "antd";
+import { Divider, Button as CircleBtn, Image } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faAngleLeft,
 	faEnvelope,
 	faImage,
 	faBrush,
+	faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import "./CreateMessage.css";
 
@@ -77,6 +78,9 @@ function CreateMessage() {
 		const {
 			target: { value },
 		} = e;
+		if (value === "attachDrawing") {
+			openCanvasModal();
+		}
 		setAttachment(value);
 		setAttachOpen(true);
 	};
@@ -87,7 +91,6 @@ function CreateMessage() {
 
 	const clearMsgDrawing = () => {
 		setMsgDrawing("");
-		setAttachment("");
 	};
 
 	const closeAttach = () => {
@@ -271,30 +274,45 @@ function CreateMessage() {
 													closeAttach={closeAttach}
 												/>
 											)}
-											{attachment === "attachDrawing" && (
-												<>
-													<button
-														onClick={(e) => {
-															e.preventDefault();
-															openCanvasModal();
-														}}
-													>
-														그림 그리기
-													</button>
-													{msgDrawing && (
-														<div>
-															<img
-																src={msgDrawing}
-																width="200px"
-																alt="messageDrawing"
-															/>
-															<button onClick={clearMsgDrawing}>
-																그림 제거하기
-															</button>
+											{
+												attachment === "attachDrawing" && msgDrawing && (
+													<div className="msgImg-container">
+														<div className="msgImg-img-container">
+															<Image src={msgDrawing} alt="messageDrawing" />
+															<CircleBtn
+																shape="circle"
+																className="upload-close-btn img-close"
+																onClick={clearMsgDrawing}
+															>
+																<FontAwesomeIcon icon={faXmark} />
+															</CircleBtn>
 														</div>
-													)}
-												</>
-											)}
+													</div>
+												)
+												// (msgDrawing ? (
+												// 	<div className="msgImg-container">
+												// 		<div className="msgImg-img-container">
+												// 			<Image src={msgDrawing} alt="messageDrawing" />
+												// 			<CircleBtn
+												// 				shape="circle"
+												// 				className="upload-close-btn img-close"
+												// 				onClick={clearMsgDrawing}
+												// 			>
+												// 				<FontAwesomeIcon icon={faXmark} />
+												// 			</CircleBtn>
+												// 		</div>
+												// 	</div>
+												// ) : (
+												// 	<Button
+												// 		onClick={(e) => {
+												// 			e.preventDefault();
+												// 			openCanvasModal();
+												// 		}}
+												// 	>
+												// 		그림 그리기
+												// 	</Button>
+												// ))
+											}
 										</div>
 									</Collapse>
 								}

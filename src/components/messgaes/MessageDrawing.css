@@ -1,16 +1,61 @@
 .msgDrawing-container {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	padding: 1rem;
 }
 
 .msgDrawing-canvas {
 	width: 100%;
-	justify-self: center;
-	border: 1px solid #303030;
+	height: 400px;
+	align-self: center;
+	border: 2px solid #303030;
+	border-radius: 20px;
 }
 
 .msgDrawing-tool-container {
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 1rem;
+	margin-top: 1rem;
+	padding: 0 1rem;
+}
+
+.msgDrawing-tool-group {
+	padding: 1rem 0;
+	font-size: 1.6rem;
+}
+.msgDrawing-tool-group button {
+	font-size: 1.6rem;
+	padding: 0.5rem 1rem;
+}
+.msgDrawing-tool-toggle-btn {
+	font-size: 1.6rem !important;
+	padding: 0.5rem 1rem !important;
+}
+
+#pen-black {
+	color: black;
+}
+#pen-red {
+	color: red;
+}
+#pen-yellow {
+	color: yellow;
+}
+#pen-green {
+	color: green;
+}
+#pen-blue {
+	color: blue;
+}
+
+.msgDrawing-toolWidth-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin: 0;
+	width: 100% !important;
+}
+.msgDrawing-toolWidth-container #toolWidth {
+	width: 200px !important;
 }
