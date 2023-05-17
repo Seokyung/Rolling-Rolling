@@ -5,7 +5,7 @@ import { collection, doc, setDoc } from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import MessageImage from "./MessageImage";
-import MessageCanvas from "./MessageCanvas";
+import MessageDrawing from "./MessageDrawing";
 import { useSelector } from "react-redux";
 
 import {
@@ -337,7 +337,7 @@ function CreateMessage() {
 				</div>
 			</div>
 			{canvasModal && (
-				<MessageCanvas
+				<MessageDrawing
 					canvasModal={canvasModal}
 					setCanvasModal={setCanvasModal}
 					setMsgDrawing={setMsgDrawing}

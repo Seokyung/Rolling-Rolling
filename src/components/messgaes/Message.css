@@ -36,13 +36,6 @@
 }
 .message-delete-btn button {
 	font-size: 1.4rem !important;
-	/* background-color: #9f5757 !important;
-	border-color: #944444 !important; */
-}
-.message-delete-btn button:hover,
-.message-delete-btn button:active {
-	/* background-color: #853d3d !important;
-	border-color: #763636 !important; */
 }
 
 @media screen and (max-width: 1023px) {

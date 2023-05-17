@@ -1,6 +1,6 @@
 .modal-dialog {
-	width: 60% !important;
-	max-width: 900px !important;
+	width: 70% !important;
+	max-width: 1200px !important;
 	min-width: 450px !important;
 }
 .modal-content {
@@ -94,21 +94,14 @@
 }
 
 .create-modal-footer button#create-btn {
-	background-color: #9f5757 !important;
-	border-color: #944444 !important;
 	margin-right: 1rem;
 }
-.create-modal-footer button#create-btn:hover {
-	background-color: #853d3d !important;
-	border-color: #763636 !important;
-}
-
 .create-modal-footer button#close-btn {
 	margin-left: 1rem;
 }
 
-/* @media screen and (max-width: 1200px) {
-	.modal-dialog-centered {
-		min-height: 80% !important;
+@media screen and (max-width: 1024px) {
+	.modal-dialog {
+		width: 80% !important;
 	}
-} */
+}

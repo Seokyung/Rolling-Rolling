@@ -1,0 +1,16 @@
+.msgDrawing-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.msgDrawing-canvas {
+	width: 100%;
+	justify-self: center;
+	border: 1px solid #303030;
+}
+
+.msgDrawing-tool-container {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1rem;
+}

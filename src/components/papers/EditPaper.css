@@ -72,11 +72,4 @@
 
 .editPaper-edit-btn button {
 	font-size: 1.8rem !important;
-	background-color: #9f5757 !important;
-	border-color: #944444 !important;
-}
-.editPaper-edit-btn button:hover,
-.editPaper-edit-btn button:active {
-	background-color: #853d3d !important;
-	border-color: #763636 !important;
 }

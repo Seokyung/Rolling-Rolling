@@ -62,13 +62,6 @@
 	margin: 1rem;
 	padding: 0.75rem 1.75rem !important;
 	font-size: 1.5rem !important;
-	background-color: #9f5757 !important;
-	border-color: #9f5757 !important;
-}
-
-.privatePaper-form-code-btn:hover,
-.privatePaper-form-code-btn:active {
-	background-color: #944444 !important;
 }
 
 @media screen and (max-width: 1023px) {

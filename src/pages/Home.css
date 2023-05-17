@@ -31,10 +31,7 @@
 	bottom: 5rem;
 	margin-bottom: 5rem;
 	padding: 1.5rem 4rem !important;
-	color: #fffdfd !important;
 	font-size: 1.8rem !important;
-	background-color: #9f5757 !important;
-	border-color: #944444 !important;
 	border-radius: 50px !important;
 	box-shadow: 0.3rem 0.5rem 0.5rem rgba(150, 143, 142, 0.8);
 }
@@ -42,8 +39,6 @@
 .paper-creating-btn:active {
 	font-size: 2.2rem !important;
 	transition: all 0.2s linear;
-	background-color: #853d3d !important;
-	border-color: #763636 !important;
 }
 
 .paper-creating-btn-icon {

@@ -43,16 +43,6 @@
 	margin-right: 1rem;
 }
 
-.paperSettings-offcanvas-body button#edit-btn {
-	background-color: #9f5757;
-	border-color: #944444 !important;
-}
-.paperSettings-offcanvas-body button#edit-btn:hover,
-.paperSettings-offcanvas-body button#edit-btn:active {
-	background-color: #853d3d !important;
-	border-color: #763636 !important;
-}
-
 @media screen and (max-width: 1024px) {
 	.paperSettings-offcanvas-body {
 		flex-direction: column !important;
