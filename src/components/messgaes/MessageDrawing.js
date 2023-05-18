@@ -1,20 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import {
-	Modal,
-	Form,
-	Button,
-	ButtonGroup,
-	ToggleButton,
-	CloseButton,
-} from "react-bootstrap";
-import { Row, Col, Slider, InputNumber } from "antd";
+import { Modal, Form, Button, CloseButton } from "react-bootstrap";
+import { Row, Col, Slider, InputNumber, Divider } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faPen,
 	faEraser,
 	faArrowLeft,
 	faRotateLeft,
+	faCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import "./MessageDrawing.css";
 
@@ -32,6 +26,16 @@ function MessageDrawing({
 	const [color, setColor] = useState("black");
 	const [drawArray, setDrawArray] = useState([]);
 	const [idx, setIdx] = useState(0);
+
+	const [customColor, setCustomColor] = useState("#000000");
+
+	const colorPalette = [
+		{ id: 0, color: "black", name: "검정" },
+		{ id: 1, color: "red", name: "빨강" },
+		{ id: 2, color: "yellow", name: "노랑" },
+		{ id: 3, color: "green", name: "초록" },
+		{ id: 4, color: "blue", name: "파랑" },
+	];
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
@@ -199,6 +203,15 @@ function MessageDrawing({
 		ctx.strokeStyle = value;
 	};
 
+	const onCustomColorChange = (e) => {
+		const {
+			target: { value },
+		} = e;
+		setColor(value);
+		setCustomColor(value);
+		ctx.strokeStyle = value;
+	};
+
 	const undoLastDrawing = () => {
 		if (idx <= 0) {
 			resetDrawing();
@@ -221,6 +234,31 @@ function MessageDrawing({
 		const drawingUrl = canvasRef.current.toDataURL("image/png");
 		setMsgDrawing(drawingUrl);
 		setCanvasModal(false);
+	};
+
+	const renderColorPalette = () => {
+		return colorPalette.map((pen) => {
+			return (
+				<div key={pen.id}>
+					<input
+						className="msgDrawing-radio-btn"
+						type="radio"
+						name="penColor"
+						id={pen.color}
+						value={pen.color}
+						checked={color === pen.color}
+						onChange={onColorChange}
+					/>
+					<label
+						className="msgDrawing-color-label"
+						htmlFor={pen.color}
+						id={`pen-${pen.color}`}
+					>
+						<FontAwesomeIcon icon={faCircle} />
+					</label>
+				</div>
+			);
+		});
 	};
 
 	return (
@@ -248,124 +286,95 @@ function MessageDrawing({
 					onMouseOut={stopDrawing}
 					onTouchEnd={stopDrawing}
 				/>
-				<div className="msgDrawing-tool-container">
-					<Form>
-						<Form.Group className="msgDrawing-tool-group">
-							<ButtonGroup>
-								<ToggleButton
-									className="msgDrawing-tool-toggle-btn"
-									type="radio"
-									name="toolType"
-									id="pen"
-									value="pen"
-									checked={tool === "pen"}
-									onChange={onToolChange}
-								>
-									<FontAwesomeIcon icon={faPen} /> 펜
-								</ToggleButton>
-								<ToggleButton
-									className="msgDrawing-tool-toggle-btn"
-									type="radio"
-									name="toolType"
-									id="eraser"
-									value="eraser"
-									checked={tool === "eraser"}
-									onChange={onToolChange}
-								>
-									<FontAwesomeIcon icon={faEraser} /> 지우개
-								</ToggleButton>
-							</ButtonGroup>
-						</Form.Group>
-						<Form.Group className="msgDrawing-tool-group">
-							<Form.Label>펜 두께</Form.Label>
-							<Row>
-								<Col span={16}>
-									<Slider
-										id="toolWidth"
-										min={1}
-										max={100}
-										value={toolWidth}
-										onChange={onToolWidthChange}
-									/>
-								</Col>
-								<Col span={4}>
-									<InputNumber
-										style={{ margin: "0 1rem" }}
-										min={1}
-										max={100}
-										value={toolWidth}
-										onChange={onToolWidthChange}
-									/>
-								</Col>
-							</Row>
-						</Form.Group>
-						<Form.Group className="msgDrawing-tool-group">
-							<Form.Check type="radio" inline>
-								<Form.Check.Input
-									type="radio"
-									name="penColor"
-									id="black"
-									value="black"
-									checked={color === "black"}
-									onChange={onColorChange}
+				<div></div>
+				<Row
+					className="msgDrawing-tool-container"
+					align="middle"
+					justify="center"
+				>
+					<Col className="msgDrawing-tool-group">
+						<input
+							className="msgDrawing-radio-btn"
+							type="radio"
+							name="toolType"
+							id="pen"
+							value="pen"
+							checked={tool === "pen"}
+							onChange={onToolChange}
+						/>
+						<label htmlFor="pen" className="msgDrawing-tool-label">
+							<FontAwesomeIcon icon={faPen} />
+						</label>
+						<input
+							className="msgDrawing-radio-btn"
+							type="radio"
+							name="toolType"
+							id="eraser"
+							value="eraser"
+							checked={tool === "eraser"}
+							onChange={onToolChange}
+						/>
+						<label htmlFor="eraser" className="msgDrawing-tool-label">
+							<FontAwesomeIcon icon={faEraser} />
+						</label>
+					</Col>
+					<Divider type="vertical" className="tool-divider" />
+					<Col className="msgDrawing-tool-group">
+						<div className="msgDrawing-color-container">
+							{renderColorPalette()}
+							<input
+								className="msgDrawing-radio-btn"
+								type="radio"
+								name="penColor"
+								id={customColor}
+								value={customColor}
+								checked={color === customColor}
+								onChange={onColorChange}
+							/>
+							<Form.Control
+								className="msgDrawing-radio-colorPicker"
+								type="color"
+								id="customColor"
+								value={customColor}
+								onChange={onCustomColorChange}
+							/>
+						</div>
+					</Col>
+					<Divider type="vertical" className="tool-divider" />
+					<Col className="msgDrawing-tool-group">
+						<Row>
+							<Col>
+								<Slider
+									className="msgDrawing-slider"
+									id="toolWidth"
+									min={1}
+									max={100}
+									value={toolWidth}
+									onChange={onToolWidthChange}
 								/>
-								<Form.Check.Label id="pen-black">검정</Form.Check.Label>
-							</Form.Check>
-							<Form.Check type="radio" inline>
-								<Form.Check.Input
-									type="radio"
-									name="penColor"
-									id="red"
-									value="red"
-									checked={color === "red"}
-									onChange={onColorChange}
+							</Col>
+							<Col>
+								<InputNumber
+									className="msgDrawing-slider-number"
+									min={1}
+									max={100}
+									value={toolWidth}
+									onChange={onToolWidthChange}
 								/>
-								<Form.Check.Label id="pen-red">빨강</Form.Check.Label>
-							</Form.Check>
-							<Form.Check type="radio" inline>
-								<Form.Check.Input
-									type="radio"
-									name="penColor"
-									id="yellow"
-									value="yellow"
-									checked={color === "yellow"}
-									onChange={onColorChange}
-								/>
-								<Form.Check.Label id="pen-yellow">노랑</Form.Check.Label>
-							</Form.Check>
-							<Form.Check type="radio" inline>
-								<Form.Check.Input
-									type="radio"
-									name="penColor"
-									id="green"
-									value="green"
-									checked={color === "green"}
-									onChange={onColorChange}
-								/>
-								<Form.Check.Label id="pen-green">초록</Form.Check.Label>
-							</Form.Check>
-							<Form.Check type="radio" inline>
-								<Form.Check.Input
-									type="radio"
-									name="penColor"
-									id="blue"
-									value="blue"
-									checked={color === "blue"}
-									onChange={onColorChange}
-								/>
-								<Form.Check.Label id="pen-blue">파랑</Form.Check.Label>
-							</Form.Check>
-						</Form.Group>
-						<Form.Group className="msgDrawing-tool-group">
-							<Button onClick={undoLastDrawing}>
-								<FontAwesomeIcon icon={faArrowLeft} /> 뒤로가기
-							</Button>
-							<Button onClick={resetDrawing}>
-								<FontAwesomeIcon icon={faRotateLeft} /> 리셋
-							</Button>
-						</Form.Group>
-					</Form>
-				</div>
+							</Col>
+						</Row>
+					</Col>
+				</Row>
+				<Row align="middle" justify="center">
+					<Col className="msgDrawing-tool-group">
+						<Button onClick={undoLastDrawing}>
+							<FontAwesomeIcon icon={faArrowLeft} />
+						</Button>
+						<Button onClick={resetDrawing}>
+							<FontAwesomeIcon icon={faRotateLeft} />
+						</Button>
+					</Col>
+				</Row>
 			</Modal.Body>
 			<Modal.Footer className="create-modal-footer">
 				<Button id="create-btn" size="lg" onClick={saveDrawing}>

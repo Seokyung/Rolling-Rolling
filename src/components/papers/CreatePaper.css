@@ -85,8 +85,8 @@
 .create-modal-footer {
 	display: flex !important;
 	justify-content: center !important;
-	margin: 0 !important;
-	padding: 2rem 1rem 1rem 1rem !important;
+	margin: 1rem !important;
+	padding: 1rem !important;
 }
 
 .create-modal-footer button {
