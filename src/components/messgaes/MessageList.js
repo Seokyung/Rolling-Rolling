@@ -12,6 +12,7 @@ import Message from "components/messgaes/Message";
 import { useSelector } from "react-redux";
 
 import { Row, Col } from "react-bootstrap";
+import { Skeleton, Empty } from "antd";
 import "./MessageList.css";
 
 function MessageList() {
@@ -19,6 +20,8 @@ function MessageList() {
 	const paperCreatorId = useSelector((state) => state.paperReducer.creatorId);
 	const paperId = useSelector((state) => state.paperReducer.paperId);
 
+	const [init, setInit] = useState(true);
+	const [isMessages, setIsMessages] = useState(false);
 	const [messages, setMessages] = useState([]);
 
 	useEffect(() => {
@@ -48,7 +51,13 @@ function MessageList() {
 					id: doc.id,
 					...doc.data(),
 				}));
+				if (messageArray.length !== 0) {
+					setIsMessages(true);
+				} else {
+					setIsMessages(false);
+				}
 				setMessages(messageArray);
+				setInit(false);
 			},
 			(error) => {
 				console.log(error.code);
@@ -62,33 +71,55 @@ function MessageList() {
 	}, []);
 
 	return (
-		<div className="messageList-container">
-			<Row xs={2} sm={2} md={2} lg={3} xl={3} className="g-4">
-				{messages.map((message) =>
-					message.isPrivate ? (
-						(paperCreatorId === userId || userId === message.creatorId) && (
-							<Col key={message.id}>
-								<Message
-									msgObj={message}
-									isOwner={
-										paperCreatorId === userId || userId === message.creatorId
-									}
-								/>
-							</Col>
-						)
+		<>
+			{init ? (
+				<Skeleton active />
+			) : (
+				<div className="messageList-container">
+					{isMessages ? (
+						<Row xs={2} sm={2} md={2} lg={3} xl={3} className="g-4">
+							{messages.map((message) =>
+								message.isPrivate ? (
+									(paperCreatorId === userId ||
+										userId === message.creatorId) && (
+										<Col key={message.id}>
+											<Message
+												msgObj={message}
+												isOwner={
+													paperCreatorId === userId ||
+													userId === message.creatorId
+												}
+											/>
+										</Col>
+									)
+								) : (
+									<Col key={message.id}>
+										<Message
+											msgObj={message}
+											isOwner={
+												paperCreatorId === userId ||
+												userId === message.creatorId
+											}
+										/>
+									</Col>
+								)
+							)}
+						</Row>
 					) : (
-						<Col key={message.id}>
-							<Message
-								msgObj={message}
-								isOwner={
-									paperCreatorId === userId || userId === message.creatorId
-								}
-							/>
-						</Col>
-					)
-				)}
-			</Row>
-		</div>
+						<Empty
+							description={
+								<div className="empty-container">
+									<span className="empty-text">
+										아직 게시된 메세지가 없네요!
+									</span>
+									<span className="empty-text">메세지를 작성해보세요 😉</span>
+								</div>
+							}
+						/>
+					)}
+				</div>
+			)}
+		</>
 	);
 }
 
