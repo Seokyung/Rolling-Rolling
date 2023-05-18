@@ -112,7 +112,7 @@ function Paper() {
 								className="paper-creating-btn-icon"
 								icon={faEnvelope}
 							/>
-							메세지 작성하기
+							메세지 쓰기
 						</Button>
 					</div>
 					<PaperSettings

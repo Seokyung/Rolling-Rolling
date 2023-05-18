@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { Modal, Form, Button, CloseButton } from "react-bootstrap";
-import { Row, Col, Slider, InputNumber, Divider } from "antd";
+import { Row, Col, Slider, InputNumber, Divider, Tooltip } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faPen,
@@ -302,9 +302,11 @@ function MessageDrawing({
 							checked={tool === "pen"}
 							onChange={onToolChange}
 						/>
-						<label htmlFor="pen" className="msgDrawing-tool-label">
-							<FontAwesomeIcon icon={faPen} />
-						</label>
+						<Tooltip title="펜">
+							<label htmlFor="pen" className="msgDrawing-tool-label">
+								<FontAwesomeIcon icon={faPen} />
+							</label>
+						</Tooltip>
 						<input
 							className="msgDrawing-radio-btn"
 							type="radio"
@@ -314,9 +316,11 @@ function MessageDrawing({
 							checked={tool === "eraser"}
 							onChange={onToolChange}
 						/>
-						<label htmlFor="eraser" className="msgDrawing-tool-label">
-							<FontAwesomeIcon icon={faEraser} />
-						</label>
+						<Tooltip title="지우개">
+							<label htmlFor="eraser" className="msgDrawing-tool-label">
+								<FontAwesomeIcon icon={faEraser} />
+							</label>
+						</Tooltip>
 					</Col>
 					<Divider type="vertical" className="tool-divider" />
 					<Col className="msgDrawing-tool-group">
@@ -367,12 +371,24 @@ function MessageDrawing({
 				</Row>
 				<Row align="middle" justify="center">
 					<Col className="msgDrawing-tool-group">
-						<Button onClick={undoLastDrawing}>
-							<FontAwesomeIcon icon={faArrowLeft} />
-						</Button>
-						<Button onClick={resetDrawing}>
-							<FontAwesomeIcon icon={faRotateLeft} />
-						</Button>
+						<Tooltip title="하나 지우기">
+							<Button
+								className="msgDrawing-tool-undo-btn"
+								variant="outline-secondary"
+								onClick={undoLastDrawing}
+							>
+								<FontAwesomeIcon icon={faArrowLeft} />
+							</Button>
+						</Tooltip>
+						<Tooltip title="전부 지우기">
+							<Button
+								className="msgDrawing-tool-undo-btn"
+								variant="secondary"
+								onClick={resetDrawing}
+							>
+								<FontAwesomeIcon icon={faRotateLeft} />
+							</Button>
+						</Tooltip>
 					</Col>
 				</Row>
 			</Modal.Body>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { dbService, storageService } from "api/fbase";
 import { collection, doc, setDoc } from "firebase/firestore";
@@ -15,7 +15,7 @@ import {
 	ToggleButton,
 	Collapse,
 } from "react-bootstrap";
-import { Divider, Button as CircleBtn, Image } from "antd";
+import { Divider, Button as CircleBtn, Image, message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faAngleLeft,
@@ -41,13 +41,27 @@ function CreateMessage() {
 	const [msgDrawing, setMsgDrawing] = useState("");
 	const [isPrivate, setIsPrivate] = useState(false);
 
+	const msgTitleRef = useRef();
+	const msgWriterRef = useRef();
+
 	const [currentTitleLength, setCurrentTitleLength] = useState(0);
 	const maxTitleLength = 50;
+
+	const [currentWriterLength, setCurrentWriterLength] = useState(
+		useSelector((state) => state.userReducer.displayName).length
+	);
+	const maxWriterLength = 30;
+
+	const [currentContentLength, setCurrentContentLength] = useState(0);
+	const maxContentLength = 500;
 
 	const [attachOpen, setAttachOpen] = useState(false);
 	const [canvasModal, setCanvasModal] = useState(false);
 
 	const [validated, setValidated] = useState(false);
+
+	const [messageApi, contextHolder] = message.useMessage();
+	const key = "updatable";
 
 	const closeCreateMessage = () => {
 		navigate(`/paper/${paperId}`, { replace: true });
@@ -62,8 +76,10 @@ function CreateMessage() {
 			setCurrentTitleLength(value.length);
 		} else if (name === "writer") {
 			setMsgWriter(value);
+			setCurrentWriterLength(value.length);
 		} else if (name === "content") {
 			setMsgContent(value);
+			setCurrentContentLength(value.length);
 		}
 	};
 
@@ -95,7 +111,6 @@ function CreateMessage() {
 
 	const closeAttach = () => {
 		setAttachOpen(false);
-		// setAttachment("");
 		setMsgImg("");
 		setMsgDrawing("");
 	};
@@ -103,9 +118,14 @@ function CreateMessage() {
 	const onMessageSubmit = async (e) => {
 		e.preventDefault();
 
-		if (msgTitle === "" || msgWriter === "") {
+		if (msgTitle === "") {
+			msgTitleRef.current.focus();
 			setValidated(true);
-			// alert("메세지 제목/작성자를 입력해주세요!");
+			return;
+		}
+		if (msgWriter === "") {
+			msgWriterRef.current.focus();
+			setValidated(true);
 			return;
 		}
 
@@ -120,6 +140,13 @@ function CreateMessage() {
 			await uploadString(msgImgRef, msgDrawing, "data_url");
 			msgImgUrl = await getDownloadURL(msgImgRef);
 		}
+
+		await messageApi.open({
+			key,
+			type: "loading",
+			content: "메세지 게시중...",
+			duration: 0.5,
+		});
 
 		const currentTime = new Date();
 		const year = currentTime.getFullYear();
@@ -150,10 +177,20 @@ function CreateMessage() {
 
 		try {
 			await setDoc(newMsg, msgObj);
-			alert(`${msgTitle} 메세지가 작성되었습니다!`);
+			messageApi.open({
+				key,
+				type: "success",
+				content: `${msgTitle} 메세지가 게시되었습니다!`,
+				duration: 2,
+			});
 		} catch (error) {
-			alert("메세지 작성에 실패하였습니다 :(");
-			console.log(error);
+			messageApi.open({
+				key,
+				type: "error",
+				content: "메세지 게시에 실패하였습니다 😢",
+				duration: 2,
+			});
+			console.log(error.code);
 		} finally {
 			setMsgTitle("");
 			setMsgWriter("");
@@ -167,6 +204,7 @@ function CreateMessage() {
 
 	return (
 		<>
+			{contextHolder}
 			<div className="paper-wrapper">
 				<div className="editPaper-container">
 					<div className="editPaper-header-container">
@@ -179,7 +217,7 @@ function CreateMessage() {
 									className="icon-margin-right"
 									icon={faEnvelope}
 								/>
-								메세지 작성하기
+								메세지 쓰기
 							</h2>
 						</div>
 					</div>
@@ -196,6 +234,7 @@ function CreateMessage() {
 									required
 									autoFocus
 									value={msgTitle}
+									ref={msgTitleRef}
 									maxLength={maxTitleLength}
 									onChange={onMessageChange}
 									placeholder="제목을 입력하세요 :)"
@@ -218,6 +257,8 @@ function CreateMessage() {
 									name="writer"
 									required
 									value={msgWriter}
+									ref={msgWriterRef}
+									maxLength={maxWriterLength}
 									onChange={onMessageChange}
 									placeholder="이름을 입력하세요 :)"
 								/>
@@ -227,6 +268,9 @@ function CreateMessage() {
 								>
 									작성자를 입력해주세요!
 								</Form.Control.Feedback>
+								<Form.Text className="create-form-length-text">
+									{currentWriterLength} / {maxWriterLength}
+								</Form.Text>
 							</Form.Group>
 						</Form>
 						<Form>
@@ -240,9 +284,13 @@ function CreateMessage() {
 									rows={5}
 									name="content"
 									value={msgContent}
+									maxLength={maxContentLength}
 									onChange={onMessageChange}
 									placeholder="내용을 입력하세요 :)"
 								/>
+								<Form.Text className="create-form-length-text">
+									{currentContentLength} / {maxContentLength}
+								</Form.Text>
 							</Form.Group>
 							<Divider className="paper-divider" />
 							<Form.Group className="create-form-group">
@@ -274,45 +322,20 @@ function CreateMessage() {
 													closeAttach={closeAttach}
 												/>
 											)}
-											{
-												attachment === "attachDrawing" && msgDrawing && (
-													<div className="msgImg-container">
-														<div className="msgImg-img-container">
-															<Image src={msgDrawing} alt="messageDrawing" />
-															<CircleBtn
-																shape="circle"
-																className="upload-close-btn img-close"
-																onClick={clearMsgDrawing}
-															>
-																<FontAwesomeIcon icon={faXmark} />
-															</CircleBtn>
-														</div>
+											{attachment === "attachDrawing" && msgDrawing && (
+												<div className="msgImg-container">
+													<div className="msgImg-img-container">
+														<Image src={msgDrawing} alt="messageDrawing" />
+														<CircleBtn
+															shape="circle"
+															className="upload-close-btn img-close"
+															onClick={clearMsgDrawing}
+														>
+															<FontAwesomeIcon icon={faXmark} />
+														</CircleBtn>
 													</div>
-												)
-												// (msgDrawing ? (
-												// 	<div className="msgImg-container">
-												// 		<div className="msgImg-img-container">
-												// 			<Image src={msgDrawing} alt="messageDrawing" />
-												// 			<CircleBtn
-												// 				shape="circle"
-												// 				className="upload-close-btn img-close"
-												// 				onClick={clearMsgDrawing}
-												// 			>
-												// 				<FontAwesomeIcon icon={faXmark} />
-												// 			</CircleBtn>
-												// 		</div>
-												// 	</div>
-												// ) : (
-												// 	<Button
-												// 		onClick={(e) => {
-												// 			e.preventDefault();
-												// 			openCanvasModal();
-												// 		}}
-												// 	>
-												// 		그림 그리기
-												// 	</Button>
-												// ))
-											}
+												</div>
+											)}
 										</div>
 									</Collapse>
 								}
@@ -347,7 +370,7 @@ function CreateMessage() {
 							<Divider className="paper-divider" />
 							<div className="editPaper-edit-btn">
 								<Button size="lg" onClick={onMessageSubmit}>
-									작성 완료
+									메세지 게시하기
 								</Button>
 							</div>
 						</Form>
