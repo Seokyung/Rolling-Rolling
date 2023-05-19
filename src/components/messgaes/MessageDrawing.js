@@ -4,20 +4,15 @@ import { Modal, Form, Button, CloseButton } from "react-bootstrap";
 import { Row, Col, Slider, InputNumber, Divider, Tooltip } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-	faPen,
+	faPaintbrush,
 	faEraser,
-	faArrowLeft,
+	faCircleLeft,
 	faRotateLeft,
 	faCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import "./MessageDrawing.css";
 
-function MessageDrawing({
-	canvasModal,
-	setCanvasModal,
-	setMsgDrawing,
-	setAttachment,
-}) {
+function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 	const canvasRef = useRef(null);
 	const [ctx, setCtx] = useState(null);
 	const [isDrawing, setIsDrawing] = useState(false);
@@ -50,16 +45,10 @@ function MessageDrawing({
 		}
 
 		setCtx(getCtx);
-		// setTool("pen");
-		// setToolWidth("1");
-		// setColor("black");
-		// setDrawArray([]);
-		// setIdx(0);
 	}, []);
 
 	const closeCanvasModal = () => {
 		setCanvasModal(false);
-		setAttachment("");
 	};
 
 	const getPosMouse = (e) => {
@@ -70,17 +59,11 @@ function MessageDrawing({
 	};
 
 	const getPosTouch = (e) => {
+		const offset = e.target.getBoundingClientRect();
 		return {
-			x: parseInt(e.touches[0].clientX),
-			y: parseInt(e.touches[0].clientY),
+			x: parseInt(e.touches[0].clientX - offset.x),
+			y: parseInt(e.touches[0].clientY - offset.y),
 		};
-
-		// Touch Event
-		// const getX = e.touches[0].clientX - e.target.offsetLeft;
-		// const getY =
-		// 	e.touches[0].clientY -
-		// 	e.target.offsetTop +
-		// 	document.documentElement.scrollTop;
 	};
 
 	const startDrawing = (e, type) => {
@@ -132,7 +115,9 @@ function MessageDrawing({
 		// window.addEventListener(
 		// 	"touchmove",
 		// 	function () {
-		// 		e.nativeEvent.preventDefault();
+		// 		if (e.cancelable) {
+		// 			e.preventDefault();
+		// 		}
 		// 	},
 		// 	{ passive: false }
 		// ); // for scroll lock in Mobile
@@ -186,11 +171,6 @@ function MessageDrawing({
 	};
 
 	const onToolWidthChange = (e) => {
-		// const {
-		// 	target: { value },
-		// } = e;
-		// setToolWidth(value);
-		// ctx.lineWidth = value;
 		setToolWidth(e);
 		ctx.lineWidth = e;
 	};
@@ -286,12 +266,8 @@ function MessageDrawing({
 					onMouseOut={stopDrawing}
 					onTouchEnd={stopDrawing}
 				/>
-				<div></div>
-				<Row
-					className="msgDrawing-tool-container"
-					align="middle"
-					justify="center"
-				>
+				<Divider className="paper-divider" />
+				<Row align="middle" justify="center">
 					<Col className="msgDrawing-tool-group">
 						<input
 							className="msgDrawing-radio-btn"
@@ -304,7 +280,7 @@ function MessageDrawing({
 						/>
 						<Tooltip title="펜">
 							<label htmlFor="pen" className="msgDrawing-tool-label">
-								<FontAwesomeIcon icon={faPen} />
+								<FontAwesomeIcon icon={faPaintbrush} />
 							</label>
 						</Tooltip>
 						<input
@@ -370,24 +346,27 @@ function MessageDrawing({
 					</Col>
 				</Row>
 				<Row align="middle" justify="center">
-					<Col className="msgDrawing-tool-group">
+					<Col className="msgDrawing-tool-undo-group">
 						<Tooltip title="하나 지우기">
-							<Button
+							<button
 								className="msgDrawing-tool-undo-btn"
-								variant="outline-secondary"
 								onClick={undoLastDrawing}
 							>
-								<FontAwesomeIcon icon={faArrowLeft} />
-							</Button>
+								<FontAwesomeIcon id="back" icon={faCircleLeft} />
+								<span>BACK</span>
+							</button>
 						</Tooltip>
+					</Col>
+					<Col className="msgDrawing-tool-undo-group">
 						<Tooltip title="전부 지우기">
-							<Button
+							<button
 								className="msgDrawing-tool-undo-btn"
 								variant="secondary"
 								onClick={resetDrawing}
 							>
 								<FontAwesomeIcon icon={faRotateLeft} />
-							</Button>
+								<span>RESET</span>
+							</button>
 						</Tooltip>
 					</Col>
 				</Row>

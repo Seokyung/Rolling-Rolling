@@ -13,10 +13,6 @@
 	border-radius: 20px;
 }
 
-.msgDrawing-tool-container {
-	margin-top: 1rem;
-}
-
 .msgDrawing-tool-group {
 	padding: 0.5rem;
 	font-size: 1.6rem;
@@ -37,13 +33,13 @@
 	display: none;
 }
 .msgDrawing-radio-btn:checked + label svg {
-	border: 1px #9b9ea1 solid;
-	box-shadow: 0.3rem 0.3rem 0.3rem rgba(150, 143, 142, 0.8);
+	border: 1px rgb(105, 177, 255) solid;
+	box-shadow: 0.3rem 0.3rem 0.3rem rgba(145, 202, 255, 0.5);
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .msgDrawing-radio-btn:checked + input {
-	border: 1px #9b9ea1 solid;
-	box-shadow: 0.3rem 0.3rem 0.3rem rgba(150, 143, 142, 0.8);
+	border: 1px #69b1ff solid;
+	box-shadow: 0.3rem 0.3rem 0.3rem rgba(145, 202, 255, 0.5);
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -60,6 +56,7 @@
 }
 .msgDrawing-tool-label svg:hover {
 	box-shadow: 0.3rem 0.3rem 0.3rem rgba(150, 143, 142, 0.8);
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .msgDrawing-color-container {
@@ -82,12 +79,16 @@
 }
 .msgDrawing-color-label svg:hover {
 	box-shadow: 0.3rem 0.3rem 0.3rem rgba(150, 143, 142, 0.8);
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .msgDrawing-radio-colorPicker {
 	margin: 0 0.5rem;
 	min-width: 5rem;
 	min-height: 5rem;
+}
+.msgDrawing-radio-colorPicker:hover {
+	box-shadow: 0.3rem 0.3rem 0.3rem rgba(150, 143, 142, 0.8);
 }
 
 #pen-black {
@@ -116,10 +117,42 @@
 	margin-left: 0.5rem;
 }
 
+.msgDrawing-tool-undo-group {
+	padding: 0.5rem 1.5rem 0 1.5rem;
+	font-family: "Binggrae", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
 .msgDrawing-tool-undo-btn {
-	font-size: 1.8rem;
-	margin: 0 0.5rem;
-	padding: 0.5rem 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+	padding: 0;
+	border: none;
+	border-radius: 50%;
+	outline: none;
+	appearance: none;
+	white-space: nowrap;
+	background: none;
+}
+.msgDrawing-tool-undo-btn svg {
+	width: 2.75rem;
+	height: 2.75rem;
+	margin-bottom: 0.3rem;
+}
+.msgDrawing-tool-undo-btn #back {
+	width: 3rem;
+	height: 3rem;
+	margin-bottom: 0.3rem;
+}
+.msgDrawing-tool-undo-btn span {
+	font-size: 1rem;
+}
+.msgDrawing-tool-undo-btn:hover {
+	color: #4096ff;
+	transition: color 0.15s ease-in-out;
 }
 
 @media screen and (max-height: 600px) {

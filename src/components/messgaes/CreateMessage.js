@@ -21,6 +21,7 @@ import {
 	faAngleLeft,
 	faEnvelope,
 	faImage,
+	faPalette,
 	faBrush,
 	faXmark,
 } from "@fortawesome/free-solid-svg-icons";
@@ -94,9 +95,6 @@ function CreateMessage() {
 		const {
 			target: { value },
 		} = e;
-		if (value === "attachDrawing") {
-			openCanvasModal();
-		}
 		setAttachment(value);
 		setAttachOpen(true);
 	};
@@ -322,18 +320,43 @@ function CreateMessage() {
 													closeAttach={closeAttach}
 												/>
 											)}
-											{attachment === "attachDrawing" && msgDrawing && (
-												<div className="msgImg-container">
-													<div className="msgImg-img-container">
-														<Image src={msgDrawing} alt="messageDrawing" />
-														<CircleBtn
-															shape="circle"
-															className="upload-close-btn img-close"
-															onClick={clearMsgDrawing}
-														>
-															<FontAwesomeIcon icon={faXmark} />
-														</CircleBtn>
-													</div>
+											{attachment === "attachDrawing" && (
+												<div className="msgImg-wrapper">
+													{msgDrawing ? (
+														<div className="msgImg-container">
+															<div className="msgImg-img-container">
+																<Image
+																	src={msgDrawing}
+																	className="msgImg-img"
+																	alt="messageDrawing"
+																/>
+																<CircleBtn
+																	shape="circle"
+																	className="upload-close-btn img-close"
+																	onClick={clearMsgDrawing}
+																>
+																	<FontAwesomeIcon icon={faXmark} />
+																</CircleBtn>
+															</div>
+														</div>
+													) : (
+														<div className="msgImg-container">
+															<div
+																className="msgImg-upload-container"
+																onClick={openCanvasModal}
+															>
+																<FontAwesomeIcon icon={faPalette} />
+																클릭해서 그림을 그려보세요
+															</div>
+															<CircleBtn
+																shape="circle"
+																className="upload-close-btn file-close"
+																onClick={closeAttach}
+															>
+																<FontAwesomeIcon icon={faXmark} />
+															</CircleBtn>
+														</div>
+													)}
 												</div>
 											)}
 										</div>
@@ -366,7 +389,6 @@ function CreateMessage() {
 									</ToggleButton>
 								</ButtonGroup>
 							</Form.Group>
-
 							<Divider className="paper-divider" />
 							<div className="editPaper-edit-btn">
 								<Button size="lg" onClick={onMessageSubmit}>
@@ -382,7 +404,6 @@ function CreateMessage() {
 					canvasModal={canvasModal}
 					setCanvasModal={setCanvasModal}
 					setMsgDrawing={setMsgDrawing}
-					setAttachment={setAttachment}
 				/>
 			)}
 		</>
