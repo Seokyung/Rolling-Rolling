@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+import useDebounce from "modules/useDebounce";
 
 import { Modal, Form, Button, CloseButton } from "react-bootstrap";
-import { Row, Col, Slider, InputNumber, Divider, Tooltip } from "antd";
+import { Row, Col, Slider, InputNumber, Divider, Tooltip, message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faPaintbrush,
@@ -15,15 +16,20 @@ import "./MessageDrawing.css";
 function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 	const canvasRef = useRef(null);
 	const [ctx, setCtx] = useState(null);
+	const [canvasWidth, setCanvasWidth] = useState(0);
+	const [canvasHeight, setCanvasHeight] = useState(0);
 	const [isDrawing, setIsDrawing] = useState(false);
 	const [tool, setTool] = useState("pen");
 	const [toolWidth, setToolWidth] = useState("1");
 	const [color, setColor] = useState("black");
+
+	const debouncedCanvasWidth = useDebounce(canvasWidth, 500);
+	const debouncedCanvasHeight = useDebounce(canvasHeight, 500);
+
 	const [drawArray, setDrawArray] = useState([]);
 	const [idx, setIdx] = useState(0);
 
 	const [customColor, setCustomColor] = useState("#000000");
-
 	const colorPalette = [
 		{ id: 0, color: "black", name: "검정" },
 		{ id: 1, color: "red", name: "빨강" },
@@ -31,6 +37,9 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 		{ id: 3, color: "green", name: "초록" },
 		{ id: 4, color: "blue", name: "파랑" },
 	];
+
+	const [messageApi, contextHolder] = message.useMessage();
+	const key = "updatable";
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
@@ -42,10 +51,98 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 		) {
 			canvas.width = canvas.clientWidth;
 			canvas.height = canvas.clientHeight;
+			setCanvasWidth(canvas.clientWidth);
+			setCanvasHeight(canvas.clientHeight);
 		}
 
 		setCtx(getCtx);
+		console.log("resize");
+
+		window.addEventListener("resize", handleResize);
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
 	}, []);
+
+	const handleResize = () => {
+		const canvas = canvasRef.current;
+		if (
+			canvas.clientWidth !== canvas.width ||
+			canvas.clientHeight !== canvas.height
+		) {
+			const tmpCanvas = document.createElement("canvas");
+			tmpCanvas.width = canvas.width;
+			tmpCanvas.height = canvas.height;
+			const tmpCtx = tmpCanvas.getContext("2d", { willReadFrequently: true });
+
+			tmpCtx.drawImage(canvas, 0, 0);
+			canvas.width = canvas.clientWidth;
+			canvas.height = canvas.clientHeight;
+			setCanvasWidth(canvas.width);
+			setCanvasHeight(canvas.height);
+
+			const getCtx = canvas.getContext("2d", { willReadFrequently: true });
+			getCtx.drawImage(
+				tmpCanvas,
+				0,
+				0,
+				tmpCanvas.width,
+				tmpCanvas.height,
+				0,
+				0,
+				canvas.width,
+				canvas.height
+			);
+			setCtx(getCtx);
+
+			// 스크린 크기가 바뀔 때(resize) 원래 그림 조정 방법
+			// 1. resize시 원래 그림이 canvas 비율에 맞춰 조정 (그림이 짜부되거나 넓어질 수 있음)
+			/*
+			const tmpCanvas = document.createElement("canvas");
+			tmpCanvas.width = canvas.width;
+			tmpCanvas.height = canvas.height;
+			const tmpCtx = tmpCanvas.getContext("2d", { willReadFrequently: true });
+
+			tmpCtx.drawImage(canvas, 0, 0);
+			canvas.width = canvas.clientWidth;
+			canvas.height = canvas.clientHeight;
+			setCanvasWidth(canvas.width);
+			setCanvasHeight(canvas.height);
+
+			const getCtx = canvas.getContext("2d", { willReadFrequently: true });
+			getCtx.drawImage(
+				tmpCanvas,
+				0,
+				0,
+				tmpCanvas.width,
+				tmpCanvas.height,
+				0,
+				0,
+				canvas.width,
+				canvas.height
+			);
+			setCtx(getCtx);
+			*/
+			// 2. resize시 원래 그림 크기 조정 X, 보이는 부분만 살림 (그림이 잘릴 수 있음)
+			/*
+			const currentImgData = ctx.getImageData(0, 0, canvasWidth, canvasHeight);
+
+			canvas.width = canvas.clientWidth;
+			canvas.height = canvas.clientHeight;
+			setCanvasWidth(canvas.width);
+			setCanvasHeight(canvas.height);
+
+			ctx.putImageData(currentImgData, 0, 0);
+			*/
+		}
+	};
+
+	useEffect(() => {}, [
+		canvasWidth,
+		canvasHeight,
+		debouncedCanvasWidth,
+		debouncedCanvasHeight,
+	]);
 
 	const closeCanvasModal = () => {
 		setCanvasModal(false);
@@ -67,19 +164,7 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 	};
 
 	const startDrawing = (e, type) => {
-		// if (e.cancelable) {
-		// 	e.preventDefault();
-		// }
-		// window.addEventListener(
-		// 	"touchstart",
-		// 	function () {
-		// 		e.nativeEvent.preventDefault();
-		// 	},
-		// 	{ passive: false }
-		// ); // for scroll lock in Mobile
-
 		let getX, getY;
-
 		if (type === "mouse") {
 			const { x, y } = getPosMouse(e);
 			getX = x;
@@ -94,6 +179,7 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 		setIsDrawing(true);
 		ctx.beginPath();
 		ctx.moveTo(getX, getY);
+		ctx.strokeStyle = color;
 
 		if (e.type !== "mouseout") {
 			setDrawArray(
@@ -112,18 +198,11 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 	};
 
 	const onDrawing = (e, type) => {
-		// window.addEventListener(
-		// 	"touchmove",
-		// 	function () {
-		// 		if (e.cancelable) {
-		// 			e.preventDefault();
-		// 		}
-		// 	},
-		// 	{ passive: false }
-		// ); // for scroll lock in Mobile
+		if (!isDrawing) {
+			return;
+		}
 
 		let getX, getY;
-
 		if (type === "mouse") {
 			const { x, y } = getPosMouse(e);
 			getX = x;
@@ -155,6 +234,9 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 	};
 
 	const stopDrawing = (e) => {
+		if (!isDrawing) {
+			return;
+		}
 		if (isDrawing) {
 			ctx.stroke();
 			ctx.closePath();
@@ -210,10 +292,23 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 		ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 	};
 
-	const saveDrawing = () => {
+	const saveDrawing = async () => {
+		await messageApi.open({
+			key,
+			type: "loading",
+			content: "그림 첨부중...",
+			duration: 0.5,
+		});
+
 		const drawingUrl = canvasRef.current.toDataURL("image/png");
 		setMsgDrawing(drawingUrl);
 		setCanvasModal(false);
+
+		await messageApi.open({
+			type: "success",
+			content: "그림이 첨부되었습니다!",
+			duration: 2,
+		});
 	};
 
 	const renderColorPalette = () => {
@@ -242,149 +337,152 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 	};
 
 	return (
-		<Modal
-			show={canvasModal}
-			onExit={closeCanvasModal}
-			centered
-			animation={true}
-			keyboard={false}
-			backdrop="static"
-		>
-			<Modal.Header className="create-modal-header">
-				<Modal.Title className="create-modal-title">그림 그리기</Modal.Title>
-				<CloseButton className="modal-close-btn" onClick={closeCanvasModal} />
-			</Modal.Header>
-			<Modal.Body className="msgDrawing-container">
-				<canvas
-					className="msgDrawing-canvas"
-					ref={canvasRef}
-					onMouseDown={(e) => startDrawing(e, "mouse")}
-					onTouchStart={(e) => startDrawing(e, "touch")}
-					onMouseMove={(e) => onDrawing(e, "mouse")}
-					onTouchMove={(e) => onDrawing(e, "touch")}
-					onMouseUp={stopDrawing}
-					onMouseOut={stopDrawing}
-					onTouchEnd={stopDrawing}
-				/>
-				<Divider className="paper-divider" />
-				<Row align="middle" justify="center">
-					<Col className="msgDrawing-tool-group">
-						<input
-							className="msgDrawing-radio-btn"
-							type="radio"
-							name="toolType"
-							id="pen"
-							value="pen"
-							checked={tool === "pen"}
-							onChange={onToolChange}
-						/>
-						<Tooltip title="펜">
-							<label htmlFor="pen" className="msgDrawing-tool-label">
-								<FontAwesomeIcon icon={faPaintbrush} />
-							</label>
-						</Tooltip>
-						<input
-							className="msgDrawing-radio-btn"
-							type="radio"
-							name="toolType"
-							id="eraser"
-							value="eraser"
-							checked={tool === "eraser"}
-							onChange={onToolChange}
-						/>
-						<Tooltip title="지우개">
-							<label htmlFor="eraser" className="msgDrawing-tool-label">
-								<FontAwesomeIcon icon={faEraser} />
-							</label>
-						</Tooltip>
-					</Col>
-					<Divider type="vertical" className="tool-divider" />
-					<Col className="msgDrawing-tool-group">
-						<div className="msgDrawing-color-container">
-							{renderColorPalette()}
+		<>
+			{contextHolder}
+			<Modal
+				show={canvasModal}
+				onExit={closeCanvasModal}
+				centered
+				animation={true}
+				keyboard={false}
+				backdrop="static"
+			>
+				<Modal.Header className="create-modal-header">
+					<Modal.Title className="create-modal-title">그림 그리기</Modal.Title>
+					<CloseButton className="modal-close-btn" onClick={closeCanvasModal} />
+				</Modal.Header>
+				<Modal.Body className="msgDrawing-container">
+					<canvas
+						className="msgDrawing-canvas"
+						ref={canvasRef}
+						onMouseDown={(e) => startDrawing(e, "mouse")}
+						onTouchStart={(e) => startDrawing(e, "touch")}
+						onMouseMove={(e) => onDrawing(e, "mouse")}
+						onTouchMove={(e) => onDrawing(e, "touch")}
+						onMouseUp={stopDrawing}
+						onMouseOut={stopDrawing}
+						onTouchEnd={stopDrawing}
+					/>
+					<Divider className="paper-divider" />
+					<Row align="middle" justify="center">
+						<Col className="msgDrawing-tool-group">
 							<input
 								className="msgDrawing-radio-btn"
 								type="radio"
-								name="penColor"
-								id={customColor}
-								value={customColor}
-								checked={color === customColor}
-								onChange={onColorChange}
+								name="toolType"
+								id="pen"
+								value="pen"
+								checked={tool === "pen"}
+								onChange={onToolChange}
 							/>
-							<Form.Control
-								className="msgDrawing-radio-colorPicker"
-								type="color"
-								id="customColor"
-								value={customColor}
-								onChange={onCustomColorChange}
+							<Tooltip title="펜">
+								<label htmlFor="pen" className="msgDrawing-tool-label">
+									<FontAwesomeIcon icon={faPaintbrush} />
+								</label>
+							</Tooltip>
+							<input
+								className="msgDrawing-radio-btn"
+								type="radio"
+								name="toolType"
+								id="eraser"
+								value="eraser"
+								checked={tool === "eraser"}
+								onChange={onToolChange}
 							/>
-						</div>
-					</Col>
-					<Divider type="vertical" className="tool-divider" />
-					<Col className="msgDrawing-tool-group">
-						<Row>
-							<Col>
-								<Slider
-									className="msgDrawing-slider"
-									id="toolWidth"
-									min={1}
-									max={100}
-									value={toolWidth}
-									onChange={onToolWidthChange}
+							<Tooltip title="지우개">
+								<label htmlFor="eraser" className="msgDrawing-tool-label">
+									<FontAwesomeIcon icon={faEraser} />
+								</label>
+							</Tooltip>
+						</Col>
+						<Divider type="vertical" className="tool-divider" />
+						<Col className="msgDrawing-tool-group">
+							<div className="msgDrawing-color-container">
+								{renderColorPalette()}
+								<input
+									className="msgDrawing-radio-btn"
+									type="radio"
+									name="penColor"
+									id={customColor}
+									value={customColor}
+									checked={color === customColor}
+									onChange={onColorChange}
 								/>
-							</Col>
-							<Col>
-								<InputNumber
-									className="msgDrawing-slider-number"
-									min={1}
-									max={100}
-									value={toolWidth}
-									onChange={onToolWidthChange}
+								<Form.Control
+									className="msgDrawing-radio-colorPicker"
+									type="color"
+									id="customColor"
+									value={customColor}
+									onChange={onCustomColorChange}
 								/>
-							</Col>
-						</Row>
-					</Col>
-				</Row>
-				<Row align="middle" justify="center">
-					<Col className="msgDrawing-tool-undo-group">
-						<Tooltip title="하나 지우기">
-							<button
-								className="msgDrawing-tool-undo-btn"
-								onClick={undoLastDrawing}
-							>
-								<FontAwesomeIcon id="back" icon={faCircleLeft} />
-								<span>BACK</span>
-							</button>
-						</Tooltip>
-					</Col>
-					<Col className="msgDrawing-tool-undo-group">
-						<Tooltip title="전부 지우기">
-							<button
-								className="msgDrawing-tool-undo-btn"
-								variant="secondary"
-								onClick={resetDrawing}
-							>
-								<FontAwesomeIcon icon={faRotateLeft} />
-								<span>RESET</span>
-							</button>
-						</Tooltip>
-					</Col>
-				</Row>
-			</Modal.Body>
-			<Modal.Footer className="create-modal-footer">
-				<Button id="create-btn" size="lg" onClick={saveDrawing}>
-					그림 첨부하기
-				</Button>
-				<Button
-					id="close-btn"
-					variant="outline-secondary"
-					size="lg"
-					onClick={closeCanvasModal}
-				>
-					닫기
-				</Button>
-			</Modal.Footer>
-		</Modal>
+							</div>
+						</Col>
+						<Divider type="vertical" className="tool-divider" />
+						<Col className="msgDrawing-tool-group">
+							<Row>
+								<Col>
+									<Slider
+										className="msgDrawing-slider"
+										id="toolWidth"
+										min={1}
+										max={100}
+										value={toolWidth}
+										onChange={onToolWidthChange}
+									/>
+								</Col>
+								<Col>
+									<InputNumber
+										className="msgDrawing-slider-number"
+										min={1}
+										max={100}
+										value={toolWidth}
+										onChange={onToolWidthChange}
+									/>
+								</Col>
+							</Row>
+						</Col>
+					</Row>
+					<Row align="middle" justify="center">
+						<Col className="msgDrawing-tool-undo-group">
+							<Tooltip title="하나 지우기">
+								<button
+									className="msgDrawing-tool-undo-btn"
+									onClick={undoLastDrawing}
+								>
+									<FontAwesomeIcon id="back" icon={faCircleLeft} />
+									<span>BACK</span>
+								</button>
+							</Tooltip>
+						</Col>
+						<Col className="msgDrawing-tool-undo-group">
+							<Tooltip title="전부 지우기">
+								<button
+									className="msgDrawing-tool-undo-btn"
+									variant="secondary"
+									onClick={resetDrawing}
+								>
+									<FontAwesomeIcon icon={faRotateLeft} />
+									<span>RESET</span>
+								</button>
+							</Tooltip>
+						</Col>
+					</Row>
+				</Modal.Body>
+				<Modal.Footer className="create-modal-footer">
+					<Button id="create-btn" size="lg" onClick={saveDrawing}>
+						그림 첨부하기
+					</Button>
+					<Button
+						id="close-btn"
+						variant="outline-secondary"
+						size="lg"
+						onClick={closeCanvasModal}
+					>
+						닫기
+					</Button>
+				</Modal.Footer>
+			</Modal>
+		</>
 	);
 }
 
