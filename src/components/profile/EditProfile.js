@@ -35,7 +35,7 @@ function EditProfile({ refreshUser }) {
 			});
 			setIsImgChanged(true);
 		} catch (error) {
-			console.log(error);
+			console.log(error.code);
 		}
 	};
 

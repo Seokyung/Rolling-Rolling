@@ -394,6 +394,14 @@ function CreateMessage() {
 								<Button size="lg" onClick={onMessageSubmit}>
 									메세지 게시하기
 								</Button>
+								<Button
+									id="close-btn"
+									variant="outline-secondary"
+									size="lg"
+									onClick={closeCreateMessage}
+								>
+									닫기
+								</Button>
 							</div>
 						</Form>
 					</div>

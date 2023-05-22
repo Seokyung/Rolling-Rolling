@@ -58,7 +58,7 @@ function Profile({ refreshUser }) {
 				await deleteDoc(paperRef);
 			});
 		} catch (error) {
-			console.log(error.message);
+			console.log(error.code);
 		}
 	};
 

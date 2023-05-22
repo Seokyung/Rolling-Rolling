@@ -280,6 +280,14 @@ function EditPaper() {
 							>
 								수정하기
 							</Button>
+							<Button
+								id="close-btn"
+								variant="outline-secondary"
+								size="lg"
+								onClick={closeEditPaper}
+							>
+								닫기
+							</Button>
 						</div>
 					</Form>
 				</div>
