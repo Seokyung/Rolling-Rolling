@@ -43,7 +43,7 @@ function PaperList() {
 	const debouncedPapersPerPage = useDebounce(papersPerPage, 500);
 
 	const [deleteModal, setDeleteModal] = useState(false);
-	const [paperListId, setPaperListId] = useState("");
+	const [deletePaperId, setDeletePaperId] = useState("");
 
 	useEffect(() => {
 		const q = query(
@@ -198,7 +198,7 @@ function PaperList() {
 
 	const openDeleteModal = (paperId) => {
 		setDeleteModal(true);
-		setPaperListId(paperId);
+		setDeletePaperId(paperId);
 	};
 
 	return (
@@ -225,7 +225,7 @@ function PaperList() {
 							<DeletePaper
 								deleteModal={deleteModal}
 								setDeleteModal={setDeleteModal}
-								paperId={paperListId}
+								paperId={deletePaperId}
 							/>
 						</>
 					) : (

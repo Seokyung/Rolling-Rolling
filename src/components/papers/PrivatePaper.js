@@ -130,18 +130,13 @@ function PrivatePaper() {
 		<>
 			{contextHolder}
 			<div className="paper-wrapper">
-				<div className="paper-container">
-					<div className="privatePaper-header-container">
-						<button
-							className="privatePaper-prev-btn"
-							onClick={closePrivatePaper}
-						>
+				<div className="editPaper-container">
+					<div className="editPaper-header-container">
+						<button onClick={closePrivatePaper}>
 							<FontAwesomeIcon icon={faAngleLeft} />
 						</button>
 						<div className="paper-title-container">
-							<h2 className="privatePaper-title">
-								페이퍼 코드를 입력하세요 🤫
-							</h2>
+							<h2 className="editPaper-title">페이퍼 코드를 입력하세요 🤫</h2>
 						</div>
 					</div>
 					<Form

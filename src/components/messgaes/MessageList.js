@@ -25,20 +25,6 @@ function MessageList() {
 	const [messages, setMessages] = useState([]);
 
 	useEffect(() => {
-		// let q;
-		// if (paperCreatorId === userId) {
-		// 	q = query(
-		// 		collection(dbService, "papers", `${paperId}`, "messages"),
-		// 		orderBy("createdAt", "desc")
-		// 	);
-		// } else {
-		// 	q = query(
-		// 		collection(dbService, "papers", `${paperId}`, "messages"),
-		// 		where("isPrivate", "==", false),
-		// 		orderBy("createdAt", "desc")
-		// 	);
-		// }
-
 		const q = query(
 			collection(dbService, "papers", `${paperId}`, "messages"),
 			orderBy("createdAt", "desc")
@@ -78,21 +64,9 @@ function MessageList() {
 				<div className="messageList-container">
 					{isMessages ? (
 						<Row xs={2} sm={2} md={2} lg={3} xl={3} className="g-4">
-							{messages.map((message) =>
-								message.isPrivate ? (
-									(paperCreatorId === userId ||
-										userId === message.creatorId) && (
-										<Col key={message.id}>
-											<Message
-												msgObj={message}
-												isOwner={
-													paperCreatorId === userId ||
-													userId === message.creatorId
-												}
-											/>
-										</Col>
-									)
-								) : (
+							{messages.map(
+								(message) => (
+									// 페이퍼 주인, 메세지 작성자가 아니면 비밀 메세지 내용만 가리는 코드
 									<Col key={message.id}>
 										<Message
 											msgObj={message}
@@ -103,6 +77,31 @@ function MessageList() {
 										/>
 									</Col>
 								)
+								// 페이퍼 주인, 메세지 작성자가 아니면 비밀 메세지가 아예 안보이게 하는 코드
+								// message.isPrivate ? (
+								// 	(paperCreatorId === userId ||
+								// 		userId === message.creatorId) && (
+								// 		<Col key={message.id}>
+								// 			<Message
+								// 				msgObj={message}
+								// 				isOwner={
+								// 					paperCreatorId === userId ||
+								// 					userId === message.creatorId
+								// 				}
+								// 			/>
+								// 		</Col>
+								// 	)
+								// ) : (
+								// 	<Col key={message.id}>
+								// 		<Message
+								// 			msgObj={message}
+								// 			isOwner={
+								// 				paperCreatorId === userId ||
+								// 				userId === message.creatorId
+								// 			}
+								// 		/>
+								// 	</Col>
+								// )
 							)}
 						</Row>
 					) : (

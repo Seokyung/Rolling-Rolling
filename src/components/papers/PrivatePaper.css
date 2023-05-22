@@ -1,35 +1,3 @@
-.privatePaper-header-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-}
-
-.privatePaper-prev-btn {
-	position: absolute;
-	left: 13%;
-	color: #9f5757;
-	outline: none;
-	appearance: none;
-	border: none;
-	white-space: nowrap;
-	background: none;
-}
-.privatePaper-prev-btn svg {
-	width: 2.5rem;
-	height: 2.5rem;
-}
-.privatePaper-prev-btn:hover {
-	color: #944444;
-}
-
-.privatePaper-title {
-	margin: 0;
-	color: #303030;
-	font-size: 1.8rem;
-	font-weight: 700;
-}
-
 .privatePaper-form-container {
 	display: flex;
 	flex-direction: column;
