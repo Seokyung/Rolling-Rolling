@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DeleteMessage from "./DeleteMessage";
 
 import { Card, Button } from "react-bootstrap";
+import { Image } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import "./Message.css";
@@ -37,17 +38,22 @@ function Message({ msgObj, isOwner }) {
 								{msgObj.msgContent}
 							</Card.Text>
 							{msgObj.msgImg && (
-								<Card.Link
-									href={msgObj.msgImg}
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									<Card.Img
-										src={msgObj.msgImg}
-										className="message-card-img"
-										alt="messageImage"
-									/>
-								</Card.Link>
+								<Image
+									src={msgObj.msgImg}
+									className="message-card-img"
+									alt="messageImage"
+								/>
+								// <Card.Link
+								// 	href={msgObj.msgImg}
+								// 	target="_blank"
+								// 	rel="noopener noreferrer"
+								// >
+								// 	<Card.Img
+								// 		src={msgObj.msgImg}
+								// 		className="message-card-img"
+								// 		alt="messageImage"
+								// 	/>
+								// </Card.Link>
 							)}
 							{isOwner && (
 								<div className="message-delete-btn">
@@ -95,17 +101,11 @@ function Message({ msgObj, isOwner }) {
 							{msgObj.msgContent}
 						</Card.Text>
 						{msgObj.msgImg && (
-							<Card.Link
-								href={msgObj.msgImg}
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<Card.Img
-									src={msgObj.msgImg}
-									className="message-card-img"
-									alt="messageImage"
-								/>
-							</Card.Link>
+							<Image
+								src={msgObj.msgImg}
+								className="message-card-img"
+								alt="messageImage"
+							/>
 						)}
 						{isOwner && (
 							<div className="message-delete-btn">
