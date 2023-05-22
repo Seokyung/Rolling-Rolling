@@ -16,6 +16,7 @@ import { Skeleton } from "antd";
 import {
 	faAngleLeft,
 	faEllipsisVertical,
+	faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -82,49 +83,62 @@ function Paper() {
 		navigate("/");
 	};
 
+	const scrollToTop = () => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	};
+
 	return (
 		<>
 			{init ? (
 				<Skeleton active />
 			) : (
 				<>
-					<div className="paper-wrapper">
-						<div className="paper-container">
-							<div className="paper-header-container">
-								<button onClick={gotoPrevPage}>
-									<FontAwesomeIcon icon={faAngleLeft} />
-								</button>
-								<div className="paper-title-container">
-									<h2 className="paper-title">{paperObj.paperName}</h2>
-									{/* <h2>{paperObj.createdAt}</h2> */}
-								</div>
-								{userId === paperObj.creatorId && (
-									<button onClick={showPaperSettings}>
-										<FontAwesomeIcon icon={faEllipsisVertical} />
+					<>
+						<div className="paper-wrapper">
+							<div className="paper-container">
+								<div className="paper-header-container">
+									<button onClick={gotoPrevPage}>
+										<FontAwesomeIcon icon={faAngleLeft} />
 									</button>
-								)}
+									<div className="paper-title-container">
+										<h2 className="paper-title">{paperObj.paperName}</h2>
+										{/* <h2>{paperObj.createdAt}</h2> */}
+									</div>
+									{userId === paperObj.creatorId && (
+										<button onClick={showPaperSettings}>
+											<FontAwesomeIcon icon={faEllipsisVertical} />
+										</button>
+									)}
+								</div>
+								<MessageList />
+								<SharePaper />
 							</div>
-							<MessageList />
-							<SharePaper />
+							<Button className="paper-creating-btn" onClick={gotoEditPaper}>
+								<FontAwesomeIcon
+									className="paper-creating-btn-icon"
+									icon={faEnvelope}
+								/>
+								메세지 쓰기
+							</Button>
 						</div>
-						<Button className="paper-creating-btn" onClick={gotoEditPaper}>
-							<FontAwesomeIcon
-								className="paper-creating-btn-icon"
-								icon={faEnvelope}
-							/>
-							메세지 쓰기
-						</Button>
-					</div>
-					<PaperSettings
-						paperSettings={paperSettings}
-						setPaperSettings={setPaperSettings}
-						setDeleteModal={setDeleteModal}
-					/>
-					<DeletePaper
-						deleteModal={deleteModal}
-						setDeleteModal={setDeleteModal}
-						paperId={paperId}
-					/>
+						<PaperSettings
+							paperSettings={paperSettings}
+							setPaperSettings={setPaperSettings}
+							setDeleteModal={setDeleteModal}
+						/>
+						<DeletePaper
+							deleteModal={deleteModal}
+							setDeleteModal={setDeleteModal}
+							paperId={paperId}
+						/>
+					</>
+					<Button
+						variant="light"
+						className="scroll-top-btn"
+						onClick={scrollToTop}
+					>
+						<FontAwesomeIcon icon={faChevronUp} />
+					</Button>
 				</>
 			)}
 		</>

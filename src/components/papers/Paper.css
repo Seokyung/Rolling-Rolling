@@ -65,6 +65,24 @@
 	word-break: break-all;
 }
 
+.scroll-top-btn {
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 3;
+	width: 5rem;
+	height: 5rem;
+	right: 5rem;
+	bottom: 5rem;
+	border-radius: 50% !important;
+	box-shadow: 0 0 1rem 0.5rem rgba(150, 143, 142, 0.5);
+}
+.scroll-top-btn svg {
+	width: 50%;
+	height: 50%;
+}
+
 @media screen and (max-width: 1200px) {
 	.paper-wrapper {
 		width: 70%;
