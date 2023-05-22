@@ -56,7 +56,6 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 		}
 
 		setCtx(getCtx);
-		console.log("resize");
 
 		window.addEventListener("resize", handleResize);
 		return () => {
@@ -304,7 +303,8 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 		setMsgDrawing(drawingUrl);
 		setCanvasModal(false);
 
-		await messageApi.open({
+		messageApi.open({
+			key,
 			type: "success",
 			content: "그림이 첨부되었습니다!",
 			duration: 2,

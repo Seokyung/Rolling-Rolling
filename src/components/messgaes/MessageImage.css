@@ -3,6 +3,9 @@
 	padding: 1rem;
 	width: 100%;
 }
+.msgImg-wrapper #msgImgInput {
+	display: none;
+}
 
 .msgImg-container {
 	display: flex;
