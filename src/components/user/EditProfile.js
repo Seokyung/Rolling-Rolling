@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { Divider } from "antd";
 
-function EditProfile({ refreshUser }) {
+function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
 	const userObj = useSelector((state) => state.userReducer);
 	const profileImgRef = useRef(null);
 	const [userName, setUserName] = useState(userObj.displayName);
@@ -106,6 +106,15 @@ function EditProfile({ refreshUser }) {
 						accept="image/*"
 					/>
 					<Button onClick={onUpdateProfileImg}>프로필 사진 변경</Button>
+				</Form.Group>
+				<Divider className="offcanvas-divider" />
+				<Form.Group className="editPaper-edit-btn">
+					<Button variant="outline-secondary" onClick={openLogOutModal}>
+						로그아웃
+					</Button>
+					<Button variant="outline-danger" onClick={openDeleteModal}>
+						회원 탈퇴
+					</Button>
 				</Form.Group>
 			</Form>
 		</div>

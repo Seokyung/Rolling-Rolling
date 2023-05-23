@@ -1,27 +1,41 @@
-.deletePaper-modal-header {
+.delete-modal-header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin: 0 1rem 1rem 1rem;
 }
 
-.deletePaper-modal-title {
+.delete-modal-title {
 	margin: 0 !important;
 	color: #303030 !important;
 	font-size: 2rem !important;
 	font-weight: 700 !important;
 }
 
-.deletePaper-modal-body {
+.delete-modal-body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	padding: 1rem !important;
 }
 
-.deletePaper-modal-body button {
+.delete-modal-body button {
 	font-size: 1.8rem !important;
 }
-.deletePaper-modal-body button#delete-btn {
+.delete-modal-body button#delete-btn {
 	margin-right: 2rem !important;
+}
+
+.delete-modal-title-danger {
+	display: flex;
+	flex-direction: column;
+	margin: 0 !important;
+	color: red !important;
+	font-size: 2.2rem !important;
+	font-weight: 700 !important;
+}
+.delete-modal-title-danger span {
+	padding-top: 0.75rem;
+	color: #595959;
+	font-size: 1.6rem;
 }

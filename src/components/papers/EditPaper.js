@@ -3,16 +3,23 @@ import { authService, dbService } from "api/fbase";
 import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { useParams, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { Form, InputGroup, Button } from "react-bootstrap";
-import { Divider, message } from "antd";
+import { Skeleton, Divider, message, Empty } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import {
+	faAngleLeft,
+	faPenToSquare,
+	faBan,
+} from "@fortawesome/free-solid-svg-icons";
 import "./EditPaper.css";
 
 function EditPaper() {
+	const userId = useSelector((state) => state.userReducer.uid);
 	const { paperId } = useParams();
 	const navigate = useNavigate();
+	const [init, setInit] = useState(true);
 
 	const [paperObj, setPaperObj] = useState({});
 	const [newPaperName, setNewPaperName] = useState("");
@@ -39,6 +46,7 @@ function EditPaper() {
 			(doc) => {
 				const paperDocObj = {
 					paperName: doc.data().paperName,
+					creatorId: doc.data().creatorId,
 					isPrivate: doc.data().isPrivate,
 					paperCode: doc.data().paperCode,
 				};
@@ -50,6 +58,7 @@ function EditPaper() {
 					const docPaperCode = doc.data().paperCode;
 					setNewPaperCode(docPaperCode.split(""));
 				}
+				setInit(false);
 			}
 		);
 		onAuthStateChanged(authService, (user) => {
@@ -192,106 +201,141 @@ function EditPaper() {
 	return (
 		<>
 			{contextHolder}
-			<div className="paper-wrapper">
-				<div className="editPaper-container">
-					<div className="editPaper-header-container">
-						<button onClick={closeEditPaper}>
-							<FontAwesomeIcon icon={faAngleLeft} />
-						</button>
-						<div className="paper-title-container">
-							<h2 className="editPaper-title">
-								<FontAwesomeIcon
-									className="icon-margin-right"
-									icon={faPenToSquare}
-								/>
-								페이퍼 수정
-							</h2>
-						</div>
-					</div>
-					<Form
-						noValidate
-						validated={validated}
-						className="editPaper-form-container"
-					>
-						<Form.Group className="create-form-group">
-							<Form.Label className="create-form-title">페이퍼 이름</Form.Label>
-							<InputGroup hasValidation>
-								<Form.Control
-									className="create-form-input"
-									type="text"
-									required
-									value={newPaperName}
-									ref={paperNameRef}
-									maxLength={maxNameLength}
-									onChange={onPaperNameChange}
-									onKeyDown={(e) => handleInputEnter(e)}
-									placeholder="페이퍼 이름을 입력하세요 :)"
-								/>
-								<Form.Control.Feedback
-									className="create-form-feedback"
-									type="invalid"
+			{init ? (
+				<Skeleton active />
+			) : (
+				<div className="paper-wrapper">
+					<div className="editPaper-container">
+						{userId === paperObj.creatorId ? (
+							<>
+								<div className="editPaper-header-container">
+									<button onClick={closeEditPaper}>
+										<FontAwesomeIcon icon={faAngleLeft} />
+									</button>
+									<div className="paper-title-container">
+										<h2 className="editPaper-title">
+											<FontAwesomeIcon
+												className="icon-margin-right"
+												icon={faPenToSquare}
+											/>
+											페이퍼 수정
+										</h2>
+									</div>
+								</div>
+								<Form
+									noValidate
+									validated={validated}
+									className="editPaper-form-container"
 								>
-									페이퍼 이름을 입력해주세요!
-								</Form.Control.Feedback>
-							</InputGroup>
-							<Form.Text className="create-form-length-text">
-								{currentNameLength} / {maxNameLength}
-							</Form.Text>
-						</Form.Group>
-						<Divider />
-						<Form.Group className="create-form-group">
-							<Form.Check type="checkbox" className="create-form-title">
-								<Form.Check.Input
-									type="checkbox"
-									checked={newIsPrivate}
-									onChange={onPrivateCheckChange}
-								/>
-								<Form.Check.Label>🔒 비공개 페이퍼</Form.Check.Label>
-							</Form.Check>
-							<Form.Text className="create-form-text">
-								페이퍼의 공개여부를 설정해주세요
-							</Form.Text>
-							<Form.Text className="create-form-text-small">
-								(비공개 페이퍼는 코드를 입력해야만 볼 수 있어요🤫 )
-							</Form.Text>
-						</Form.Group>
-						{newIsPrivate && (
-							<Form.Group className="create-form-group">
-								<Form.Group className="create-form-code-group">
-									{renderCodeInputs()}
-									<Form.Control.Feedback
-										className="create-form-feedback"
-										type="invalid"
-									>
-										페이퍼 코드가 올바르지 않습니다!
-									</Form.Control.Feedback>
-								</Form.Group>
-								<Form.Text className="create-form-text">
-									4자리의 숫자로 이루어진 코드를 입력해주세요
-								</Form.Text>
-							</Form.Group>
+									<Form.Group className="create-form-group">
+										<Form.Label className="create-form-title">
+											페이퍼 이름
+										</Form.Label>
+										<InputGroup hasValidation>
+											<Form.Control
+												className="create-form-input"
+												type="text"
+												required
+												value={newPaperName}
+												ref={paperNameRef}
+												maxLength={maxNameLength}
+												onChange={onPaperNameChange}
+												onKeyDown={(e) => handleInputEnter(e)}
+												placeholder="페이퍼 이름을 입력하세요 :)"
+											/>
+											<Form.Control.Feedback
+												className="create-form-feedback"
+												type="invalid"
+											>
+												페이퍼 이름을 입력해주세요!
+											</Form.Control.Feedback>
+										</InputGroup>
+										<Form.Text className="create-form-length-text">
+											{currentNameLength} / {maxNameLength}
+										</Form.Text>
+									</Form.Group>
+									<Divider />
+									<Form.Group className="create-form-group">
+										<Form.Check type="checkbox" className="create-form-title">
+											<Form.Check.Input
+												type="checkbox"
+												checked={newIsPrivate}
+												onChange={onPrivateCheckChange}
+											/>
+											<Form.Check.Label>🔒 비공개 페이퍼</Form.Check.Label>
+										</Form.Check>
+										<Form.Text className="create-form-text">
+											페이퍼의 공개여부를 설정해주세요
+										</Form.Text>
+										<Form.Text className="create-form-text-small">
+											(비공개 페이퍼는 코드를 입력해야만 볼 수 있어요🤫 )
+										</Form.Text>
+									</Form.Group>
+									{newIsPrivate && (
+										<Form.Group className="create-form-group">
+											<Form.Group className="create-form-code-group">
+												{renderCodeInputs()}
+												<Form.Control.Feedback
+													className="create-form-feedback"
+													type="invalid"
+												>
+													페이퍼 코드가 올바르지 않습니다!
+												</Form.Control.Feedback>
+											</Form.Group>
+											<Form.Text className="create-form-text">
+												4자리의 숫자로 이루어진 코드를 입력해주세요
+											</Form.Text>
+										</Form.Group>
+									)}
+									<Divider />
+									<div className="editPaper-edit-btn">
+										<Button
+											size="lg"
+											disabled={
+												isNameValidate && isPrivateValidate && isCodeValidate
+											}
+											onClick={onEditPaper}
+										>
+											수정하기
+										</Button>
+										<Button
+											id="close-btn"
+											variant="outline-secondary"
+											size="lg"
+											onClick={closeEditPaper}
+										>
+											닫기
+										</Button>
+									</div>
+								</Form>
+							</>
+						) : (
+							<Empty
+								image={<FontAwesomeIcon icon={faBan} />}
+								imageStyle={{
+									color: "red",
+								}}
+								description={
+									<div className="empty-container">
+										<span className="empty-text bad-access">
+											잘못된 접근입니다!
+										</span>
+										<span className="empty-text">
+											<Button
+												className="empty-prev-btn"
+												onClick={closeEditPaper}
+											>
+												<FontAwesomeIcon icon={faAngleLeft} />
+												페이퍼로 돌아가기
+											</Button>
+										</span>
+									</div>
+								}
+							/>
 						)}
-						<Divider />
-						<div className="editPaper-edit-btn">
-							<Button
-								size="lg"
-								disabled={isNameValidate && isPrivateValidate && isCodeValidate}
-								onClick={onEditPaper}
-							>
-								수정하기
-							</Button>
-							<Button
-								id="close-btn"
-								variant="outline-secondary"
-								size="lg"
-								onClick={closeEditPaper}
-							>
-								닫기
-							</Button>
-						</div>
-					</Form>
+					</div>
 				</div>
-			</div>
+			)}
 		</>
 	);
 }

@@ -1,108 +1,55 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { authService, dbService, storageService } from "api/fbase";
-import { deleteUser } from "firebase/auth";
-import {
-	doc,
-	deleteDoc,
-	query,
-	collection,
-	getDocs,
-	where,
-} from "firebase/firestore";
-import { ref, deleteObject } from "firebase/storage";
 import { useSelector } from "react-redux";
-import EditProfile from "components/profile/EditProfile";
+import EditProfile from "components/user/EditProfile";
 import LogOutModal from "components/user/LogOutModal";
+import DeleteUser from "components/user/DeleteUser";
 
 import { Button } from "react-bootstrap";
+import { Row, Col, Image } from "antd";
 import "./Profile.css";
 
 function Profile({ refreshUser }) {
 	const userObj = useSelector((state) => state.userReducer);
-	const [logOutModal, setLogOutModal] = useState(false);
 
-	const navigate = useNavigate();
+	const [logOutModal, setLogOutModal] = useState(false);
+	const [deleteModal, setDeleteModal] = useState(false);
 
 	const openLogOutModal = () => {
 		setLogOutModal(true);
 	};
 
-	const deletePaperData = async () => {
-		try {
-			const paperQuery = query(
-				collection(dbService, "papers"),
-				where("creatorId", "==", `${userObj.uid}`)
-			);
-			const paperSnapshot = await getDocs(paperQuery);
-			paperSnapshot.forEach(async (paper) => {
-				const msgQuery = query(
-					collection(dbService, "papers", `${paper.id}`, "messages")
-				);
-				const msgSnapshot = await getDocs(msgQuery);
-				msgSnapshot.forEach(async (msg) => {
-					const msgRef = doc(
-						dbService,
-						"papers",
-						`${paper.id}`,
-						"messages",
-						`${msg.id}`
-					);
-					if (msg.data().msgImg !== "") {
-						const urlRef = ref(storageService, msg.data().msgImg);
-						await deleteObject(urlRef);
-					}
-					await deleteDoc(msgRef);
-				});
-				const paperRef = doc(dbService, "papers", `${paper.id}`);
-				await deleteDoc(paperRef);
-			});
-		} catch (error) {
-			console.log(error.code);
-		}
-	};
-
-	const deleteProfileImgData = async () => {
-		const urlRef = ref(storageService, `${userObj.uid}/profileImg`);
-		await deleteObject(urlRef);
-	};
-
-	const deleteAccount = async () => {
-		const isDelete = window.confirm(
-			`정말로 회원을 탈퇴하시겠습니까?\n회원 탈퇴시 그동안의 데이터도 모두 삭제됩니다.`
-		);
-		if (isDelete) {
-			try {
-				deletePaperData();
-				deleteProfileImgData();
-				alert(
-					`회원 탈퇴 되었습니다!\n\n그동안 Rolling-Rolling을 애용해주셔서 감사합니다 :)\n필요할 땐 언제든 다시 찾아주세요♡`
-				);
-				navigate("/", { replace: true });
-			} catch (error) {
-				alert(error.message);
-			} finally {
-				const user = authService.currentUser;
-				await deleteUser(user);
-			}
-		}
+	const openDeleteModal = () => {
+		setDeleteModal(true);
 	};
 
 	return (
 		<>
-			<div className="home-container">
+			<div className="profile-container">
 				<div className="home-paper-container">
-					<img src={`${userObj.photoURL}`} width="100px" alt="profileImage" />
-					<h2>{userObj.displayName}</h2>
-					<EditProfile refreshUser={refreshUser} />
-					<div className="editPaper-edit-btn">
-						<Button onClick={openLogOutModal}>로그아웃</Button>
-						<Button onClick={deleteAccount}>회원 탈퇴</Button>
-					</div>
+					<Row className="profile-row">
+						<Col span={24} lg={8} className="profile-info-container">
+							<div className="profile-img-container">
+								<Image
+									className="profile-img"
+									src={`${userObj.photoURL}`}
+									alt="profileImage"
+								/>
+							</div>
+							<h2 className="profile-username">{userObj.displayName}</h2>
+						</Col>
+						<Col span={24} lg={16} className="profile-edit-container">
+							<EditProfile
+								refreshUser={refreshUser}
+								openLogOutModal={openLogOutModal}
+								openDeleteModal={openDeleteModal}
+							/>
+						</Col>
+					</Row>
 				</div>
 			</div>
 
 			<LogOutModal logOutModal={logOutModal} setLogOutModal={setLogOutModal} />
+			<DeleteUser deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
 		</>
 	);
 }

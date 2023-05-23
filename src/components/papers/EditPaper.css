@@ -77,3 +77,16 @@
 .editPaper-edit-btn button#close-btn {
 	margin-left: 2rem;
 }
+
+.bad-access {
+	font-size: 2rem;
+	font-weight: 700;
+	color: red;
+}
+.empty-prev-btn {
+	margin-top: 0.5rem;
+	font-size: 1.6rem !important;
+}
+.empty-prev-btn svg {
+	margin-right: 0.75rem;
+}

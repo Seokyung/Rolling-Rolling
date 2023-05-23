@@ -66,13 +66,13 @@ function DeleteMessage({ deleteModal, setDeleteModal, msgObj }) {
 				centered
 				animation={true}
 			>
-				<Modal.Header className="deletePaper-modal-header">
-					<Modal.Title className="deletePaper-modal-title">
+				<Modal.Header className="delete-modal-header">
+					<Modal.Title className="delete-modal-title">
 						메세지를 삭제하시겠습니까?
 					</Modal.Title>
 					<CloseButton className="modal-close-btn" onClick={closeDeleteModal} />
 				</Modal.Header>
-				<Modal.Body className="deletePaper-modal-body">
+				<Modal.Body className="delete-modal-body">
 					<Button
 						id="delete-btn"
 						variant="danger"

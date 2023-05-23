@@ -54,13 +54,13 @@ function LogOutModal({ logOutModal, setLogOutModal }) {
 				centered
 				animation={true}
 			>
-				<Modal.Header className="deletePaper-modal-header">
-					<Modal.Title className="deletePaper-modal-title">
+				<Modal.Header className="delete-modal-header">
+					<Modal.Title className="delete-modal-title">
 						로그아웃 하시겠습니까?
 					</Modal.Title>
 					<CloseButton className="modal-close-btn" onClick={closeLogOutModal} />
 				</Modal.Header>
-				<Modal.Body className="deletePaper-modal-body">
+				<Modal.Body className="delete-modal-body">
 					<Button id="delete-btn" size="lg" onClick={onLogoutClick}>
 						로그아웃하기
 					</Button>
