@@ -16,7 +16,7 @@ function MessageImage({ msgImg, setMsgImg, closeAttach }) {
 		await messageApi.open({
 			key,
 			type: "loading",
-			content: "사진이 첨부중...",
+			content: "사진 첨부중...",
 			duration: 0.5,
 		});
 
@@ -26,7 +26,7 @@ function MessageImage({ msgImg, setMsgImg, closeAttach }) {
 		const imgFile = files[0];
 
 		try {
-			const compressedImg = await imageCompression(imgFile, { maxSizeMB: 0.5 });
+			const compressedImg = await imageCompression(imgFile, { maxSizeMB: 0.1 });
 			const promise = imageCompression.getDataUrlFromFile(compressedImg);
 			promise.then((result) => {
 				setMsgImg(result);

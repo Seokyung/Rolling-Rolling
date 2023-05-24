@@ -41,6 +41,8 @@ function LogOutModal({ logOutModal, setLogOutModal }) {
 				duration: 2,
 			});
 			console.log(error.code);
+		} finally {
+			closeLogOutModal();
 		}
 	};
 

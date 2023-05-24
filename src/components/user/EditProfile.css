@@ -1,0 +1,98 @@
+.editProfile-form-group {
+	display: flex !important;
+	flex-direction: column !important;
+	margin: 1rem;
+}
+
+.editProfile-header-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 1rem;
+}
+
+.editProfile-title {
+	color: #fffdfd;
+	font-size: 2rem;
+	font-weight: 700;
+	margin: 0;
+	padding: 1.5rem 3rem;
+	border-radius: 40px;
+	background-color: #9f5757;
+}
+
+.editProfile-input-group button {
+	font-size: 1.6rem !important;
+}
+.editProfile-profile-img-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.editProfile-input-group #profileImgInput {
+	display: none;
+}
+
+.profile-img-upload-wrapper {
+	position: relative;
+	margin-bottom: 1.5rem;
+}
+
+.profile-img-upload-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 150px;
+	height: 150px;
+}
+.profile-img-upload-container img {
+	font-size: 3rem;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border: 1px #dee2e6 solid;
+	border-radius: 50%;
+}
+.profile-img-upload-container div {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	overflow: hidden;
+	border-radius: 50%;
+	background-color: rgba(0, 0, 0, 0.15);
+}
+.profile-img-upload-container p {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	margin: 0;
+	padding-top: 0.7rem;
+	width: 100%;
+	height: 25%;
+	text-align: center;
+	vertical-align: center;
+	font-size: 1.1rem;
+	color: #fffdfd;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.editProfile-auth-btn {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin-top: 1rem;
+}
+.editProfile-auth-btn button {
+	font-size: 1.4rem !important;
+}
+.editProfile-auth-btn #undo-btn {
+	margin-right: 1rem;
+}
+.editProfile-auth-btn #logout-btn {
+	margin-right: 1rem;
+}

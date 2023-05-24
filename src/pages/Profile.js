@@ -4,8 +4,7 @@ import EditProfile from "components/user/EditProfile";
 import LogOutModal from "components/user/LogOutModal";
 import DeleteUser from "components/user/DeleteUser";
 
-import { Button } from "react-bootstrap";
-import { Row, Col, Image } from "antd";
+import { Row, Col, Image, message } from "antd";
 import "./Profile.css";
 
 function Profile({ refreshUser }) {
@@ -13,6 +12,8 @@ function Profile({ refreshUser }) {
 
 	const [logOutModal, setLogOutModal] = useState(false);
 	const [deleteModal, setDeleteModal] = useState(false);
+
+	const [messageApi, contextHolder] = message.useMessage();
 
 	const openLogOutModal = () => {
 		setLogOutModal(true);
@@ -24,20 +25,23 @@ function Profile({ refreshUser }) {
 
 	return (
 		<>
+			{contextHolder}
 			<div className="profile-container">
 				<div className="home-paper-container">
 					<Row className="profile-row">
-						<Col span={24} lg={8} className="profile-info-container">
-							<div className="profile-img-container">
-								<Image
-									className="profile-img"
-									src={`${userObj.photoURL}`}
-									alt="profileImage"
-								/>
+						<Col span={24} xl={9} className="profile-info-container">
+							<div className="profile-img-wrapper">
+								<div className="profile-img-container">
+									<Image
+										className="profile-img"
+										src={`${userObj.photoURL}`}
+										alt="profileImage"
+									/>
+								</div>
 							</div>
 							<h2 className="profile-username">{userObj.displayName}</h2>
 						</Col>
-						<Col span={24} lg={16} className="profile-edit-container">
+						<Col span={24} xl={15} className="profile-edit-container">
 							<EditProfile
 								refreshUser={refreshUser}
 								openLogOutModal={openLogOutModal}
@@ -48,7 +52,11 @@ function Profile({ refreshUser }) {
 				</div>
 			</div>
 
-			<LogOutModal logOutModal={logOutModal} setLogOutModal={setLogOutModal} />
+			<LogOutModal
+				logOutModal={logOutModal}
+				setLogOutModal={setLogOutModal}
+				messageApi={messageApi}
+			/>
 			<DeleteUser deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
 		</>
 	);

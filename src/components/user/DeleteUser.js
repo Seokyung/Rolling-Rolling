@@ -14,15 +14,11 @@ import {
 import { ref, deleteObject } from "firebase/storage";
 
 import { Modal, Button, CloseButton } from "react-bootstrap";
-import { message } from "antd";
 
-function DeleteUser({ deleteModal, setDeleteModal }) {
+function DeleteUser({ deleteModal, setDeleteModal, messageApi }) {
 	const userObj = useSelector((state) => state.userReducer);
 
 	const navigate = useNavigate();
-
-	const [messageApi, contextHolder] = message.useMessage();
-	const key = "updatable";
 
 	const closeDeleteModal = () => {
 		setDeleteModal(false);
@@ -71,6 +67,13 @@ function DeleteUser({ deleteModal, setDeleteModal }) {
 		try {
 			deletePaperData();
 			deleteProfileImgData();
+			// alert with style
+			// closeDeleteModal();
+			// await messageApi.open({
+			// 	type: "success",
+			// 	content: `회원 탈퇴 되었습니다! 그동안 Rolling-Rolling을 애용해주셔서 감사합니다 :) 필요할 땐 언제든 다시 찾아주세요♡`,
+			// 	duration: 3,
+			// });
 			alert(
 				`회원 탈퇴 되었습니다!\n\n그동안 Rolling-Rolling을 애용해주셔서 감사합니다 :)\n필요할 땐 언제든 다시 찾아주세요♡`
 			);
@@ -84,42 +87,39 @@ function DeleteUser({ deleteModal, setDeleteModal }) {
 	};
 
 	return (
-		<>
-			{contextHolder}
-			<Modal
-				show={deleteModal}
-				onHide={closeDeleteModal}
-				onExit={closeDeleteModal}
-				centered
-				animation={true}
-			>
-				<Modal.Header className="delete-modal-header">
-					<Modal.Title className="delete-modal-title-danger">
-						정말로 회원을 탈퇴하시겠습니까?
-						<span>회원 탈퇴시 그동안의 데이터도 모두 삭제됩니다.</span>
-					</Modal.Title>
-					<CloseButton className="modal-close-btn" onClick={closeDeleteModal} />
-				</Modal.Header>
-				<Modal.Body className="delete-modal-body">
-					<Button
-						id="delete-btn"
-						variant="outline-danger"
-						size="lg"
-						onClick={deleteAccount}
-					>
-						회원 탈퇴
-					</Button>
-					<Button
-						id="close-btn"
-						variant="secondary"
-						size="lg"
-						onClick={closeDeleteModal}
-					>
-						닫기
-					</Button>
-				</Modal.Body>
-			</Modal>
-		</>
+		<Modal
+			show={deleteModal}
+			onHide={closeDeleteModal}
+			onExit={closeDeleteModal}
+			centered
+			animation={true}
+		>
+			<Modal.Header className="delete-modal-header">
+				<Modal.Title className="delete-modal-title-danger">
+					정말로 회원을 탈퇴하시겠습니까?
+					<span>회원 탈퇴시 그동안의 데이터도 모두 삭제됩니다.</span>
+				</Modal.Title>
+				<CloseButton className="modal-close-btn" onClick={closeDeleteModal} />
+			</Modal.Header>
+			<Modal.Body className="delete-modal-body">
+				<Button
+					id="delete-btn"
+					variant="outline-danger"
+					size="lg"
+					onClick={deleteAccount}
+				>
+					회원 탈퇴
+				</Button>
+				<Button
+					id="close-btn"
+					variant="secondary"
+					size="lg"
+					onClick={closeDeleteModal}
+				>
+					닫기
+				</Button>
+			</Modal.Body>
+		</Modal>
 	);
 }
 

@@ -1,25 +1,46 @@
 import React, { useRef, useState } from "react";
 import imageCompression from "browser-image-compression";
-import { authService, storageService } from "api/fbase";
-import { ref, uploadString, getDownloadURL } from "firebase/storage";
-import { updateProfile } from "firebase/auth";
 import { useSelector } from "react-redux";
+import EditUser from "./EditUser";
 
-import { Form, Button } from "react-bootstrap";
-import { Divider } from "antd";
+import { Form, Button, InputGroup } from "react-bootstrap";
+import { Divider, message } from "antd";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import "./EditProfile.css";
 
 function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
 	const userObj = useSelector((state) => state.userReducer);
-	const profileImgRef = useRef(null);
+
 	const [userName, setUserName] = useState(userObj.displayName);
 	const [profileImg, setProfileImg] = useState(userObj.photoURL);
-	const [isImgChanged, setIsImgChanged] = useState(false);
+	const userNameRef = useRef(null);
+
+	const [currentNameLength, setCurrentNameLength] = useState(userName.length);
+	const maxNameLength = 20;
+
+	const [validated, setValidated] = useState(false);
+	const [isNameValidate, setIsNameValidate] = useState(true);
+	const [isImgValidate, setIsImgValidate] = useState(true);
+
+	const [editModal, setEditModal] = useState(false);
+	const [editType, setEditType] = useState("");
+
+	const [messageApi, contextHolder] = message.useMessage();
 
 	const onUserNameChange = (e) => {
 		const {
 			target: { value },
 		} = e;
-		setUserName(value);
+		if (value.length <= maxNameLength) {
+			setUserName(value);
+			setCurrentNameLength(value.length);
+		}
+		if (value === userObj.displayName) {
+			setIsNameValidate(true);
+		} else {
+			setIsNameValidate(false);
+		}
 	};
 
 	const onProfileImgChange = async (e) => {
@@ -28,96 +49,154 @@ function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
 		} = e;
 		const imgFile = files[0];
 		try {
-			const compressedImg = await imageCompression(imgFile, { maxSizeMB: 0.5 });
+			const compressedImg = await imageCompression(imgFile, { maxSizeMB: 0.1 });
 			const promise = imageCompression.getDataUrlFromFile(compressedImg);
 			promise.then((result) => {
 				setProfileImg(result);
 			});
-			setIsImgChanged(true);
+			setIsImgValidate(false);
 		} catch (error) {
 			console.log(error.code);
 		}
 	};
 
+	const undoChanges = () => {
+		setUserName(userObj.displayName);
+		setProfileImg(userObj.photoURL);
+
+		setIsNameValidate(true);
+		setIsImgValidate(true);
+	};
+
+	const openEditModal = (info) => {
+		setEditType(info);
+		setEditModal(true);
+	};
+
 	const onUpdateUserName = async (e) => {
 		e.preventDefault();
 		if (userName === "") {
-			alert("이름을 작성해주세요!");
+			userNameRef.current.focus();
+			setValidated(true);
 			return;
 		}
 		if (userName !== userObj.displayName) {
-			const isEdit = window.confirm("이름을 변경하시겠습니까?");
-			if (isEdit) {
-				await updateProfile(authService.currentUser, {
-					displayName: userName,
-				});
-				alert("이름이 변경되었습니다!");
-				refreshUser();
-			}
+			openEditModal("userName");
 		}
 	};
 
 	const onUpdateProfileImg = async (e) => {
 		e.preventDefault();
 		if (profileImg === "") {
-			alert("사진을 선택해주세요!");
 			return;
 		}
-		if (isImgChanged) {
-			const isEdit = window.confirm("프로필 사진을 변경하시겠습니까?");
-			if (isEdit) {
-				const imgRef = ref(storageService, `${userObj.uid}/profileImg`);
-				await uploadString(imgRef, profileImg, "data_url");
-				const profileImgUrl = await getDownloadURL(imgRef);
-				await updateProfile(authService.currentUser, {
-					photoURL: profileImgUrl,
-				});
-				alert("프로필 사진이 변경되었습니다!");
-				refreshUser();
-			}
-		}
+		openEditModal("profileImg");
 	};
 
 	return (
-		<div>
-			<Form className="editPaper-form-container">
-				<Form.Group className="create-form-group">
+		<>
+			{contextHolder}
+			<Form
+				noValidate
+				validated={validated}
+				className="editPaper-form-container"
+			>
+				<div className="editProfile-header-container">
+					<h2 className="editProfile-title">프로필 수정</h2>
+				</div>
+				<Divider className="offcanvas-divider" />
+				<Form.Group className="editProfile-form-group">
+					<div className="editProfile-input-group editProfile-profile-img-container">
+						<div className="profile-img-upload-wrapper">
+							<div className="profile-img-upload-container">
+								<img src={profileImg} alt="editProfileImage" />
+								<label htmlFor="profileImgInput">
+									<div>
+										<p>
+											<FontAwesomeIcon icon={faPenToSquare} /> 사진 선택
+										</p>
+									</div>
+								</label>
+							</div>
+						</div>
+						<Form.Control
+							type="file"
+							id="profileImgInput"
+							onChange={onProfileImgChange}
+							accept="image/*"
+						/>
+						<Button disabled={isImgValidate} onClick={onUpdateProfileImg}>
+							프로필 사진 변경
+						</Button>
+					</div>
+				</Form.Group>
+				<Divider className="offcanvas-divider" />
+				<Form.Group className="editProfile-form-group">
 					<Form.Label className="create-form-title">이름 변경하기</Form.Label>
-					<Form.Control
-						type="text"
-						className="create-form-input"
-						value={userName}
-						onChange={onUserNameChange}
-						placeholder={userObj.displayName}
-					/>
-					<Button onClick={onUpdateUserName}>이름 변경</Button>
+					<InputGroup hasValidation className="editProfile-input-group">
+						<Form.Control
+							type="text"
+							className="create-form-input"
+							required
+							value={userName}
+							ref={userNameRef}
+							maxLength={maxNameLength}
+							onChange={onUserNameChange}
+							placeholder={userObj.displayName}
+						/>
+						<Button disabled={isNameValidate} onClick={onUpdateUserName}>
+							이름 변경
+						</Button>
+						<Form.Control.Feedback
+							className="create-form-feedback"
+							type="invalid"
+						>
+							이름을 입력해주세요!
+						</Form.Control.Feedback>
+					</InputGroup>
+					<Form.Text className="create-form-length-text">
+						{currentNameLength} / {maxNameLength}
+					</Form.Text>
 				</Form.Group>
 				<Divider className="offcanvas-divider" />
-				<Form.Group className="create-form-group">
-					<Form.Label className="create-form-title">
-						프로필 사진 변경하기
-					</Form.Label>
-					<img src={profileImg} width="100px" alt="editProfileImage" />
-					<Form.Control
-						type="file"
-						id="profileImgInput"
-						ref={profileImgRef}
-						onChange={onProfileImgChange}
-						accept="image/*"
-					/>
-					<Button onClick={onUpdateProfileImg}>프로필 사진 변경</Button>
-				</Form.Group>
-				<Divider className="offcanvas-divider" />
-				<Form.Group className="editPaper-edit-btn">
-					<Button variant="outline-secondary" onClick={openLogOutModal}>
+				<Form.Group className="editProfile-auth-btn">
+					<Button
+						id="undo-btn"
+						variant="secondary"
+						disabled={!(!isNameValidate || !isImgValidate)}
+						onClick={undoChanges}
+					>
+						변경사항 되돌리기
+					</Button>
+					<Button
+						id="logout-btn"
+						variant="outline-secondary"
+						onClick={openLogOutModal}
+					>
 						로그아웃
 					</Button>
-					<Button variant="outline-danger" onClick={openDeleteModal}>
+					<Button
+						id="withdraw-btn"
+						variant="outline-danger"
+						onClick={openDeleteModal}
+					>
 						회원 탈퇴
 					</Button>
 				</Form.Group>
 			</Form>
-		</div>
+
+			<EditUser
+				editModal={editModal}
+				setEditModal={setEditModal}
+				editType={editType}
+				userName={userName}
+				profileImg={profileImg}
+				setIsNameValidate={setIsNameValidate}
+				setIsImgValidate={setIsImgValidate}
+				messageApi={messageApi}
+				refreshUser={refreshUser}
+			/>
+		</>
 	);
 }
 

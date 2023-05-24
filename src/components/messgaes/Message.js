@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import "./Message.css";
 
-function Message({ msgObj, isOwner }) {
+function Message({ msgObj, isOwner, messageApi }) {
 	const [deleteModal, setDeleteModal] = useState(false);
 	const [deleteMsgObj, setDeleteMsgObj] = useState("");
 
@@ -128,6 +128,7 @@ function Message({ msgObj, isOwner }) {
 				deleteModal={deleteModal}
 				setDeleteModal={setDeleteModal}
 				msgObj={deleteMsgObj}
+				messageApi={messageApi}
 			/>
 		</>
 	);

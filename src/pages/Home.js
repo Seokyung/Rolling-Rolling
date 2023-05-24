@@ -3,6 +3,7 @@ import CreatePaper from "components/papers/CreatePaper";
 import PaperList from "components/papers/PaperList";
 
 import { Button } from "react-bootstrap";
+import { message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import "./Home.css";
@@ -10,12 +11,15 @@ import "./Home.css";
 function Home() {
 	const [paperModal, setPaperModal] = useState(false);
 
+	const [messageApi, contextHolder] = message.useMessage();
+
 	const openPaperModal = () => {
 		setPaperModal(true);
 	};
 
 	return (
 		<>
+			{contextHolder}
 			<div className="home-container">
 				<div className="home-paper-container">
 					<PaperList />
@@ -28,7 +32,11 @@ function Home() {
 					페이퍼 만들기
 				</Button>
 			</div>
-			<CreatePaper paperModal={paperModal} setPaperModal={setPaperModal} />
+			<CreatePaper
+				paperModal={paperModal}
+				setPaperModal={setPaperModal}
+				messageApi={messageApi}
+			/>
 		</>
 	);
 }

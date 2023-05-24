@@ -81,7 +81,7 @@ function Navigation() {
 							className="navigation-offcanvas-nav-link"
 							onClick={closeMenu}
 						>
-							<FontAwesomeIcon icon={faUser} />내 정보
+							<FontAwesomeIcon icon={faUser} />내 프로필
 						</Link>
 					</Nav>
 					<Divider className="offcanvas-divider" />

@@ -4,10 +4,9 @@ import { collection, doc, setDoc } from "firebase/firestore";
 import { useSelector } from "react-redux";
 
 import { Modal, Button, Form, CloseButton } from "react-bootstrap";
-import { message } from "antd";
 import "./CreatePaper.css";
 
-function CreatePaper({ paperModal, setPaperModal }) {
+function CreatePaper({ paperModal, setPaperModal, messageApi }) {
 	const userId = useSelector((state) => state.userReducer.uid);
 	const [paperName, setPaperName] = useState("");
 	const [paperCode, setPaperCode] = useState(Array(4).fill(""));
@@ -20,7 +19,6 @@ function CreatePaper({ paperModal, setPaperModal }) {
 
 	const [validated, setValidated] = useState(false);
 
-	const [messageApi, contextHolder] = message.useMessage();
 	const key = "updatable";
 
 	const closePaperModal = () => {
@@ -178,102 +176,98 @@ function CreatePaper({ paperModal, setPaperModal }) {
 				duration: 2,
 			});
 			console.log(error.code);
+		} finally {
+			closePaperModal();
 		}
-		closePaperModal();
 	};
 
 	return (
-		<>
-			{contextHolder}
-			<Modal
-				show={paperModal}
-				onExit={closePaperModal}
-				centered
-				animation={true}
-				keyboard={false}
-				backdrop="static"
-			>
-				<Modal.Header className="create-modal-header">
-					<Modal.Title className="create-modal-title">
-						페이퍼 만들기
-					</Modal.Title>
-					<CloseButton className="modal-close-btn" onClick={closePaperModal} />
-				</Modal.Header>
-				<Modal.Body>
-					<Form noValidate validated={validated}>
-						<Form.Group className="create-form-group">
-							<Form.Label className="create-form-title">페이퍼 이름</Form.Label>
-							<Form.Control
-								className="create-form-input"
-								required
-								autoFocus
-								type="text"
-								value={paperName}
-								ref={paperNameRef}
-								maxLength={maxNameLength}
-								onChange={onPaperNameChange}
-								onKeyDown={(e) => handleInputEnter(e)}
-								placeholder="페이퍼 이름을 입력해주세요 :)"
+		<Modal
+			show={paperModal}
+			onExit={closePaperModal}
+			centered
+			animation={true}
+			keyboard={false}
+			backdrop="static"
+		>
+			<Modal.Header className="create-modal-header">
+				<Modal.Title className="create-modal-title">페이퍼 만들기</Modal.Title>
+				<CloseButton className="modal-close-btn" onClick={closePaperModal} />
+			</Modal.Header>
+			<Modal.Body>
+				<Form noValidate validated={validated}>
+					<Form.Group className="create-form-group">
+						<Form.Label className="create-form-title">페이퍼 이름</Form.Label>
+						<Form.Control
+							className="create-form-input"
+							required
+							autoFocus
+							type="text"
+							value={paperName}
+							ref={paperNameRef}
+							maxLength={maxNameLength}
+							onChange={onPaperNameChange}
+							onKeyDown={(e) => handleInputEnter(e)}
+							placeholder="페이퍼 이름을 입력해주세요 :)"
+						/>
+						<Form.Control.Feedback
+							className="create-form-feedback"
+							type="invalid"
+						>
+							페이퍼 이름을 입력해주세요!
+						</Form.Control.Feedback>
+						<Form.Text className="create-form-length-text">
+							{currentNameLength} / {maxNameLength}
+						</Form.Text>
+					</Form.Group>
+					<Form.Group className="create-form-group">
+						<Form.Check type="checkbox" className="create-form-title">
+							<Form.Check.Input
+								type="checkbox"
+								checked={isPrivate}
+								onChange={onPrivateCheckChange}
 							/>
-							<Form.Control.Feedback
-								className="create-form-feedback"
-								type="invalid"
-							>
-								페이퍼 이름을 입력해주세요!
-							</Form.Control.Feedback>
-							<Form.Text className="create-form-length-text">
-								{currentNameLength} / {maxNameLength}
-							</Form.Text>
-						</Form.Group>
+							<Form.Check.Label>🔒 비공개 페이퍼</Form.Check.Label>
+						</Form.Check>
+						<Form.Text className="create-form-text">
+							페이퍼의 공개여부를 설정해주세요
+						</Form.Text>
+						<Form.Text className="create-form-text-small">
+							(비공개 페이퍼는 코드를 입력해야만 볼 수 있어요🤫 )
+						</Form.Text>
+					</Form.Group>
+					{isPrivate && (
 						<Form.Group className="create-form-group">
-							<Form.Check type="checkbox" className="create-form-title">
-								<Form.Check.Input
-									type="checkbox"
-									checked={isPrivate}
-									onChange={onPrivateCheckChange}
-								/>
-								<Form.Check.Label>🔒 비공개 페이퍼</Form.Check.Label>
-							</Form.Check>
+							<Form.Group className="create-form-code-group">
+								{renderCodeInputs()}
+								<Form.Control.Feedback
+									className="create-form-feedback"
+									type="invalid"
+								>
+									페이퍼 코드가 올바르지 않습니다!
+								</Form.Control.Feedback>
+							</Form.Group>
 							<Form.Text className="create-form-text">
-								페이퍼의 공개여부를 설정해주세요
-							</Form.Text>
-							<Form.Text className="create-form-text-small">
-								(비공개 페이퍼는 코드를 입력해야만 볼 수 있어요🤫 )
+								4자리의 숫자로 이루어진 코드를 입력해주세요
 							</Form.Text>
 						</Form.Group>
-						{isPrivate && (
-							<Form.Group className="create-form-group">
-								<Form.Group className="create-form-code-group">
-									{renderCodeInputs()}
-									<Form.Control.Feedback
-										className="create-form-feedback"
-										type="invalid"
-									>
-										페이퍼 코드가 올바르지 않습니다!
-									</Form.Control.Feedback>
-								</Form.Group>
-								<Form.Text className="create-form-text">
-									4자리의 숫자로 이루어진 코드를 입력해주세요
-								</Form.Text>
-							</Form.Group>
-						)}
-					</Form>
-				</Modal.Body>
-				<Modal.Footer className="create-modal-footer">
-					<Button id="create-btn" size="lg" onClick={onCreatePaper}>
-						페이퍼 만들기
-					</Button>
-					<Button
-						id="close-btn"
-						variant="outline-secondary"
-						size="lg"
-						onClick={closePaperModal}
-					>
-						닫기
-					</Button>
-				</Modal.Footer>
-			</Modal>
-		</>
+					)}
+				</Form>
+			</Modal.Body>
+			<Modal.Footer className="create-modal-footer">
+				<Button id="create-btn" size="lg" onClick={onCreatePaper}>
+					페이퍼 만들기
+				</Button>
+				<Button
+					id="close-btn"
+					variant="outline-secondary"
+					size="lg"
+					onClick={closePaperModal}
+				>
+					닫기
+				</Button>
+			</Modal.Footer>
+		</Modal>
 	);
 }
 

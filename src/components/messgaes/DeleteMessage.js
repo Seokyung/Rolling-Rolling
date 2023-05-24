@@ -6,8 +6,7 @@ import { ref, deleteObject } from "firebase/storage";
 import { Modal, Button, CloseButton } from "react-bootstrap";
 import { message } from "antd";
 
-function DeleteMessage({ deleteModal, setDeleteModal, msgObj }) {
-	const [messageApi, contextHolder] = message.useMessage();
+function DeleteMessage({ deleteModal, setDeleteModal, msgObj, messageApi }) {
 	const key = "updatable";
 
 	const closeDeleteModal = () => {
@@ -58,7 +57,7 @@ function DeleteMessage({ deleteModal, setDeleteModal, msgObj }) {
 
 	return (
 		<>
-			{contextHolder}
+			{/* {contextHolder} */}
 			<Modal
 				show={deleteModal}
 				onHide={closeDeleteModal}
