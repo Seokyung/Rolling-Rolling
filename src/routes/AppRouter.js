@@ -1,11 +1,5 @@
 import React from "react";
-import {
-	HashRouter,
-	Routes,
-	Route,
-	Navigate,
-	BrowserRouter,
-} from "react-router-dom";
+import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import Navigation from "routes/Navigation";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
