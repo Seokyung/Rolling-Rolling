@@ -11,7 +11,8 @@ import rootReducer from "modules";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const store = legacy_createStore(rootReducer, composeWithDevTools());
+// const store = legacy_createStore(rootReducer, composeWithDevTools());
+const store = legacy_createStore(rootReducer);
 
 root.render(
 	<Provider store={store}>

@@ -12,6 +12,9 @@
 }
 
 .editProfile-title {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	color: #fffdfd;
 	font-size: 2rem;
 	font-weight: 700;
@@ -19,6 +22,9 @@
 	padding: 1.5rem 3rem;
 	border-radius: 40px;
 	background-color: #9f5757;
+}
+.editProfile-title svg {
+	margin-right: 0.75rem;
 }
 
 .editProfile-input-group button {
@@ -81,6 +87,16 @@
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
+.editProfile-undo-btn {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin: 1rem 0;
+}
+.editProfile-undo-btn button {
+	font-size: 1.6rem !important;
+}
+
 .editProfile-auth-btn {
 	display: flex;
 	justify-content: flex-end;
@@ -88,10 +104,10 @@
 	margin-top: 1rem;
 }
 .editProfile-auth-btn button {
-	font-size: 1.4rem !important;
+	font-size: 1.3rem !important;
 }
 .editProfile-auth-btn #undo-btn {
-	margin-right: 1rem;
+	width: auto;
 }
 .editProfile-auth-btn #logout-btn {
 	margin-right: 1rem;

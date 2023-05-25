@@ -6,7 +6,11 @@ import EditUser from "./EditUser";
 import { Form, Button, InputGroup } from "react-bootstrap";
 import { Divider, message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import {
+	faUserPen,
+	faPenToSquare,
+	faClockRotateLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import "./EditProfile.css";
 
 function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
@@ -102,7 +106,9 @@ function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
 				className="editPaper-form-container"
 			>
 				<div className="editProfile-header-container">
-					<h2 className="editProfile-title">프로필 수정</h2>
+					<h2 className="editProfile-title">
+						<FontAwesomeIcon icon={faUserPen} /> 프로필 수정
+					</h2>
 				</div>
 				<Divider className="offcanvas-divider" />
 				<Form.Group className="editProfile-form-group">
@@ -159,15 +165,17 @@ function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
 					</Form.Text>
 				</Form.Group>
 				<Divider className="offcanvas-divider" />
-				<Form.Group className="editProfile-auth-btn">
+				<Form.Group className="editProfile-undo-btn">
 					<Button
-						id="undo-btn"
 						variant="secondary"
 						disabled={!(!isNameValidate || !isImgValidate)}
 						onClick={undoChanges}
 					>
-						변경사항 되돌리기
+						<FontAwesomeIcon icon={faClockRotateLeft} /> 변경사항 되돌리기
 					</Button>
+				</Form.Group>
+				<Divider className="offcanvas-divider" />
+				<Form.Group className="editProfile-auth-btn">
 					<Button
 						id="logout-btn"
 						variant="outline-secondary"
