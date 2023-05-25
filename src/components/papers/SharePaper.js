@@ -49,7 +49,7 @@ function SharePaper() {
 								type="text"
 								readOnly
 								ref={paperUrlRef}
-								value={`http://localhost:3000/paper/${paperId}`}
+								value={`https://rolling-rolling.web.app/paper/${paperId}`}
 							/>
 							<Tooltip title="링크 복사">
 								<Button variant="secondary" onClick={onShareClick}>
