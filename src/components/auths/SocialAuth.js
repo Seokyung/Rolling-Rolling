@@ -1,6 +1,8 @@
 import React from "react";
 import { authService } from "api/fbase";
 import {
+	setPersistence,
+	inMemoryPersistence,
 	signInWithPopup,
 	GoogleAuthProvider,
 	FacebookAuthProvider,
@@ -29,9 +31,12 @@ function SocialAuth({ onLoginMethodChange }) {
 			provider = new GithubAuthProvider();
 		}
 		try {
-			await signInWithPopup(authService, provider);
+			setPersistence(authService, inMemoryPersistence).then(() => {
+				return signInWithPopup(authService, provider);
+			});
+			// await signInWithPopup(authService, provider);
 		} catch (error) {
-			console.log(error.message);
+			console.log(error.code);
 		}
 	};
 

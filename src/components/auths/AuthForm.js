@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import { authService } from "api/fbase";
 import {
+	setPersistence,
+	browserSessionPersistence,
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 } from "firebase/auth";
@@ -104,7 +106,10 @@ function AuthForm({ onLoginMethodChange }) {
 			if (newAccount) {
 				await createUserWithEmailAndPassword(authService, email, password);
 			} else {
-				await signInWithEmailAndPassword(authService, email, password);
+				setPersistence(authService, browserSessionPersistence).then(() => {
+					return signInWithEmailAndPassword(authService, email, password);
+				});
+				// await signInWithEmailAndPassword(authService, email, password);
 			}
 			setValidated(false);
 			setEmail("");
