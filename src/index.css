@@ -51,11 +51,11 @@ body,
 	height: 1.5rem;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 992px) {
 	html,
 	body,
 	#root,
 	#root > div {
-		font-size: 90%;
+		font-size: 93.75%;
 	}
 }
