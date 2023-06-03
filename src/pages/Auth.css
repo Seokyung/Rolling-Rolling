@@ -24,13 +24,13 @@
 	background-color: #fffdfd;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 992px) {
 	.auth-container {
 		flex-direction: column;
 		justify-content: flex-start;
-		width: 80%;
+		width: 90%;
 		height: auto;
-		margin: 20rem auto;
+		margin: 15rem auto;
 	}
 
 	.auth-logo-container {
@@ -42,18 +42,18 @@
 		flex-direction: column;
 		justify-content: center;
 		width: 100%;
-		max-width: 700px;
+		max-width: 800px;
 		margin-top: 5rem;
 	}
 
 	.login-container {
-		padding: 5rem;
+		padding: 4rem 3.5rem;
 		border-radius: 40px;
 		min-width: 400px;
 	}
 }
 
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 993px) {
 	.auth-container {
 		flex-direction: row;
 		justify-content: center;

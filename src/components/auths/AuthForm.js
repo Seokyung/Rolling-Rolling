@@ -122,6 +122,7 @@ function AuthForm({ onLoginMethodChange }) {
 				content: `${
 					newAccount ? "회원가입이 완료되었습니다!" : "로그인되었습니다!"
 				}`,
+				className: "alert-message-container",
 				duration: 2,
 			});
 		} catch (error) {
@@ -129,6 +130,7 @@ function AuthForm({ onLoginMethodChange }) {
 				key,
 				type: "error",
 				content: `${newAccount ? "회원가입" : "로그인"}에 실패하였습니다 😢`,
+				className: "alert-message-container",
 				duration: 2,
 			});
 			if (newAccount) {
@@ -162,7 +164,6 @@ function AuthForm({ onLoginMethodChange }) {
 					<Form.Label className="authForm-form-label">이메일</Form.Label>
 					<Form.Control
 						className="authForm-input-text"
-						autoFocus
 						required
 						type="email"
 						id="email"
@@ -185,6 +186,7 @@ function AuthForm({ onLoginMethodChange }) {
 						className="authForm-input-pw"
 						required
 						type="password"
+						id="password"
 						name="password"
 						value={password}
 						ref={pwRef}
@@ -209,6 +211,7 @@ function AuthForm({ onLoginMethodChange }) {
 							isInvalid={isPwInValid}
 							isValid={isPwValid}
 							type="password"
+							id="checkPassword"
 							name="checkPassword"
 							value={checkPassword}
 							ref={checkPwRef}

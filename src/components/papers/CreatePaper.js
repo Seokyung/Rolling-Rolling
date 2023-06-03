@@ -135,6 +135,7 @@ function CreatePaper({ paperModal, setPaperModal, messageApi }) {
 			key,
 			type: "loading",
 			content: "페이퍼 생성중...",
+			className: "alert-message-container",
 			duration: 0.5,
 		});
 
@@ -166,6 +167,7 @@ function CreatePaper({ paperModal, setPaperModal, messageApi }) {
 				key,
 				type: "success",
 				content: `${paperName} 페이퍼가 생성되었습니다!`,
+				className: "alert-message-container",
 				duration: 2,
 			});
 		} catch (error) {
@@ -173,6 +175,7 @@ function CreatePaper({ paperModal, setPaperModal, messageApi }) {
 				key,
 				type: "error",
 				content: "페이퍼 생성에 실패하였습니다 😢",
+				className: "alert-message-container",
 				duration: 2,
 			});
 			console.log(error.code);

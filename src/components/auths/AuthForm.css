@@ -27,11 +27,11 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+	padding: 2rem;
 }
 
 .authForm-form-label {
 	font-size: 1.8rem;
-	font-weight: 700;
 	color: #9f5757;
 }
 
@@ -85,11 +85,7 @@
 	text-decoration: underline;
 }
 
-@media screen and (max-width: 1024px) {
-	.authForm-form-container {
-		padding: 3rem 3rem 2rem 3rem;
-	}
-
+@media screen and (max-width: 992px) {
 	.authForm-form-group {
 		margin-bottom: 2rem;
 	}
@@ -101,13 +97,13 @@
 	.authForm-input-text {
 		font-size: 2.3rem !important;
 	}
+
+	.authForm-input-pw {
+		font-size: 2.3rem !important;
+	}
 }
 
-@media screen and (min-width: 1025px) {
-	.authForm-form-container {
-		padding: 2rem;
-	}
-
+@media screen and (min-width: 993px) {
 	.authForm-form-group {
 		margin-bottom: 1.5rem;
 	}

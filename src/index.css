@@ -43,12 +43,13 @@ body,
 
 .alert-message-container {
 	margin-top: 3vh;
-	font-size: 1.5rem;
+	font-size: 1.8rem;
 }
 
 .alert-message-container svg {
-	width: 1.5rem;
-	height: 1.5rem;
+	width: 1.8rem;
+	height: 1.8rem;
+	margin-right: 0.35rem;
 }
 
 @media screen and (max-width: 992px) {
@@ -57,5 +58,6 @@ body,
 	#root,
 	#root > div {
 		font-size: 93.75%;
+		/* font-size: 100%; */
 	}
 }

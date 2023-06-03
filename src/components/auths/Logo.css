@@ -10,13 +10,16 @@
 	height: auto;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 992px) {
 	.logo-container {
 		justify-content: center;
 	}
+	.logo-container img {
+		max-width: 600px;
+	}
 }
 
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 993px) {
 	.logo-container {
 		justify-content: flex-end;
 	}
