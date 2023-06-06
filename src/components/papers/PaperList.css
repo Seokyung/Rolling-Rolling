@@ -1,8 +1,8 @@
 .paperList-card-container {
 	display: flex !important;
 	flex-direction: column !important;
-	margin: 0.5rem 0.5rem 2.5rem 0.5rem !important;
-	padding: 2rem !important;
+	margin: 1.5rem 0.5rem !important;
+	padding: 1.5rem !important;
 	background-color: #fffdfd !important;
 	border-radius: 30px !important;
 	border: none !important;
@@ -26,7 +26,6 @@
 	margin-bottom: 1rem;
 	color: #944444;
 	font-size: 2.2rem;
-	font-weight: 700;
 }
 .private-icon {
 	margin-right: 0.5rem;
@@ -40,11 +39,11 @@
 
 .paperList-card-date {
 	color: #454545;
-	font-size: 1.4rem;
+	font-size: 1.6rem;
 }
 
 .paperList-card-delete-btn {
-	font-size: 1.5rem !important;
+	font-size: 1.8rem !important;
 }
 
 .empty-container {
@@ -76,14 +75,13 @@
 }
 
 .paperList-pagination-item a {
-	font-size: 1.4rem;
+	font-size: 1.6rem;
 	color: #303030;
 	border: none;
 }
 
 .paperList-pagination-item a:hover,
 .paperList-pagination-item a:active {
-	font-weight: 700;
 	color: #9f5757;
 }
 

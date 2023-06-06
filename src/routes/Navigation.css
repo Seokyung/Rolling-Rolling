@@ -40,7 +40,8 @@
 }
 
 .navigation-menu svg {
-	font-size: 2.2rem;
+	width: 2.5rem;
+	height: 2.5rem;
 	color: #595959;
 }
 .navigation-menu svg:hover {

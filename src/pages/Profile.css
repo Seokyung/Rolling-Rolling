@@ -3,7 +3,7 @@
 	flex-direction: column;
 	width: 80%;
 	min-width: 350px;
-	max-width: 1200px;
+	max-width: 1000px;
 	height: auto;
 	margin: 0 auto;
 	padding-top: 13rem;
@@ -52,7 +52,6 @@
 	padding: 1.8rem 3rem;
 	color: #fffdfd;
 	font-size: 2.5rem;
-	font-weight: 700;
 	word-break: break-word;
 	border-radius: 40px;
 	background-color: #944444;
@@ -84,8 +83,8 @@
 	}
 
 	.profile-img {
-		width: 250px !important;
-		height: 250px !important;
+		width: 350px !important;
+		height: 350px !important;
 	}
 
 	.profile-edit-container {

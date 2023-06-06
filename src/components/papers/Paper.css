@@ -13,7 +13,7 @@
 	width: 100%;
 	height: auto;
 	margin-bottom: 5rem;
-	padding: 3rem;
+	padding: 3rem 2rem;
 	border-radius: 40px;
 	background-color: #e4bab5;
 	box-shadow: 0.5rem 0.5rem 0.5rem #968f8e;
@@ -60,7 +60,6 @@
 	background-color: #fffdfd;
 	color: #944444;
 	font-size: 2.4rem;
-	font-weight: 700;
 	text-align: center;
 	word-break: break-all;
 }
@@ -76,7 +75,7 @@
 	right: 5rem;
 	bottom: 5rem;
 	border-radius: 50% !important;
-	box-shadow: 0 0 1rem 0.5rem rgba(150, 143, 142, 0.5);
+	box-shadow: 0 0 0.75rem 0.25rem rgba(150, 143, 142, 0.35);
 }
 .scroll-top-btn svg {
 	width: 50%;
@@ -92,6 +91,6 @@
 
 @media screen and (min-width: 1400px) {
 	.paper-wrapper {
-		max-width: 1200px;
+		max-width: 1000px;
 	}
 }

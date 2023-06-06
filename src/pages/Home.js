@@ -5,7 +5,7 @@ import PaperList from "components/papers/PaperList";
 import { Button } from "react-bootstrap";
 import { message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { faScroll, faFileCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import "./Home.css";
 
 function Home() {
@@ -22,6 +22,9 @@ function Home() {
 			{contextHolder}
 			<div className="home-container">
 				<div className="home-paper-container">
+					<div className="home-title-container">
+						<h2 className="home-title">내 페이퍼 목록</h2>
+					</div>
 					<PaperList />
 				</div>
 				<Button className="paper-creating-btn" onClick={openPaperModal}>

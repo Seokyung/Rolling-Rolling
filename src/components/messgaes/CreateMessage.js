@@ -230,7 +230,6 @@ function CreateMessage() {
 									type="text"
 									name="title"
 									required
-									autoFocus
 									value={msgTitle}
 									ref={msgTitleRef}
 									maxLength={maxTitleLength}

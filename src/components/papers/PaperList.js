@@ -84,7 +84,7 @@ function PaperList() {
 			setPapersPerPage(10);
 		} else {
 			setColNum(1);
-			setPapersPerPage(5);
+			setPapersPerPage(6);
 		}
 
 		window.addEventListener("resize", handleResize);
@@ -102,7 +102,7 @@ function PaperList() {
 			setPapersPerPage(10);
 		} else {
 			setColNum(1);
-			setPapersPerPage(5);
+			setPapersPerPage(6);
 		}
 	};
 

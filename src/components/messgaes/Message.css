@@ -11,7 +11,6 @@
 
 .message-card-title {
 	font-size: 2rem !important;
-	font-weight: 700 !important;
 	color: #944444 !important;
 	margin-bottom: 1rem !important;
 }
@@ -27,12 +26,13 @@
 
 .message-card-img {
 	width: auto;
-	margin-bottom: 1rem !important;
+	max-height: 250px;
 }
 
 .message-delete-btn {
 	display: flex;
 	justify-content: right;
+	margin-top: 1rem;
 }
 .message-delete-btn button {
 	font-size: 1.4rem !important;

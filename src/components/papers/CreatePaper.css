@@ -19,7 +19,6 @@
 	margin: 0 !important;
 	color: #303030 !important;
 	font-size: 2rem !important;
-	font-weight: 700 !important;
 }
 
 .modal-close-btn {
@@ -100,8 +99,8 @@
 	margin-left: 1rem;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 992px) {
 	.modal-dialog {
-		width: 80% !important;
+		width: 93% !important;
 	}
 }
