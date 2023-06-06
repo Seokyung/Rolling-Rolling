@@ -78,9 +78,9 @@
 	}
 } */
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 992px) {
 	.profile-container {
-		width: 70%;
+		width: 90%;
 	}
 
 	.profile-img {

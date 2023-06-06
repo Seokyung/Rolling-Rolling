@@ -83,9 +83,9 @@
 	height: 50%;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 992px) {
 	.paper-wrapper {
-		width: 70%;
+		width: 90%;
 		min-width: 350px;
 	}
 }

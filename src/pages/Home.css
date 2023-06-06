@@ -49,9 +49,9 @@
 	transform: rotate(360deg);
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 992px) {
 	.home-container {
-		width: 70%;
+		width: 90%;
 		min-width: 350px;
 	}
 }
