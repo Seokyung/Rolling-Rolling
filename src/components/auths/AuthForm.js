@@ -106,10 +106,10 @@ function AuthForm({ onLoginMethodChange }) {
 			if (newAccount) {
 				await createUserWithEmailAndPassword(authService, email, password);
 			} else {
-				setPersistence(authService, browserSessionPersistence).then(() => {
-					return signInWithEmailAndPassword(authService, email, password);
-				});
-				// await signInWithEmailAndPassword(authService, email, password);
+				// setPersistence(authService, browserSessionPersistence).then(() => {
+				// 	return signInWithEmailAndPassword(authService, email, password);
+				// });
+				await signInWithEmailAndPassword(authService, email, password);
 			}
 			setValidated(false);
 			setEmail("");

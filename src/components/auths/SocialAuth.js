@@ -31,10 +31,10 @@ function SocialAuth({ onLoginMethodChange }) {
 			provider = new GithubAuthProvider();
 		}
 		try {
-			setPersistence(authService, inMemoryPersistence).then(() => {
-				return signInWithPopup(authService, provider);
-			});
-			// await signInWithPopup(authService, provider);
+			// setPersistence(authService, inMemoryPersistence).then(() => {
+			// 	return signInWithPopup(authService, provider);
+			// });
+			await signInWithPopup(authService, provider);
 		} catch (error) {
 			console.log(error.code);
 		}
