@@ -5,7 +5,7 @@ import PaperList from "components/papers/PaperList";
 import { Button } from "react-bootstrap";
 import { message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faScroll, faFileCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { faFileCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import "./Home.css";
 
 function Home() {

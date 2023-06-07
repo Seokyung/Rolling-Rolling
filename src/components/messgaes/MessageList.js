@@ -61,7 +61,7 @@ function MessageList() {
 					{contextHolder}
 					<div className="messageList-container">
 						{isMessages ? (
-							<Row xs={2} sm={2} md={2} lg={3} xl={3} className="g-4">
+							<Row xs={1} sm={1} md={1} lg={2} xl={3} className="g-4">
 								{messages.map(
 									(message) => (
 										// 페이퍼 주인, 메세지 작성자가 아니면 비밀 메세지 내용만 가리는 코드

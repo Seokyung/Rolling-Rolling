@@ -101,11 +101,13 @@ function Message({ msgObj, isOwner, messageApi }) {
 							{msgObj.msgContent}
 						</Card.Text>
 						{msgObj.msgImg && (
-							<Image
-								src={msgObj.msgImg}
-								className="message-card-img"
-								alt="messageImage"
-							/>
+							<div className="message-card-img-wrapper">
+								<Image
+									src={msgObj.msgImg}
+									className="message-card-img"
+									alt="messageImage"
+								/>
+							</div>
 						)}
 						{isOwner && (
 							<div className="message-delete-btn">

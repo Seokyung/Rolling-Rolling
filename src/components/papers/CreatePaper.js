@@ -106,7 +106,8 @@ function CreatePaper({ paperModal, setPaperModal, messageApi }) {
 					className="create-form-code"
 					required
 					key={index}
-					type="text"
+					type="number"
+					inputmode="numeric"
 					maxLength={1}
 					value={code}
 					ref={(el) => (codeInputRef.current[index] = el)}
