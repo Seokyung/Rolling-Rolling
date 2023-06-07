@@ -296,6 +296,7 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 			key,
 			type: "loading",
 			content: "그림 첨부중...",
+			className: "alert-message-container",
 			duration: 0.5,
 		});
 
@@ -307,6 +308,7 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 			key,
 			type: "success",
 			content: "그림이 첨부되었습니다!",
+			className: "alert-message-container",
 			duration: 2,
 		});
 	};

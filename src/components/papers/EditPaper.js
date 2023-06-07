@@ -179,6 +179,7 @@ function EditPaper() {
 			key,
 			type: "loading",
 			content: "페이퍼 수정중...",
+			className: "alert-message-container",
 			duration: 0.5,
 		});
 		const paperRef = doc(dbService, "papers", `${paperId}`);
@@ -191,6 +192,7 @@ function EditPaper() {
 			key,
 			type: "success",
 			content: `페이퍼가 수정되었습니다!`,
+			className: "alert-message-container",
 			duration: 2,
 		});
 		setValidated(false);

@@ -87,7 +87,7 @@
 
 @media screen and (max-width: 768px) {
 	:root {
-		--papers-per-page: 5;
+		--papers-per-page: 6;
 	}
 
 	.paperList-col-container {

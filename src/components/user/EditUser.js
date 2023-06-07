@@ -30,6 +30,7 @@ function EditUser({
 			key,
 			type: "loading",
 			content: "수정중...",
+			className: "alert-message-container",
 		});
 
 		try {
@@ -52,6 +53,7 @@ function EditUser({
 				key,
 				type: "success",
 				content: "수정되었습니다!",
+				className: "alert-message-container",
 				duration: 2,
 			});
 		} catch (error) {
@@ -59,6 +61,7 @@ function EditUser({
 				key,
 				type: "error",
 				content: "수정에 실패하였습니다 😢",
+				className: "alert-message-container",
 				duration: 2,
 			});
 			if (editType === "userName") {

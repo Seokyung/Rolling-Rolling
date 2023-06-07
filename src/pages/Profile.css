@@ -61,22 +61,6 @@
 	padding-left: 2rem;
 }
 
-/* @media screen and (max-width: 992px) {
-	.profile-container {
-		width: 70%;
-	}
-
-	.profile-img {
-		width: 250px !important;
-		height: 250px !important;
-	}
-
-	.profile-edit-container {
-		padding-bottom: 2rem;
-		padding-left: 0;
-	}
-} */
-
 @media screen and (max-width: 992px) {
 	.profile-container {
 		width: 90%;

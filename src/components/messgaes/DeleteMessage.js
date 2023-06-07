@@ -4,7 +4,6 @@ import { doc, deleteDoc } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 
 import { Modal, Button, CloseButton } from "react-bootstrap";
-import { message } from "antd";
 
 function DeleteMessage({ deleteModal, setDeleteModal, msgObj, messageApi }) {
 	const key = "updatable";
@@ -18,6 +17,7 @@ function DeleteMessage({ deleteModal, setDeleteModal, msgObj, messageApi }) {
 			key,
 			type: "loading",
 			content: "메세지 삭제중...",
+			className: "alert-message-container",
 			duration: 0.5,
 		});
 
@@ -40,6 +40,7 @@ function DeleteMessage({ deleteModal, setDeleteModal, msgObj, messageApi }) {
 				key,
 				type: "success",
 				content: "메세지가 삭제되었습니다!",
+				className: "alert-message-container",
 				duration: 2,
 			});
 		} catch (error) {
@@ -47,6 +48,7 @@ function DeleteMessage({ deleteModal, setDeleteModal, msgObj, messageApi }) {
 				key,
 				type: "error",
 				content: "메세지 삭제에 실패하였습니다 😢",
+				className: "alert-message-container",
 				duration: 2,
 			});
 			console.log(error.code);

@@ -21,6 +21,7 @@ function LogOutModal({ logOutModal, setLogOutModal }) {
 			key,
 			type: "loading",
 			content: "로그아웃 중...",
+			className: "alert-message-container",
 			duration: 0.5,
 		});
 
@@ -30,6 +31,7 @@ function LogOutModal({ logOutModal, setLogOutModal }) {
 				key,
 				type: "success",
 				content: "로그아웃 되었습니다!",
+				className: "alert-message-container",
 				duration: 2,
 			});
 			navigate("/", { replace: true });
@@ -38,6 +40,7 @@ function LogOutModal({ logOutModal, setLogOutModal }) {
 				key,
 				type: "error",
 				content: "로그아웃에 실패하였습니다 😢",
+				className: "alert-message-container",
 				duration: 2,
 			});
 			console.log(error.code);

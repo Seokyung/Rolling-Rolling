@@ -76,16 +76,9 @@
 	background-color: rgba(172, 172, 172, 0.9);
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 992px) {
 	.msgImg-upload-container {
-		max-width: 400px;
-		max-height: 200px;
-	}
-}
-
-@media screen and (max-width: 768px) {
-	.msgImg-upload-container {
-		max-width: 240px;
-		max-height: 150px;
+		min-width: 240px;
+		min-height: 150px;
 	}
 }

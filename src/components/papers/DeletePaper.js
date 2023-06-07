@@ -23,6 +23,7 @@ function DeletePaper({ deleteModal, setDeleteModal, paperId }) {
 			key,
 			type: "loading",
 			content: "페이퍼 삭제중...",
+			className: "alert-message-container",
 			duration: 0.5,
 		});
 
@@ -51,6 +52,7 @@ function DeletePaper({ deleteModal, setDeleteModal, paperId }) {
 				key,
 				type: "success",
 				content: "페이퍼가 삭제되었습니다!",
+				className: "alert-message-container",
 				duration: 2,
 			});
 			navigate("/", { replace: true });
@@ -59,6 +61,7 @@ function DeletePaper({ deleteModal, setDeleteModal, paperId }) {
 				key,
 				type: "error",
 				content: "페이퍼 삭제에 실패하였습니다 😢",
+				className: "alert-message-container",
 				duration: 2,
 			});
 			console.log(error.code);

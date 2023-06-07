@@ -104,6 +104,7 @@ function PrivatePaper() {
 			messageApi.open({
 				type: "error",
 				content: "페이퍼 코드를 입력해주세요!",
+				className: "alert-message-container",
 			});
 			return;
 		}
@@ -111,6 +112,7 @@ function PrivatePaper() {
 			key,
 			type: "loading",
 			content: "로딩중...",
+			className: "alert-message-container",
 			duration: 0.7,
 		});
 		if (paperObj.paperCode === codes.join("")) {
@@ -120,6 +122,7 @@ function PrivatePaper() {
 				key,
 				type: "error",
 				content: "페이퍼 코드가 다릅니다!",
+				className: "alert-message-container",
 				duration: 2,
 			});
 			setCodes(Array(4).fill(""));

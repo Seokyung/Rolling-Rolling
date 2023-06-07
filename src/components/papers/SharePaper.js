@@ -31,6 +31,7 @@ function SharePaper() {
 			messageApi.open({
 				type: "info",
 				content: "링크를 복사했습니다!",
+				className: "alert-message-container",
 			});
 		});
 	};

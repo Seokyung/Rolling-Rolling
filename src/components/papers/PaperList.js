@@ -193,6 +193,7 @@ function PaperList() {
 	};
 
 	const onPageChange = (pageNumber) => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
 		setCurrentPage(pageNumber);
 	};
 

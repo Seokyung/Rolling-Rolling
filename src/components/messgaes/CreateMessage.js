@@ -143,6 +143,7 @@ function CreateMessage() {
 			key,
 			type: "loading",
 			content: "메세지 게시중...",
+			className: "alert-message-container",
 			duration: 0.5,
 		});
 
@@ -179,6 +180,7 @@ function CreateMessage() {
 				key,
 				type: "success",
 				content: `${msgTitle} 메세지가 게시되었습니다!`,
+				className: "alert-message-container",
 				duration: 2,
 			});
 		} catch (error) {
@@ -186,6 +188,7 @@ function CreateMessage() {
 				key,
 				type: "error",
 				content: "메세지 게시에 실패하였습니다 😢",
+				className: "alert-message-container",
 				duration: 2,
 			});
 			console.log(error.code);

@@ -17,6 +17,7 @@ function MessageImage({ msgImg, setMsgImg, closeAttach }) {
 			key,
 			type: "loading",
 			content: "사진 첨부중...",
+			className: "alert-message-container",
 			duration: 0.5,
 		});
 
@@ -39,6 +40,7 @@ function MessageImage({ msgImg, setMsgImg, closeAttach }) {
 			key,
 			type: "success",
 			content: "사진이 첨부되었습니다!",
+			className: "alert-message-container",
 			duration: 2,
 		});
 	};

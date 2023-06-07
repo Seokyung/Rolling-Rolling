@@ -43,7 +43,7 @@
 	margin-right: 1rem;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 992px) {
 	.paperSettings-offcanvas-body {
 		flex-direction: column !important;
 		justify-content: flex-start !important;
