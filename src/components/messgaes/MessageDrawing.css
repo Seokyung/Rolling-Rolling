@@ -114,7 +114,7 @@
 }
 
 .msgDrawing-slider {
-	width: 90%;
+	min-width: 400px;
 	margin-right: 0.5rem;
 }
 
@@ -122,11 +122,9 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 90%;
+	min-width: 60px;
 }
 .msgDrawing-slider-number input {
-	padding: 1rem !important;
-	font-size: 1.6rem !important;
 	font-family: "Binggrae", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
 		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
 }

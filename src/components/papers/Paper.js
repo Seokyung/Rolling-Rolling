@@ -111,7 +111,7 @@ function Paper() {
 									)}
 								</div>
 								<MessageList />
-								<SharePaper />
+								{userId === paperObj.creatorId && <SharePaper />}
 							</div>
 							<Button className="paper-creating-btn" onClick={gotoEditPaper}>
 								<FontAwesomeIcon

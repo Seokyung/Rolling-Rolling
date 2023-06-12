@@ -421,7 +421,7 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 						</Col>
 					</Row>
 					<Row align="middle" justify="center">
-						<Col span={20} className="msgDrawing-slider-group">
+						<Col className="msgDrawing-slider-group">
 							<Slider
 								className="msgDrawing-slider"
 								id="toolWidth"
@@ -431,7 +431,7 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 								onChange={onToolWidthChange}
 							/>
 						</Col>
-						<Col span={4} className="msgDrawing-slider-group">
+						<Col className="msgDrawing-slider-group">
 							<InputNumber
 								className="msgDrawing-slider-number"
 								min={1}
