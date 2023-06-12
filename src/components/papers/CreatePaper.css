@@ -56,10 +56,10 @@
 	margin-left: 0.75rem;
 	font-size: 1.4rem !important;
 }
-/* .create-form-text-small {
+.create-form-text-small {
 	margin-left: 0.75rem;
-	font-size: 1.2rem !important;
-} */
+	font-size: 1.3rem !important;
+}
 
 .create-form-feedback {
 	width: 100% !important;
@@ -70,7 +70,7 @@
 .create-form-code-group {
 	display: flex;
 	flex-direction: row;
-	align-items: baseline;
+	align-items: center;
 	margin: 0.5rem 0;
 }
 
@@ -105,7 +105,7 @@
 		width: 93% !important;
 	}
 
-	/* .create-modal-title {
+	.create-modal-title {
 		font-size: 2.2rem !important;
 	}
 
@@ -114,7 +114,7 @@
 	}
 
 	.create-form-input {
-		font-size: 2.3rem !important;
+		font-size: 2.2rem !important;
 	}
 	.create-form-input::placeholder {
 		font-size: 1.8rem !important;
@@ -128,15 +128,11 @@
 		font-size: 1.6rem !important;
 	}
 
-	.create-form-feedback {
-		font-size: 1.8rem !important;
-	}
-
 	.create-form-code {
-		font-size: 2.3rem !important;
+		font-size: 2.2rem !important;
 	}
 
 	.create-modal-footer button {
 		font-size: 2rem !important;
-	} */
+	}
 }

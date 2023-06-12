@@ -153,6 +153,7 @@ function EditPaper() {
 					key={index}
 					type="number"
 					inputMode="numeric"
+					size="lg"
 					maxLength={1}
 					value={code}
 					ref={(el) => (codeInputRef.current[index] = el)}
@@ -238,6 +239,7 @@ function EditPaper() {
 											<Form.Control
 												className="create-form-input"
 												type="text"
+												size="lg"
 												required
 												value={newPaperName}
 												ref={paperNameRef}

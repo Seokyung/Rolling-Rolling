@@ -125,16 +125,6 @@
 	} */
 }
 
-/* @media screen and (min-width: 993px) {
-	:root {
-		--papers-per-page: 10;
-	}
-
-	.paperList-col-container {
-		width: 50% !important;
-	}
-} */
-
 @media screen and (min-width: 1200px) {
 	:root {
 		--papers-per-page: 12;

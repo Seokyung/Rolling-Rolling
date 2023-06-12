@@ -232,6 +232,7 @@ function CreateMessage() {
 									className="create-form-input"
 									type="text"
 									name="title"
+									size="lg"
 									required
 									value={msgTitle}
 									ref={msgTitleRef}
@@ -255,6 +256,7 @@ function CreateMessage() {
 									className="create-form-input"
 									type="text"
 									name="writer"
+									size="lg"
 									required
 									value={msgWriter}
 									ref={msgWriterRef}
@@ -283,6 +285,7 @@ function CreateMessage() {
 									as="textarea"
 									rows={5}
 									name="content"
+									size="lg"
 									value={msgContent}
 									maxLength={maxContentLength}
 									onChange={onMessageChange}

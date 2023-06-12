@@ -27,10 +27,10 @@ function Message({ msgObj, isOwner, messageApi }) {
 								{msgObj.isPrivate && <span className="private-icon">🔒</span>}
 								{msgObj.msgTitle}
 							</Card.Title>
-							<Card.Subtitle className="mb-3 text-muted message-card-subs">
+							<Card.Subtitle className="mb-3 text-muted message-card-date">
 								{msgObj.createdAt}
 							</Card.Subtitle>
-							<Card.Subtitle className="mb-3 text-muted message-card-subs">
+							<Card.Subtitle className="mb-3 text-muted message-card-writer">
 								<span className="private-icon">👤</span>
 								{msgObj.msgWriter}
 							</Card.Subtitle>
@@ -76,10 +76,10 @@ function Message({ msgObj, isOwner, messageApi }) {
 								{msgObj.isPrivate && <span className="private-icon">🔒</span>}
 								비밀 메세지입니다 🤫
 							</Card.Title>
-							<Card.Subtitle className="mb-3 text-muted message-card-subs">
+							<Card.Subtitle className="mb-3 text-muted message-card-date">
 								{msgObj.createdAt}
 							</Card.Subtitle>
-							<Card.Subtitle className="mb-3 text-muted message-card-subs">
+							<Card.Subtitle className="mb-3 text-muted message-card-writer">
 								<span className="private-icon">👤</span>
 								{msgObj.msgWriter}
 							</Card.Subtitle>
@@ -90,10 +90,10 @@ function Message({ msgObj, isOwner, messageApi }) {
 						<Card.Title className="message-card-title">
 							{msgObj.msgTitle}
 						</Card.Title>
-						<Card.Subtitle className="mb-3 text-muted message-card-subs">
+						<Card.Subtitle className="mb-3 text-muted message-card-date">
 							{msgObj.createdAt}
 						</Card.Subtitle>
-						<Card.Subtitle className="mb-3 text-muted message-card-subs">
+						<Card.Subtitle className="mb-3 text-muted message-card-writer">
 							<span className="private-icon">👤</span>
 							{msgObj.msgWriter}
 						</Card.Subtitle>
@@ -143,10 +143,10 @@ function Message({ msgObj, isOwner, messageApi }) {
 	// 				{msgObj.isPrivate && <span className="private-icon">🔒</span>}
 	// 				{msgObj.msgTitle}
 	// 			</Card.Title>
-	// 			<Card.Subtitle className="mb-3 text-muted message-card-subs">
+	// 			<Card.Subtitle className="mb-3 text-muted message-card-date">
 	// 				{msgObj.createdAt}
 	// 			</Card.Subtitle>
-	// 			<Card.Subtitle className="mb-3 text-muted message-card-subs">
+	// 			<Card.Subtitle className="mb-3 text-muted message-card-writer">
 	// 				<span className="private-icon">👤</span>
 	// 				{msgObj.msgWriter}
 	// 			</Card.Subtitle>

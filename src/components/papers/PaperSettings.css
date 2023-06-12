@@ -31,12 +31,11 @@
 }
 
 .paperSettings-offcanvas-body button {
-	width: 50%;
-	min-width: 180px;
-	max-width: 350px;
+	width: 90%;
+	max-width: 400px;
 	margin: 0 3rem;
 	padding: 2rem;
-	font-size: 1.8rem;
+	font-size: 2.2rem;
 	border-radius: 10px;
 }
 .paperSettings-offcanvas-body button svg {
@@ -51,6 +50,7 @@
 	}
 
 	.paperSettings-offcanvas-body button {
+		max-width: none;
 		margin: 1.5rem;
 	}
 }

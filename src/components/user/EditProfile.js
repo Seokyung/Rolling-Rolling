@@ -143,6 +143,7 @@ function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
 						<Form.Control
 							type="text"
 							className="create-form-input"
+							size="lg"
 							required
 							value={userName}
 							ref={userNameRef}

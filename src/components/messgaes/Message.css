@@ -15,12 +15,16 @@
 	margin-bottom: 1rem !important;
 }
 
-.message-card-subs {
+.message-card-date {
 	font-size: 1.4rem !important;
 }
 
-.message-card-content {
+.message-card-writer {
 	font-size: 1.6rem !important;
+}
+
+.message-card-content {
+	font-size: 1.8rem !important;
 	color: #303030 !important;
 }
 
