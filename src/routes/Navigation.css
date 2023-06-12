@@ -118,7 +118,7 @@
 
 @media screen and (max-width: 992px) {
 	.navigation-offcanvas-container {
-		--bs-offcanvas-width: 60% !important;
+		--bs-offcanvas-width: 70% !important;
 	}
 }
 

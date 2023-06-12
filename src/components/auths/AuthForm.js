@@ -168,7 +168,7 @@ function AuthForm({ onLoginMethodChange }) {
 						type="email"
 						id="email"
 						name="email"
-						size="large"
+						size="lg"
 						value={email}
 						ref={emailRef}
 						onChange={onAuthInputChange}
@@ -189,7 +189,7 @@ function AuthForm({ onLoginMethodChange }) {
 						type="password"
 						id="password"
 						name="password"
-						size="large"
+						size="lg"
 						value={password}
 						ref={pwRef}
 						onChange={onAuthInputChange}
@@ -215,7 +215,7 @@ function AuthForm({ onLoginMethodChange }) {
 							type="password"
 							id="checkPassword"
 							name="checkPassword"
-							size="large"
+							size="lg"
 							value={checkPassword}
 							ref={checkPwRef}
 							onChange={onAuthInputChange}

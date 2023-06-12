@@ -59,6 +59,10 @@ body,
 	#root,
 	#root > div {
 		/* font-size: 93.75%; */
-		font-size: 100%;
+		font-size: 18px;
+	}
+
+	.form-control-lg {
+		min-height: 120px;
 	}
 }

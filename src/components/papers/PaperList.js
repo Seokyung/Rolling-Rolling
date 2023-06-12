@@ -234,7 +234,7 @@ function PaperList() {
 							description={
 								<div className="empty-container">
 									<span className="empty-text">아직 페이퍼가 없네요!</span>
-									<span className="empty-text">페이퍼를 생성해보세요 😉</span>
+									<span className="empty-text">페이퍼를 만들어보세요 😉</span>
 								</div>
 							}
 						/>
