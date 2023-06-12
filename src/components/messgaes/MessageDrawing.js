@@ -419,29 +419,26 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 								/>
 							</div>
 						</Col>
-						<Divider type="vertical" className="tool-divider" />
-						<Col className="msgDrawing-tool-group">
-							<Row>
-								<Col>
-									<Slider
-										className="msgDrawing-slider"
-										id="toolWidth"
-										min={1}
-										max={100}
-										value={toolWidth}
-										onChange={onToolWidthChange}
-									/>
-								</Col>
-								<Col>
-									<InputNumber
-										className="msgDrawing-slider-number"
-										min={1}
-										max={100}
-										value={toolWidth}
-										onChange={onToolWidthChange}
-									/>
-								</Col>
-							</Row>
+					</Row>
+					<Row align="middle" justify="center">
+						<Col span={20} className="msgDrawing-slider-group">
+							<Slider
+								className="msgDrawing-slider"
+								id="toolWidth"
+								min={1}
+								max={100}
+								value={toolWidth}
+								onChange={onToolWidthChange}
+							/>
+						</Col>
+						<Col span={4} className="msgDrawing-slider-group">
+							<InputNumber
+								className="msgDrawing-slider-number"
+								min={1}
+								max={100}
+								value={toolWidth}
+								onChange={onToolWidthChange}
+							/>
 						</Col>
 					</Row>
 					<Row align="middle" justify="center">

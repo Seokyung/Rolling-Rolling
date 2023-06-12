@@ -107,14 +107,28 @@
 	color: blue;
 }
 
+.msgDrawing-slider-group {
+	display: flex;
+	justify-content: center;
+	padding: 0.5rem;
+}
+
 .msgDrawing-slider {
-	min-width: 100px;
+	width: 90%;
 	margin-right: 0.5rem;
 }
 
 .msgDrawing-slider-number {
-	width: 6rem;
-	margin-left: 0.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 90%;
+}
+.msgDrawing-slider-number input {
+	padding: 1rem !important;
+	font-size: 1.6rem !important;
+	font-family: "Binggrae", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
 }
 
 .msgDrawing-tool-undo-group {
