@@ -79,7 +79,7 @@ function PaperList() {
 		if (window.screen.width > 1200) {
 			setColNum(3);
 			setPapersPerPage(12);
-		} else if (window.screen.width > 768) {
+		} else if (window.screen.width > 992) {
 			setColNum(2);
 			setPapersPerPage(10);
 		} else {
@@ -97,7 +97,7 @@ function PaperList() {
 		if (window.screen.width > 1200) {
 			setColNum(3);
 			setPapersPerPage(12);
-		} else if (window.screen.width > 768) {
+		} else if (window.screen.width > 992) {
 			setColNum(2);
 			setPapersPerPage(10);
 		} else {

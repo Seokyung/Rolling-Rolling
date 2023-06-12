@@ -106,8 +106,9 @@ function CreatePaper({ paperModal, setPaperModal, messageApi }) {
 					className="create-form-code"
 					required
 					key={index}
-					type="number"
-					inputmode="numeric"
+					type="text"
+					inputMode="numeric"
+					size="lg"
 					maxLength={1}
 					value={code}
 					ref={(el) => (codeInputRef.current[index] = el)}
@@ -205,8 +206,8 @@ function CreatePaper({ paperModal, setPaperModal, messageApi }) {
 						<Form.Control
 							className="create-form-input"
 							required
-							autoFocus
 							type="text"
+							size="lg"
 							value={paperName}
 							ref={paperNameRef}
 							maxLength={maxNameLength}
@@ -236,7 +237,7 @@ function CreatePaper({ paperModal, setPaperModal, messageApi }) {
 						<Form.Text className="create-form-text">
 							페이퍼의 공개여부를 설정해주세요
 						</Form.Text>
-						<Form.Text className="create-form-text-small">
+						<Form.Text className="create-form-text">
 							(비공개 페이퍼는 코드를 입력해야만 볼 수 있어요🤫 )
 						</Form.Text>
 					</Form.Group>

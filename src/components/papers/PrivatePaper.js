@@ -86,7 +86,7 @@ function PrivatePaper() {
 					required
 					key={index}
 					type="password"
-					inputmode="numeric"
+					inputMode="numeric"
 					maxLength={1}
 					value={code}
 					ref={(el) => (codeInputRef.current[index] = el)}

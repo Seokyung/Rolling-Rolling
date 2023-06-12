@@ -152,7 +152,7 @@ function EditPaper() {
 					required
 					key={index}
 					type="number"
-					inputmode="numeric"
+					inputMode="numeric"
 					maxLength={1}
 					value={code}
 					ref={(el) => (codeInputRef.current[index] = el)}
