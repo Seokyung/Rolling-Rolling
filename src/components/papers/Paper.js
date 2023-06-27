@@ -11,7 +11,7 @@ import PaperSettings from "./PaperSettings";
 import DeletePaper from "./DeletePaper";
 import SharePaper from "./SharePaper";
 
-import { Button } from "react-bootstrap";
+import { Stack, Button } from "react-bootstrap";
 import { Skeleton } from "antd";
 import {
 	faAngleLeft,
@@ -96,20 +96,27 @@ function Paper() {
 					<>
 						<div className="paper-wrapper">
 							<div className="paper-container">
-								<div className="paper-header-container">
-									<button onClick={gotoPrevPage}>
-										<FontAwesomeIcon icon={faAngleLeft} />
-									</button>
-									<div className="paper-title-container">
-										<h2 className="paper-title">{paperObj.paperName}</h2>
-										{/* <h2>{paperObj.createdAt}</h2> */}
-									</div>
-									{userId === paperObj.creatorId && (
-										<button onClick={showPaperSettings}>
-											<FontAwesomeIcon icon={faEllipsisVertical} />
+								<Stack
+									className="paper-header-margin-bottom"
+									direction="horizontal"
+									gap={3}
+								>
+									<div className="paper-header-btn">
+										<button onClick={gotoPrevPage}>
+											<FontAwesomeIcon icon={faAngleLeft} />
 										</button>
-									)}
-								</div>
+									</div>
+									<div className="me-auto paper-title-container">
+										<h2 className="paper-title">{paperObj.paperName}</h2>
+									</div>
+									<div className="paper-header-btn">
+										{userId === paperObj.creatorId && (
+											<button onClick={showPaperSettings}>
+												<FontAwesomeIcon icon={faEllipsisVertical} />
+											</button>
+										)}
+									</div>
+								</Stack>
 								<MessageList />
 								{userId === paperObj.creatorId && <SharePaper />}
 							</div>

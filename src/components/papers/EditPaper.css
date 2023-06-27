@@ -10,45 +10,9 @@
 	box-shadow: 0.5rem 0.5rem 0.5rem #968f8e;
 }
 
-.editPaper-header-container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	margin-bottom: 2rem;
-}
-.editPaper-header-container button {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 5%;
-	z-index: 1;
-	color: #595959;
-	font-size: 2rem;
-	outline: none;
-	appearance: none;
-	border: none;
-	white-space: nowrap;
-	background: none;
-}
-.editPaper-header-container button:hover,
-.editPaper-header-container button:active {
-	color: #454545;
-}
-
-.paper-title-container {
-	width: 100%;
-	margin: 0 1rem;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
-}
-
 .editPaper-title {
-	margin: 0 0 0 -5%;
 	font-size: 2.2rem;
-	padding: 1.8rem 3.5rem;
+	padding: 1.8rem 2.5rem;
 	border-radius: 40px;
 	color: #595959;
 	background-color: #fffdfd;

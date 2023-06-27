@@ -9,6 +9,7 @@ import MessageDrawing from "./MessageDrawing";
 import { useSelector } from "react-redux";
 
 import {
+	Stack,
 	Form,
 	Button,
 	ButtonGroup,
@@ -208,10 +209,16 @@ function CreateMessage() {
 			{contextHolder}
 			<div className="paper-wrapper">
 				<div className="editPaper-container">
-					<div className="editPaper-header-container">
-						<button onClick={closeCreateMessage}>
-							<FontAwesomeIcon icon={faAngleLeft} />
-						</button>
+					<Stack
+						className="paper-header-margin-bottom"
+						direction="horizontal"
+						gap={3}
+					>
+						<div className="paper-header-btn">
+							<button onClick={closeCreateMessage}>
+								<FontAwesomeIcon icon={faAngleLeft} />
+							</button>
+						</div>
 						<div className="paper-title-container">
 							<h2 className="createMessage-title">
 								<FontAwesomeIcon
@@ -221,7 +228,8 @@ function CreateMessage() {
 								메세지 쓰기
 							</h2>
 						</div>
-					</div>
+						<div className="paper-header-btn"></div>
+					</Stack>
 					<div className="editPaper-form-container">
 						<Form noValidate validated={validated}>
 							<Form.Group className="create-form-group">

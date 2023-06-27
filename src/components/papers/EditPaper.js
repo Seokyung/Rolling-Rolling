@@ -5,7 +5,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { Form, InputGroup, Button } from "react-bootstrap";
+import { Stack, Form, InputGroup, Button } from "react-bootstrap";
 import { Skeleton, Divider, message, Empty } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -212,7 +212,28 @@ function EditPaper() {
 					<div className="editPaper-container">
 						{userId === paperObj.creatorId ? (
 							<>
-								<div className="editPaper-header-container">
+								<Stack
+									className="paper-header-margin-bottom"
+									direction="horizontal"
+									gap={3}
+								>
+									<div className="paper-header-btn">
+										<button onClick={closeEditPaper}>
+											<FontAwesomeIcon icon={faAngleLeft} />
+										</button>
+									</div>
+									<div className="paper-title-container">
+										<h2 className="editPaper-title">
+											<FontAwesomeIcon
+												className="icon-margin-right"
+												icon={faPenToSquare}
+											/>
+											페이퍼 수정
+										</h2>
+									</div>
+									<div className="paper-header-btn"></div>
+								</Stack>
+								{/* <div className="editPaper-header-container">
 									<button onClick={closeEditPaper}>
 										<FontAwesomeIcon icon={faAngleLeft} />
 									</button>
@@ -225,7 +246,7 @@ function EditPaper() {
 											페이퍼 수정
 										</h2>
 									</div>
-								</div>
+								</div> */}
 								<Form
 									noValidate
 									validated={validated}

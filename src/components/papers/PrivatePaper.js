@@ -4,7 +4,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { Form, Button } from "react-bootstrap";
+import { Stack, Form, Button } from "react-bootstrap";
 import { message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
@@ -136,14 +136,17 @@ function PrivatePaper() {
 			{contextHolder}
 			<div className="paper-wrapper">
 				<div className="editPaper-container">
-					<div className="editPaper-header-container">
-						<button onClick={closePrivatePaper}>
-							<FontAwesomeIcon icon={faAngleLeft} />
-						</button>
+					<Stack direction="horizontal" gap={3}>
+						<div className="paper-header-btn">
+							<button onClick={closePrivatePaper}>
+								<FontAwesomeIcon icon={faAngleLeft} />
+							</button>
+						</div>
 						<div className="paper-title-container">
 							<h2 className="editPaper-title">페이퍼 코드를 입력하세요 🤫</h2>
 						</div>
-					</div>
+						<div className="paper-header-btn"></div>
+					</Stack>
 					<Form
 						noValidate
 						validated={validated}
