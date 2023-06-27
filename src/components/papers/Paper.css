@@ -20,30 +20,38 @@
 }
 
 .paper-header-margin-bottom {
-	margin-bottom: 1rem;
+	margin-bottom: 1.5rem;
 }
 
 .paper-header-btn {
-	text-align: center;
-	width: 2.3rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	z-index: 1;
 }
 .paper-header-btn button {
 	color: #595959;
-	font-size: 2.2rem;
 	outline: none;
 	appearance: none;
 	border: none;
 	white-space: nowrap;
 	background: none;
 }
+.paper-header-btn svg {
+	width: 2.2rem;
+	height: 2.2rem;
+}
 .paper-header-btn button:hover,
 .paper-header-btn button:active {
 	color: #454545;
 }
 
+.header-btn-width {
+	width: 2.2rem;
+}
+
 .paper-title-container {
-	width: 100%;
+	margin: 0 auto;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -51,6 +59,7 @@
 }
 
 .paper-title {
+	margin: 0;
 	padding: 1.8rem 2.5rem;
 	border-radius: 40px;
 	background-color: #fffdfd;

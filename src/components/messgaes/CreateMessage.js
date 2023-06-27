@@ -228,7 +228,7 @@ function CreateMessage() {
 								메세지 쓰기
 							</h2>
 						</div>
-						<div className="paper-header-btn"></div>
+						<div className="paper-header-btn header-btn-width"></div>
 					</Stack>
 					<div className="editPaper-form-container">
 						<Form noValidate validated={validated}>

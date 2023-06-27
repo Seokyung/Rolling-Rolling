@@ -231,22 +231,8 @@ function EditPaper() {
 											페이퍼 수정
 										</h2>
 									</div>
-									<div className="paper-header-btn"></div>
+									<div className="paper-header-btn header-btn-width"></div>
 								</Stack>
-								{/* <div className="editPaper-header-container">
-									<button onClick={closeEditPaper}>
-										<FontAwesomeIcon icon={faAngleLeft} />
-									</button>
-									<div className="paper-title-container">
-										<h2 className="editPaper-title">
-											<FontAwesomeIcon
-												className="icon-margin-right"
-												icon={faPenToSquare}
-											/>
-											페이퍼 수정
-										</h2>
-									</div>
-								</div> */}
 								<Form
 									noValidate
 									validated={validated}

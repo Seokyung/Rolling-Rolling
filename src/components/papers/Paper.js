@@ -96,17 +96,13 @@ function Paper() {
 					<>
 						<div className="paper-wrapper">
 							<div className="paper-container">
-								<Stack
-									className="paper-header-margin-bottom"
-									direction="horizontal"
-									gap={3}
-								>
+								<Stack direction="horizontal" gap={3}>
 									<div className="paper-header-btn">
 										<button onClick={gotoPrevPage}>
 											<FontAwesomeIcon icon={faAngleLeft} />
 										</button>
 									</div>
-									<div className="me-auto paper-title-container">
+									<div className="paper-title-container">
 										<h2 className="paper-title">{paperObj.paperName}</h2>
 									</div>
 									<div className="paper-header-btn">

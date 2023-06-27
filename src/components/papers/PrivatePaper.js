@@ -145,7 +145,7 @@ function PrivatePaper() {
 						<div className="paper-title-container">
 							<h2 className="editPaper-title">페이퍼 코드를 입력하세요 🤫</h2>
 						</div>
-						<div className="paper-header-btn"></div>
+						<div className="paper-header-btn header-btn-width"></div>
 					</Stack>
 					<Form
 						noValidate
