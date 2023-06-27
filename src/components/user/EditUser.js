@@ -47,8 +47,20 @@ function EditUser({
 					photoURL: profileImgUrl,
 				});
 				setIsImgValidate(true);
+			} else if (editType === "userInfo") {
+				const imgRef = ref(storageService, `${userObj.uid}/profileImg`);
+				await uploadString(imgRef, profileImg, "data_url");
+				const profileImgUrl = await getDownloadURL(imgRef);
+				await updateProfile(authService.currentUser, {
+					displayName: userName,
+					photoURL: profileImgUrl,
+				});
+				setIsNameValidate(true);
+				setIsImgValidate(true);
 			}
+
 			closeEditModal();
+
 			messageApi.open({
 				key,
 				type: "success",
@@ -67,6 +79,9 @@ function EditUser({
 			if (editType === "userName") {
 				setIsNameValidate(false);
 			} else if (editType === "profileImg") {
+				setIsImgValidate(false);
+			} else if (editType === "userInfo") {
+				setIsNameValidate(false);
 				setIsImgValidate(false);
 			}
 			console.log(error.code);

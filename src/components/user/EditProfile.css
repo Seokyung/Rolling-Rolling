@@ -20,7 +20,7 @@
 	margin: 0;
 	padding: 1.5rem 3rem;
 	border-radius: 40px;
-	background-color: #9f5757;
+	background-color: rgba(0, 0, 0, 0.6);
 }
 .editProfile-title svg {
 	margin-right: 0.75rem;
@@ -29,20 +29,22 @@
 .editProfile-input-group button {
 	font-size: 1.8rem !important;
 }
+.editProfile-input-group #profileImgInput {
+	display: none;
+}
+
 .editProfile-profile-img-container {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
-
-.editProfile-input-group #profileImgInput {
-	display: none;
+.editProfile-profile-img-container button {
+	margin-top: 1.5rem;
 }
 
 .profile-img-upload-wrapper {
 	position: relative;
-	margin-bottom: 1.5rem;
 }
 
 .profile-img-upload-container {
@@ -86,13 +88,14 @@
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
-.editProfile-undo-btn {
+.editProfile-edit-btn {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
 	align-items: center;
-	margin: 1rem 0;
+	margin: 1rem;
 }
-.editProfile-undo-btn button {
+.editProfile-edit-btn button {
+	padding: 1rem;
 	font-size: 1.8rem !important;
 }
 
@@ -116,10 +119,6 @@
 	.profile-img-upload-container {
 		width: 300px;
 		height: 300px;
-	}
-
-	.editProfile-undo-btn {
-		justify-content: center;
 	}
 
 	.editProfile-auth-btn {

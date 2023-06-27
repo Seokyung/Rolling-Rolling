@@ -77,24 +77,50 @@ function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
 		setEditModal(true);
 	};
 
-	const onUpdateUserName = async (e) => {
+	// const onUpdateUserName = async (e) => {
+	// 	e.preventDefault();
+	// 	if (userName === "") {
+	// 		userNameRef.current.focus();
+	// 		setValidated(true);
+	// 		return;
+	// 	}
+	// 	if (userName !== userObj.displayName) {
+	// 		openEditModal("userName");
+	// 	}
+	// };
+
+	// const onUpdateProfileImg = async (e) => {
+	// 	e.preventDefault();
+	// 	if (profileImg === "") {
+	// 		return;
+	// 	}
+	// 	openEditModal("profileImg");
+	// };
+
+	const onUpdateUserInfo = async (e) => {
 		e.preventDefault();
-		if (userName === "") {
+		let editType = "";
+
+		if (!isNameValidate && userName === "") {
 			userNameRef.current.focus();
 			setValidated(true);
 			return;
 		}
-		if (userName !== userObj.displayName) {
-			openEditModal("userName");
-		}
-	};
-
-	const onUpdateProfileImg = async (e) => {
-		e.preventDefault();
-		if (profileImg === "") {
+		if (!isImgValidate && profileImg === "") {
 			return;
 		}
-		openEditModal("profileImg");
+
+		if (!isNameValidate && !isImgValidate) {
+			editType = "userInfo";
+		} else if (!isNameValidate) {
+			editType = "userName";
+		} else if (!isImgValidate) {
+			editType = "profileImg";
+		}
+
+		if (editType !== "") {
+			openEditModal(editType);
+		}
 	};
 
 	return (
@@ -131,9 +157,11 @@ function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
 							onChange={onProfileImgChange}
 							accept="image/*"
 						/>
-						<Button disabled={isImgValidate} onClick={onUpdateProfileImg}>
-							프로필 사진 변경
-						</Button>
+						{/* {!isImgValidate && (
+							<Button onClick={onUpdateProfileImg}>
+								선택한 사진으로 변경하기
+							</Button>
+						)} */}
 					</div>
 				</Form.Group>
 				<Divider className="offcanvas-divider" />
@@ -151,9 +179,9 @@ function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
 							onChange={onUserNameChange}
 							placeholder={userObj.displayName}
 						/>
-						<Button disabled={isNameValidate} onClick={onUpdateUserName}>
+						{/* <Button disabled={isNameValidate} onClick={onUpdateUserName}>
 							이름 변경
-						</Button>
+						</Button> */}
 						<Form.Control.Feedback
 							className="create-form-feedback"
 							type="invalid"
@@ -166,13 +194,19 @@ function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
 					</Form.Text>
 				</Form.Group>
 				<Divider className="offcanvas-divider" />
-				<Form.Group className="editProfile-undo-btn">
+				<Form.Group className="editProfile-edit-btn">
 					<Button
-						variant="secondary"
+						variant="outline-secondary"
 						disabled={!(!isNameValidate || !isImgValidate)}
 						onClick={undoChanges}
 					>
-						<FontAwesomeIcon icon={faClockRotateLeft} /> 변경사항 되돌리기
+						변경사항 되돌리기
+					</Button>
+					<Button
+						disabled={!(!isNameValidate || !isImgValidate)}
+						onClick={onUpdateUserInfo}
+					>
+						프로필 수정하기
 					</Button>
 				</Form.Group>
 				<Divider className="offcanvas-divider" />
