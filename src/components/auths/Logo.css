@@ -7,15 +7,12 @@
 .logo-container img {
 	display: flex;
 	min-width: 380px;
-	max-width: 520px;
+	max-width: 450px;
 	height: auto;
 }
 
 @media screen and (max-width: 992px) {
 	.logo-container {
 		justify-content: center;
-	}
-	.logo-container img {
-		max-width: 600px;
 	}
 }

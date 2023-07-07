@@ -40,7 +40,6 @@
 	.auth-container {
 		flex-direction: column;
 		justify-content: center;
-		width: 90%;
 		height: auto;
 		margin: 15rem auto;
 	}
@@ -67,16 +66,6 @@
 }
 
 @media screen and (min-width: 1400px) {
-	.auth-logo-container {
-		width: 47.5%;
-		margin-right: 2.5rem;
-	}
-
-	.auth-login-container {
-		width: 52.5%;
-		margin-left: 2.5rem;
-	}
-
 	.login-container {
 		max-width: 580px;
 	}

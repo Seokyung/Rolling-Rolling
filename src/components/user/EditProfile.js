@@ -6,11 +6,7 @@ import EditUser from "./EditUser";
 import { Form, Button, InputGroup } from "react-bootstrap";
 import { Divider, message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-	faUserPen,
-	faPenToSquare,
-	faClockRotateLeft,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUserPen, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import "./EditProfile.css";
 
 function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
