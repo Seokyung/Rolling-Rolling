@@ -37,14 +37,15 @@ https://rolling-rolling.web.app/
 
 ## 기술 스택
 
-**개발 환경**
+### 개발 환경
 
-<img src="https://img.shields.io/badge/Visual_Studio_Code-007ACC?style=flat&logo=VisualStudioCode&logoColor=white">&nbsp;
-<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white">
+<img src="https://img.shields.io/badge/Visual_Studio_Code-007ACC?style=for-the-badge&logo=VisualStudioCode&logoColor=white">&nbsp;
+<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badget&logo=GitHub&logoColor=white">
 
-**개발 툴**
+### 개발 툴
 
-<img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white">&nbsp;
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white">&nbsp;
-<img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat&logo=Firebase&logoColor=white">&nbsp;
-<img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">&nbsp;
+<img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=React&logoColor=white">&nbsp;
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white">&nbsp;
+<img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">&nbsp;
+<img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=Firebase&logoColor=white">
