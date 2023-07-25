@@ -1,7 +1,7 @@
 # Rolling-Rolling
 
 <p align="center">
-<img src="https://github.com/Seokyung/Rolling-Rolling/assets/48540451/5e25cd7a-82fb-4d3a-9c07-84c07426b359" width="300" />
+<img src="https://github.com/Seokyung/Rolling-Rolling/assets/48540451/5e25cd7a-82fb-4d3a-9c07-84c07426b359" width="350" />
 </p>
 
 ## 💁 프로젝트 소개
@@ -12,7 +12,7 @@
 
 서로의 페이퍼에 비밀 메세지를 남기고, 내 페이퍼의 메세지들을 열람해 볼 수 있는 롤링페이퍼 서비스입니다!
 
-> 개발 기간 : 2023.03 ~ 2023.06<br/>~~무한 수정 중입니다...~~
+> 개발 기간 : 2023.03 ~ 2023.06<br/>~~더 나은 서비스를 위해 무한 수정 중입니다...~~
 
 ## 🔗 배포 주소
 
