@@ -50,6 +50,8 @@ https://rolling-rolling.web.app/
 |                                                                             메세지 작성 화면                                                                              |                                                                                프로필 화면                                                                                |
 | <img width="1545" alt="스크린샷 2023-07-25 오후 11 02 23" src="https://github.com/Seokyung/Rolling-Rolling/assets/48540451/ca922eb1-2503-4160-a4ec-5dcec1f5e22d"> | <img width="1545" alt="스크린샷 2023-07-25 오후 11 06 12" src="https://github.com/Seokyung/Rolling-Rolling/assets/48540451/0070d95c-5fc6-45e0-82ec-fe7e67119af6"> |
 
+<hr/>
+
 ## 💻 기술 스택
 
 ### 개발 환경
