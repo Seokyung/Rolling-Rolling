@@ -4,7 +4,7 @@
 <img src="https://github.com/Seokyung/Rolling-Rolling/assets/48540451/5e25cd7a-82fb-4d3a-9c07-84c07426b359" width="300" />
 </p>
 
-## 프로젝트 소개
+## 💁‍♀️ 프로젝트 소개
 
 친구, 동료, 지인, 연인, 가족들과 온라인으로 롤링페이퍼를 돌려보자!
 
@@ -35,17 +35,19 @@ https://rolling-rolling.web.app/
 
 - 이름, 프로필 사진 변경 가능
 
+## 화면 구성
+
 ## 기술 스택
 
 ### 개발 환경
 
 <img src="https://img.shields.io/badge/Visual_Studio_Code-007ACC?style=for-the-badge&logo=VisualStudioCode&logoColor=white">&nbsp;
-<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badget&logo=GitHub&logoColor=white">
+<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white">
 
 ### 개발 툴
 
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">&nbsp;
-<img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=React&logoColor=white">&nbsp;
+<img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white">&nbsp;
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white">&nbsp;
 <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">&nbsp;
 <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=Firebase&logoColor=white">
