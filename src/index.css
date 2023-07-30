@@ -6,6 +6,12 @@
 	font-style: normal;
 }
 
+:root {
+	--font-size-lg: calc(1rem + 0.75vw);
+	--font-size-md: 1rem;
+	--font-size-sm: 0.75rem;
+}
+
 html,
 body,
 #root,
@@ -14,16 +20,17 @@ body,
 	padding: 0;
 	height: 100%;
 	background-color: #faeeed;
-	font-size: 10px;
-	/* font-size: var(--bs-body-font-size); */
 	color: #303030;
 	font-family: "Binggrae", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
 		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+	word-break: break-all;
 }
 
 * {
 	box-sizing: border-box;
-	/* -webkit-text-size-adjust: none; */
+	font-size: var(--font-size-md);
+	/* text-size-adjust: none;
+	-webkit-text-size-adjust: none; */
 }
 
 .btn-primary {
@@ -60,15 +67,6 @@ body,
 }
 
 @media screen and (max-width: 992px) {
-	html,
-	body,
-	#root,
-	#root > div {
-		/* font-size: 93.75%; */
-		font-size: 16px;
-		/* font-size: calc(1rem + 1.5vw); */
-	}
-
 	.form-control-lg {
 		min-height: 120px;
 	}

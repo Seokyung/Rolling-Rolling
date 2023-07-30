@@ -8,7 +8,7 @@ import {
 	FacebookAuthProvider,
 	GithubAuthProvider,
 } from "firebase/auth";
-import "./SocialAuth.css";
+
 import { Stack, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,6 +16,7 @@ import {
 	faGithub,
 	faFacebook,
 } from "@fortawesome/free-brands-svg-icons";
+import "./SocialAuth.css";
 
 function SocialAuth({ onLoginMethodChange }) {
 	const onSocialClick = async (e) => {
