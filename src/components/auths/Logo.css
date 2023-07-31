@@ -1,18 +1,22 @@
 .logo-container {
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
-	width: 100%;
 }
 .logo-container img {
 	display: flex;
-	min-width: 380px;
-	max-width: 450px;
+	width: 30rem;
+	min-width: 300px;
+	max-width: 400px;
+	width: 100%;
 	height: auto;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 768px) {
 	.logo-container {
 		justify-content: center;
+	}
+	.logo-container img {
+		min-width: 180px;
+		max-width: 300px;
 	}
 }

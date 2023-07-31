@@ -44,7 +44,7 @@ function SocialAuth({ onLoginMethodChange }) {
 	return (
 		<>
 			<h3 className="login-title">간편 로그인</h3>
-			<Stack className="social-form-container" gap={5}>
+			<Stack className="social-form-container" gap={4}>
 				<Button
 					className="social-btn google"
 					name="google"

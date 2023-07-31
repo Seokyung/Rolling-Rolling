@@ -4,13 +4,13 @@
 	align-items: center;
 	position: relative;
 	width: 100%;
+	margin: 0.5rem 0;
 }
 
 .authForm-prev-btn {
 	position: absolute;
-	left: 0;
+	left: 0.5rem;
 	padding: 0;
-	font-size: 2.8rem;
 	color: #6e6e6e;
 	outline: none;
 	appearance: none;
@@ -22,93 +22,66 @@
 .authForm-prev-btn:active {
 	color: #585858;
 }
+.authForm-prev-btn svg {
+	width: var(--font-size-btn);
+	height: var(--font-size-btn);
+}
+
+.authForm-title {
+	margin: 0;
+}
 
 .authForm-form-container {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	padding: 2rem;
+	padding: 1rem;
 }
 
 .authForm-form-group {
-	margin-bottom: 1.5rem;
+	margin-bottom: 1rem;
 }
 
 .authForm-form-label {
-	font-size: 1.8rem;
 	color: #9f5757;
 }
 
 .authForm-input-text {
-	padding: 1rem !important;
-	font-size: 2rem !important;
-}
-.authForm-input-text::placeholder {
-	font-size: 1.6rem !important;
+	padding-top: 0.75rem !important;
+	padding-bottom: 0.75rem !important;
 }
 
 .authForm-input-pw {
-	padding: 1rem !important;
-	font-size: 2rem !important;
+	padding-top: 0.75rem !important;
+	padding-bottom: 0.75rem !important;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
 		Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
 }
 .authForm-input-pw::placeholder {
-	font-size: 1.6rem !important;
 	font-family: "Binggrae", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
 		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
 }
 
-.authForm-form-feedback {
-	font-size: 1.5rem !important;
-}
-
 .authForm-form-error {
 	text-align: center !important;
-	font-size: 1.5rem !important;
 	color: var(--bs-form-invalid-color) !important;
 }
 
 .authForm-btn {
-	margin-top: 1rem !important;
-	padding: 1.8rem !important;
-	font-size: 2.2rem !important;
+	min-height: 60px;
+	font-size: var(--font-size-btn) !important;
 }
 
 .authForm-text {
 	width: 100%;
-	font-size: 1.8rem;
+	font-size: var(--font-size-sm);
 	color: #6e6e6e;
 	text-align: center;
 }
 
 .authForm-toggle-text {
-	margin-left: 1rem;
+	margin-left: 0.5rem;
 	cursor: pointer;
 	color: #9f5757;
 	text-decoration: underline;
-}
-
-@media screen and (max-width: 992px) {
-	.authForm-form-group {
-		margin-bottom: 2rem;
-	}
-
-	/* .authForm-form-label {
-		font-size: 2rem;
-	} */
-
-	.authForm-input-text {
-		font-size: 2.2rem !important;
-	}
-	.authForm-input-text::placeholder {
-		font-size: 1.8rem !important;
-	}
-
-	.authForm-input-pw {
-		font-size: 2.2rem !important;
-	}
-	.authForm-input-pw::placeholder {
-		font-size: 1.8rem !important;
-	}
 }

@@ -152,7 +152,7 @@ function AuthForm({ onLoginMethodChange }) {
 				<button className="authForm-prev-btn" onClick={onLoginMethodChange}>
 					<FontAwesomeIcon icon={faAngleLeft} />
 				</button>
-				<h3 className="login-title">{newAccount ? "회원가입" : "로그인"}</h3>
+				<h3 className="authForm-title">{newAccount ? "회원가입" : "로그인"}</h3>
 			</div>
 			<Form
 				className="authForm-form-container"
@@ -168,16 +168,12 @@ function AuthForm({ onLoginMethodChange }) {
 						type="email"
 						id="email"
 						name="email"
-						size="lg"
 						value={email}
 						ref={emailRef}
 						onChange={onAuthInputChange}
 						placeholder="이메일을 입력해주세요"
 					/>
-					<Form.Control.Feedback
-						type="invalid"
-						className="authForm-form-feedback"
-					>
+					<Form.Control.Feedback type="invalid">
 						이메일을 입력해주세요!
 					</Form.Control.Feedback>
 				</Form.Group>
@@ -189,16 +185,12 @@ function AuthForm({ onLoginMethodChange }) {
 						type="password"
 						id="password"
 						name="password"
-						size="lg"
 						value={password}
 						ref={pwRef}
 						onChange={onAuthInputChange}
 						placeholder="비밀번호를 입력해주세요"
 					/>
-					<Form.Control.Feedback
-						type="invalid"
-						className="authForm-form-feedback"
-					>
+					<Form.Control.Feedback type="invalid">
 						비밀번호를 입력해주세요!
 					</Form.Control.Feedback>
 				</Form.Group>
@@ -215,16 +207,12 @@ function AuthForm({ onLoginMethodChange }) {
 							type="password"
 							id="checkPassword"
 							name="checkPassword"
-							size="lg"
 							value={checkPassword}
 							ref={checkPwRef}
 							onChange={onAuthInputChange}
 							placeholder="비밀번호를 한번 더 입력해주세요"
 						/>
-						<Form.Control.Feedback
-							type="invalid"
-							className="authForm-form-feedback"
-						>
+						<Form.Control.Feedback type="invalid">
 							{checkPwMsg}
 						</Form.Control.Feedback>
 					</Form.Group>

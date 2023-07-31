@@ -7,18 +7,19 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	height: 300px;
+	height: 200px;
 	transform: translateY(0%);
 	color: #f5f5f7;
 	text-align: center;
 	background-color: #303030;
 }
+.footer-container span,
+a {
+	font-size: var(--font-size-sm);
+}
 
 .footer-developer {
-	margin: 0.75rem;
-}
-.footer-developer * {
-	font-size: var(--font-size-lg);
+	margin: 0.5rem;
 }
 .footer-developer a {
 	color: #f5f5f7;
