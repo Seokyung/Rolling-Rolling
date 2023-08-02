@@ -1,10 +1,8 @@
 .modal-dialog {
-	width: 70% !important;
-	max-width: 1200px !important;
-	min-width: 450px !important;
+	max-width: 700px !important;
 }
 .modal-content {
-	padding: 2rem;
+	padding: 1rem 0.25rem;
 	border-radius: 40px !important;
 }
 
@@ -18,30 +16,22 @@
 .create-modal-title {
 	margin: 0 !important;
 	color: #303030 !important;
-	font-size: 2rem !important;
-}
-
-.modal-close-btn {
-	font-size: 1.8rem;
+	font-size: 1.25rem !important;
 }
 
 .create-form-group {
 	display: flex !important;
 	flex-direction: column !important;
-	margin: 0 1rem 1.5rem 1rem;
+	margin: 0 1rem 0.5rem 1rem;
 }
 
 .create-form-title {
 	color: #9f5757;
-	font-size: 1.8rem;
 }
 
 .create-form-input {
-	padding: 1rem !important;
-	font-size: 2rem !important;
-}
-.create-form-input::placeholder {
-	font-size: 1.6rem !important;
+	padding-top: 0.75rem !important;
+	padding-bottom: 0.75rem !important;
 }
 
 .create-form-length-text {
@@ -49,22 +39,18 @@
 	justify-content: right !important;
 	margin-top: 0.5rem !important;
 	margin-right: 0.5rem;
-	font-size: 1.4rem !important;
 }
 
 .create-form-text {
-	margin-left: 0.75rem;
-	font-size: 1.4rem !important;
+	margin-left: 0.5rem;
 }
 .create-form-text-small {
-	margin-left: 0.75rem;
-	font-size: 1.3rem !important;
+	margin-left: 0.5rem;
 }
 
 .create-form-feedback {
 	width: 100% !important;
-	margin-left: 0.75rem;
-	font-size: 1.6rem !important;
+	margin-left: 0.25rem;
 }
 
 .create-form-code-group {
@@ -75,65 +61,14 @@
 }
 
 .create-form-code {
-	margin-right: 1rem !important;
-	padding: 1rem !important;
-	width: 5rem !important;
+	margin: 0 0.25rem !important;
+	max-width: 70px !important;
 	text-align: center;
-	font-size: 2rem !important;
 }
 
 .create-modal-footer {
 	display: flex !important;
 	justify-content: center !important;
-	margin: 1rem 1rem 0 1rem !important;
+	margin: 0.5rem 1rem 0 1rem !important;
 	padding: 1rem !important;
-}
-
-.create-modal-footer button {
-	font-size: 1.8rem !important;
-}
-
-.create-modal-footer button#create-btn {
-	margin-right: 1rem;
-}
-.create-modal-footer button#close-btn {
-	margin-left: 1rem;
-}
-
-@media screen and (max-width: 992px) {
-	.modal-dialog {
-		width: 93% !important;
-	}
-
-	.create-modal-title {
-		font-size: 2.2rem !important;
-	}
-
-	.create-form-title {
-		font-size: 2rem !important;
-	}
-
-	.create-form-input {
-		font-size: 2.2rem !important;
-	}
-	.create-form-input::placeholder {
-		font-size: 1.8rem !important;
-	}
-
-	.create-form-length-text {
-		font-size: 1.6rem !important;
-	}
-
-	.create-form-text {
-		font-size: 1.6rem !important;
-	}
-
-	.create-form-code {
-		width: 5.5rem;
-		font-size: 2.2rem !important;
-	}
-
-	.create-modal-footer button {
-		font-size: 2rem !important;
-	}
 }

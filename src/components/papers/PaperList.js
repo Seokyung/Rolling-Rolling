@@ -76,10 +76,13 @@ function PaperList() {
 			}
 		});
 
-		if (window.screen.width > 1200) {
+		if (window.innerWidth > 1200) {
+			setColNum(4);
+			setPapersPerPage(12);
+		} else if (window.innerWidth > 992) {
 			setColNum(3);
 			setPapersPerPage(12);
-		} else if (window.screen.width > 992) {
+		} else if (window.innerWidth > 768) {
 			setColNum(2);
 			setPapersPerPage(10);
 		} else {
@@ -94,10 +97,13 @@ function PaperList() {
 	}, []);
 
 	const handleResize = () => {
-		if (window.screen.width > 1200) {
+		if (window.innerWidth > 1200) {
+			setColNum(4);
+			setPapersPerPage(12);
+		} else if (window.innerWidth > 992) {
 			setColNum(3);
 			setPapersPerPage(12);
-		} else if (window.screen.width > 992) {
+		} else if (window.innerWidth > 768) {
 			setColNum(2);
 			setPapersPerPage(10);
 		} else {
@@ -157,12 +163,12 @@ function PaperList() {
 									<Card className="paperList-card-container">
 										<Card.Body>
 											<Card.Title>
-												<h4 className="paperList-card-title">
+												<h5 className="paperList-card-title">
 													{paper.isPrivate && (
 														<span className="private-icon">🔒</span>
 													)}
 													{paper.paperName}
-												</h4>
+												</h5>
 											</Card.Title>
 											<div className="paperList-card-info">
 												<Card.Text className="paperList-card-date">

@@ -108,7 +108,6 @@ function CreatePaper({ paperModal, setPaperModal, messageApi }) {
 					key={index}
 					type="text"
 					inputMode="numeric"
-					size="lg"
 					maxLength={1}
 					value={code}
 					ref={(el) => (codeInputRef.current[index] = el)}
@@ -207,7 +206,6 @@ function CreatePaper({ paperModal, setPaperModal, messageApi }) {
 							className="create-form-input"
 							required
 							type="text"
-							size="lg"
 							value={paperName}
 							ref={paperNameRef}
 							maxLength={maxNameLength}
@@ -245,12 +243,12 @@ function CreatePaper({ paperModal, setPaperModal, messageApi }) {
 						<Form.Group className="create-form-group">
 							<Form.Group className="create-form-code-group">
 								{renderCodeInputs()}
-								<Form.Control.Feedback
+								{/* <Form.Control.Feedback
 									className="create-form-feedback"
 									type="invalid"
 								>
 									페이퍼 코드가 올바르지 않습니다!
-								</Form.Control.Feedback>
+								</Form.Control.Feedback> */}
 							</Form.Group>
 							<Form.Text className="create-form-text">
 								4자리의 숫자로 이루어진 코드를 입력해주세요
@@ -260,13 +258,12 @@ function CreatePaper({ paperModal, setPaperModal, messageApi }) {
 				</Form>
 			</Modal.Body>
 			<Modal.Footer className="create-modal-footer">
-				<Button id="create-btn" size="lg" onClick={onCreatePaper}>
+				<Button id="create-btn" onClick={onCreatePaper}>
 					페이퍼 만들기
 				</Button>
 				<Button
 					id="close-btn"
 					variant="outline-secondary"
-					size="lg"
 					onClick={closePaperModal}
 				>
 					닫기

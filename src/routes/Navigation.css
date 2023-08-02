@@ -7,6 +7,7 @@
 	height: 70px;
 	margin: 0 auto;
 	padding: 0.5rem 0;
+	padding-top: 0.75rem;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -53,20 +54,21 @@
 .navigation-offcanvas-container {
 	display: flex !important;
 	padding: 1.5rem !important;
-	/* font-size: 1.7rem; */
 	border: none !important;
 }
 
-.navigation-offcanvas-title {
+.navigation-offcanvas-header {
 	display: flex !important;
 	align-items: center !important;
-	/* font-size: 2.2rem !important; */
+}
+
+.navigation-offcanvas-title {
 	color: #303030 !important;
 }
 
 .navigation-offcanvas-title span {
 	font-size: 1.375rem;
-	margin-right: 0.5rem;
+	margin-right: 0.25rem;
 	color: #944444;
 }
 
@@ -115,13 +117,4 @@
 	.navigation-offcanvas-container {
 		--bs-offcanvas-width: 75% !important;
 	}
-}
-
-@media screen and (min-width: 1400px) {
-	/* .navigation-container {
-		max-width: 1250px;
-	} */
-	/* .navigation-menu {
-		right: 5%;
-	} */
 }
