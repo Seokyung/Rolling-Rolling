@@ -60,7 +60,7 @@ function Navigation() {
 				show={isMenu}
 				onHide={closeMenu}
 			>
-				<Offcanvas.Header closeButton className="navigation-offcanvas-header">
+				<Offcanvas.Header closeButton>
 					<Offcanvas.Title className="navigation-offcanvas-title">
 						<span>{userName}</span>님
 					</Offcanvas.Title>

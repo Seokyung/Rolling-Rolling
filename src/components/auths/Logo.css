@@ -4,9 +4,9 @@
 }
 .logo-container img {
 	display: flex;
-	width: 23rem;
-	min-width: 300px;
-	max-width: 400px;
+	width: 20rem;
+	min-width: 250px;
+	max-width: 380px;
 	width: 100%;
 	height: auto;
 }
@@ -16,7 +16,7 @@
 		justify-content: center;
 	}
 	.logo-container img {
-		min-width: 180px;
-		max-width: 250px;
+		min-width: 150px;
+		max-width: 200px;
 	}
 }

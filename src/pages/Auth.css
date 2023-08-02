@@ -70,7 +70,6 @@
 
 	.auth-gap {
 		width: 100%;
-		min-width: none;
-		height: 2rem;
+		height: 1.75rem;
 	}
 }

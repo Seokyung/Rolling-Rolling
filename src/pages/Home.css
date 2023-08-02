@@ -4,7 +4,7 @@
 	width: 80%;
 	height: auto;
 	margin: 0 auto;
-	padding-top: 13rem;
+	padding-top: 80px;
 }
 
 .home-paper-container {
@@ -30,7 +30,7 @@
 	border-radius: 25px;
 	background-color: #fffdfd;
 	color: #595959;
-	font-size: 2.4rem;
+	/* font-size: 2.4rem; */
 	text-align: center;
 	word-break: break-all;
 }
@@ -50,7 +50,7 @@
 	bottom: 3rem;
 	margin-bottom: 4rem;
 	padding: 1.5rem 4rem !important;
-	font-size: 2rem !important;
+	/* font-size: 2rem !important; */
 	border-radius: 50px !important;
 	box-shadow: 0.3rem 0.5rem 0.5rem rgba(150, 143, 142, 0.8);
 }

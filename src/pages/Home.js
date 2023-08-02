@@ -23,7 +23,7 @@ function Home() {
 			<div className="home-container">
 				<div className="home-paper-container">
 					<div className="home-title-container">
-						<h2 className="home-title">내 페이퍼 목록</h2>
+						<h3 className="home-title">내 페이퍼 목록</h3>
 					</div>
 					<PaperList />
 				</div>
