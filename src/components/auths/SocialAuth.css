@@ -18,7 +18,7 @@
 	color: #fffdfd !important;
 	font-size: var(--font-size-btn) !important;
 	border: none !important;
-	box-shadow: 0.3rem 0.5rem 0.5rem #cccaca !important;
+	box-shadow: 0.25rem 0.25rem 0.25rem #cccaca !important;
 }
 
 .google {

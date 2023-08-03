@@ -66,15 +66,10 @@ function LogOutModal({ logOutModal, setLogOutModal }) {
 					<CloseButton className="modal-close-btn" onClick={closeLogOutModal} />
 				</Modal.Header>
 				<Modal.Body className="delete-modal-body">
-					<Button id="delete-btn" size="lg" onClick={onLogoutClick}>
+					<Button id="delete-btn" onClick={onLogoutClick}>
 						로그아웃하기
 					</Button>
-					<Button
-						id="close-btn"
-						variant="secondary"
-						size="lg"
-						onClick={closeLogOutModal}
-					>
+					<Button id="close-btn" variant="secondary" onClick={closeLogOutModal}>
 						닫기
 					</Button>
 				</Modal.Body>

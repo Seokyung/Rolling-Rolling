@@ -151,9 +151,8 @@ function EditPaper() {
 					className="create-form-code"
 					required
 					key={index}
-					type="number"
+					type="text"
 					inputMode="numeric"
-					size="lg"
 					maxLength={1}
 					value={code}
 					ref={(el) => (codeInputRef.current[index] = el)}
@@ -208,14 +207,14 @@ function EditPaper() {
 			{init ? (
 				<Skeleton active />
 			) : (
-				<div className="paper-wrapper">
+				<div className="editPaper-wrapper">
 					<div className="editPaper-container">
 						{userId === paperObj.creatorId ? (
 							<>
 								<Stack
-									className="paper-header-margin-bottom"
+									className="editPaper-header-container"
 									direction="horizontal"
-									gap={3}
+									gap={2}
 								>
 									<div className="paper-header-btn">
 										<button onClick={closeEditPaper}>
@@ -223,15 +222,12 @@ function EditPaper() {
 										</button>
 									</div>
 									<div className="paper-title-container">
-										<h2 className="editPaper-title">
-											<FontAwesomeIcon
-												className="icon-margin-right"
-												icon={faPenToSquare}
-											/>
+										<span className="editPaper-title">
+											<FontAwesomeIcon icon={faPenToSquare} />
 											페이퍼 수정
-										</h2>
+										</span>
 									</div>
-									<div className="paper-header-btn header-btn-width"></div>
+									<div className="paper-header-btn header-btn-no-display"></div>
 								</Stack>
 								<Form
 									noValidate
@@ -246,7 +242,6 @@ function EditPaper() {
 											<Form.Control
 												className="create-form-input"
 												type="text"
-												size="lg"
 												required
 												value={newPaperName}
 												ref={paperNameRef}
@@ -266,7 +261,7 @@ function EditPaper() {
 											{currentNameLength} / {maxNameLength}
 										</Form.Text>
 									</Form.Group>
-									<Divider />
+									<Divider className="divider-margin" />
 									<Form.Group className="create-form-group">
 										<Form.Check type="checkbox" className="create-form-title">
 											<Form.Check.Input
@@ -277,9 +272,9 @@ function EditPaper() {
 											<Form.Check.Label>🔒 비공개 페이퍼</Form.Check.Label>
 										</Form.Check>
 										<Form.Text className="create-form-text">
-											페이퍼의 공개여부를 설정해주세요
+											페이퍼의 공개여부를 설정해주세요.
 										</Form.Text>
-										<Form.Text className="create-form-text-small">
+										<Form.Text className="create-form-text">
 											(비공개 페이퍼는 코드를 입력해야만 볼 수 있어요🤫 )
 										</Form.Text>
 									</Form.Group>
@@ -287,22 +282,21 @@ function EditPaper() {
 										<Form.Group className="create-form-group">
 											<Form.Group className="create-form-code-group">
 												{renderCodeInputs()}
-												<Form.Control.Feedback
+												{/* <Form.Control.Feedback
 													className="create-form-feedback"
 													type="invalid"
 												>
 													페이퍼 코드가 올바르지 않습니다!
-												</Form.Control.Feedback>
+												</Form.Control.Feedback> */}
 											</Form.Group>
-											<Form.Text className="create-form-text">
-												4자리의 숫자로 이루어진 코드를 입력해주세요
+											<Form.Text className="create-form-text warning-text">
+												4자리의 숫자로 이루어진 코드를 입력해주세요!
 											</Form.Text>
 										</Form.Group>
 									)}
-									<Divider />
+									<Divider className="divider-margin" />
 									<div className="editPaper-edit-btn">
 										<Button
-											size="lg"
 											disabled={
 												isNameValidate && isPrivateValidate && isCodeValidate
 											}
@@ -313,7 +307,6 @@ function EditPaper() {
 										<Button
 											id="close-btn"
 											variant="outline-secondary"
-											size="lg"
 											onClick={closeEditPaper}
 										>
 											닫기
@@ -332,7 +325,7 @@ function EditPaper() {
 										<span className="empty-text bad-access">
 											잘못된 접근입니다!
 										</span>
-										<span className="empty-text">
+										<span className="font-change">
 											<Button
 												className="empty-prev-btn"
 												onClick={closeEditPaper}

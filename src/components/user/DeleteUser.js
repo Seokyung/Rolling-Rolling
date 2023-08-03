@@ -95,30 +95,24 @@ function DeleteUser({ deleteModal, setDeleteModal, messageApi }) {
 			animation={true}
 		>
 			<Modal.Header className="delete-modal-header">
-				<Modal.Title className="delete-modal-title-danger">
+				<Modal.Title className="delete-modal-title bad-access">
 					정말로 회원을 탈퇴하시겠습니까?
-					<span>회원 탈퇴시 그동안의 데이터도 모두 삭제됩니다.</span>
 				</Modal.Title>
 				<CloseButton className="modal-close-btn" onClick={closeDeleteModal} />
 			</Modal.Header>
-			<Modal.Body className="delete-modal-body">
+			<Modal.Body>회원 탈퇴시 그동안의 데이터도 모두 삭제됩니다.</Modal.Body>
+			<Modal.Footer className="delete-modal-body">
 				<Button
 					id="delete-btn"
 					variant="outline-danger"
-					size="lg"
 					onClick={deleteAccount}
 				>
 					회원 탈퇴
 				</Button>
-				<Button
-					id="close-btn"
-					variant="secondary"
-					size="lg"
-					onClick={closeDeleteModal}
-				>
+				<Button id="close-btn" variant="secondary" onClick={closeDeleteModal}>
 					닫기
 				</Button>
-			</Modal.Body>
+			</Modal.Footer>
 		</Modal>
 	);
 }

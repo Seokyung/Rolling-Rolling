@@ -65,7 +65,7 @@ function Navigation() {
 						<span>{userName}</span>님
 					</Offcanvas.Title>
 				</Offcanvas.Header>
-				<Divider className="offcanvas-divider" />
+				<Divider className="divider-margin" />
 				<Offcanvas.Body className="navigation-offcanvas-body">
 					<Nav className="navigation-offcanvas-nav">
 						<Link
@@ -84,7 +84,7 @@ function Navigation() {
 							<FontAwesomeIcon icon={faUser} />내 프로필
 						</Link>
 					</Nav>
-					<Divider className="offcanvas-divider" />
+					<Divider className="divider-margin" />
 					<div className="navigation-offcanvas-logout-btn">
 						<Button onClick={openLogOutModal}>로그아웃</Button>
 					</div>

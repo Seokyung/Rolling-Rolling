@@ -96,16 +96,20 @@ function Paper() {
 					<>
 						<div className="paper-wrapper">
 							<div className="paper-container">
-								<Stack direction="horizontal" gap={3}>
-									<div className="paper-header-btn">
+								<Stack
+									direction="horizontal"
+									className="paper-header-container"
+									gap={2}
+								>
+									<div className="paper-header-btn paper-header-margin-top">
 										<button onClick={gotoPrevPage}>
 											<FontAwesomeIcon icon={faAngleLeft} />
 										</button>
 									</div>
 									<div className="paper-title-container">
-										<h2 className="paper-title">{paperObj.paperName}</h2>
+										<h4 className="paper-title">{paperObj.paperName}</h4>
 									</div>
-									<div className="paper-header-btn">
+									<div className="paper-header-btn paper-header-margin-top">
 										{userId === paperObj.creatorId && (
 											<button onClick={showPaperSettings}>
 												<FontAwesomeIcon icon={faEllipsisVertical} />

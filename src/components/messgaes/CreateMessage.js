@@ -303,7 +303,7 @@ function CreateMessage() {
 									{currentContentLength} / {maxContentLength}
 								</Form.Text>
 							</Form.Group>
-							<Divider className="paper-divider" />
+							<Divider className="divider-margin" />
 							<Form.Group className="create-form-group">
 								<Form.Check type="checkbox" className="create-form-title">
 									<Form.Check.Input
@@ -321,7 +321,7 @@ function CreateMessage() {
 									)
 								</Form.Text>
 							</Form.Group>
-							<Divider className="paper-divider" />
+							<Divider className="divider-margin" />
 							<Form.Group className="createMessage-button-group">
 								{
 									<Collapse in={attachOpen}>
@@ -402,7 +402,7 @@ function CreateMessage() {
 									</ToggleButton>
 								</ButtonGroup>
 							</Form.Group>
-							<Divider className="paper-divider" />
+							<Divider className="divider-margin" />
 							<div className="editPaper-edit-btn">
 								<Button size="lg" onClick={onMessageSubmit}>
 									메세지 게시하기

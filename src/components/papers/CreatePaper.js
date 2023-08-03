@@ -233,7 +233,7 @@ function CreatePaper({ paperModal, setPaperModal, messageApi }) {
 							<Form.Check.Label>🔒 비공개 페이퍼</Form.Check.Label>
 						</Form.Check>
 						<Form.Text className="create-form-text">
-							페이퍼의 공개여부를 설정해주세요
+							페이퍼의 공개여부를 설정해주세요.
 						</Form.Text>
 						<Form.Text className="create-form-text">
 							(비공개 페이퍼는 코드를 입력해야만 볼 수 있어요🤫 )
@@ -250,8 +250,8 @@ function CreatePaper({ paperModal, setPaperModal, messageApi }) {
 									페이퍼 코드가 올바르지 않습니다!
 								</Form.Control.Feedback> */}
 							</Form.Group>
-							<Form.Text className="create-form-text">
-								4자리의 숫자로 이루어진 코드를 입력해주세요
+							<Form.Text className="create-form-text warning-text ">
+								4자리의 숫자로 이루어진 코드를 입력해주세요!
 							</Form.Text>
 						</Form.Group>
 					)}

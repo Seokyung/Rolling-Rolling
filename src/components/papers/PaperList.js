@@ -163,12 +163,12 @@ function PaperList() {
 									<Card className="paperList-card-container">
 										<Card.Body>
 											<Card.Title>
-												<h5 className="paperList-card-title">
+												<span className="paperList-card-title">
 													{paper.isPrivate && (
 														<span className="private-icon">🔒</span>
 													)}
 													{paper.paperName}
-												</h5>
+												</span>
 											</Card.Title>
 											<div className="paperList-card-info">
 												<Card.Text className="paperList-card-date">

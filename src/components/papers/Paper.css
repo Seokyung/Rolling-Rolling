@@ -1,10 +1,12 @@
 .paper-wrapper {
 	display: flex;
 	flex-direction: column;
-	width: 80%;
+	width: 90%;
+	min-width: 250px;
+	max-width: 1200px;
 	height: auto;
 	margin: 0 auto;
-	padding-top: 13rem;
+	padding-top: 85px;
 }
 
 .paper-container {
@@ -12,15 +14,15 @@
 	flex-direction: column;
 	width: 100%;
 	height: auto;
-	margin-bottom: 5rem;
-	padding: 3rem 2rem;
+	margin-bottom: 1.5rem;
+	padding: 1.5rem 1.25rem;
 	border-radius: 40px;
 	background-color: #e4bab5;
-	box-shadow: 0.5rem 0.5rem 0.5rem #968f8e;
+	box-shadow: 0.375rem 0.375rem 0.375rem #968f8e;
 }
 
-.paper-header-margin-bottom {
-	margin-bottom: 1.5rem;
+.paper-header-container {
+	align-items: flex-start !important;
 }
 
 .paper-header-btn {
@@ -30,6 +32,7 @@
 	z-index: 1;
 }
 .paper-header-btn button {
+	padding: 0;
 	color: #595959;
 	outline: none;
 	appearance: none;
@@ -38,16 +41,20 @@
 	background: none;
 }
 .paper-header-btn svg {
-	width: 2.2rem;
-	height: 2.2rem;
+	width: var(--font-size-btn);
+	height: var(--font-size-btn);
 }
 .paper-header-btn button:hover,
 .paper-header-btn button:active {
 	color: #454545;
 }
 
-.header-btn-width {
-	width: 2.2rem;
+.paper-header-margin-top {
+	margin-top: 0.75rem;
+}
+
+.header-btn-no-display {
+	width: var(--font-size-btn);
 }
 
 .paper-title-container {
@@ -59,14 +66,17 @@
 }
 
 .paper-title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 60px;
 	margin: 0;
-	padding: 1.8rem 2.5rem;
-	border-radius: 40px;
+	padding: 0.5rem 1.125rem;
+	border-radius: 25px;
 	background-color: #fffdfd;
 	color: #944444;
-	font-size: 2.4rem;
 	text-align: center;
-	word-break: break-all;
+	word-break: break-word;
 }
 
 .scroll-top-btn {
@@ -75,27 +85,14 @@
 	justify-content: center;
 	align-items: center;
 	z-index: 3;
-	width: 5rem;
-	height: 5rem;
-	right: 3rem;
-	bottom: 3rem;
+	width: 2.5rem;
+	height: 2.5rem;
+	right: 1.5rem;
+	bottom: 2.5rem;
 	border-radius: 50% !important;
-	box-shadow: 0 0 0.75rem 0.25rem rgba(150, 143, 142, 0.35);
+	box-shadow: 0 0 0.25rem 0.25rem rgba(150, 143, 142, 0.35);
 }
 .scroll-top-btn svg {
-	width: 50%;
-	height: 50%;
-}
-
-@media screen and (max-width: 992px) {
-	.paper-wrapper {
-		width: 90%;
-		min-width: 350px;
-	}
-}
-
-@media screen and (min-width: 1400px) {
-	.paper-wrapper {
-		max-width: 1000px;
-	}
+	width: 100%;
+	height: 100%;
 }

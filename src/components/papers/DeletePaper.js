@@ -87,18 +87,12 @@ function DeletePaper({ deleteModal, setDeleteModal, paperId }) {
 					<CloseButton className="modal-close-btn" onClick={closeDeleteModal} />
 				</Modal.Header>
 				<Modal.Body className="delete-modal-body">
-					<Button
-						id="delete-btn"
-						variant="danger"
-						size="lg"
-						onClick={deletePaper}
-					>
+					<Button id="delete-btn" variant="danger" onClick={deletePaper}>
 						페이퍼 삭제
 					</Button>
 					<Button
 						id="close-btn"
 						variant="outline-secondary"
-						size="lg"
 						onClick={closeDeleteModal}
 					>
 						닫기

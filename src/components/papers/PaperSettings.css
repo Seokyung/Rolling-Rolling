@@ -1,23 +1,21 @@
 .paperSettings-offcanvas-container {
-	--bs-offcanvas-height: 55% !important;
+	--bs-offcanvas-height: 50% !important;
 	border: none !important;
-	font-size: 1.7rem;
-	padding: 4rem !important;
+	padding: 1rem 0 !important;
 	border-radius: 40px 40px 0 0 !important;
 }
 
 .paperSettings-offcanvas-header {
-	margin-bottom: 1rem !important;
+	padding: 1rem 1.75rem !important;
 }
 
 .paperSettings-offcanvas-title {
 	display: flex;
 	align-items: center;
-	font-size: 2.2rem !important;
 	color: #454545 !important;
 }
 .paperSettings-offcanvas-title svg {
-	margin-right: 1rem;
+	margin-right: 0.375rem;
 }
 
 .paperSettings-offcanvas-body {
@@ -25,32 +23,20 @@
 	flex-direction: row !important;
 	justify-content: center !important;
 	align-items: flex-start;
-	width: 100%;
-	margin-top: 1rem;
-	padding: 2rem !important;
 }
 
 .paperSettings-offcanvas-body button {
-	width: 90%;
-	max-width: 400px;
-	margin: 0 3rem;
-	padding: 2rem;
-	font-size: 2.2rem;
-	border-radius: 10px;
+	font-size: var(--font-size-btn);
+	margin: 0.75rem;
 }
 .paperSettings-offcanvas-body button svg {
-	margin-right: 1rem;
+	margin-right: 0.375rem;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 768px) {
 	.paperSettings-offcanvas-body {
 		flex-direction: column !important;
 		justify-content: flex-start !important;
 		align-items: center;
-	}
-
-	.paperSettings-offcanvas-body button {
-		max-width: none;
-		margin: 1.5rem;
 	}
 }

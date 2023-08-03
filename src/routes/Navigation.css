@@ -43,8 +43,8 @@
 }
 
 .navigation-menu svg {
-	width: 25px;
-	height: 25px;
+	width: 22px;
+	height: 22px;
 	color: #595959;
 }
 .navigation-menu svg:hover {
@@ -70,10 +70,6 @@
 	font-size: 1.375rem;
 	margin-right: 0.25rem;
 	color: #944444;
-}
-
-.offcanvas-divider {
-	margin: 1rem 0 !important;
 }
 
 .navigation-offcanvas-body {
@@ -110,7 +106,7 @@
 .navigation-offcanvas-logout-btn button {
 	padding: 0.5rem 1rem !important;
 	font-size: var(--font-size-btn) !important;
-	box-shadow: 0.3rem 0.3rem 0.3rem #cccaca !important;
+	box-shadow: 0.25rem 0.25rem 0.25rem #cccaca !important;
 }
 
 @media screen and (max-width: 768px) {

@@ -365,7 +365,7 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 						onMouseOut={stopDrawing}
 						onTouchEnd={stopDrawing}
 					/>
-					<Divider className="paper-divider" />
+					<Divider className="divider-margin" />
 					<Row align="middle" justify="center">
 						<Col className="msgDrawing-tool-group">
 							<input
@@ -397,7 +397,7 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 								</label>
 							</Tooltip>
 						</Col>
-						<Divider type="vertical" className="tool-divider" />
+						{/* <Divider type="vertical" className="tool-divider" /> */}
 						<Col className="msgDrawing-tool-group">
 							<div className="msgDrawing-color-container">
 								{renderColorPalette()}
@@ -468,13 +468,12 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 					</Row>
 				</Modal.Body>
 				<Modal.Footer className="create-modal-footer">
-					<Button id="create-btn" size="lg" onClick={saveDrawing}>
+					<Button id="create-btn" onClick={saveDrawing}>
 						그림 첨부하기
 					</Button>
 					<Button
 						id="close-btn"
 						variant="outline-secondary"
-						size="lg"
 						onClick={closeCanvasModal}
 					>
 						닫기

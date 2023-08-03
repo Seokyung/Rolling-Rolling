@@ -2,15 +2,14 @@
 	max-width: 700px !important;
 }
 .modal-content {
-	padding: 1rem 0.25rem;
-	border-radius: 40px !important;
+	padding: 0.5rem 0.25rem;
+	border-radius: 25px !important;
 }
 
 .create-modal-header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin: 0 1rem 1rem 1rem;
 }
 
 .create-modal-title {
@@ -22,7 +21,6 @@
 .create-form-group {
 	display: flex !important;
 	flex-direction: column !important;
-	margin: 0 1rem 0.5rem 1rem;
 }
 
 .create-form-title {
@@ -42,10 +40,11 @@
 }
 
 .create-form-text {
+	font-size: 0.75rem !important;
 	margin-left: 0.5rem;
 }
-.create-form-text-small {
-	margin-left: 0.5rem;
+.warning-text {
+	color: #dc3545 !important;
 }
 
 .create-form-feedback {
@@ -69,6 +68,4 @@
 .create-modal-footer {
 	display: flex !important;
 	justify-content: center !important;
-	margin: 0.5rem 1rem 0 1rem !important;
-	padding: 1rem !important;
 }

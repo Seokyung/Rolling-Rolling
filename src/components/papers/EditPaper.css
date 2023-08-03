@@ -1,55 +1,69 @@
+.editPaper-wrapper {
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	min-width: 250px;
+	max-width: 900px;
+	margin: 0 auto;
+	padding-top: 85px;
+}
+
 .editPaper-container {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 	height: auto;
-	margin-bottom: 5rem;
-	padding: 3rem;
+	margin-bottom: 2rem;
+	padding: 1.25rem;
 	border-radius: 40px;
 	background-color: #e4bab5;
 	box-shadow: 0.5rem 0.5rem 0.5rem #968f8e;
 }
 
+.editPaper-header-container {
+	margin-bottom: 1rem;
+}
+
 .editPaper-title {
-	font-size: 2.2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 50px;
 	margin: 0;
-	padding: 1.8rem 2.5rem;
-	border-radius: 40px;
+	padding: 0.5rem 1.125rem;
+	border-radius: 25px;
+	font-size: 1.125rem;
 	color: #595959;
 	background-color: #fffdfd;
+}
+.editPaper-title svg {
+	font-size: inherit;
+	margin-right: 0.375rem;
 }
 
 .editPaper-form-container {
 	display: flex;
 	flex-direction: column;
-	margin-top: 0.5rem;
-	margin-bottom: 1rem;
-	padding: 2.5rem;
+	padding: 1.5rem;
 	background-color: #fffdfd;
 	border-radius: 40px;
 }
 
 .editPaper-edit-btn {
 	display: flex !important;
-	justify-content: flex-end !important;
+	justify-content: center !important;
 }
 
 .editPaper-edit-btn button {
-	font-size: 1.8rem !important;
-}
-
-.editPaper-edit-btn button#close-btn {
-	margin-left: 2rem;
+	margin: 0 0.5rem;
 }
 
 .bad-access {
-	font-size: 2rem;
-	color: red;
+	color: red !important;
 }
 .empty-prev-btn {
 	margin-top: 0.5rem;
-	font-size: 1.6rem !important;
 }
 .empty-prev-btn svg {
-	margin-right: 0.75rem;
+	margin-right: 0.375rem;
 }

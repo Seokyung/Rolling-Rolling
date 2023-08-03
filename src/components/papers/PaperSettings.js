@@ -39,15 +39,16 @@ function PaperSettings({ paperSettings, setPaperSettings, setDeleteModal }) {
 					페이퍼 설정
 				</Offcanvas.Title>
 			</Offcanvas.Header>
-			<Divider className="offcanvas-divider" />
+			<Divider className="divider-margin" />
 			<Offcanvas.Body className="paperSettings-offcanvas-body">
-				<Button id="edit-btn" onClick={gotoEditPaper}>
+				<Button id="edit-btn" size="lg" onClick={gotoEditPaper}>
 					<FontAwesomeIcon icon={faPenToSquare} />
 					페이퍼 수정하기
 				</Button>
 				<Button
 					id="delete-btn"
 					variant="outline-danger"
+					size="lg"
 					onClick={openDeleteModal}
 				>
 					<FontAwesomeIcon icon={faTrash} />

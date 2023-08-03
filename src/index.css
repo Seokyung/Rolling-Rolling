@@ -52,17 +52,26 @@ body,
 }
 
 .alert-message-container {
-	margin-top: 5vh;
-	margin-left: 2vw;
-	margin-right: 2vw;
 	font-family: "Binggrae", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
 		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-	font-size: 1.8rem;
-	word-break: break-all;
+	word-break: break-word;
+}
+.alert-message-container div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.alert-message-container svg {
-	width: 1.8rem;
-	height: 1.8rem;
-	margin-right: 0.35rem;
+.font-change {
+	font-family: "Binggrae", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.divider-margin {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+.modal-open {
+	padding-right: 0 !important;
 }

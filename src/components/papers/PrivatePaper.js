@@ -33,17 +33,21 @@ function PrivatePaper() {
 				setPaperObj(paperDocObj);
 			}
 		);
+
 		onAuthStateChanged(authService, (user) => {
 			if (user === null) {
 				unsubscribe();
 			}
 		});
+
 		if (codeInputRef.current[0]) {
 			codeInputRef.current[0].focus();
 			if (codes[0]) {
 				codeInputRef.current[0].select();
 			}
 		}
+
+		window.scrollTo({ top: 0, behavior: "smooth" });
 	}, []);
 
 	const closePrivatePaper = () => {
@@ -87,7 +91,6 @@ function PrivatePaper() {
 					key={index}
 					type="password"
 					inputMode="numeric"
-					size="lg"
 					maxLength={1}
 					value={code}
 					ref={(el) => (codeInputRef.current[index] = el)}
@@ -134,18 +137,18 @@ function PrivatePaper() {
 	return (
 		<>
 			{contextHolder}
-			<div className="paper-wrapper">
-				<div className="editPaper-container">
-					<Stack direction="horizontal" gap={3}>
+			<div className="privatePaper-wrapper">
+				<div className="editPaper-container privatePaper-container">
+					<Stack direction="horizontal" gap={2}>
 						<div className="paper-header-btn">
 							<button onClick={closePrivatePaper}>
 								<FontAwesomeIcon icon={faAngleLeft} />
 							</button>
 						</div>
 						<div className="paper-title-container">
-							<h2 className="editPaper-title">페이퍼 코드를 입력하세요 🤫</h2>
+							<span className="editPaper-title">🤫 페이퍼 코드 입력</span>
 						</div>
-						<div className="paper-header-btn header-btn-width"></div>
+						<div className="paper-header-btn header-btn-no-display"></div>
 					</Stack>
 					<Form
 						noValidate
