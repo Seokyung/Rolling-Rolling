@@ -1,9 +1,23 @@
+:root {
+	--msg-col-num: 3;
+}
+
 .messageList-container {
 	margin: 3rem 0;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 768px) {
+	:root {
+		--msg-col-num: 1;
+	}
+
 	.messageList-container {
 		margin: 2rem 0;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	:root {
+		--msg-col-num: 4;
 	}
 }

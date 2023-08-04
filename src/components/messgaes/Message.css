@@ -2,11 +2,11 @@
 	display: flex !important;
 	flex-direction: column !important;
 	margin: 0.5rem !important;
-	padding: 1.5rem !important;
+	padding: 1rem !important;
 	background-color: #fffdfd !important;
 	border: none !important;
-	border-radius: 5px 5px 30px 5px !important;
-	box-shadow: 0.5rem 0.5rem 0.5rem #a0827f !important;
+	/* border-radius: 5px 5px 30px 5px !important; */
+	box-shadow: 0.375rem 0.375rem 0.375rem #a0827f !important;
 }
 
 .message-card-title {
