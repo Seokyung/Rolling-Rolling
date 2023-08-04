@@ -16,6 +16,12 @@
 	}
 }
 
+@media screen and (max-width: 992px) {
+	:root {
+		--msg-col-num: 2;
+	}
+}
+
 @media screen and (min-width: 1200px) {
 	:root {
 		--msg-col-num: 4;

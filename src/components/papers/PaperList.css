@@ -1,5 +1,5 @@
 :root {
-	--papers-per-page: 10;
+	--papers-per-page: 12;
 }
 
 .paperList-col-container {
@@ -109,6 +109,12 @@
 
 	.paperList-col-container {
 		width: 100% !important;
+	}
+}
+
+@media screen and (max-width: 992px) {
+	:root {
+		--papers-per-page: 10;
 	}
 }
 
