@@ -3,7 +3,7 @@
 	flex-direction: column;
 	width: 90%;
 	min-width: 250px;
-	max-width: 900px;
+	max-width: 750px;
 	margin: 0 auto;
 	padding-top: 85px;
 }
@@ -14,7 +14,7 @@
 	width: 100%;
 	height: auto;
 	margin-bottom: 2rem;
-	padding: 1.25rem;
+	padding: calc(1rem + 0.45vw);
 	border-radius: 40px;
 	background-color: #e4bab5;
 	box-shadow: 0.5rem 0.5rem 0.5rem #968f8e;

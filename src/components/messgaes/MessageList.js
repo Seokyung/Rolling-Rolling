@@ -109,7 +109,7 @@ function MessageList() {
 	const renderMsgRows = () => {
 		return msgRowNum.map((rowIdx) => {
 			return (
-				<Row key={rowIdx}>
+				<Row key={rowIdx} className="messageList-row">
 					{messages
 						.slice(rowIdx * msgColNum, (rowIdx + 1) * msgColNum)
 						.map((message) => (

@@ -74,18 +74,12 @@ function DeleteMessage({ deleteModal, setDeleteModal, msgObj, messageApi }) {
 					<CloseButton className="modal-close-btn" onClick={closeDeleteModal} />
 				</Modal.Header>
 				<Modal.Body className="delete-modal-body">
-					<Button
-						id="delete-btn"
-						variant="danger"
-						size="lg"
-						onClick={deleteMessage}
-					>
+					<Button id="delete-btn" variant="danger" onClick={deleteMessage}>
 						메세지 삭제
 					</Button>
 					<Button
 						id="close-btn"
 						variant="outline-secondary"
-						size="lg"
 						onClick={closeDeleteModal}
 					>
 						닫기

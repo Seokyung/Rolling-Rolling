@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { dbService, storageService } from "api/fbase";
 import { collection, doc, setDoc } from "firebase/firestore";
@@ -64,6 +64,10 @@ function CreateMessage() {
 
 	const [messageApi, contextHolder] = message.useMessage();
 	const key = "updatable";
+
+	useEffect(() => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	}, []);
 
 	const closeCreateMessage = () => {
 		navigate(`/paper/${paperId}`, { replace: true });
@@ -207,12 +211,12 @@ function CreateMessage() {
 	return (
 		<>
 			{contextHolder}
-			<div className="paper-wrapper">
+			<div className="editPaper-wrapper">
 				<div className="editPaper-container">
 					<Stack
-						className="paper-header-margin-bottom"
+						className="editPaper-header-container"
 						direction="horizontal"
-						gap={3}
+						gap={2}
 					>
 						<div className="paper-header-btn">
 							<button onClick={closeCreateMessage}>
@@ -220,15 +224,12 @@ function CreateMessage() {
 							</button>
 						</div>
 						<div className="paper-title-container">
-							<h2 className="createMessage-title">
-								<FontAwesomeIcon
-									className="icon-margin-right"
-									icon={faEnvelope}
-								/>
+							<h2 className="editPaper-title">
+								<FontAwesomeIcon icon={faEnvelope} />
 								메세지 쓰기
 							</h2>
 						</div>
-						<div className="paper-header-btn header-btn-width"></div>
+						<div className="paper-header-btn header-btn-no-display"></div>
 					</Stack>
 					<div className="editPaper-form-container">
 						<Form noValidate validated={validated}>
@@ -240,7 +241,6 @@ function CreateMessage() {
 									className="create-form-input"
 									type="text"
 									name="title"
-									size="lg"
 									required
 									value={msgTitle}
 									ref={msgTitleRef}
@@ -264,7 +264,6 @@ function CreateMessage() {
 									className="create-form-input"
 									type="text"
 									name="writer"
-									size="lg"
 									required
 									value={msgWriter}
 									ref={msgWriterRef}
@@ -293,7 +292,6 @@ function CreateMessage() {
 									as="textarea"
 									rows={5}
 									name="content"
-									size="lg"
 									value={msgContent}
 									maxLength={maxContentLength}
 									onChange={onMessageChange}
@@ -316,7 +314,7 @@ function CreateMessage() {
 								<Form.Text className="create-form-text">
 									메세지의 공개여부를 설정해주세요
 								</Form.Text>
-								<Form.Text className="create-form-text-small">
+								<Form.Text className="create-form-text">
 									(비공개 메세지는 페이퍼 주인과 메세지 작성자만 볼 수 있어요🤫
 									)
 								</Form.Text>
@@ -404,13 +402,10 @@ function CreateMessage() {
 							</Form.Group>
 							<Divider className="divider-margin" />
 							<div className="editPaper-edit-btn">
-								<Button size="lg" onClick={onMessageSubmit}>
-									메세지 게시하기
-								</Button>
+								<Button onClick={onMessageSubmit}>메세지 게시하기</Button>
 								<Button
 									id="close-btn"
 									variant="outline-secondary"
-									size="lg"
 									onClick={closeCreateMessage}
 								>
 									닫기

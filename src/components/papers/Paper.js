@@ -107,7 +107,7 @@ function Paper() {
 										</button>
 									</div>
 									<div className="paper-title-container">
-										<h4 className="paper-title">{paperObj.paperName}</h4>
+										<h5 className="paper-title">{paperObj.paperName}</h5>
 									</div>
 									<div className="paper-header-btn paper-header-margin-top">
 										{userId === paperObj.creatorId && (

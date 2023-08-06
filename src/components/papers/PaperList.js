@@ -14,7 +14,7 @@ import useDebounce from "modules/useDebounce";
 import DeletePaper from "./DeletePaper";
 
 import { Skeleton, Empty } from "antd";
-import { Row, Col, Card, Button, Pagination } from "react-bootstrap";
+import { Row, Col, Card, Badge, Button, Pagination } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import "./PaperList.css";
@@ -54,8 +54,9 @@ function PaperList() {
 		const unsubscribe = onSnapshot(
 			q,
 			(snapshot) => {
-				const paperArray = snapshot.docs.map((doc) => ({
+				const paperArray = snapshot.docs.map((doc, idx) => ({
 					id: doc.id,
+					paperIdx: idx,
 					...doc.data(),
 				}));
 				if (paperArray.length !== 0) {
@@ -70,6 +71,7 @@ function PaperList() {
 				console.log(error.code);
 			}
 		);
+
 		onAuthStateChanged(authService, (user) => {
 			if (user === null) {
 				unsubscribe();
@@ -77,9 +79,6 @@ function PaperList() {
 		});
 
 		if (window.innerWidth > 1200) {
-			setColNum(4);
-			setPapersPerPage(12);
-		} else if (window.innerWidth > 992) {
 			setColNum(3);
 			setPapersPerPage(12);
 		} else if (window.innerWidth > 768) {
@@ -98,9 +97,6 @@ function PaperList() {
 
 	const handleResize = () => {
 		if (window.innerWidth > 1200) {
-			setColNum(4);
-			setPapersPerPage(12);
-		} else if (window.innerWidth > 992) {
 			setColNum(3);
 			setPapersPerPage(12);
 		} else if (window.innerWidth > 768) {
@@ -150,7 +146,7 @@ function PaperList() {
 				<Row key={rowIdx}>
 					{slicedPapers
 						.slice(rowIdx * colNum, (rowIdx + 1) * colNum)
-						.map((paper) => (
+						.map((paper, idx) => (
 							<Col key={paper.id} className="paperList-col-container">
 								<Link
 									to={
@@ -162,6 +158,11 @@ function PaperList() {
 								>
 									<Card className="paperList-card-container">
 										<Card.Body>
+											<Card.Text className="paperList-card-badge">
+												<Badge bg="secondary">
+													{papers.length - paper.paperIdx}번째 페이퍼
+												</Badge>
+											</Card.Text>
 											<Card.Title>
 												<span className="paperList-card-title">
 													{paper.isPrivate && (

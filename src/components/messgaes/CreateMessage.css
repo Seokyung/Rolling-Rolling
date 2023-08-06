@@ -1,32 +1,24 @@
-.createMessage-title {
-	/* font-size: 2.2rem; */
-	margin: 0;
-	padding: 1.8rem 2.5rem;
-	border-radius: 40px;
-	color: #303030;
-	background-color: #fffdfd;
-}
-
 .createMessage-button-group {
 	display: flex !important;
 	flex-direction: column !important;
 	align-items: center;
-	margin: 0 1rem 1.5rem 1rem;
+	padding: 0.75rem 0;
 }
 
 .createMessage-toggle-btn {
-	/* font-size: 1.6rem !important; */
-	padding: 1rem 1.5rem !important;
+	font-size: 0.875rem !important;
+	padding: 0.5rem 0.875rem !important;
 }
 .createMessage-toggle-btn svg {
-	margin-right: 0.75rem;
+	font-size: inherit;
+	margin-right: 0.375rem;
 }
 
-.createMessage-form-group {
+/* .createMessage-form-group {
 	display: flex !important;
 	flex-direction: row !important;
 	margin: 0 1rem 1.5rem 1rem;
-}
+} */
 
 .createMessage-attach-group {
 	margin: 0;
