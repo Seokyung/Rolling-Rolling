@@ -61,7 +61,7 @@ function MessageImage({ msgImg, setMsgImg, closeAttach }) {
 			<div className="msgImg-wrapper">
 				{msgImg ? (
 					<div className="msgImg-container">
-						<div className="msgImg-img-container">
+						<div className="width-full">
 							<Image src={msgImg} className="msgImg-img" alt="messageImage" />
 							<CircleBtn
 								shape="circle"
@@ -73,8 +73,8 @@ function MessageImage({ msgImg, setMsgImg, closeAttach }) {
 						</div>
 					</div>
 				) : (
-					<div className="msgImg-container">
-						<label htmlFor="msgImgInput">
+					<div className="msgImg-container width-full">
+						<label htmlFor="msgImgInput" className="width-full">
 							<div className="msgImg-upload-container">
 								<FontAwesomeIcon icon={faInbox} />
 								첨부할 사진을 선택해주세요

@@ -335,7 +335,7 @@ function CreateMessage() {
 												<div className="msgImg-wrapper">
 													{msgDrawing ? (
 														<div className="msgImg-container">
-															<div className="msgImg-img-container">
+															<div className="width-full">
 																<Image
 																	src={msgDrawing}
 																	className="msgImg-img"
@@ -351,7 +351,7 @@ function CreateMessage() {
 															</div>
 														</div>
 													) : (
-														<div className="msgImg-container">
+														<div className="msgImg-container width-full">
 															<div
 																className="msgImg-upload-container"
 																onClick={openCanvasModal}

@@ -29,7 +29,7 @@ function Profile({ refreshUser }) {
 			<div className="profile-container">
 				<div className="home-paper-container">
 					<Row className="profile-row">
-						<Col span={24} xl={9} className="profile-info-container">
+						<Col span={24} md={9} className="profile-info-container">
 							<div className="profile-img-wrapper">
 								<div className="profile-img-container">
 									<Image
@@ -39,9 +39,9 @@ function Profile({ refreshUser }) {
 									/>
 								</div>
 							</div>
-							<h2 className="profile-username">{userObj.displayName}</h2>
+							<h4 className="profile-username">{userObj.displayName}</h4>
 						</Col>
-						<Col span={24} xl={15} className="profile-edit-container">
+						<Col span={24} md={15} className="profile-edit-container">
 							<EditProfile
 								refreshUser={refreshUser}
 								openLogOutModal={openLogOutModal}

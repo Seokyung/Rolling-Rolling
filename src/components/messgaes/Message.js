@@ -43,17 +43,6 @@ function Message({ msgObj, isOwner, messageApi }) {
 									className="message-card-img"
 									alt="messageImage"
 								/>
-								// <Card.Link
-								// 	href={msgObj.msgImg}
-								// 	target="_blank"
-								// 	rel="noopener noreferrer"
-								// >
-								// 	<Card.Img
-								// 		src={msgObj.msgImg}
-								// 		className="message-card-img"
-								// 		alt="messageImage"
-								// 	/>
-								// </Card.Link>
 							)}
 							{isOwner && (
 								<div className="message-delete-btn">

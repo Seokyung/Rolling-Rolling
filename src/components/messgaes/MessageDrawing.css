@@ -2,95 +2,133 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	padding: 1rem;
+	padding: 1rem 0.75rem !important;
 }
 
 .msgDrawing-canvas {
 	width: 100%;
-	height: 100%;
-	min-height: 200px;
-	max-height: 500px;
+	height: 30vh;
+	min-height: 150px;
+	max-height: 350px;
 	align-self: center;
 	border: 2px solid #303030;
 	border-radius: 20px;
 }
 
 .msgDrawing-tool-group {
-	padding: 0.5rem;
-	/* font-size: 1.6rem; */
+	display: flex;
+	flex-direction: row;
+	padding: 0.25rem;
 	font-family: "Binggrae", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
 		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 .tool-divider {
-	height: 3rem;
+	height: 2rem;
 	border-color: rgba(5, 5, 5, 0.1);
-}
-
-.msgDrawing-radio-container {
-	margin-right: 1rem;
 }
 
 .msgDrawing-radio-btn {
 	display: none;
 }
 .msgDrawing-radio-btn:checked + label svg {
-	border: 1px rgb(105, 177, 255) solid;
-	box-shadow: 0.3rem 0.3rem 0.3rem rgba(145, 202, 255, 0.5);
+	border: 1px #e4bab5 solid;
+	box-shadow: 0.25rem 0.25rem 0.25rem rgba(148, 68, 68, 0.35);
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .msgDrawing-radio-btn:checked + input {
-	border: 1px #69b1ff solid;
-	box-shadow: 0.3rem 0.3rem 0.3rem rgba(145, 202, 255, 0.5);
+	border: 1px #e4bab5 solid;
+	box-shadow: 0.25rem 0.25rem 0.25rem rgba(148, 68, 68, 0.35);
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .msgDrawing-tool-label {
-	margin: 0 0.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 25px;
+	margin: 0 0.375rem;
 	cursor: pointer;
+	border: none;
+	outline: none;
+	appearance: none;
+	white-space: nowrap;
+	background: none;
 }
 .msgDrawing-tool-label svg {
-	padding: 1rem;
-	/* width: 2.5rem;
-	height: 2.5rem; */
+	padding: 0.75rem;
 	border: 1px #dee2e6 solid;
 	border-radius: 50%;
 }
 .msgDrawing-tool-label svg:hover {
-	box-shadow: 0.3rem 0.3rem 0.3rem rgba(150, 143, 142, 0.8);
+	box-shadow: 0.25rem 0.25rem 0.25rem rgba(150, 143, 142, 0.8);
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.msgDrawing-color-container {
+.msgDrawing-tool-undo-btn {
 	display: flex;
-	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+	min-height: 25px;
+	margin: 0 0.375rem;
+	padding: 0;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	appearance: none;
+	white-space: nowrap;
+	background: none;
+}
+.msgDrawing-tool-undo-btn svg {
+	padding: 0.75rem;
+	border: 1px #dee2e6 solid;
+	border-radius: 50%;
+}
+.msgDrawing-tool-undo-btn #back-icon:hover {
+	box-shadow: -0.25rem 0.25rem 0.25rem rgba(148, 68, 68, 0.35);
+}
+.msgDrawing-tool-undo-btn svg:hover {
+	color: #9f5757;
+	border-color: #e4bab5;
+	box-shadow: 0.25rem 0.25rem 0.25rem rgba(148, 68, 68, 0.35);
+	transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+		box-shadow 0.15s ease-in-out;
+}
+
+.colorPicker-margin {
+	margin: 0.5rem 0;
+	padding: 0.25rem 0;
+}
+
+.msgDrawing-color-group {
+	display: flex;
+	flex-direction: row;
+	font-family: "Binggrae", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 .msgDrawing-color-label {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	margin: 0 0.5rem;
 	cursor: pointer;
 }
 .msgDrawing-color-label svg {
 	padding: 0.375rem;
-	/* width: 3rem;
-	height: 3rem; */
 	border: 1px #dee2e6 solid;
 	border-radius: 50%;
 }
 .msgDrawing-color-label svg:hover {
-	box-shadow: 0.3rem 0.3rem 0.3rem rgba(150, 143, 142, 0.8);
+	box-shadow: 0.25rem 0.25rem 0.25rem rgba(150, 143, 142, 0.8);
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .msgDrawing-radio-colorPicker {
 	margin: 0 0.5rem;
-	/* min-width: 5rem;
-	min-height: 5rem; */
 }
 .msgDrawing-radio-colorPicker:hover {
-	box-shadow: 0.3rem 0.3rem 0.3rem rgba(150, 143, 142, 0.8);
+	box-shadow: 0.25rem 0.25rem 0.25rem rgba(150, 143, 142, 0.8);
 }
 
 #pen-black {
@@ -112,7 +150,7 @@
 .msgDrawing-slider-group {
 	display: flex;
 	justify-content: center;
-	padding: 0.5rem;
+	padding: 0.25rem;
 }
 
 .msgDrawing-slider {
@@ -120,65 +158,43 @@
 	margin-right: 0.5rem;
 }
 
+.ant-slider .ant-slider-track {
+	background-color: #efdedd !important;
+}
+.ant-slider:hover .ant-slider-track {
+	background-color: #e4bab5 !important;
+}
+
+.ant-slider .ant-slider-handle::after {
+	box-shadow: 0 0 0 2px #c37f7f !important;
+}
+.ant-slider:hover .ant-slider-handle::after {
+	box-shadow: 0 0 0 4px #9f5757 !important;
+}
+
 .msgDrawing-slider-number {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* min-width: 60px; */
 }
 .msgDrawing-slider-number input {
+	font-size: 0.75rem !important;
 	font-family: "Binggrae", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
 		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
 }
 
-.msgDrawing-tool-undo-group {
-	padding: 0.25rem;
-	/* padding: 0.5rem 1.5rem 0 1.5rem; */
-	font-family: "Binggrae", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+.ant-input-number:hover {
+	border-color: #c37f7f !important;
 }
 
-.msgDrawing-tool-undo-btn {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	margin: 0;
-	padding: 0;
-	color: #303030;
-	border: none;
-	border-radius: 50%;
-	outline: none;
-	appearance: none;
-	white-space: nowrap;
-	background: none;
-}
-.msgDrawing-tool-undo-btn svg {
-	/* width: 2.75rem;
-	height: 2.75rem; */
-	margin-bottom: 0.3rem;
-}
-.msgDrawing-tool-undo-btn #back {
-	/* width: 3rem;
-	height: 3rem; */
-	margin-bottom: 0.3rem;
-}
-.msgDrawing-tool-undo-btn span {
-	/* font-size: 1rem; */
-}
-.msgDrawing-tool-undo-btn:hover {
-	color: #4096ff;
-	transition: color 0.15s ease-in-out;
+.ant-input-number-focused {
+	border-color: #c37f7f !important;
+	box-shadow: 0 0 0 2px rgba(195, 127, 127, 0.1) !important;
 }
 
-@media screen and (max-height: 600px) {
-	.msgDrawing-canvas {
-		height: 100%;
-	}
+.ant-input-number .ant-input-number-handler svg {
+	color: #d9d9d9 !important;
 }
-
-@media screen and (max-height: 768px) {
-	.msgDrawing-canvas {
-		/* max-height: 300px; */
-	}
+.ant-input-number .ant-input-number-handler:hover svg {
+	color: #c37f7f !important;
 }

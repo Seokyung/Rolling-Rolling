@@ -9,6 +9,7 @@ import {
 	faEraser,
 	faCircleLeft,
 	faRotateLeft,
+	faShare,
 	faCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import "./MessageDrawing.css";
@@ -273,6 +274,11 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 		ctx.strokeStyle = value;
 	};
 
+	const changeToCustomColor = () => {
+		setColor(customColor);
+		ctx.strokeStyle = customColor;
+	};
+
 	const undoLastDrawing = () => {
 		if (idx <= 0) {
 			resetDrawing();
@@ -316,7 +322,7 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 	const renderColorPalette = () => {
 		return colorPalette.map((pen) => {
 			return (
-				<div key={pen.id}>
+				<Col key={pen.id} className="msgDrawing-color-group">
 					<input
 						className="msgDrawing-radio-btn"
 						type="radio"
@@ -333,7 +339,7 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 					>
 						<FontAwesomeIcon icon={faCircle} />
 					</label>
-				</div>
+				</Col>
 			);
 		});
 	};
@@ -347,6 +353,7 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 				centered
 				animation={true}
 				keyboard={false}
+				scrollable={true}
 				backdrop="static"
 			>
 				<Modal.Header className="create-modal-header">
@@ -377,11 +384,11 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 								checked={tool === "pen"}
 								onChange={onToolChange}
 							/>
-							<Tooltip title="펜">
-								<label htmlFor="pen" className="msgDrawing-tool-label">
-									<FontAwesomeIcon icon={faPaintbrush} />
-								</label>
-							</Tooltip>
+							{/* <Tooltip title="펜"> */}
+							<label htmlFor="pen" className="msgDrawing-tool-label">
+								<FontAwesomeIcon icon={faPaintbrush} />
+							</label>
+							{/* </Tooltip> */}
 							<input
 								className="msgDrawing-radio-btn"
 								type="radio"
@@ -391,33 +398,53 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 								checked={tool === "eraser"}
 								onChange={onToolChange}
 							/>
-							<Tooltip title="지우개">
-								<label htmlFor="eraser" className="msgDrawing-tool-label">
-									<FontAwesomeIcon icon={faEraser} />
-								</label>
-							</Tooltip>
+							{/* <Tooltip title="지우개"> */}
+							<label htmlFor="eraser" className="msgDrawing-tool-label">
+								<FontAwesomeIcon icon={faEraser} />
+							</label>
+							{/* </Tooltip> */}
 						</Col>
-						{/* <Divider type="vertical" className="tool-divider" /> */}
+						<Divider type="vertical" className="tool-divider" />
 						<Col className="msgDrawing-tool-group">
-							<div className="msgDrawing-color-container">
-								{renderColorPalette()}
-								<input
-									className="msgDrawing-radio-btn"
-									type="radio"
-									name="penColor"
-									id={customColor}
-									value={customColor}
-									checked={color === customColor}
-									onChange={onColorChange}
+							{/* <Tooltip title="하나 지우기"> */}
+							<span
+								className="msgDrawing-tool-undo-btn"
+								onClick={undoLastDrawing}
+							>
+								<FontAwesomeIcon
+									id="back-icon"
+									icon={faShare}
+									flip="horizontal"
 								/>
-								<Form.Control
-									className="msgDrawing-radio-colorPicker"
-									type="color"
-									id="customColor"
-									value={customColor}
-									onChange={onCustomColorChange}
-								/>
-							</div>
+							</span>
+							{/* </Tooltip> */}
+							{/* <Tooltip title="전부 지우기"> */}
+							<span className="msgDrawing-tool-undo-btn" onClick={resetDrawing}>
+								<FontAwesomeIcon icon={faRotateLeft} />
+							</span>
+							{/* </Tooltip> */}
+						</Col>
+					</Row>
+					<Row align="middle" justify="center" className="colorPicker-margin">
+						{renderColorPalette()}
+						<Col className="msgDrawing-color-group">
+							<input
+								className="msgDrawing-radio-btn"
+								type="radio"
+								name="penColor"
+								id={customColor}
+								value={customColor}
+								checked={color === customColor}
+								onChange={onColorChange}
+							/>
+							<Form.Control
+								className="msgDrawing-radio-colorPicker"
+								type="color"
+								id="customColor"
+								value={customColor}
+								onChange={onCustomColorChange}
+								onClick={changeToCustomColor}
+							/>
 						</Col>
 					</Row>
 					<Row align="middle" justify="center">
@@ -439,31 +466,6 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 								value={toolWidth}
 								onChange={onToolWidthChange}
 							/>
-						</Col>
-					</Row>
-					<Row align="middle" justify="center">
-						<Col className="msgDrawing-tool-undo-group">
-							<Tooltip title="하나 지우기">
-								<button
-									className="msgDrawing-tool-undo-btn"
-									onClick={undoLastDrawing}
-								>
-									<FontAwesomeIcon id="back" icon={faCircleLeft} />
-									<span>BACK</span>
-								</button>
-							</Tooltip>
-						</Col>
-						<Col className="msgDrawing-tool-undo-group">
-							<Tooltip title="전부 지우기">
-								<button
-									className="msgDrawing-tool-undo-btn"
-									variant="secondary"
-									onClick={resetDrawing}
-								>
-									<FontAwesomeIcon icon={faRotateLeft} />
-									<span>RESET</span>
-								</button>
-							</Tooltip>
 						</Col>
 					</Row>
 				</Modal.Body>

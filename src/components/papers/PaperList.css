@@ -31,11 +31,21 @@
 }
 
 .paperList-card-badge {
-	margin-bottom: 0.25rem;
+	display: flex;
+	align-items: center;
+	margin-bottom: 0.5rem;
 }
 .paperList-card-badge span {
+	margin-right: 0.25rem;
 	padding: 0.25rem 0.375rem;
 	font-size: 0.5rem;
+}
+#grey-background {
+	background-color: #8d9296 !important;
+}
+#badge-icon {
+	padding: 0;
+	margin-right: 0.15rem;
 }
 
 .paperList-card-title {

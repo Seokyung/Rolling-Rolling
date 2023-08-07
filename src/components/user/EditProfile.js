@@ -6,7 +6,7 @@ import EditUser from "./EditUser";
 import { Form, Button, InputGroup } from "react-bootstrap";
 import { Divider, message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPen, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { faUserPen, faImages } from "@fortawesome/free-solid-svg-icons";
 import "./EditProfile.css";
 
 function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
@@ -128,11 +128,12 @@ function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
 				className="editPaper-form-container"
 			>
 				<div className="editProfile-header-container">
-					<h2 className="editProfile-title">
-						<FontAwesomeIcon icon={faUserPen} /> 프로필 수정
-					</h2>
+					<h5 className="editProfile-title">
+						<FontAwesomeIcon icon={faUserPen} />
+						프로필 수정
+					</h5>
 				</div>
-				<Divider className="offcanvas-divider" />
+				<Divider className="divider-margin" />
 				<Form.Group className="editProfile-form-group">
 					<div className="editProfile-input-group editProfile-profile-img-container">
 						<div className="profile-img-upload-wrapper">
@@ -140,9 +141,13 @@ function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
 								<img src={profileImg} alt="editProfileImage" />
 								<label htmlFor="profileImgInput">
 									<div>
-										<p>
-											<FontAwesomeIcon icon={faPenToSquare} /> 사진 선택
-										</p>
+										<span>
+											<FontAwesomeIcon
+												icon={faImages}
+												className="private-icon"
+											/>
+											사진 선택
+										</span>
 									</div>
 								</label>
 							</div>
@@ -160,14 +165,13 @@ function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
 						)} */}
 					</div>
 				</Form.Group>
-				<Divider className="offcanvas-divider" />
+				<Divider className="divider-margin" />
 				<Form.Group className="editProfile-form-group">
 					<Form.Label className="create-form-title">이름 변경하기</Form.Label>
 					<InputGroup hasValidation className="editProfile-input-group">
 						<Form.Control
 							type="text"
 							className="create-form-input"
-							size="lg"
 							required
 							value={userName}
 							ref={userNameRef}
@@ -190,7 +194,7 @@ function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
 					</Form.Text>
 				</Form.Group>
 				<Divider className="offcanvas-divider" />
-				<Form.Group className="editProfile-edit-btn">
+				<Form.Group className="editPaper-edit-btn">
 					<Button
 						variant="outline-secondary"
 						disabled={!(!isNameValidate || !isImgValidate)}
@@ -205,7 +209,7 @@ function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
 						프로필 수정하기
 					</Button>
 				</Form.Group>
-				<Divider className="offcanvas-divider" />
+				<Divider className="divider-margin" />
 				<Form.Group className="editProfile-auth-btn">
 					<Button
 						id="logout-btn"

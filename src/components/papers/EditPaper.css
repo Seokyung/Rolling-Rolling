@@ -44,9 +44,9 @@
 .editPaper-form-container {
 	display: flex;
 	flex-direction: column;
-	padding: 1.5rem;
+	padding: 1.5rem 1.25rem;
 	background-color: #fffdfd;
-	border-radius: 40px;
+	border-radius: 25px;
 }
 
 .editPaper-edit-btn {

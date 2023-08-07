@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LogOutModal from "components/user/LogOutModal";
@@ -16,13 +15,12 @@ function Navigation() {
 	const [isMenu, setIsMenu] = useState(false);
 	const [logOutModal, setLogOutModal] = useState(false);
 
-	const location = useLocation();
+	const scrollToTop = () => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	};
 
 	const reloadHome = () => {
-		let currentLocation = location.pathname;
-		if (currentLocation === "/") {
-			window.location.reload();
-		}
+		window.location.reload().then(scrollToTop());
 	};
 
 	const showMenu = () => {
@@ -31,6 +29,14 @@ function Navigation() {
 
 	const closeMenu = () => {
 		setIsMenu(false);
+	};
+
+	const goToHome = () => {
+		scrollToTop().then(closeMenu());
+	};
+
+	const goToProfile = () => {
+		scrollToTop().then(closeMenu());
 	};
 
 	const openLogOutModal = () => {
@@ -71,7 +77,7 @@ function Navigation() {
 						<Link
 							to={"/"}
 							className="navigation-offcanvas-nav-link"
-							onClick={closeMenu}
+							onClick={goToHome}
 						>
 							<FontAwesomeIcon icon={faHouse} />
 							페이퍼 홈
@@ -79,7 +85,7 @@ function Navigation() {
 						<Link
 							to={"/profile"}
 							className="navigation-offcanvas-nav-link"
-							onClick={closeMenu}
+							onClick={goToProfile}
 						>
 							<FontAwesomeIcon icon={faUser} />내 프로필
 						</Link>

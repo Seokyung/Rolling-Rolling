@@ -192,6 +192,7 @@ function CreatePaper({ paperModal, setPaperModal, messageApi }) {
 			centered
 			animation={true}
 			keyboard={false}
+			scrollable={true}
 			backdrop="static"
 		>
 			<Modal.Header className="create-modal-header">

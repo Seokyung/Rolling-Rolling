@@ -163,7 +163,10 @@ function MessageList() {
 					{contextHolder}
 					<div className="messageList-container">
 						{isMessages ? (
-							renderMsgRows()
+							<>
+								<span>✉️ 총 {messages.length}개의 메세지가 있어요!</span>
+								{renderMsgRows()}
+							</>
 						) : (
 							<Empty
 								description={

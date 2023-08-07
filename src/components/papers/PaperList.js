@@ -159,9 +159,14 @@ function PaperList() {
 									<Card className="paperList-card-container">
 										<Card.Body>
 											<Card.Text className="paperList-card-badge">
-												<Badge bg="secondary">
+												<Badge id="grey-background">
 													{papers.length - paper.paperIdx}번째 페이퍼
 												</Badge>
+												{paper.isPrivate && (
+													<Badge bg="warning" text="dark">
+														<span id="badge-icon">🔒</span>비공개
+													</Badge>
+												)}
 											</Card.Text>
 											<Card.Title>
 												<span className="paperList-card-title">
