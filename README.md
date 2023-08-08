@@ -48,7 +48,7 @@ https://rolling-rolling.web.app/
 |                                                                             페이퍼 수정 화면                                                                              |                                                                             메세지 작성 화면                                                                              |
 | <img width="1535" alt="스크린샷 2023-08-09 오전 2 28 15" src="https://github.com/Seokyung/Rolling-Rolling/assets/48540451/a2755b31-2ea5-4a8f-bc57-afe36656f4b1"> | <img width="1535" alt="스크린샷 2023-08-09 오전 2 28 52" src="https://github.com/Seokyung/Rolling-Rolling/assets/48540451/d9c74a8b-3aa9-47ba-8787-265e2788c026"> |
 |                                                                             메세지 그림 화면                                                                              |                                                                                프로필 화면                                                                                |
-| <img width="1535" alt="스크린샷 2023-08-09 오전 2 25 48" src="https://github.com/Seokyung/Rolling-Rolling/assets/48540451/0a5c7588-6108-47fd-869f-8e22b02ae18d"> | <img width="1535" alt="스크린샷 2023-08-09 오전 2 17 09" src="https://github.com/Seokyung/Rolling-Rolling/assets/48540451/3ac9963d-c532-4005-b8ec-fa735500a3ba"> |
+| <img width="1535" alt="스크린샷 2023-08-09 오전 2 30 57" src="https://github.com/Seokyung/Rolling-Rolling/assets/48540451/866c0f05-7d28-4893-bd18-7338f0dc99eb"> | <img width="1535" alt="스크린샷 2023-08-09 오전 2 17 09" src="https://github.com/Seokyung/Rolling-Rolling/assets/48540451/3ac9963d-c532-4005-b8ec-fa735500a3ba"> |
 
 <hr/>
 
