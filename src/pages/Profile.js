@@ -41,7 +41,8 @@ function Profile({ refreshUser }) {
 							</div>
 							<h4 className="profile-username">{userObj.displayName}</h4>
 						</Col>
-						<Col span={24} md={15} className="profile-edit-container">
+						<Col span={24} md={1} className="profile-empty-col"></Col>
+						<Col span={24} md={14}>
 							<EditProfile
 								refreshUser={refreshUser}
 								openLogOutModal={openLogOutModal}

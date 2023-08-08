@@ -6,7 +6,11 @@ import EditUser from "./EditUser";
 import { Form, Button, InputGroup } from "react-bootstrap";
 import { Divider, message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPen, faImages } from "@fortawesome/free-solid-svg-icons";
+import {
+	faUserPen,
+	faImages,
+	faRotateLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import "./EditProfile.css";
 
 function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
@@ -63,6 +67,7 @@ function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
 	const undoChanges = () => {
 		setUserName(userObj.displayName);
 		setProfileImg(userObj.photoURL);
+		setCurrentNameLength(userObj.displayName.length);
 
 		setIsNameValidate(true);
 		setIsImgValidate(true);
@@ -128,10 +133,10 @@ function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
 				className="editPaper-form-container"
 			>
 				<div className="editProfile-header-container">
-					<h5 className="editProfile-title">
+					<span className="editProfile-title">
 						<FontAwesomeIcon icon={faUserPen} />
 						프로필 수정
-					</h5>
+					</span>
 				</div>
 				<Divider className="divider-margin" />
 				<Form.Group className="editProfile-form-group">
@@ -140,14 +145,16 @@ function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
 							<div className="profile-img-upload-container">
 								<img src={profileImg} alt="editProfileImage" />
 								<label htmlFor="profileImgInput">
-									<div>
-										<span>
-											<FontAwesomeIcon
-												icon={faImages}
-												className="private-icon"
-											/>
-											사진 선택
-										</span>
+									<div className="profile-img-upload-container-img">
+										<div className="profile-img-upload-container-select">
+											<span>
+												<FontAwesomeIcon
+													icon={faImages}
+													className="private-icon"
+												/>
+												사진 선택
+											</span>
+										</div>
 									</div>
 								</label>
 							</div>
@@ -193,21 +200,23 @@ function EditProfile({ refreshUser, openLogOutModal, openDeleteModal }) {
 						{currentNameLength} / {maxNameLength}
 					</Form.Text>
 				</Form.Group>
-				<Divider className="offcanvas-divider" />
+				<Divider className="divider-margin" />
 				<Form.Group className="editPaper-edit-btn">
-					<Button
-						variant="outline-secondary"
-						disabled={!(!isNameValidate || !isImgValidate)}
-						onClick={undoChanges}
-					>
-						변경사항 되돌리기
-					</Button>
 					<Button
 						disabled={!(!isNameValidate || !isImgValidate)}
 						onClick={onUpdateUserInfo}
 					>
 						프로필 수정하기
 					</Button>
+					{(!isNameValidate || !isImgValidate) && (
+						<Button
+							variant="outline-secondary"
+							disabled={!(!isNameValidate || !isImgValidate)}
+							onClick={undoChanges}
+						>
+							<FontAwesomeIcon icon={faRotateLeft} />
+						</Button>
+					)}
 				</Form.Group>
 				<Divider className="divider-margin" />
 				<Form.Group className="editProfile-auth-btn">

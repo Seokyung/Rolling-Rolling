@@ -15,6 +15,10 @@
 	border-radius: 20px;
 }
 
+.row-padding {
+	padding: 0.25rem;
+}
+
 .msgDrawing-tool-group {
 	display: flex;
 	flex-direction: row;
@@ -32,13 +36,13 @@
 	display: none;
 }
 .msgDrawing-radio-btn:checked + label svg {
-	border: 1px #e4bab5 solid;
-	box-shadow: 0.25rem 0.25rem 0.25rem rgba(148, 68, 68, 0.35);
+	border: 1px #c37f7f solid;
+	box-shadow: 2px 2px 2px rgba(148, 68, 68, 0.35);
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .msgDrawing-radio-btn:checked + input {
-	border: 1px #e4bab5 solid;
-	box-shadow: 0.25rem 0.25rem 0.25rem rgba(148, 68, 68, 0.35);
+	border: 1px #c37f7f solid;
+	box-shadow: 2px 2px 2px rgba(148, 68, 68, 0.35);
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -48,6 +52,8 @@
 	align-items: center;
 	min-height: 25px;
 	margin: 0 0.375rem;
+	padding: 0.25rem;
+	border-radius: 50%;
 	cursor: pointer;
 	border: none;
 	outline: none;
@@ -56,12 +62,13 @@
 	background: none;
 }
 .msgDrawing-tool-label svg {
+	min-height: 20px;
 	padding: 0.75rem;
 	border: 1px #dee2e6 solid;
 	border-radius: 50%;
 }
 .msgDrawing-tool-label svg:hover {
-	box-shadow: 0.25rem 0.25rem 0.25rem rgba(150, 143, 142, 0.8);
+	box-shadow: 2px 2px 2px rgba(150, 143, 142, 0.8);
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -69,9 +76,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	min-height: 25px;
 	margin: 0 0.375rem;
-	padding: 0;
+	padding: 0.25rem;
 	cursor: pointer;
 	border: none;
 	outline: none;
@@ -80,29 +86,31 @@
 	background: none;
 }
 .msgDrawing-tool-undo-btn svg {
+	min-height: 20px;
 	padding: 0.75rem;
 	border: 1px #dee2e6 solid;
 	border-radius: 50%;
 }
 .msgDrawing-tool-undo-btn #back-icon:hover {
-	box-shadow: -0.25rem 0.25rem 0.25rem rgba(148, 68, 68, 0.35);
+	box-shadow: -2px 2px 2px rgba(148, 68, 68, 0.35);
 }
 .msgDrawing-tool-undo-btn svg:hover {
 	color: #9f5757;
-	border-color: #e4bab5;
-	box-shadow: 0.25rem 0.25rem 0.25rem rgba(148, 68, 68, 0.35);
+	border-color: #c37f7f;
+	box-shadow: 2px 2px 2px rgba(148, 68, 68, 0.35);
 	transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out,
 		box-shadow 0.15s ease-in-out;
 }
 
 .colorPicker-margin {
-	margin: 0.5rem 0;
-	padding: 0.25rem 0;
+	margin: 0.25rem 0;
+	padding: 0.25rem;
 }
 
 .msgDrawing-color-group {
 	display: flex;
 	flex-direction: row;
+	padding: 0.25rem;
 	font-family: "Binggrae", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
 		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
@@ -111,24 +119,25 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 0 0.5rem;
+	padding: 0.25rem;
 	cursor: pointer;
 }
 .msgDrawing-color-label svg {
-	padding: 0.375rem;
+	min-height: 25px;
+	padding: 0.25rem;
 	border: 1px #dee2e6 solid;
 	border-radius: 50%;
 }
 .msgDrawing-color-label svg:hover {
-	box-shadow: 0.25rem 0.25rem 0.25rem rgba(150, 143, 142, 0.8);
+	box-shadow: 2px 2px 2px rgba(150, 143, 142, 0.8);
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .msgDrawing-radio-colorPicker {
-	margin: 0 0.5rem;
+	margin: 0.25rem;
 }
 .msgDrawing-radio-colorPicker:hover {
-	box-shadow: 0.25rem 0.25rem 0.25rem rgba(150, 143, 142, 0.8);
+	box-shadow: 2px 2px 2px rgba(150, 143, 142, 0.8);
 }
 
 #pen-black {
@@ -150,25 +159,38 @@
 .msgDrawing-slider-group {
 	display: flex;
 	justify-content: center;
+	margin: 0 0.125rem;
 	padding: 0.25rem;
 }
 
 .msgDrawing-slider {
-	min-width: 150px;
+	min-width: 160px;
 	margin-right: 0.5rem;
 }
 
 .ant-slider .ant-slider-track {
-	background-color: #efdedd !important;
-}
-.ant-slider:hover .ant-slider-track {
 	background-color: #e4bab5 !important;
 }
+.ant-slider:hover .ant-slider-track {
+	background-color: #d0a39e !important;
+}
 
+.ant-slider-horizontal .ant-slider-handle {
+	inset-block-start: -1px;
+}
+
+.ant-slider .ant-slider-handle {
+	width: 15px !important;
+	height: 15px !important;
+}
 .ant-slider .ant-slider-handle::after {
+	width: 15px !important;
+	height: 15px !important;
 	box-shadow: 0 0 0 2px #c37f7f !important;
 }
 .ant-slider:hover .ant-slider-handle::after {
+	width: 18px !important;
+	height: 18px !important;
 	box-shadow: 0 0 0 4px #9f5757 !important;
 }
 
@@ -178,7 +200,6 @@
 	align-items: center;
 }
 .msgDrawing-slider-number input {
-	font-size: 0.75rem !important;
 	font-family: "Binggrae", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
 		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
 }

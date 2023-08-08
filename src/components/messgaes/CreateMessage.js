@@ -105,6 +105,8 @@ function CreateMessage() {
 	};
 
 	const openCanvasModal = () => {
+		document.body.style.position = "fixed";
+		document.body.style.top = `-${window.scrollY}px`;
 		setCanvasModal(true);
 	};
 

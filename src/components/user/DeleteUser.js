@@ -65,24 +65,20 @@ function DeleteUser({ deleteModal, setDeleteModal, messageApi }) {
 
 	const deleteAccount = async () => {
 		try {
+			const user = authService.currentUser;
+
 			deletePaperData();
 			deleteProfileImgData();
-			// alert with style
-			// closeDeleteModal();
-			// await messageApi.open({
-			// 	type: "success",
-			// 	content: `회원 탈퇴 되었습니다! 그동안 Rolling-Rolling을 애용해주셔서 감사합니다 :) 필요할 땐 언제든 다시 찾아주세요♡`,
-			// 	duration: 3,
-			// });
+			await deleteUser(user);
+
 			alert(
 				`회원 탈퇴 되었습니다!\n\n그동안 Rolling-Rolling을 애용해주셔서 감사합니다 :)\n필요할 땐 언제든 다시 찾아주세요♡`
 			);
-			navigate("/", { replace: true });
 		} catch (error) {
 			alert(error.message);
 		} finally {
-			const user = authService.currentUser;
-			await deleteUser(user);
+			window.scrollTo({ top: 0, behavior: "smooth" });
+			navigate("/", { replace: true });
 		}
 	};
 

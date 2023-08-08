@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faPaintbrush,
 	faEraser,
-	faCircleLeft,
 	faRotateLeft,
 	faShare,
 	faCircle,
@@ -21,7 +20,7 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 	const [canvasHeight, setCanvasHeight] = useState(0);
 	const [isDrawing, setIsDrawing] = useState(false);
 	const [tool, setTool] = useState("pen");
-	const [toolWidth, setToolWidth] = useState("1");
+	const [toolWidth, setToolWidth] = useState(1);
 	const [color, setColor] = useState("black");
 
 	const debouncedCanvasWidth = useDebounce(canvasWidth, 500);
@@ -145,7 +144,14 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 	]);
 
 	const closeCanvasModal = () => {
-		setCanvasModal(false);
+		try {
+			const scrollY = document.body.style.top;
+			document.body.style.position = "";
+			document.body.style.top = "";
+			window.scrollTo(0, parseInt(scrollY || "0") * -1);
+		} finally {
+			setCanvasModal(false);
+		}
 	};
 
 	const getPosMouse = (e) => {
@@ -308,7 +314,7 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 
 		const drawingUrl = canvasRef.current.toDataURL("image/png");
 		setMsgDrawing(drawingUrl);
-		setCanvasModal(false);
+		closeCanvasModal();
 
 		messageApi.open({
 			key,
@@ -373,7 +379,7 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 						onTouchEnd={stopDrawing}
 					/>
 					<Divider className="divider-margin" />
-					<Row align="middle" justify="center">
+					<Row align="middle" justify="center" className="row-padding">
 						<Col className="msgDrawing-tool-group">
 							<input
 								className="msgDrawing-radio-btn"
@@ -447,7 +453,7 @@ function MessageDrawing({ canvasModal, setCanvasModal, setMsgDrawing }) {
 							/>
 						</Col>
 					</Row>
-					<Row align="middle" justify="center">
+					<Row align="middle" justify="center" className="row-padding">
 						<Col className="msgDrawing-slider-group">
 							<Slider
 								className="msgDrawing-slider"

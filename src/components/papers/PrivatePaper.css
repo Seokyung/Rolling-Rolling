@@ -5,13 +5,13 @@
 	width: 90%;
 	min-width: 250px;
 	max-width: 750px;
-	height: 90%;
+	height: 90vh;
 	margin: 0 auto;
 }
 
 .privatePaper-container {
 	justify-content: center;
-	min-height: 285px;
+	/* min-height: 285px; */
 }
 
 .privatePaper-form-container {
@@ -24,8 +24,8 @@
 .privatePaper-form-code-group {
 	display: flex;
 	flex-direction: row;
-	margin-top: 2rem;
-	margin-bottom: 2rem;
+	margin-top: 1.75rem;
+	margin-bottom: 1.75rem;
 }
 
 .privatePaper-form-code {

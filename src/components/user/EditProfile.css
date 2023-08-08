@@ -8,7 +8,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin-bottom: 0.5rem;
 }
 
 .editProfile-title {
@@ -18,10 +17,10 @@
 	min-height: 50px;
 	margin: 0;
 	padding: 0.5rem 1.125rem !important;
+	font-size: 1.125rem;
 	color: #fffdfd;
 	border-radius: 25px;
 	background-color: #8d9296;
-	/* background-color: rgba(0, 0, 0, 0.6); */
 }
 .editProfile-title svg {
 	margin-right: 0.375rem;
@@ -56,10 +55,11 @@
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	border: 1px #dee2e6 solid;
+	border: 5px #dee2e6 solid;
 	border-radius: 50%;
 }
-.profile-img-upload-container div {
+
+.profile-img-upload-container-img {
 	position: absolute;
 	left: 0;
 	bottom: 0;
@@ -70,7 +70,8 @@
 	border-radius: 50%;
 	background-color: rgba(0, 0, 0, 0.15);
 }
-.profile-img-upload-container span {
+
+.profile-img-upload-container-select {
 	display: flex;
 	justify-content: center;
 	position: absolute;
@@ -80,27 +81,42 @@
 	padding-top: 0.5rem;
 	width: 100%;
 	height: 25%;
-	text-align: center;
 	vertical-align: center;
+	background-color: rgba(0, 0, 0, 0.65);
+}
+
+.profile-img-upload-container-select span {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
 	font-size: 0.5rem;
 	color: #fffdfd;
-	background-color: rgba(0, 0, 0, 0.5);
+}
+.profile-img-upload-container-select svg {
+	height: 0.75rem;
 }
 
 .editProfile-auth-btn {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	/* margin-top: 1rem; */
 }
 .editProfile-auth-btn button {
-	font-size: var(--font-size-sm) !important;
-}
-.editProfile-auth-btn #logout-btn {
-	margin-right: 1rem;
+	font-size: 0.75rem !important;
+	margin: 0 0.5rem;
 }
 
 @media screen and (max-width: 768px) {
+	.profile-img-upload-container {
+		width: 135px;
+		height: 135px;
+	}
+
+	.profile-img-upload-container-select {
+		padding-top: 0.375rem;
+	}
+
 	.editProfile-auth-btn {
 		justify-content: center;
 	}

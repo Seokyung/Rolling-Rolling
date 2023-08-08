@@ -45,6 +45,7 @@ function LogOutModal({ logOutModal, setLogOutModal }) {
 			});
 			console.log(error.code);
 		} finally {
+			window.scrollTo({ top: 0, behavior: "smooth" });
 			closeLogOutModal();
 		}
 	};
